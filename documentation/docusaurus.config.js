@@ -120,12 +120,13 @@ const config = {
             docId: 'intro',
             position: 'left',
             label: 'Documentation',
-          },{
-            to: '/tutorial/Intro',
-            label: 'Docusaurus Tutorial',
-            position: 'left',
-            activeBaseRegex: `/tutorial/`,
           },
+          // {
+          //   to: '/tutorial/Intro',
+          //   label: 'Docusaurus Tutorial',
+          //   position: 'left',
+          //   activeBaseRegex: `/tutorial/`,
+          // },
           {
             href: 'https://github.com/'+process.env.ORG_NAME+'/'+process.env.PROJECT_NAME,
             label: 'GitHub',

@@ -59,6 +59,7 @@ Compiled Binary (in APK for Android or IPA for iOS)
 ## Collaborators
 
 [//]: # ( readme: collaborators -start )
+
 <table>
 <tr>
     <td align="center">
@@ -69,10 +70,52 @@ Compiled Binary (in APK for Android or IPA for iOS)
         </a>
     </td>
     <td align="center">
-        <a href="https://github.com/leighflagg">
-            <img src="https://avatars.githubusercontent.com/u/77810293?v=4" width="100;" alt="leighflagg"/>
+        <a href="https://github.com/son2005">
+            <img src="https://avatars.githubusercontent.com/u/18011568?v=4" width="100;" alt="son2005"/>
             <br />
-            <sub><b>Null</b></sub>
+            <sub><b>Son Tran</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/karljamesgray">
+            <img src="https://avatars.githubusercontent.com/u/65617725?v=4" width="100;" alt="karljamesgray"/>
+            <br />
+            <sub><b>Karl James Gray</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/youfeili">
+            <img src="https://avatars.githubusercontent.com/u/64341655?v=4" width="100;" alt="youfeili"/>
+            <br />
+            <sub><b>Youfei Li</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/mailoalex">
+            <img src="https://avatars.githubusercontent.com/u/89528670?v=4" width="100;" alt="mailoalex"/>
+            <br />
+            <sub><b>Alex Mailo</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/hynguyen33">
+            <img src="https://avatars.githubusercontent.com/u/72808228?v=4" width="100;" alt="hynguyen33"/>
+            <br />
+            <sub><b>Hy D Nguyen</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/dariodaguanno">
+            <img src="https://avatars.githubusercontent.com/u/97544581?v=4" width="100;" alt="dariodaguanno"/>
+            <br />
+            <sub><b>Dario George D'Aguanno</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/atewari18">
+            <img src="https://avatars.githubusercontent.com/u/78163717?v=4" width="100;" alt="atewari18"/>
+            <br />
+            <sub><b>Anya Tewari</b></sub>
         </a>
     </td></tr>
 </table>
