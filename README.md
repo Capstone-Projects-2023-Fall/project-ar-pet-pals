@@ -12,7 +12,7 @@
 
 ## Keywords
 
-Section 003, Unity 3D, Mobile Augmented Reality Game, Object Recognition AI, Android and iOS, Unity 3D or Unreal Engine 5
+Section 003, Unity 3D, Mobile Game, Augmented Reality, Object Recognition AI, Natural Language Model, Android
 
 ## Project Abstract
 
