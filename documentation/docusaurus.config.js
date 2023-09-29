@@ -24,6 +24,8 @@ const title = ''+process.env.PROJECT_NAME.replaceAll('-',' ').split(' ').map((wo
   return word[0].toUpperCase() + word.substring(1);
 }).join(' ');
 
+// const title = 'local test';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   /*TODO: Change to your project's title and tagline*/
