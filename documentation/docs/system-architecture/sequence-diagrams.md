@@ -226,3 +226,63 @@ sequenceDiagram
 6. Pet nibbles its virtual fruit, and both feel rejuvenated.
 7. The user returns to studying, feeling more refreshed and focused.
 ```
+
+## Use Case 8 
+```mermaid
+sequenceDiagram
+    title Sequence Diagram 8
+
+    actor user
+
+    Note right of user: Young healthy adult on fitness journey
+
+    user->>APP: opens app
+    user->>APP: opens leaderboard tab
+
+    APP->>database: Asks for leaderboard info.
+    database-->>APP: Returns leaderboard info.
+
+    APP-->>user: Shows a list of users sorted by points
+
+    Note right of user: Sees the highest-level user
+
+    user->>APP: taps on highest-level user
+
+    APP->>database: asks for user and pet information
+    database-->>APP: Returns user and pet information
+
+    APP-->>user: displays user's info.
+    APP-->>user: displays how to earn badges
+
+    user->>APP: clicks on ribbon to learn how to earn badges
+
+    APP-->>user: shows badges stored in app
+
+    Note right of user: sees badge for feeding the most protein
+
+    user->>APP: taps on information icon to find more info.
+    APP-->>user: tells user how to earn points
+
+
+    Note right of user: User makes goal to eat healthier to earn points
+
+    user->>APP: earns points
+    APP->>database: updates user's score
+    database-->>APP: returns new info.
+
+    APP-->>user: moves the user up on the leaderboard
+
+```
+```text
+## Use Case 8- APP Creating a Competetive Interactive Health Experience
+1. User is a young adult on a fitness journey with friends.
+2. User has been keeping up with their health and nutrition goals using the app and interacting with their virtual pet.
+3. At the end of the week, user opens the app and taps on the leaderboard tab.
+4. Sees the users with the most amount of points.
+5. Taps on another user’s username and sees their profile, pet’s health score, and badges.
+6. Taps on ribbon icon to see how to earn badges.
+7. Sees that there is a badge for feeding virtual pet the most protein in grams/week.
+8. User taps on the information circle icon to see what tasks reward users with points.
+9. User makes new goal to eat more protein this next week so they can get higher on the leaderboard and compete with their friends.
+10. User earns points and moves up on the leaderboard.
+```
