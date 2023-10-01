@@ -194,30 +194,35 @@ sequenceDiagram
     title Sequence Diagram 7
 
     actor user
+    activate APP
+    activate objectRecognition
+    activate database
 
-    user->>APP: opens app
-    APP-->>user: "Welcome"
+    APP->>database: Checks pet's status
+    database-->>APP: Sends pet status
+    APP-->>user: sends notification "Your pet suggests a quick brain break!"
 
-    user->>APP: aim camera at chair
-    APP->>objectRecognition: capture and transfer chair image data
+    user->>APP: open app
+    APP-->>user: display the pet juggling virtual balls
+
+    user->>APP: grabs a fruit snack and scans it
+    APP->>objectRecognition: capture and transfer image data
     objectRecognition->>+objectRecognition: process image data
-    objectRecognition-->>APP: recognize chair
-    APP-->>user: show comment "chair"
+    objectRecognition-->>APP: recognize fruit
+    APP-->>user: show comment "fruit"
 
-    user->>APP: tap the chair
+    user->>APP: tap the fruit
     APP->>+APP: determine pet response
-    APP-->>user: display the pet animation of running to the chair and sitting down
+    APP-->>user: displaying pet nibbling its virtual fruit
 ```
 
 ```text
 ## Use Case 7- Environment Engagement
-1. A user is a work from home and wants to be entertained by how the virtual pet's interactions with the real world environment.
-2. The user opens ARPetPals app.
-3. The user aims the camera at a chair next to him.
-4. The app captures and transfers the chair's image data to the object recognition component.
-5. The object recognition component processes the image data, recognizes the chair, and send the result back to the app.
-6. The app informs the user the recognized object by displaying a comment "chair."
-7. The user wants the virtual pet seated next to him.
-8. The user tap the chair.
-9. The app responds to the user by displaying an animation of the virtual pet running to the chair and sitting down.
+1. A user is a high school student preparing for exams and requires short breaks to stay efficient.
+2. After two hours of studying, the app prompts: "Your pet suggests a quick brain break!"
+3. User opens the app to see the pet juggling virtual balls.
+4. User attempts to mimic the juggling, causing some laughter and relaxation.
+5. The user grabs a fruit snack and scans it.
+6. Pet nibbles its virtual fruit, and both feel rejuvenated.
+7. The user returns to studying, feeling more refreshed and focused.
 ```
