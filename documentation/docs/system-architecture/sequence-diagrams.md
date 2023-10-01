@@ -96,3 +96,41 @@ sequenceDiagram
 7. The user taps a button on the app to record their activity. 
 8. The virtual pet is seen on screen in the users room visibly calmer/happier, and its health bar is at 100%.
 ```
+
+
+
+## Use case 7
+```mermaid
+
+sequenceDiagram
+    title Sequence Diagram 7
+
+    actor user
+
+    user->>APP: opens app
+    APP-->>user: "Welcome"
+
+    user->>APP: aim camera at chair
+    APP->>objectRecognition: capture and transfer chair image data
+    objectRecognition->>+objectRecognition: process image data
+    objectRecognition-->>APP: recognize chair
+    APP-->>user: show comment "chair"
+
+    user->>APP: tap the chair
+    APP->>+APP: determine pet response
+    APP-->>user: display the pet animation of running to the chair and sitting down
+```
+
+
+```text
+## Use Case 7- Environment Engagement
+1. A user is a work from home and wants to be entertained by how the virtual pet's interactions with the real world environment.
+2. The user opens ARPetPals app.
+3. The user aims the camera at a chair next to him.
+4. The app captures and transfers the chair's image data to the object recognition component.
+5. The object recognition component processes the image data, recognizes the chair, and send the result back to the app.
+6. The app informs the user the recognized object by displaying a comment "chair."
+7. The user wants the virtual pet seated next to him.
+8. The user tap the chair.
+9. The app responds to the user by displaying an animation of the virtual pet running to the chair and sitting down.
+```
