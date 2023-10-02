@@ -5,53 +5,76 @@ sidebar_position: 2
 Components
 =============================
 
-## Client Application
+## Client-Facing Application
 
-The client application is the ARPetPals mobile app installed on the user's Android. It serves as the primary interface that users interact with their virtual pets and the augmented reality environment.
+This component is what the client sees when they open the application. Everybit of user interaction is prompted and handled through here.
 
-**Interfaces**:
-- Main User Interface: The user interacts with the virtual pet, the AR environment, and various app features through the mobile app's user interface.
-- Camera: The app uses the smartphone's camera to capture the real-world environment, facilitating object recognition and virtual pet integration.
-- API Integration: The app may interface with external services or APIs for certain features like user authentication.
+**Classes**
+- UserInterface: Handles the display and layout of the user interface.
+- UserInputHandler: Manages user interactions and inputs.
+- NotificationManager: Sends reminders and notifications to the user.
+- LeaderBoardDisplay: Manages the display of the public leaderboard.
+- ExerciseReminder: Sends reminders to users to interact with their pet by exercising.
+
+![Class Diagram](img/client-facing-app-cd.png)
+
+
+## Device Data Collection
+
+Since this application heavily relies on AR, sensor and visual data has to be constantly collected and interpreted. While the camera is the most used portion of the application, sensors such as touch and accelerometer may also provide crucial information to support a positive and seamless user experience.
+
+**Classes**
+- CameraManager: Manages camera access and data collection.
+- SensorManager: Manages the collection of data from various sensors like accelerometer and touch.
+- DataInterpreter: Interprets and processes the collected sensor and visual data.
+
+![Class Diagram](img/device-data-collect-cd.png)
+
 
 ## Object Recognition AI
 
-Object recognition AI is a crucial component that enables the virtual pet to interact with real-world objects. It identifies and analyzes objects captured by the smartphone's camera to trigger appropriate responses from the virtual pet.
+Once connection with the camera has been established, AR Pet Pals needs to extract relevant objects from the visual feed. Object recognition and machine learning approaches will be employed here to ensure that the app can communicate the objects it sees with the rest of the software.
 
-**Interfaces**:
-- Camera Feed Interface: The object recognition AI receives input from the smartphone's camera feed, continuously processing visual data to recognize objects.
-- Virtual Pet Interaction: When objects are recognized, the AI communicates with the virtual pet's behavior system to trigger animations, comments, or interactions.
+**Classes**
+- ObjectRecognition: Identifies objects from the camera feed using machine learning models.
+- ObjectProcessor: Processes recognized objects and extracts relevant information.
+- AICommunicator: Facilitates communication between the object recognition component and other components.
+- NutritionRecorder: Records and processes the nutrition information of the food recognized by the object recognition AI.
 
-## Virtual Pet Behavior System
-
-The virtual pet behavior system governs the actions, animations, and responses of the user's virtual pet. It ensures that the pet exhibits lifelike behaviors and interactions based on user actions and environmental cues.
-
-**Interfaces**:
-- User Interaction Interface: The behavior system responds to user interactions such as feeding, playing, and cleaning.
-
-- Object Recognition Interface: It receives signals from the object recognition AI to trigger specific animations or comments when the pet interacts with recognized objects.
-- Health and Happiness Metrics Interface: The system calculates and updates the pet's health and happiness metrics based on user interactions and environmental cues.
+![Class Diagram](img/obj-recogn-ai-cd.png)
 
 
-## Backend Server
+## Pet Display
 
-The backend server handles data related to the leaderboard feature. It stores and manages user profiles, pet metrics, and leaderboard rankings.
+The pet itself will be displayed using the advanced graphics technology, Unity. To allow for Unity to properly display the results classes have to be created receive configuration details and to carry the visual to the user display.
 
-**Interfaces**:
-- User Profile Data Interface: The server communicates with the client app to store and retrieve user profiles, including pet information and activity metrics.
-- Leaderboard Data Interface: It provides leaderboard data to the client app, enabling users to view 
-the rankings of pets based on health and happiness.
+**Classes**
+- PetRenderer: Renders the pet on the screen using Unity.
+- DisplayConfigurator: Configures display settings and parameters for Unity.
+- UserDisplayManager: Manages the display of the pet and other elements on the user screen.
 
-## Database 
+![Class Diagram](img/pet-display-cd.png)
 
-If a backend server is used, it may rely on a database to store and manage user and leaderboard data.
 
-**Interfaces**:
-- Server-Database Interface: The backend server communicates with the database to perform operations such as storing user profiles, updating pet metrics, and retrieving leaderboard data.
+## Pet Behavior
 
-## User's Smartphone Sensors
+Based on user actions and other factors, the pet can exhibit a variety of behaviors on-screen. This component interprets user input, the visual feed, and other inputs and converts them into pet behaviors.
 
-The user's smartphone is equipped with sensors such as GPS and accelerometers. These sensors are used to track the user's physical movement and activity level.
+**Classes**
+- BehaviorInterpreter: Interprets user input, visual feed, and other inputs to determine pet behavior.
+- BehaviorManager: Manages the different behaviors the pet can exhibit.
+- UserActionProcessor: Processes user actions and converts them into corresponding pet behaviors.
+- HealthMetricCalculator: Calculates the health metrics of the pet based on user diet and exercise habits.
 
-**Interfaces**:
-- Activity Tracking Interface: The client app accesses sensor data to monitor the user's physical movement and translate it into activity metrics that impact the virtual pet's well-being.
+![Class Diagram](img/pet-behavior-cd.png)
+
+
+## Databse Integration
+User and pet information will be stored in a connected database. Upon reboots of the app, new users logging, or major setting changes, the database will accessed to retrieve relevant data.
+
+**Classes**
+- DatabaseManager: Manages connections, retrievals, and updates to the database.
+- UserDataRetriever: Retrieves user and pet information from the database.
+- SettingsManager: Manages user settings and preferences and updates them in the database.
+
+![Class Diagram](img/db-integration-cd.png)
