@@ -4,6 +4,54 @@ sidebar_position: 3
 
 # Sequence Diagrams
 
+## Use case 1
+
+```mermaid
+sequenceDiagram
+    title Sequence Diagram 1
+
+    actor user
+
+    %% user->>+appstore: requests app
+    %% appstore-->>-user: downloads and installs app
+
+    user->>APP: Opens app
+    user->>APP: Create an account
+
+    APP->>database: Create new user
+    database-->>APP: Return new user
+    APP-->>user: Display intro for first-time user
+
+    APP->>APP: Pet's health and happiness decreases
+
+    APP->>user: Send notification to feed pet
+    
+    user-->>APP: User puts unhealthy food in frame of camera
+    APP->>objectRecognition: Send image of frame 
+    objectRecognition-->>APP: Send food's information
+    APP->>user: Display food information
+    APP->>user: Prompt user to confirm food information
+    user-->>APP: User confirms food information
+    APP->>database: improves pet's health by 25% and happiness by 15%
+    database-->>APP: Display new pet stats
+    APP->>user: Display text about eating healthier food
+
+```
+
+```text
+## Use Case 1- APP Illustrating the Effects of Poor Nutrition 
+A user is a college student and spends lots of time studying at their desk and does not have time to cook nutritious meals.
+User downloads ARPP and creates an account.
+User has been studying for hours and has not eaten or done any physical activity.
+User receives a notification from the app reminding them to feed their pet.
+User opens the app and sees their virtual pet sitting on their desk, looking very malnourished and weak.
+User gets a bowl of ramen noodles and a can of Monster to drink.
+User points the camera at its food and the app recognizes the food correctly, asking the user to verify.
+User taps a button to confirm that the food is correctly recognized.
+The pet is nourished slightly but is not at 100% health due to the poor nutritional value of the user’s meal.
+The user is not properly nourished due to the poor meal choice and is hungry again a short while later.
+```
+
 ## Use case 2
 
 ```mermaid
