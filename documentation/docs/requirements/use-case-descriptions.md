@@ -30,13 +30,12 @@ sidebar_position: 5
 
 ## Use Case 3- APP Helping User Keep Active
 1. A user is a software engineer working from home full time and has eaten but has not moved in a while due to several long morning zoom meetings.
-2. The user receives a notification from the app letting them know that their pet is in need of a walk.
+2. The user receives a notification from the app letting them know that their pet's happiness is low and is in need of a walk.
 3. The user opens the app and sees their virtual pet in their room, looking very hyper and needing exercise. The pet’s happiness bar is low.
-4. The user taps a button to indicate they are starting their activity.
-5. The user stands up and takes a walk down their hallway and back to their room.
-6. The app tracks the users steps using their smartphones built in hardware sensors.
-7. The user taps a button on the app to record their activity.
-8. The virtual pet is seen on screen in the users room visibly calmer/happier, and its health bar is at 100%.
+4. The user goes for a walk around the neighborhood.
+5. The user's activity tracker would measure the amount of steps and distance travelled.
+6. APP fetches the data from the activty tracker.
+8. The virtual pet is seen on screen in the users room visibly calmer/happier, it's health bar is at 100% and it's happiness bar has raised 50%.
 
 ## Use Case 4 - Competitive Leaderboard
 1. A corporate employee who's been working from home due to recent global circumstances. With a sedentary lifestyle, they struggle to incorporate regular exercise into their daily routine.
