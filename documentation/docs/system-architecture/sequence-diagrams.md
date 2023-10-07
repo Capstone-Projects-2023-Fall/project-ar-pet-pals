@@ -206,21 +206,36 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    participant User as College Student
-    participant App as AR PetPal
+    title Sequence Diagram 6
 
-    User->>App: Launches ARPetPals app
-    App-->>User: Displays "Sign In" or "Sign Up" options
-    User->>App: Chooses "Sign Up" (for new users) or "Sign In" (for returning users)
-    Note over User,App: If "Sign Up"
-    User->>App: Provides necessary details to create account
-    App-->>User: Account created successfully
-    Note over User,App: If "Sign In"
-    User->>App: Enters existing credentials
-    App-->>User: Grants access to ARPetPals dashboard
-    User->>App: Navigates to settings menu
-    User->>App: Selects "Sign Out" option
-    App-->>User: Confirms sign-out and returns to initial sign-in screen
+    actor user
+
+    Note right of user: College student eager to use digital platforms
+
+    user->>APP: opens app
+
+    alt user is new to the app
+        APP-->>user:  displays Sign up form
+        user->APP: signs up
+        APP->>database: adds user's info to db
+        database-->>APP: returns user's info
+
+
+    else user is returning
+        APP-->>user: displays login form
+        user->>APP: logs in
+        APP->>database: checks user's credentials
+        database-->>APP: grants access
+
+    end
+    Note right of user: User takes a break from app
+    user->>APP: user wants logs out
+    APP-->user: asks the user for confirmation about logging out
+    user->>APP: confirms that he wants to log out
+    APP->>database: clears user's login cookie
+    APP-->>user: logs the user out
+
+    Note right of user: user closes app
 ```
 
 ```text
