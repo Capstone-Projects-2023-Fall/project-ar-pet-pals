@@ -179,19 +179,19 @@ sequenceDiagram
 sequenceDiagram
     title Sequence Diagram 5
 
-    participant User
+    actor user
     participant APP
 
-    User->>App: user clicks on settings menu
-    App-->>User: display settings menu
-    User->>App: user clicks on "change name"
-    User->>App: user changes name
-    App->>Database: update "name" with user input
-    Database-->>App: api response
-    User->>App: user clicks on "change avatar"
-    User->>App: user changes avatar
-    App->>Database: update "avatar" with user input
-    Database-->>App: api response
+    user->>APP: user clicks on settings menu
+    APP-->>user: display settings menu
+    user->>APP: user clicks on "change name"
+    user->>APP: user changes name
+    APP->>Database: update "name" with user input
+    Database-->>APP: api response
+    user->>APP: user clicks on "change avatar"
+    user->>APP: user changes avatar
+    APP->>Database: update "avatar" with user input
+    Database-->>APP: api response
 ```
 
 ```text
