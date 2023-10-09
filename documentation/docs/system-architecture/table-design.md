@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-ER Diagrams
+ER Diagram and Table Design
 =============================
 
 ## ER Diagram
