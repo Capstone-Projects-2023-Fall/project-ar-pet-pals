@@ -184,14 +184,16 @@ sequenceDiagram
 
     user->>APP: user clicks on settings menu
     APP-->>user: display settings menu
-    user->>APP: user clicks on "change name"
+    user->>APP: user clicks on "change name" button
     user->>APP: user changes name
     APP->>Database: update "name" with user input
     Database-->>APP: api response
-    user->>APP: user clicks on "change avatar"
+    user->>APP: user clicks on "change avatar" button
     user->>APP: user changes avatar
     APP->>Database: update "avatar" with user input
     Database-->>APP: api response
+    user->>APP: user clicks "close menu" button
+    APP-->>user: close settings menu
 ```
 
 ```text
