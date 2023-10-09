@@ -177,19 +177,21 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    participant User as Tech-Savvy User
-    participant App as AR PetPal
+    title Sequence Diagram 5
 
-    User->>App: Navigates to "Pet Personalization"
-    App->>User: Display customization options
-    User->>App: Types in new pet name
-    App->>User: Name updated
-    User->>App: Browses avatar collection
-    User->>App: Selects desired avatar
-    App->>User: Avatar updated
-    User->>App: Navigates to app settings
-    User->>App: Tweaks preferences
-    App->>User: Apply changes and showcase pet with new name and appearance
+    participant User
+    participant APP
+
+    User->>App: user clicks on settings menu
+    App-->>User: display settings menu
+    User->>App: user clicks on "change name"
+    User->>App: user changes name
+    App->>Database: update "name" with user input
+    Database-->>App: api response
+    User->>App: user clicks on "change avatar"
+    User->>App: user changes avatar
+    App->>Database: update "avatar" with user input
+    Database-->>App: api response
 ```
 
 ```text
