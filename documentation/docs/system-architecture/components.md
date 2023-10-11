@@ -7,7 +7,7 @@ Components
 
 ## Client-Facing Application
 
-This component is what the client sees when they open the application. Everybit of user interaction is prompted and handled through here.
+This component is what the client sees when they open the application. Every bit of user interaction is prompted and handled through here.
 
 **Classes**
 - UserInterface: Handles the display and layout of the user interface.
@@ -69,8 +69,8 @@ Based on user actions and other factors, the pet can exhibit a variety of behavi
 ![Class Diagram](img/pet-behavior-cd.png)
 
 
-## Databse Integration
-User and pet information will be stored in a connected database. Upon reboots of the app, new users logging, or major setting changes, the database will accessed to retrieve relevant data.
+## Database Integration
+User and pet information will be stored in a connected database. Upon reboots of the app, new users logging, or major setting changes, the database will accessed to retrieve relevant data. This database will be hosted on an Microsoft Azure Linux server which will be hosted on the cloud, and will have an API that will connect the application with said said database. This API should only let authorized users access database resources like pet information, and should keep the user's data confidential and safe.
 
 **Classes**
 - DatabaseManager: Manages connections, retrievals, and updates to the database.
