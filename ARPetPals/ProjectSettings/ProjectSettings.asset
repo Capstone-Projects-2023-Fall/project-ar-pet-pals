@@ -838,7 +838,14 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Collab: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -858,11 +865,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 1cac7b5c-0e17-4b0b-8f5c-55bd15c4223a
+  cloudProjectId: 196f7e73-6753-4f3c-a915-ea0bc1ea598f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: ARPetPals
-  organizationId: dariodagg
+  organizationId: hynguyen33
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
