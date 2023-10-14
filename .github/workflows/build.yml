@@ -9,6 +9,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        projectPath:
+          - ./
+        unityVersion:
+          - 2022.2.21f1
         targetPlatform:
           - Android # Build an Android .apk standalone app.
     steps:
