@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 22732921}
   m_Layer: 0
   m_Name: AR Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -479,6 +479,10 @@ PrefabInstance:
     - target: {fileID: 1042753228856018, guid: 638583a177564da19f00393d12d53375, type: 3}
       propertyPath: m_Name
       value: Bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042753228856018, guid: 638583a177564da19f00393d12d53375, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4925620406897788, guid: 638583a177564da19f00393d12d53375, type: 3}
       propertyPath: m_RootOrder
