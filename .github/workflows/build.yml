@@ -53,7 +53,6 @@ jobs:
           artifactsPath: ${{ matrix.testMode }}-artifacts
           githubToken: ${{ secrets.TOKEN }}
           checkName: ${{ matrix.testMode }} Test Results
-
       #Build
       - uses: game-ci/unity-builder@v3
         env:
