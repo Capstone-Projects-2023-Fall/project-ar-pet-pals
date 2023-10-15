@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['jog_0',['Jog',['../classUnityEditor_1_1Timeline_1_1Jog.html',1,'UnityEditor::Timeline']]],
-  ['joystick_1',['Joystick',['../classUnityEngine_1_1InputSystem_1_1Joystick.html',1,'UnityEngine::InputSystem']]],
-  ['jsonstring_2',['JsonString',['../structUnityEngine_1_1InputSystem_1_1Utilities_1_1JsonParser_1_1JsonString.html',1,'UnityEngine::InputSystem::Utilities::JsonParser']]],
-  ['jsonvalue_3',['JsonValue',['../structUnityEngine_1_1InputSystem_1_1Utilities_1_1JsonParser_1_1JsonValue.html',1,'UnityEngine::InputSystem::Utilities::JsonParser']]]
+  ['khrsimplecontroller_0',['KHRSimpleController',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1Interactions_1_1KHRSimpleControllerProfile_1_1KHRSimpleController.html',1,'UnityEngine::XR::OpenXR::Features::Interactions::KHRSimpleControllerProfile']]],
+  ['khrsimplecontrollerprofile_1',['KHRSimpleControllerProfile',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1Interactions_1_1KHRSimpleControllerProfile.html',1,'UnityEngine::XR::OpenXR::Features::Interactions']]]
 ];

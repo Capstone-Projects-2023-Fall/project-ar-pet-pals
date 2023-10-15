@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['legacyblendmode_0',['LegacyBlendMode',['../classUnityEditor_1_1XR_1_1Simulation_1_1Rendering_1_1MaterialInspector.html#a2148b175159801e9679493a76a6e6e16',1,'UnityEditor::XR::Simulation::Rendering::MaterialInspector']]],
-  ['levelofdetail_1',['LevelOfDetail',['../classUnityEngine_1_1XR_1_1MagicLeap_1_1MLSpatialMapper.html#a534ed8e58c7d63f9c54214124b67fe0a',1,'UnityEngine::XR::MagicLeap::MLSpatialMapper']]],
-  ['lightestimation_2',['LightEstimation',['../namespaceUnityEngine_1_1XR_1_1ARFoundation.html#ac91c38313e8bff1ac4a78e32c0fbb115',1,'UnityEngine::XR::ARFoundation']]],
-  ['lightestimationmode_3',['LightEstimationMode',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a43711c73fc0c0c1626c399ad1296d4e6',1,'UnityEngine::XR::ARSubsystems']]],
-  ['linetype_4',['LineType',['../classUnityEngine_1_1UI_1_1InputField.html#a5ae8b7dabd5aecdf0d19b79e0dbcd126',1,'UnityEngine::UI::InputField']]],
-  ['logverbositylevel_5',['LogVerbosityLevel',['../namespaceUnityEditor_1_1TestTools_1_1CodeCoverage.html#a386e94ad8fcd0e1f93d7e1211debab09',1,'UnityEditor::TestTools::CodeCoverage']]],
-  ['loopmode_6',['LoopMode',['../classUnityEngine_1_1Timeline_1_1AnimationPlayableAsset.html#aa01707fe3f113b2e01fc742ee390834e',1,'UnityEngine::Timeline::AnimationPlayableAsset']]]
+  ['occlusionpreferencemode_0',['OcclusionPreferenceMode',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a21f3e9b811e78a5a46223742298fc0fa',1,'UnityEngine::XR::ARSubsystems']]],
+  ['origin180_1',['Origin180',['../classUnityEngine_1_1UI_1_1Image.html#a20ea7c76bb558fe160c6114254e6f885',1,'UnityEngine::UI::Image']]],
+  ['origin360_2',['Origin360',['../classUnityEngine_1_1UI_1_1Image.html#a8835e7ff1cf68e7c2fe338539ea2c312',1,'UnityEngine::UI::Image']]],
+  ['origin90_3',['Origin90',['../classUnityEngine_1_1UI_1_1Image.html#a709fe5ae5ffcfc60981013279425c59f',1,'UnityEngine::UI::Image']]],
+  ['originhorizontal_4',['OriginHorizontal',['../classUnityEngine_1_1UI_1_1Image.html#a7930dd0018586b7a106c332efb22cc8b',1,'UnityEngine::UI::Image']]],
+  ['originvertical_5',['OriginVertical',['../classUnityEngine_1_1UI_1_1Image.html#a846c0b9bc908f5b0f98bfb1f199c2c36',1,'UnityEngine::UI::Image']]]
 ];
