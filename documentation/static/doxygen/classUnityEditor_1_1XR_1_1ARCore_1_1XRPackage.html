@@ -85,90 +85,21 @@ $(function() {
 Inheritance diagram for UnityEditor.XR.ARCore.XRPackage:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classUnityEditor_1_1XR_1_1ARCore_1_1XRPackage.png" usemap="#UnityEditor.XR.ARCore.XRPackage_map" alt=""/>
-  <map id="UnityEditor.XR.ARCore.XRPackage_map" name="UnityEditor.XR.ARCore.XRPackage_map">
-<area href="interfaceUnityEditor_1_1XR_1_1Management_1_1Metadata_1_1IXRPackage.html" title="Implement this interface to provide package level information and actions." alt="UnityEditor.XR.Management.Metadata.IXRPackage" shape="rect" coords="0,0,299,24"/>
-  </map>
-</div></div>
+  <img src="classUnityEditor_1_1XR_1_1ARCore_1_1XRPackage.png" alt=""/>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9d6a236fdb5509fe6184fde7a64378cc" id="r_a9d6a236fdb5509fe6184fde7a64378cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnityEditor_1_1XR_1_1ARCore_1_1XRPackage.html#a9d6a236fdb5509fe6184fde7a64378cc">PopulateNewSettingsInstance</a> (ScriptableObject obj)</td></tr>
-<tr class="memdesc:a9d6a236fdb5509fe6184fde7a64378cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the package to configure new settings and/or port old settings to the instance passed in.  <br /></td></tr>
+<tr class="memitem:a9d6a236fdb5509fe6184fde7a64378cc" id="r_a9d6a236fdb5509fe6184fde7a64378cc"><td class="memItemLeft" align="right" valign="top"><a id="a9d6a236fdb5509fe6184fde7a64378cc" name="a9d6a236fdb5509fe6184fde7a64378cc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>PopulateNewSettingsInstance</b> (ScriptableObject obj)</td></tr>
 <tr class="separator:a9d6a236fdb5509fe6184fde7a64378cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a73b91f65bfb8ad089451cf78eb82e48a" id="r_a73b91f65bfb8ad089451cf78eb82e48a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfaceUnityEditor_1_1XR_1_1Management_1_1Metadata_1_1IXRPackageMetadata.html">IXRPackageMetadata</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnityEditor_1_1XR_1_1ARCore_1_1XRPackage.html#a73b91f65bfb8ad089451cf78eb82e48a">metadata</a><code> [get]</code></td></tr>
-<tr class="memdesc:a73b91f65bfb8ad089451cf78eb82e48a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an instance of IXRPackageMetadata. Information will be used to allow the XR Plug-in Management to provide settings and loaders through the settings UI.  <br /></td></tr>
+<tr class="memitem:a73b91f65bfb8ad089451cf78eb82e48a" id="r_a73b91f65bfb8ad089451cf78eb82e48a"><td class="memItemLeft" align="right" valign="top"><a id="a73b91f65bfb8ad089451cf78eb82e48a" name="a73b91f65bfb8ad089451cf78eb82e48a"></a>
+IXRPackageMetadata&#160;</td><td class="memItemRight" valign="bottom"><b>metadata</b><code> [get]</code></td></tr>
 <tr class="separator:a73b91f65bfb8ad089451cf78eb82e48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header properties_interfaceUnityEditor_1_1XR_1_1Management_1_1Metadata_1_1IXRPackage"><td colspan="2" onclick="javascript:toggleInherit('properties_interfaceUnityEditor_1_1XR_1_1Management_1_1Metadata_1_1IXRPackage')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="interfaceUnityEditor_1_1XR_1_1Management_1_1Metadata_1_1IXRPackage.html">UnityEditor.XR.Management.Metadata.IXRPackage</a></td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9d6a236fdb5509fe6184fde7a64378cc" name="a9d6a236fdb5509fe6184fde7a64378cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d6a236fdb5509fe6184fde7a64378cc">&#9670;&#160;</a></span>PopulateNewSettingsInstance()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool UnityEditor.XR.ARCore.XRPackage.PopulateNewSettingsInstance </td>
-          <td>(</td>
-          <td class="paramtype">ScriptableObject&#160;</td>
-          <td class="paramname"><em>obj</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Allows the package to configure new settings and/or port old settings to the instance passed in. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">obj</td><td>ScriptableObject instance representing an instance of the settings type provided by IXRPackageMetadata.settingsType.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the operation succeeded, false if not. If implementation is empty, just return true.</dd></dl>
-
-<p>Implements <a class="el" href="interfaceUnityEditor_1_1XR_1_1Management_1_1Metadata_1_1IXRPackage.html#afb16e19037d5b3816afc874ecfc15aba">UnityEditor.XR.Management.Metadata.IXRPackage</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Property Documentation</h2>
-<a id="a73b91f65bfb8ad089451cf78eb82e48a" name="a73b91f65bfb8ad089451cf78eb82e48a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73b91f65bfb8ad089451cf78eb82e48a">&#9670;&#160;</a></span>metadata</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="interfaceUnityEditor_1_1XR_1_1Management_1_1Metadata_1_1IXRPackageMetadata.html">IXRPackageMetadata</a> UnityEditor.XR.ARCore.XRPackage.metadata</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns an instance of IXRPackageMetadata. Information will be used to allow the XR Plug-in Management to provide settings and loaders through the settings UI. </p>
-
-<p>Implements <a class="el" href="interfaceUnityEditor_1_1XR_1_1Management_1_1Metadata_1_1IXRPackage.html#a274d7d8229cead830f49ef79621d50b2">UnityEditor.XR.Management.Metadata.IXRPackage</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>ARPetPals/Library/PackageCache/com.unity.xr.arcore@5.0.7/Editor/<b>ARCorePackageMetadata.cs</b></li>
 </ul>

@@ -147,10 +147,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>matchFrameRate</b><co
 <tr class="memdesc:a32a48f74d7e67a81017dc75338333223"><td class="mdescLeft">&#160;</td><td class="mdescRight">If <code>true</code>, the session will block execution until a new AR frame is available. This property is obsolete. Use matchFrameRateRequested or matchFrameRateEnabled instead. <br /></td></tr>
 <tr class="separator:a32a48f74d7e67a81017dc75338333223"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a061d15bfb3b99f938b3cc7ff377aa09c" id="r_a061d15bfb3b99f938b3cc7ff377aa09c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnityEngine_1_1XR_1_1ARFoundation_1_1ARSession.html#a061d15bfb3b99f938b3cc7ff377aa09c">matchFrameRateEnabled</a><code> [get]</code></td></tr>
-<tr class="memdesc:a061d15bfb3b99f938b3cc7ff377aa09c"><td class="mdescLeft">&#160;</td><td class="mdescRight">If <code>true</code>, the underlying subsystem will attempt to synchronize the AR frame rate with <a class="el" href="namespaceUnity.html">Unity</a>'s.  <br /></td></tr>
+<tr class="memdesc:a061d15bfb3b99f938b3cc7ff377aa09c"><td class="mdescLeft">&#160;</td><td class="mdescRight">If <code>true</code>, the underlying subsystem will attempt to synchronize the AR frame rate with Unity's.  <br /></td></tr>
 <tr class="separator:a061d15bfb3b99f938b3cc7ff377aa09c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87eb46ca739d58881140d6b5f449a2be" id="r_a87eb46ca739d58881140d6b5f449a2be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnityEngine_1_1XR_1_1ARFoundation_1_1ARSession.html#a87eb46ca739d58881140d6b5f449a2be">matchFrameRateRequested</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a87eb46ca739d58881140d6b5f449a2be"><td class="mdescLeft">&#160;</td><td class="mdescRight">If <code>true</code>, the session will block execution until a new AR frame is available and set <a href="xref:UnityEngine.Application.targetFrameRate">Application.targetFrameRate</a> to match the native update frequency of the AR session. Otherwise, the AR session is updated independently of the <a class="el" href="namespaceUnity.html">Unity</a> frame.  <br /></td></tr>
+<tr class="memdesc:a87eb46ca739d58881140d6b5f449a2be"><td class="mdescLeft">&#160;</td><td class="mdescRight">If <code>true</code>, the session will block execution until a new AR frame is available and set <a href="xref:UnityEngine.Application.targetFrameRate">Application.targetFrameRate</a> to match the native update frequency of the AR session. Otherwise, the AR session is updated independently of the Unity frame.  <br /></td></tr>
 <tr class="separator:a87eb46ca739d58881140d6b5f449a2be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1395be85720b865b2482599dcff7f00a" id="r_a1395be85720b865b2482599dcff7f00a"><td class="memItemLeft" align="right" valign="top"><a id="a1395be85720b865b2482599dcff7f00a" name="a1395be85720b865b2482599dcff7f00a"></a>
 <a class="el" href="namespaceUnityEngine_1_1XR_1_1ARFoundation.html#a7b4a99c767ef30d4771aed3911d5d921">TrackingMode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>requestedTrackingMode</b><code> [get, set]</code></td></tr>
@@ -393,7 +393,7 @@ static Action&lt; <a class="el" href="structUnityEngine_1_1XR_1_1ARFoundation_1_
 </table>
 </div><div class="memdoc">
 
-<p>If <code>true</code>, the underlying subsystem will attempt to synchronize the AR frame rate with <a class="el" href="namespaceUnity.html">Unity</a>'s. </p>
+<p>If <code>true</code>, the underlying subsystem will attempt to synchronize the AR frame rate with Unity's. </p>
 <dl class="section see"><dt>See also</dt><dd>matchFrameRateRequested</dd></dl>
 
 </div>
@@ -418,8 +418,8 @@ static Action&lt; <a class="el" href="structUnityEngine_1_1XR_1_1ARFoundation_1_
 </table>
 </div><div class="memdoc">
 
-<p>If <code>true</code>, the session will block execution until a new AR frame is available and set <a href="xref:UnityEngine.Application.targetFrameRate">Application.targetFrameRate</a> to match the native update frequency of the AR session. Otherwise, the AR session is updated independently of the <a class="el" href="namespaceUnity.html">Unity</a> frame. </p>
-<p>If enabled with a simple scene, the <code>ARSession.Update</code> might appear to take a long time. This is because your application is waiting for the next AR frame, similar to the way <a class="el" href="namespaceUnity.html">Unity</a> will <code>WaitForTargetFPS</code> at the end of a frame. If the rest of the <a class="el" href="namespaceUnity.html">Unity</a> frame takes non-trivial time, then the next <code>ARSession.Update</code> will take a proportionally smaller amount of time.</p>
+<p>If <code>true</code>, the session will block execution until a new AR frame is available and set <a href="xref:UnityEngine.Application.targetFrameRate">Application.targetFrameRate</a> to match the native update frequency of the AR session. Otherwise, the AR session is updated independently of the Unity frame. </p>
+<p>If enabled with a simple scene, the <code>ARSession.Update</code> might appear to take a long time. This is because your application is waiting for the next AR frame, similar to the way Unity will <code>WaitForTargetFPS</code> at the end of a frame. If the rest of the Unity frame takes non-trivial time, then the next <code>ARSession.Update</code> will take a proportionally smaller amount of time.</p>
 <p>This option does three things:</p><ul>
 <li>Enables a <a href="xref:UnityEngine.XR.ARSubsystems.XRSessionSubsystem.matchFrameRateRequested">setting on the XRSessionSubsystem</a> which causes the update to block until the next AR frame is ready.</li>
 <li>Sets <a href="xref:UnityEngine.Application.targetFrameRate">Application.targetFrameRate</a> to the session's preferred update rate.</li>

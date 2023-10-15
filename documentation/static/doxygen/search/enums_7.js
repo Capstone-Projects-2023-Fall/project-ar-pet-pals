@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['horizontalalignmentoptions_0',['HorizontalAlignmentOptions',['../namespaceTMPro.html#a48bf77c46bd71c8b9748573d436953d1',1,'TMPro']]],
-  ['humansegmentationdepthmode_1',['HumanSegmentationDepthMode',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#afefed5ac50af982e184f494d8a974871',1,'UnityEngine::XR::ARSubsystems']]],
-  ['humansegmentationstencilmode_2',['HumanSegmentationStencilMode',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a03d23d6275f8729273bcb08566fd184b',1,'UnityEngine::XR::ARSubsystems']]]
+  ['imagetype_0',['ImageType',['../classUnityEngine_1_1XR_1_1ARKit_1_1ARKitCpuImageApi.html#a8b4c5d2eb40a549ceb7b56d23ab4f402',1,'UnityEngine::XR::ARKit::ARKitCpuImageApi']]],
+  ['inputbutton_1',['InputButton',['../classUnityEngine_1_1EventSystems_1_1PointerEventData.html#a1710dc25f71b763de62dd216f30756f6',1,'UnityEngine::EventSystems::PointerEventData']]],
+  ['inputtype_2',['InputType',['../classUnityEngine_1_1UI_1_1InputField.html#a6215c075a8f1105f0cc69189166897f0',1,'UnityEngine::UI::InputField']]]
 ];
