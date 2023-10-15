@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['inputfieldtests_0',['InputfieldTests',['../namespaceInputfieldTests.html',1,'']]]
+  ['tests_0',['Tests',['../namespaceTests.html',1,'']]],
+  ['toggletest_1',['ToggleTest',['../namespaceToggleTest.html',1,'']]]
 ];

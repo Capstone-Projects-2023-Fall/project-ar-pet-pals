@@ -1,25 +1,7 @@
 var searchData=
 [
-  ['tagvaluetype_0',['TagValueType',['../namespaceTMPro.html#a9d72007c13ac0bf341a0ea96f1175f0f',1,'TMPro']]],
-  ['testmode_1',['TestMode',['../namespaceUnityEditor_1_1TestTools_1_1TestRunner_1_1Api.html#af169988e2317e7edb0f1b09d920412e9',1,'UnityEditor::TestTools::TestRunner::Api']]],
-  ['testplatform_2',['TestPlatform',['../namespaceUnityEngine_1_1TestTools.html#a5a0403d5399516208d8232fac155f61f',1,'UnityEngine::TestTools']]],
-  ['teststatus_3',['TestStatus',['../namespaceUnityEditor_1_1TestTools_1_1TestRunner_1_1Api.html#aaa9e778c850f68edefcbb4af5b1cd187',1,'UnityEditor::TestTools::TestRunner::Api']]],
-  ['textrenderflags_4',['TextRenderFlags',['../namespaceTMPro.html#ac5a571bdd8e4873a73f2c05b62feff0e',1,'TMPro']]],
-  ['timeformat_5',['TimeFormat',['../namespaceUnityEditor_1_1Timeline.html#a70c693765681725af29e9342a937a6f6',1,'UnityEditor::Timeline']]],
-  ['timelinemodes_6',['TimelineModes',['../namespaceUnityEditor_1_1Timeline.html#af9aefa8b1ec710da91fbc7bdf0bcafbc',1,'UnityEditor::Timeline']]],
-  ['tmp_5fvertexdataupdateflags_7',['TMP_VertexDataUpdateFlags',['../namespaceTMPro.html#a517464fab2ef7ff5b9658d2acaf49a57',1,'TMPro']]],
-  ['toggletransition_8',['ToggleTransition',['../classUnityEngine_1_1UI_1_1Toggle.html#a731aa36a35bdf6d56719d4729e4696eb',1,'UnityEngine::UI::Toggle']]],
-  ['tokentype_9',['TokenType',['../classUnity_1_1PlasticSCM_1_1Editor_1_1WebApi_1_1CredentialsResponse.html#aac7dbeb6e44e1360e45bb28aef39407a',1,'Unity::PlasticSCM::Editor::WebApi::CredentialsResponse']]],
-  ['touchphase_10',['TouchPhase',['../namespaceUnityEngine_1_1InputSystem.html#a586a6521911c62d23469e51a336d29db',1,'UnityEngine::InputSystem']]],
-  ['trackabletype_11',['TrackableType',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#adb8dc6e0c9e5b86b8a0677cc7ce8ec85',1,'UnityEngine::XR::ARSubsystems']]],
-  ['trackbindingerrors_12',['TrackBindingErrors',['../namespaceUnityEditor_1_1Timeline.html#ab1298abef70580c7ae84c896c0fa4a85',1,'UnityEditor::Timeline']]],
-  ['trackbindingflags_13',['TrackBindingFlags',['../namespaceUnityEngine_1_1Timeline.html#ad69a5e8e5a785bb2a56182fefcf74e0b',1,'UnityEngine::Timeline']]],
-  ['trackedpose_14',['TrackedPose',['../classUnityEngine_1_1SpatialTracking_1_1TrackedPoseDriver.html#a8550ca81b0565bb099c624c7720f670e',1,'UnityEngine::SpatialTracking::TrackedPoseDriver']]],
-  ['trackingmode_15',['TrackingMode',['../namespaceUnityEngine_1_1XR_1_1ARFoundation.html#a7b4a99c767ef30d4771aed3911d5d921',1,'UnityEngine::XR::ARFoundation']]],
-  ['trackingoriginmode_16',['TrackingOriginMode',['../classUnity_1_1XR_1_1CoreUtils_1_1XROrigin.html#a713bacc6c5766ffc5cca53c5bc227e3d',1,'Unity::XR::CoreUtils::XROrigin']]],
-  ['trackingstate_17',['TrackingState',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#adcf1ff8f096aeb652d62f0a2dd5a382c',1,'UnityEngine::XR::ARSubsystems']]],
-  ['trackingtype_18',['trackingtype',['../classUnityEngine_1_1SpatialTracking_1_1TrackedPoseDriver.html#a1290c2ee695d652c2a165926bacef3f6',1,'UnityEngine.SpatialTracking.TrackedPoseDriver.TrackingType'],['../classUnityEngine_1_1InputSystem_1_1XR_1_1TrackedPoseDriver.html#aff39573b52d1e8165b8b81be6ffe91b1',1,'UnityEngine.InputSystem.XR.TrackedPoseDriver.TrackingType']]],
-  ['trackoffset_19',['TrackOffset',['../namespaceUnityEngine_1_1Timeline.html#a7b9155ea6faa7fbeccc09dea7a347417',1,'UnityEngine::Timeline']]],
-  ['transformation_20',['Transformation',['../structUnityEngine_1_1XR_1_1ARSubsystems_1_1XRCpuImage.html#a7e78e87fc12ec38c5cc8f88d3dc912c5',1,'UnityEngine::XR::ARSubsystems::XRCpuImage']]],
-  ['type_21',['Type',['../classUnityEngine_1_1UI_1_1Image.html#ac8ca5b86942f856ba1e5c94d638edc44',1,'UnityEngine::UI::Image']]]
+  ['xrcamerabackgroundrenderingmode_0',['XRCameraBackgroundRenderingMode',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a5a40b0d16f60abea6006c3993270c00b',1,'UnityEngine::XR::ARSubsystems']]],
+  ['xrcameraframeproperties_1',['XRCameraFrameProperties',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#acb4dfae5705877d2bf8bbee20641a695',1,'UnityEngine::XR::ARSubsystems']]],
+  ['xrenvironmentblendmode_2',['XrEnvironmentBlendMode',['../namespaceUnityEngine_1_1XR_1_1OpenXR_1_1NativeTypes.html#a672be072083477675be25ec56db0df69',1,'UnityEngine::XR::OpenXR::NativeTypes']]],
+  ['xrsupportedcamerabackgroundrenderingmode_3',['XRSupportedCameraBackgroundRenderingMode',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a8c8b7f17d09a31a07b17cd7878f45821',1,'UnityEngine::XR::ARSubsystems']]]
 ];
