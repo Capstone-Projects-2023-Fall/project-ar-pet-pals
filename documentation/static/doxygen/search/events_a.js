@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['trackablesparenttransformchanged_0',['TrackablesParentTransformChanged',['../classUnity_1_1XR_1_1CoreUtils_1_1XROrigin.html#af7eff0adbb3691353bd29b1ca591ae49',1,'Unity::XR::CoreUtils::XROrigin']]],
-  ['trackedimageschanged_1',['trackedImagesChanged',['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARTrackedImageManager.html#a721bfb26062773ff17367a6e3cc13143',1,'UnityEngine::XR::ARFoundation::ARTrackedImageManager']]],
-  ['trackedobjectschanged_2',['trackedObjectsChanged',['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARTrackedObjectManager.html#a238eabcc773cf19c813ed6921a5a6150',1,'UnityEngine::XR::ARFoundation::ARTrackedObjectManager']]]
+  ['updated_0',['updated',['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARFace.html#a58d0fe8166918f45f824a6bec7b4d300',1,'UnityEngine.XR.ARFoundation.ARFace.updated'],['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARPointCloud.html#ae9ef428489c04b488c7c268a82df22be',1,'UnityEngine.XR.ARFoundation.ARPointCloud.updated'],['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARRaycast.html#af4fc61599dbf6d43c787d528b26843f9',1,'UnityEngine.XR.ARFoundation.ARRaycast.updated']]]
 ];
