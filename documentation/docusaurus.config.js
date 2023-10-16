@@ -24,6 +24,8 @@ const title = ''+process.env.PROJECT_NAME.replaceAll('-',' ').split(' ').map((wo
   return word[0].toUpperCase() + word.substring(1);
 }).join(' ');
 
+// const title = 'local test';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   /*TODO: Change to your project's title and tagline*/
@@ -118,12 +120,13 @@ const config = {
             docId: 'intro',
             position: 'left',
             label: 'Documentation',
-          },{
-            to: '/tutorial/Intro',
-            label: 'Docusaurus Tutorial',
-            position: 'left',
-            activeBaseRegex: `/tutorial/`,
           },
+          // {
+          //   to: '/tutorial/Intro',
+          //   label: 'Docusaurus Tutorial',
+          //   position: 'left',
+          //   activeBaseRegex: `/tutorial/`,
+          // },
           {
             href: 'https://github.com/'+process.env.ORG_NAME+'/'+process.env.PROJECT_NAME,
             label: 'GitHub',

@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['objectproperties_0',['ObjectProperties',['../structUnityEditor_1_1XR_1_1ARKit_1_1Json_1_1ObjectProperties.html',1,'UnityEditor::XR::ARKit::Json']]],
+  ['oculusquestfeature_1',['OculusQuestFeature',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1OculusQuestSupport_1_1OculusQuestFeature.html',1,'UnityEngine::XR::OpenXR::Features::OculusQuestSupport']]],
+  ['oculustouchcontroller_2',['OculusTouchController',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1Interactions_1_1OculusTouchControllerProfile_1_1OculusTouchController.html',1,'UnityEngine::XR::OpenXR::Features::Interactions::OculusTouchControllerProfile']]],
+  ['oculustouchcontrollerprofile_3',['OculusTouchControllerProfile',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1Interactions_1_1OculusTouchControllerProfile.html',1,'UnityEngine::XR::OpenXR::Features::Interactions']]],
+  ['onchangeevent_4',['OnChangeEvent',['../classUnityEngine_1_1UI_1_1InputField_1_1OnChangeEvent.html',1,'UnityEngine::UI::InputField']]],
+  ['openxrdevice_5',['OpenXRDevice',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Input_1_1OpenXRDevice.html',1,'UnityEngine::XR::OpenXR::Input']]],
+  ['openxrfeature_6',['OpenXRFeature',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1OpenXRFeature.html',1,'UnityEngine::XR::OpenXR::Features']]],
+  ['openxrfeaturebuildhooks_7',['OpenXRFeatureBuildHooks',['../classUnityEditor_1_1XR_1_1OpenXR_1_1Features_1_1OpenXRFeatureBuildHooks.html',1,'UnityEditor::XR::OpenXR::Features']]],
+  ['openxrfeaturesetattribute_8',['OpenXRFeatureSetAttribute',['../classUnityEditor_1_1XR_1_1OpenXR_1_1Features_1_1OpenXRFeatureSetAttribute.html',1,'UnityEditor::XR::OpenXR::Features']]],
+  ['openxrfeaturetests_9',['OpenXRFeatureTests',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Tests_1_1OpenXRFeatureTests.html',1,'UnityEngine::XR::OpenXR::Tests']]],
+  ['openxrinteractionfeature_10',['OpenXRInteractionFeature',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1OpenXRInteractionFeature.html',1,'UnityEngine::XR::OpenXR::Features']]],
+  ['openxrloader_11',['OpenXRLoader',['../classUnityEngine_1_1XR_1_1OpenXR_1_1OpenXRLoader.html',1,'UnityEngine::XR::OpenXR']]],
+  ['openxrloaderbase_12',['OpenXRLoaderBase',['../classUnityEngine_1_1XR_1_1OpenXR_1_1OpenXRLoaderBase.html',1,'UnityEngine::XR::OpenXR']]],
+  ['openxrloadernopreinit_13',['OpenXRLoaderNoPreInit',['../classUnityEngine_1_1XR_1_1OpenXR_1_1OpenXRLoaderNoPreInit.html',1,'UnityEngine::XR::OpenXR']]],
+  ['openxrsettings_14',['OpenXRSettings',['../classUnityEngine_1_1XR_1_1OpenXR_1_1OpenXRSettings.html',1,'UnityEngine::XR::OpenXR']]],
+  ['optiondata_15',['OptionData',['../classUnityEngine_1_1UI_1_1Dropdown_1_1OptionData.html',1,'UnityEngine::UI::Dropdown']]],
+  ['optiondatalist_16',['OptionDataList',['../classUnityEngine_1_1UI_1_1Dropdown_1_1OptionDataList.html',1,'UnityEngine::UI::Dropdown']]],
+  ['osversion_17',['OSVersion',['../structUnityEngine_1_1XR_1_1ARKit_1_1OSVersion.html',1,'UnityEngine::XR::ARKit']]],
+  ['osversiontestfixture_18',['OSVersionTestFixture',['../classUnityEngine_1_1XR_1_1ARKit_1_1Tests_1_1OSVersionTestFixture.html',1,'UnityEngine::XR::ARKit::Tests']]],
+  ['outline_19',['Outline',['../classUnityEngine_1_1UI_1_1Outline.html',1,'UnityEngine::UI']]]
+];

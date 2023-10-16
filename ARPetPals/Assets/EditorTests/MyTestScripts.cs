@@ -33,4 +33,23 @@ public class MyTestScripts
     public void TestNotEqualNum() {
         Assert.AreNotEqual(1, 2);
     }
+
+    [Test]
+    public void SceneExistsInBuildSettings()
+    {
+        string sceneName = "MainScene";
+        bool sceneExists = false;
+
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            if (System.IO.Path.GetFileNameWithoutExtension(scenePath) == sceneName)
+            {
+                sceneExists = true;
+                break;
+            }
+        }
+
+        Assert.IsTrue(sceneExists, $"Scene '{sceneName}' does not exist in build settings.");
+    }
 }

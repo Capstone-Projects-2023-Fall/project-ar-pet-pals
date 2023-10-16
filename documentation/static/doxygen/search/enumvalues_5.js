@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['face_0',['Face',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#adb8dc6e0c9e5b86b8a0677cc7ce8ec85a8af5861002f3c157f9ba842bba10aa3f',1,'UnityEngine::XR::ARSubsystems']]],
+  ['facetracking_1',['FaceTracking',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a4fbc32f1d74930ae4e646d45854c9fa8ad60b677c3871d7f92cda768f3cb32365',1,'UnityEngine::XR::ARSubsystems']]],
+  ['fade_2',['Fade',['../classUnityEngine_1_1UI_1_1Toggle.html#a731aa36a35bdf6d56719d4729e4696eba04e0385c10aefee8e4681617d2f3ef40',1,'UnityEngine::UI::Toggle']]],
+  ['failed_3',['Failed',['../structUnityEngine_1_1XR_1_1ARSubsystems_1_1XRCpuImage.html#a106e21e46dde7cdc591180b680044664ad7c8c85bf79bbe1b7188497c32c3b0ca',1,'UnityEngine::XR::ARSubsystems::XRCpuImage']]],
+  ['fastest_4',['fastest',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a03d23d6275f8729273bcb08566fd184ba90fd7fdf6f41406a75e5265b9583bb4e',1,'UnityEngine.XR.ARSubsystems.Fastest'],['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#afefed5ac50af982e184f494d8a974871a90fd7fdf6f41406a75e5265b9583bb4e',1,'UnityEngine.XR.ARSubsystems.Fastest'],['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a171ced1cc6c4c8e829bc67be56393ae9a90fd7fdf6f41406a75e5265b9583bb4e',1,'UnityEngine.XR.ARSubsystems.Fastest']]],
+  ['featurepoint_5',['FeaturePoint',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#adb8dc6e0c9e5b86b8a0677cc7ce8ec85a81d66952d59b5de41234e779a33a4870',1,'UnityEngine::XR::ARSubsystems']]],
+  ['featurepoints_6',['featurepoints',['../classUnityEngine_1_1XR_1_1ARSubsystems_1_1XRPointCloudSubsystemDescriptor.html#ad3204174a3d1a8cb619fa1d6ab2bf2caa682d01ad99ae2ca3e6ac8e1b5f574783',1,'UnityEngine.XR.ARSubsystems.XRPointCloudSubsystemDescriptor.FeaturePoints'],['../classUnityEngine_1_1XR_1_1ARSubsystems_1_1XRDepthSubsystemDescriptor.html#a11c8bdac30d7337ee110784677d2ba43a682d01ad99ae2ca3e6ac8e1b5f574783',1,'UnityEngine.XR.ARSubsystems.XRDepthSubsystemDescriptor.FeaturePoints']]],
+  ['fileiofailed_7',['FileIOFailed',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560aa13ba8ad264846b4e6702abdf42a2362',1,'UnityEngine::XR::ARKit']]],
+  ['filled_8',['Filled',['../classUnityEngine_1_1UI_1_1Image.html#ac8ca5b86942f856ba1e5c94d638edc44ad9d586f8c792f8f661052af42536323c',1,'UnityEngine::UI::Image']]],
+  ['finished_9',['Finished',['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a8f1358489aaa5cfabaa4141dbce59b00a8f3d10eb21bd36347c258679eba9e92b',1,'UnityEngine::XR::ARCore']]],
+  ['fitinparent_10',['FitInParent',['../classUnityEngine_1_1UI_1_1AspectRatioFitter.html#a87fd30bb5580951d7579695d2a0a19a1a191652c0f04740da8935e81a5f898935',1,'UnityEngine::UI::AspectRatioFitter']]],
+  ['fixed_11',['Fixed',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a0c923bb44db86b871c9829744f6cc7c9a4457d440870ad6d42bab9082d9bf9b61',1,'UnityEngine::XR::ARSubsystems']]],
+  ['fixedcolumncount_12',['FixedColumnCount',['../classUnityEngine_1_1UI_1_1GridLayoutGroup.html#abdfdea9128841742ea93a1587e947fb4ab59c8d36a44032abe1b976f25662e904',1,'UnityEngine::UI::GridLayoutGroup']]],
+  ['fixedrowcount_13',['FixedRowCount',['../classUnityEngine_1_1UI_1_1GridLayoutGroup.html#abdfdea9128841742ea93a1587e947fb4a5ef56f0da4ec25a54efa897a25842174',1,'UnityEngine::UI::GridLayoutGroup']]],
+  ['flexible_14',['Flexible',['../classUnityEngine_1_1UI_1_1GridLayoutGroup.html#abdfdea9128841742ea93a1587e947fb4a13b303a6c0d90897b5375ce901acc445',1,'UnityEngine::UI::GridLayoutGroup']]],
+  ['floor_15',['floor',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a6c1ec27d62c1732e8d8d0a1c1ef2636aaf3f6d0343d56ce88ce7958170ed05cb3',1,'UnityEngine.XR.ARKit.Floor'],['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a74a54a2585676239f952b44abadf737daf3f6d0343d56ce88ce7958170ed05cb3',1,'UnityEngine.XR.ARSubsystems.Floor']]],
+  ['foreheadleft_16',['ForeheadLeft',['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a3ffd4e244ff9966735039c993c342951a3a5ad21504c6bcd96845929b7236e265',1,'UnityEngine::XR::ARCore']]],
+  ['foreheadright_17',['ForeheadRight',['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a3ffd4e244ff9966735039c993c342951a812d8329a110ada2cc12054c3985492a',1,'UnityEngine::XR::ARCore']]],
+  ['forward_18',['Forward',['../namespaceUnityEngine_1_1XR_1_1Simulation.html#ae863b8a926455110e1ccdac1d826bb6da67d2f6740a8eaebf4d5c6f79be8da481',1,'UnityEngine::XR::Simulation']]],
+  ['fps30_19',['Fps30',['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a196bb9f67a310896ad1e2ca485f21363a03a38d3a7e7bfa1fd9cf06efc68f023d',1,'UnityEngine::XR::ARCore']]],
+  ['fps60_20',['Fps60',['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a196bb9f67a310896ad1e2ca485f21363a444800b26e38169636911c9cff686b84',1,'UnityEngine::XR::ARCore']]],
+  ['front_21',['Front',['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a6a3f7ff70e2bff23e0bce8e22edb63f2a5835bab1ade0060909e31a06af2e2cde',1,'UnityEngine::XR::ARCore']]]
+];

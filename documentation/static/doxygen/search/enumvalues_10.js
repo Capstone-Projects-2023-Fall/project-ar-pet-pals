@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['scalewithscreensize_0',['ScaleWithScreenSize',['../classUnityEngine_1_1UI_1_1CanvasScaler.html#a2b7a899b4d84a54f47c77ec915ebd1b9a2ac0fab43627f997005598024f98fd05',1,'UnityEngine::UI::CanvasScaler']]],
+  ['scroll_1',['Scroll',['../namespaceUnityEngine_1_1EventSystems.html#af45e2ec1e41b37e1dcffcfde552bd542a105078d294d30c978ca2badf7f376934',1,'UnityEngine::EventSystems']]],
+  ['seat_2',['seat',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a74a54a2585676239f952b44abadf737da25c40c519686f155291de96c60796f70',1,'UnityEngine.XR.ARSubsystems.Seat'],['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a6c1ec27d62c1732e8d8d0a1c1ef2636aa25c40c519686f155291de96c60796f70',1,'UnityEngine.XR.ARKit.Seat']]],
+  ['select_3',['Select',['../namespaceUnityEngine_1_1EventSystems.html#af45e2ec1e41b37e1dcffcfde552bd542ae0626222614bdee31951d84c64e5e9ff',1,'UnityEngine::EventSystems']]],
+  ['sensorfailed_4',['SensorFailed',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560ada39da8259b718a85ab8153df8dbf40d',1,'UnityEngine::XR::ARKit']]],
+  ['sensorunavailable_5',['SensorUnavailable',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560addfc5a91cde0d6c597f688ea257560bf',1,'UnityEngine::XR::ARKit']]],
+  ['sessioninitializing_6',['SessionInitializing',['../namespaceUnityEngine_1_1XR_1_1ARFoundation.html#a26d16ed84ae6358b83a72c66a201a749a3a04d0bd80a7eb7dedad7828c6973481',1,'UnityEngine::XR::ARFoundation']]],
+  ['sessiontracking_7',['SessionTracking',['../namespaceUnityEngine_1_1XR_1_1ARFoundation.html#a26d16ed84ae6358b83a72c66a201a749af5ebbbe8485d2877ef94a828546d42d9',1,'UnityEngine::XR::ARFoundation']]],
+  ['shrink_8',['Shrink',['../classUnityEngine_1_1UI_1_1CanvasScaler.html#a0710454d02cf5385685fafe2bb730884a1bb54971ab41a5a931b23159019fd73f',1,'UnityEngine::UI::CanvasScaler']]],
+  ['simple_9',['Simple',['../classUnityEngine_1_1UI_1_1Image.html#ac8ca5b86942f856ba1e5c94d638edc44a1fbb1e3943c2c6c560247ac8f9289780',1,'UnityEngine::UI::Image']]],
+  ['singleline_10',['SingleLine',['../classUnityEngine_1_1UI_1_1InputField.html#a5ae8b7dabd5aecdf0d19b79e0dbcd126a3e5c1fb76b6543ac61af54b185f02af9',1,'UnityEngine::UI::InputField']]],
+  ['singlepassinstanced_11',['SinglePassInstanced',['../classUnityEngine_1_1XR_1_1OpenXR_1_1OpenXRSettings.html#a0a4d7a3876278a45cb314eb919701d45ae35027637053619ab82bce920d313775',1,'UnityEngine::XR::OpenXR::OpenXRSettings']]],
+  ['sliced_12',['Sliced',['../classUnityEngine_1_1UI_1_1Image.html#ac8ca5b86942f856ba1e5c94d638edc44afa6a7b9fa989f179f6bbf2796bf4337c',1,'UnityEngine::UI::Image']]],
+  ['standard_13',['standard',['../classUnityEngine_1_1UI_1_1InputField.html#a6215c075a8f1105f0cc69189166897f0aeb6d8ae6f20283755b339c0dc273988b',1,'UnityEngine.UI.InputField.Standard'],['../classUnityEngine_1_1UI_1_1InputField.html#a7319ba6a2133beb3a3a3f78f59f592c2aeb6d8ae6f20283755b339c0dc273988b',1,'UnityEngine.UI.InputField.Standard']]],
+  ['submit_14',['Submit',['../namespaceUnityEngine_1_1EventSystems.html#af45e2ec1e41b37e1dcffcfde552bd542aa4d3b161ce1309df1c4e25df28694b7b',1,'UnityEngine::EventSystems']]],
+  ['success_15',['success',['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a64e7e274c5995797f53a89bd6fe9f32da505a83f220c02df2f85c3810cd9ceb38',1,'UnityEngine.XR.ARCore.Success'],['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a3c1a48e8b4de276a5db3835ca3a2e2b9a505a83f220c02df2f85c3810cd9ceb38',1,'UnityEngine.XR.ARKit.Success'],['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#ac62d8a2eb393cdaec634273278077d18a505a83f220c02df2f85c3810cd9ceb38',1,'UnityEngine.XR.ARSubsystems.Success'],['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a175195d733ba44ed1185569cb0e7147da505a83f220c02df2f85c3810cd9ceb38',1,'UnityEngine.XR.ARSubsystems.Success']]],
+  ['supported_16',['supported',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a17dcea968591c786b33b7898abf6041faeaa4dc5078017a5c5bebf383ab6f5124',1,'UnityEngine.XR.ARSubsystems.Supported'],['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#ad73d92a3328c102ae5896d865223737daeaa4dc5078017a5c5bebf383ab6f5124',1,'UnityEngine.XR.ARSubsystems.Supported']]]
+];

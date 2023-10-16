@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['parse_0',['Parse',['../structUnityEngine_1_1XR_1_1ARKit_1_1OSVersion.html#a5b9dd303baeca118c2d00a8ff2086560',1,'UnityEngine::XR::ARKit::OSVersion']]],
+  ['pathtostring_1',['PathToString',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1OpenXRFeature.html#ae9d919869f8e3637cf99461869c3f225',1,'UnityEngine::XR::OpenXR::Features::OpenXRFeature']]],
+  ['performclipping_2',['performclipping',['../interfaceUnityEngine_1_1UI_1_1IClipper.html#a646c86ae932ad0efd75ca37994783b6f',1,'UnityEngine.UI.IClipper.PerformClipping()'],['../classUnityEngine_1_1UI_1_1RectMask2D.html#adbb2c797676f41e6d85e8a25d6435268',1,'UnityEngine.UI.RectMask2D.PerformClipping()']]],
+  ['plane_3',['Plane',['../structUnityEngine_1_1XR_1_1ARSubsystems_1_1XRCpuImage_1_1Plane.html#a4274085b6cdfba91a401cbc3c4d54d85',1,'UnityEngine::XR::ARSubsystems::XRCpuImage::Plane']]],
+  ['planediscoveryvoxelgrid_4',['PlaneDiscoveryVoxelGrid',['../classUnityEngine_1_1XR_1_1Simulation_1_1PlaneDiscoveryVoxelGrid.html#a1be788ece6ea9e445b275770dc046695',1,'UnityEngine::XR::Simulation::PlaneDiscoveryVoxelGrid']]],
+  ['planeraycaster_5',['PlaneRaycaster',['../classUnityEngine_1_1XR_1_1Simulation_1_1PlaneRaycaster.html#af38240fc0c90b95a807f7e098b98c053',1,'UnityEngine::XR::Simulation::PlaneRaycaster']]],
+  ['planevoxelgrid_6',['PlaneVoxelGrid',['../classUnityEngine_1_1XR_1_1Simulation_1_1PlaneVoxelGrid.html#a3ba2f03d11509d23d4484af8b6ce70a3',1,'UnityEngine::XR::Simulation::PlaneVoxelGrid']]],
+  ['pointcloudraycaster_7',['PointCloudRaycaster',['../classUnityEngine_1_1XR_1_1Simulation_1_1PointCloudRaycaster.html#aaf92f926b823bb07ee894e7dd8a8d06d',1,'UnityEngine::XR::Simulation::PointCloudRaycaster']]],
+  ['posecontrol_8',['PoseControl',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Input_1_1PoseControl.html#a3edc7477b7005ff9ee56172025a67ba2',1,'UnityEngine::XR::OpenXR::Input::PoseControl']]],
+  ['preprocessbuildeventargs_9',['PreprocessBuildEventArgs',['../structUnityEditor_1_1XR_1_1ARSubsystems_1_1PreprocessBuildEventArgs.html#a19cfbc2ef2c0327457ebe4a5ae727a7c',1,'UnityEditor::XR::ARSubsystems::PreprocessBuildEventArgs']]],
+  ['pressedthisframe_10',['PressedThisFrame',['../classUnityEngine_1_1EventSystems_1_1PointerInputModule_1_1MouseButtonEventData.html#aa378ae28787da2d4d1e92cf2714cf842',1,'UnityEngine::EventSystems::PointerInputModule::MouseButtonEventData']]],
+  ['processdrag_11',['ProcessDrag',['../classUnityEngine_1_1EventSystems_1_1PointerInputModule.html#a4b97f07c0cfc1a97896d4251a5ddf73d',1,'UnityEngine::EventSystems::PointerInputModule']]],
+  ['processmouseevent_12',['ProcessMouseEvent',['../classUnityEngine_1_1EventSystems_1_1StandaloneInputModule.html#a5ee4634ca3dbbf691484d60accaaed3d',1,'UnityEngine::EventSystems::StandaloneInputModule']]],
+  ['processmousepress_13',['ProcessMousePress',['../classUnityEngine_1_1EventSystems_1_1StandaloneInputModule.html#a54b548c9a6f6ec22bc68499846f58a01',1,'UnityEngine::EventSystems::StandaloneInputModule']]],
+  ['processmove_14',['ProcessMove',['../classUnityEngine_1_1EventSystems_1_1PointerInputModule.html#aee98d7e4472040a411060d5fad6879aa',1,'UnityEngine::EventSystems::PointerInputModule']]],
+  ['processtouchpress_15',['ProcessTouchPress',['../classUnityEngine_1_1EventSystems_1_1StandaloneInputModule.html#a764027a9ab1805f560b929ae8bfff4f3',1,'UnityEngine::EventSystems::StandaloneInputModule']]]
+];

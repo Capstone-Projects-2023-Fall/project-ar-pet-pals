@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['lastpress_0',['lastPress',['../classUnityEngine_1_1EventSystems_1_1PointerEventData.html#a38baf879211b87529318bb7fc9d67019',1,'UnityEngine::EventSystems::PointerEventData']]],
+  ['layers_1',['layers',['../classUnityEngine_1_1XR_1_1Simulation_1_1PlaneVoxelGrid.html#a8eb9760adace98d487d3091d55b02859',1,'UnityEngine::XR::Simulation::PlaneVoxelGrid']]],
+  ['layoutpriority_2',['layoutpriority',['../interfaceUnityEngine_1_1UI_1_1ILayoutElement.html#a13e5c560042cac2db6ddfd22143f1be9',1,'UnityEngine.UI.ILayoutElement.layoutPriority'],['../classUnityEngine_1_1UI_1_1LayoutGroup.html#a9faa8f52026a2db90605b307e53849c8',1,'UnityEngine.UI.LayoutGroup.layoutPriority']]],
+  ['lefteye_3',['leftEye',['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARFace.html#a1b97cb0eb8f20a9b8860e15887a31ebf',1,'UnityEngine::XR::ARFoundation::ARFace']]],
+  ['lefteyepose_4',['leftEyePose',['../structUnityEngine_1_1XR_1_1ARSubsystems_1_1XRFace.html#ab5ee7aa795646de215bf6fca18228900',1,'UnityEngine::XR::ARSubsystems::XRFace']]],
+  ['legacycameraevents_5',['legacyCameraEvents',['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARCameraBackground.html#a4a1e9a898b18afc31b0d58b0e8fcb451',1,'UnityEngine::XR::ARFoundation::ARCameraBackground']]],
+  ['length_6',['length',['../structUnityEngine_1_1XR_1_1ARKit_1_1ARCollaborationDataBuilder.html#a66adf5581a92b8bdd853f7644cab285f',1,'UnityEngine::XR::ARKit::ARCollaborationDataBuilder']]],
+  ['library_7',['library',['../classUnityEngine_1_1XR_1_1ARSubsystems_1_1XRObjectTrackingSubsystem.html#ad2be73607c636edfebe639905e11bf31',1,'UnityEngine.XR.ARSubsystems.XRObjectTrackingSubsystem.library'],['../classUnityEngine_1_1XR_1_1ARSubsystems_1_1XRObjectTrackingSubsystem_1_1Provider.html#aa7ea38db8d3d2f7755d35f3b5522a056',1,'UnityEngine.XR.ARSubsystems.XRObjectTrackingSubsystem.Provider.library']]],
+  ['lightestimation_8',['lightEstimation',['../structUnityEngine_1_1XR_1_1ARFoundation_1_1ARCameraFrameEventArgs.html#af98d49802d70538d3073167269dca402',1,'UnityEngine::XR::ARFoundation::ARCameraFrameEventArgs']]],
+  ['lightestimationmode_9',['lightEstimationMode',['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARCameraManager.html#a23c90cf9a629bb0bdf8644953c16aeca',1,'UnityEngine::XR::ARFoundation::ARCameraManager']]],
+  ['linerendererprefab_10',['lineRendererPrefab',['../classUnityEngine_1_1XR_1_1ARFoundation_1_1ARDebugMenu.html#aca69b46bcb5aae35364f35b6b02d8282',1,'UnityEngine::XR::ARFoundation::ARDebugMenu']]],
+  ['linespacing_11',['lineSpacing',['../classUnityEngine_1_1UI_1_1FontData.html#a33682360a4cd31d059937e452b4a07f2',1,'UnityEngine::UI::FontData']]],
+  ['localizeddescription_12',['localizedDescription',['../structUnityEngine_1_1XR_1_1ARKit_1_1NSError.html#a491a76ad4dc12a68c7f84fd7045ea9c9',1,'UnityEngine::XR::ARKit::NSError']]],
+  ['localizedfailurereason_13',['localizedFailureReason',['../structUnityEngine_1_1XR_1_1ARKit_1_1NSError.html#a8734da1af92e97b8d2e56362a44a4aaa',1,'UnityEngine::XR::ARKit::NSError']]],
+  ['localizedrecoverysuggestion_14',['localizedRecoverySuggestion',['../structUnityEngine_1_1XR_1_1ARKit_1_1NSError.html#aa855f9bbab2c1cd585f416b64b2856fe',1,'UnityEngine::XR::ARKit::NSError']]],
+  ['localpose_15',['localPose',['../structUnityEngine_1_1XR_1_1ARSubsystems_1_1XRHumanBodyJoint.html#a087be3844fc35334a1bd92c151cc3de0',1,'UnityEngine::XR::ARSubsystems::XRHumanBodyJoint']]],
+  ['localscale_16',['localScale',['../structUnityEngine_1_1XR_1_1ARSubsystems_1_1XRHumanBodyJoint.html#ac7b608239ad7a1468303a7ff42f51ab9',1,'UnityEngine::XR::ARSubsystems::XRHumanBodyJoint']]]
+];

@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['image_0',['Image',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#adb8dc6e0c9e5b86b8a0677cc7ce8ec85abe53a0541a6d36f6ecb879fa2c584b08',1,'UnityEngine::XR::ARSubsystems']]],
+  ['imagetracking_1',['ImageTracking',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a4fbc32f1d74930ae4e646d45854c9fa8ac566a1f5f7ed36005127fc2cfcb4b9ce',1,'UnityEngine::XR::ARSubsystems']]],
+  ['inches_2',['Inches',['../classUnityEngine_1_1UI_1_1CanvasScaler.html#a93b23d678bc87ca91c4ca135abcf54f5ad73325cdb1cb4f9a1ed11bdab879321d',1,'UnityEngine::UI::CanvasScaler']]],
+  ['initializepotentialdrag_3',['InitializePotentialDrag',['../namespaceUnityEngine_1_1EventSystems.html#af45e2ec1e41b37e1dcffcfde552bd542a657517dd0928d744aa3070bf265fe877',1,'UnityEngine::EventSystems']]],
+  ['initializing_4',['Initializing',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a500b79ca0cb8bd0b479bd4cfe475d027a32b169f72b293ef80d35435e9894f8e2',1,'UnityEngine::XR::ARSubsystems']]],
+  ['installed_5',['Installed',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a17dcea968591c786b33b7898abf6041fa98dd43dfae05b11befe1f140e0ec787a',1,'UnityEngine::XR::ARSubsystems']]],
+  ['installing_6',['Installing',['../namespaceUnityEngine_1_1XR_1_1ARFoundation.html#a26d16ed84ae6358b83a72c66a201a749a2763f33c904a183bd0ef06f9c4fb4403',1,'UnityEngine::XR::ARFoundation']]],
+  ['instant_7',['Instant',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#aeef731638815fb577b4d9c831e98fbfca54828f327f31abd59f2f459c0247756d',1,'UnityEngine::XR::ARKit']]],
+  ['insufficientfeatures_8',['insufficientfeatures',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a500b79ca0cb8bd0b479bd4cfe475d027a2b46fd70c2d27cd86565fdc371611393',1,'UnityEngine.XR.ARSubsystems.InsufficientFeatures'],['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560a2b46fd70c2d27cd86565fdc371611393',1,'UnityEngine.XR.ARKit.InsufficientFeatures']]],
+  ['insufficientlight_9',['InsufficientLight',['../namespaceUnityEngine_1_1XR_1_1ARSubsystems.html#a500b79ca0cb8bd0b479bd4cfe475d027abcec42c3f0005d8c856fbafe3947f01f',1,'UnityEngine::XR::ARSubsystems']]],
+  ['integer_10',['Integer',['../classUnityEngine_1_1UI_1_1InputField.html#a1ab8ee3dc9e7c82d1c598c61a9412f48aa0faef0851b4294c06f2b94bb1cb2044',1,'UnityEngine::UI::InputField']]],
+  ['integernumber_11',['IntegerNumber',['../classUnityEngine_1_1UI_1_1InputField.html#a7319ba6a2133beb3a3a3f78f59f592c2a01c85075e3923cad28625320edba4610',1,'UnityEngine::UI::InputField']]],
+  ['invalid_12',['Invalid',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a3c1a48e8b4de276a5db3835ca3a2e2b9a4bbb8f967da6d1a610596d7257179c2b',1,'UnityEngine::XR::ARKit']]],
+  ['invalidcollaborationdata_13',['InvalidCollaborationData',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560a772eea922ca4e1d9e5dcf3a8b380118c',1,'UnityEngine::XR::ARKit']]],
+  ['invalidconfiguration_14',['InvalidConfiguration',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560af237deac1e85c65673a7bba9093bca7e',1,'UnityEngine::XR::ARKit']]],
+  ['invalidreferenceimage_15',['InvalidReferenceImage',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560a7e92d0eefebd1bc24b0b4a69dc08b073',1,'UnityEngine::XR::ARKit']]],
+  ['invalidreferenceobject_16',['InvalidReferenceObject',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560ac03c806a7f13e485322568c85f6ec9b0',1,'UnityEngine::XR::ARKit']]],
+  ['invalidworldmap_17',['InvalidWorldMap',['../namespaceUnityEngine_1_1XR_1_1ARKit.html#a613e11162ccff7ec1c67b969e64e1560a3e3d0845a87deb6a8ef7a6ad1cc28ec0',1,'UnityEngine::XR::ARKit']]],
+  ['ioerror_18',['ioerror',['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a8f1358489aaa5cfabaa4141dbce59b00a5206bd7472156351d2d9a99633ac9580',1,'UnityEngine.XR.ARCore.IOError'],['../namespaceUnityEngine_1_1XR_1_1ARCore.html#a3bfe3e9a08e87f291d070231fa5cd772a5206bd7472156351d2d9a99633ac9580',1,'UnityEngine.XR.ARCore.IOError']]],
+  ['iosypcbcr420_5f8biplanarfullrange_19',['IosYpCbCr420_8BiPlanarFullRange',['../structUnityEngine_1_1XR_1_1ARSubsystems_1_1XRCpuImage.html#a527b128c5f2592aa52a94ce1f47507d2a6e8b404920dd246a5676b05764006ac8',1,'UnityEngine::XR::ARSubsystems::XRCpuImage']]]
+];
