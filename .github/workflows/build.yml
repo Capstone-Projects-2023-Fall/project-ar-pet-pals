@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Run all tests ✨
+    name: automated testing ✨
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -48,7 +48,7 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: ${{ matrix.testMode }}-artifacts
-          githubToken: ${{ secrets.TOKEN }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: ${{ matrix.testMode }} Test Results
           coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+my.assembly.*'
       - uses: actions/upload-artifact@v3
