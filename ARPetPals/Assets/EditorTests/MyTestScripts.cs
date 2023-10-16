@@ -33,4 +33,50 @@ public class MyTestScripts
     public void TestNotEqualNum() {
         Assert.AreNotEqual(1, 2);
     }
+
+    [Test]
+    public void SceneExistsInBuildSettings()
+    {
+        string sceneName = "MainScene"; // Replace with your scene name
+        bool sceneExists = false;
+
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            if (System.IO.Path.GetFileNameWithoutExtension(scenePath) == sceneName)
+            {
+                sceneExists = true;
+                break;
+            }
+        }
+
+        Assert.IsTrue(sceneExists, $"Scene '{sceneName}' does not exist in build settings.");
+    }
+
+    // [Test]
+    // public void CanInstantiatePrefab()
+    // {
+    //     string prefabPath = "Assets/Prefabs/MyPrefab.prefab"; // Replace with your prefab path
+    //     GameObject prefab = Resources.Load<GameObject>(prefabPath);
+
+    //     Assert.IsNotNull(prefab, $"Prefab at '{prefabPath}' could not be loaded.");
+
+    //     GameObject instance = Object.Instantiate(prefab);
+    //     Assert.IsNotNull(instance, $"Prefab at '{prefabPath}' could not be instantiated.");
+
+    //     Object.DestroyImmediate(instance);
+    // }
+
+    // [UnityTest]
+    // public IEnumerator GameObjectExistsInScene()
+    // {
+    //     string sceneName = "MainScene"; // Replace with your scene name
+    //     string gameObjectName = "Dog"; // Replace with your game object name
+
+    //     SceneManager.LoadScene(sceneName);
+    //     yield return null; // Wait for the scene to load
+
+    //     GameObject obj = GameObject.Find(gameObjectName);
+    //     Assert.IsNotNull(obj, $"Game object '{gameObjectName}' does not exist in scene '{sceneName}'.");
+    // }
 }
