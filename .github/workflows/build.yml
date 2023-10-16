@@ -36,6 +36,8 @@ jobs:
             Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
             Library-${{ matrix.projectPath }}-
             Library-
+      - if: matrix.targetPlatform == 'Android'
+        uses: jlumbroso/free-disk-space@v1.3.0
       - uses: game-ci/unity-test-runner@v3
         id: testRunner
         env:
