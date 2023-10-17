@@ -1,9 +1,9 @@
 ---
 sidebar_position: 3
-description: Device Data Collection Documentation.
+description: Device Data Collection
 ---
 
-Device Data Collection Documentation
+Device Data Collection
 =============================
 
 ## Class CameraManager
