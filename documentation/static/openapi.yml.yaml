@@ -4,13 +4,12 @@ info:
   description: |-
     ARPetPals is a mobile augmented reality (AR) application designed for Android. ARPetPals aims to aid users in their health and fitness journey in a fun and interactive way by integrating real-world activity tracking and object recognition, where user's daily movement and nutrition contribute to the health and happiness of their virtual pet, encouraging them to stay active and make healthier eating choices. ARPetPals allows users to adopt and interact with virtual pets in their real-world environments such as one’s desk at work. The virtual pet requires care, attention, and playtime, with their happiness and health metrics affected by user interactions. The game also leverages object recognition AI to enable virtual pets to interact with real-world objects, enhancing the gameplay experience. The health of the virtual pet is directly correlated with the user’s diet and activity habits. Using object recognition, the game will recognize food a user is eating and record the nutrition information. The healthier the food, the more nourished a pet becomes. The app will remind users to nourish their pet throughout the day and to interact with it by exercising. The pet will become more fit and content based on a user's activity level. There is an interactive aspect to the game where the health of a virtual pet is displayed on a public leader board. This gives users incentive to keep up their pets' health status by adding a competitive nature to the game. The game also uses speech to text AI to give commands and interact with the virtual pet. ARPetPals will be developed using the Unity 3D game engine, version 2022.2.21.
 
-
 servers:
   - url: /api/v3
 
 tags:
   - name: object-recognition
-    description: Describes the object-recognition from the AR Foundational API 
+    description: Describes the object-recognition from the AR Foundational API
     externalDocs:
       description: Find out more about AR Foundational API
       url: https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@6.0/manual/features/features.html
@@ -19,7 +18,90 @@ tags:
     externalDocs:
       description: API for displaying pets using Unity technology
 
+  - name: front
+    externalDocs:
+      description: API for managing user interface, inputs, notifications, leaderboard, and exercise reminders
+
 paths:
+  /front/displayInterface:
+    get:
+      summary: "Retrieve the user interface layout."
+      operationId: "getDisplayInterface"
+      tags:
+        - UserInterface
+      responses:
+        "200":
+          description: "Successfully retrieved UI layout."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInterfaceLayout"
+
+  /front/userInput:
+    post:
+      summary: "Handle user interactions and inputs."
+      operationId: "handleUserInput"
+      tags:
+        - UserInputHandler
+      requestBody:
+        description: "User input details."
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInputDetails"
+      responses:
+        "200":
+          description: "User input processed successfully."
+
+  /front/sendNotification:
+    post:
+      summary: "Send notifications to the user."
+      operationId: "sendNotification"
+      tags:
+        - NotificationManager
+      requestBody:
+        description: "Notification details."
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NotificationDetails"
+      responses:
+        "200":
+          description: "Notification sent successfully."
+
+  /front/leaderboard:
+    get:
+      summary: "Retrieve the public leaderboard."
+      operationId: "getLeaderboard"
+      tags:
+        - LeaderBoardDisplay
+      responses:
+        "200":
+          description: "Successfully retrieved leaderboard."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeaderboardDetails"
+
+  /front/exerciseReminder:
+    post:
+      summary: "Send exercise reminders to the user."
+      operationId: "sendExerciseReminder"
+      tags:
+        - ExerciseReminder
+      requestBody:
+        description: "Details of the exercise reminder."
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExerciseReminderDetails"
+      responses:
+        "200":
+          description: "Exercise reminder sent successfully."
+
   /display/renderPet:
     post:
       summary: "Renders the pet using Unity."
@@ -32,14 +114,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PetDetails'
+              $ref: "#/components/schemas/PetDetails"
       responses:
-        '200':
+        "200":
           description: "Pet rendered successfully."
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RenderResponse'
+                $ref: "#/components/schemas/RenderResponse"
 
   /display/configureDisplay:
     post:
@@ -53,9 +135,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DisplayConfiguration'
+              $ref: "#/components/schemas/DisplayConfiguration"
       responses:
-        '200':
+        "200":
           description: "Display configured successfully."
 
   /display/manageUserDisplay:
@@ -70,18 +152,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserDisplayRequest'
+              $ref: "#/components/schemas/UserDisplayRequest"
       responses:
-        '200':
+        "200":
           description: "User display managed successfully."
 
-    
   /object-recogntion/ARTrackedImageManager:
     get:
       tags:
         - object-recognition
       summary: ARTrackedImageManager
-      description: Describes API used in order to track images, which performs 2D image tracking. 
+      description: Describes API used in order to track images, which performs 2D image tracking.
   /object-recogntion/ARTrackedObjectManager:
     get:
       tags:
@@ -102,9 +183,66 @@ paths:
       description: |-
         Describes API used in order to track real-world planes ( real world surfaces like desks, floors,etc)
 
-
 components:
   schemas:
+    UserInterfaceLayout:
+      type: object
+      properties:
+        layoutId:
+          type: string
+          description: "ID of the UI layout."
+        components:
+          type: array
+          items:
+            type: string
+          description: "Components present in the UI layout."
+
+    UserInputDetails:
+      type: object
+      properties:
+        inputType:
+          type: string
+          description: "Type of user input."
+        inputValue:
+          type: string
+          description: "Value of the user input."
+
+    NotificationDetails:
+      type: object
+      properties:
+        notificationType:
+          type: string
+          description: "Type of notification."
+        message:
+          type: string
+          description: "Message content of the notification."
+
+    LeaderboardDetails:
+      type: object
+      properties:
+        rank:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserRank"
+          description: "List of users and their rankings."
+
+    UserRank:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: "ID of the user."
+        score:
+          type: integer
+          description: "User's score on the leaderboard."
+
+    ExerciseReminderDetails:
+      type: object
+      properties:
+        reminderMessage:
+          type: string
+          description: "Message for the exercise reminder."
+
     PetDetails:
       type: object
       properties:
