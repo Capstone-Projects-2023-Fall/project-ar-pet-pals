@@ -28,7 +28,7 @@ paths:
       summary: "Retrieve the user interface layout."
       operationId: "getDisplayInterface"
       tags:
-        - UserInterface
+        - front
       responses:
         "200":
           description: "Successfully retrieved UI layout."
@@ -42,7 +42,7 @@ paths:
       summary: "Handle user interactions and inputs."
       operationId: "handleUserInput"
       tags:
-        - UserInputHandler
+        - front
       requestBody:
         description: "User input details."
         required: true
@@ -59,7 +59,7 @@ paths:
       summary: "Send notifications to the user."
       operationId: "sendNotification"
       tags:
-        - NotificationManager
+        - front
       requestBody:
         description: "Notification details."
         required: true
@@ -76,7 +76,7 @@ paths:
       summary: "Retrieve the public leaderboard."
       operationId: "getLeaderboard"
       tags:
-        - LeaderBoardDisplay
+        - front
       responses:
         "200":
           description: "Successfully retrieved leaderboard."
@@ -90,7 +90,7 @@ paths:
       summary: "Send exercise reminders to the user."
       operationId: "sendExerciseReminder"
       tags:
-        - ExerciseReminder
+        - front
       requestBody:
         description: "Details of the exercise reminder."
         required: true
