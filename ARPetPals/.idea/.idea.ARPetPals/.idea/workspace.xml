@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1781716-5da8-4ba9-a8bc-654060b64c5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/UI/Scripts/LogInController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Scripts/LogInController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,7 @@
       <workItem from="1697855607486" duration="1922000" />
       <workItem from="1697858591562" duration="15000" />
       <workItem from="1697858625641" duration="5672000" />
-      <workItem from="1697909529678" duration="1265000" />
+      <workItem from="1697909529678" duration="3239000" />
     </task>
     <servers />
   </component>
