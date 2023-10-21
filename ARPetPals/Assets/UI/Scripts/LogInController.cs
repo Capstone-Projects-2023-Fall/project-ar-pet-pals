@@ -14,7 +14,7 @@ public class LogInController : MonoBehaviour
     public string passwordInput;
     public GameObject gameObject;
     [SerializeField] 
-    public TMP_Text EditText;
+    public TMP_Text editText;
     
     
     public void getUserName(string s)
@@ -32,14 +32,14 @@ public class LogInController : MonoBehaviour
     public void loginButtonClicked()
     {
         Debug.Log($"Log in Clicked username: {usernameInput} password: {passwordInput}");
-        if (passwordInput != null && usernameInput != null)
+        if (passwordInput != "" && usernameInput != "")
         {
             gameObject.GetComponent<APIService>().SignIn(usernameInput, passwordInput, (errMessage) =>
             {
                 if (errMessage != "")
                 {
                     Debug.Log("Login Fail: " + errMessage);
-                    EditText.text = errMessage;
+                    editText.text = errMessage;
                 }
                 else
                 {

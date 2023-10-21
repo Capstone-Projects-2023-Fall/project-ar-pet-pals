@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ARPetPals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,34 +8,52 @@ using UnityEngine.SceneManagement;
 public class NewBehaviourScript : MonoBehaviour
 {
     public GameObject gameObject;
-    public string username;
-    public string password;
-    public string confirmPassword;
+    public string usernameInput;
+    public string passwordInput;
+    public string confirmPasswordInput;
     public TMP_Text editText;
 
-    public void usernameInput(string s)
+    public void getUsername(string s)
     {
-        username = s;
-        Debug.Log("username: " + username);
+        usernameInput = s;
+        Debug.Log("username: " + usernameInput);
     }
 
-    public void passwordInput(string s)
+    public void getPassword(string s)
     {
-        password = s;
-        Debug.Log("username: " + password);
+        passwordInput = s;
+        Debug.Log("password: " + passwordInput);
     }
 
-    public void confirmPassInput(string s)
+    public void getConfirmPassword(string s)
     {
-        confirmPassword = s;
-        Debug.Log("username: " + confirmPassword);
+        confirmPasswordInput = s;
+        Debug.Log("confirma password input: " + confirmPasswordInput);
     }
 
     public void registerButtonClicked()
     {
-        editText.text = password.Equals(confirmPassword) ? "Password correct" : "Password incorrect";
+        editText.text = passwordInput.Equals(confirmPasswordInput) ? "Password correct" : "Password incorrect";
         Debug.Log("register clicked");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        if (usernameInput != "" && passwordInput != "" && confirmPasswordInput != "" &&
+            passwordInput.Equals(confirmPasswordInput))
+        {
+            gameObject.GetComponent<APIService>().SignUp(usernameInput, passwordInput, (errMessage) =>
+            {
+                if (errMessage != "")
+                {
+                    Debug.Log("Signup Fail: " + errMessage);
+                    editText.text = errMessage;
+                }
+                else
+                {
+                    Debug.Log("Signup Success: " + errMessage);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+            });
+
+
+        }
     }
 
 }
