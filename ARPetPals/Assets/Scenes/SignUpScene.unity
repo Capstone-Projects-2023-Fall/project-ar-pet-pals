@@ -1555,6 +1555,7 @@ GameObject:
   - component: {fileID: 738632112}
   - component: {fileID: 738632111}
   - component: {fileID: 738632114}
+  - component: {fileID: 738632115}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1648,11 +1649,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce9f3fffba45c74a9def6ac58e399da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 0}
-  username: 
-  password: 
-  confirmPassword: 
+  gameObject: {fileID: 738632110}
+  usernameInput: 
+  passwordInput: 
+  confirmPasswordInput: 
   editText: {fileID: 697848851}
+--- !u!114 &738632115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738632110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e9dc7cd4a9fad46ab1b96a10d42c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832808573
 GameObject:
   m_ObjectHideFlags: 0
