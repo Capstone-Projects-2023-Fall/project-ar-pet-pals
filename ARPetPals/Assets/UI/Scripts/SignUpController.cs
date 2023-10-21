@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         editText.text = password.Equals(confirmPassword) ? "Password correct" : "Password incorrect";
         Debug.Log("register clicked");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
 }

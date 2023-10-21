@@ -40,7 +40,7 @@ public class LogInController : MonoBehaviour
 
     public void registerButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +2);
     }
     
 }
