@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using static ARPetPals.APIServiceResponse;
 using Newtonsoft.Json;
+using System;
 
 namespace ARPetPals
 {
@@ -15,17 +16,17 @@ namespace ARPetPals
         private const string KEY_TOKEN = "token";
         private const string KEY_USER_NAME = "username";
 
-        public void SignIn(string username, string password)
+        public void SignIn(string username, string password, Action<string> callback)
         {
-            StartCoroutine(SendSignInRequest(username, password));
+            StartCoroutine(SendSignInRequest(username, password, callback));
         }
 
-        public void SignUp(string username, string password)
+        public void SignUp(string username, string password, Action<string> callback)
         {
-            StartCoroutine(SendSignUpRequest(username, password));
+            StartCoroutine(SendSignUpRequest(username, password, callback));
         }
 
-        private IEnumerator SendSignInRequest(string username, string password)
+        private IEnumerator SendSignInRequest(string username, string password, Action<string> callback)
         {
             string url = URL + "/signin";
 
@@ -45,6 +46,8 @@ namespace ARPetPals
                 if (request.result != UnityWebRequest.Result.Success)
                 {
                     Debug.LogError("Sign-in failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
                 }
                 // Signin successful
                 else
@@ -56,11 +59,13 @@ namespace ARPetPals
                     // Store the token for later use
                     PlayerPrefs.SetString(KEY_TOKEN, responseData.token);
                     PlayerPrefs.SetString(KEY_USER_NAME, responseData.userInfo.name);
+                    callback("");
                 }
+                
             }
         }
 
-        private IEnumerator SendSignUpRequest(string username, string password)
+        private IEnumerator SendSignUpRequest(string username, string password, Action<string> callback)
         {
             string url = URL + "/signup";
             Dictionary<string, string> body = new Dictionary<string, string>
@@ -80,6 +85,8 @@ namespace ARPetPals
                 if (request.result != UnityWebRequest.Result.Success)
                 {
                     Debug.LogError("Sign-up failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
                 }
                 // Signup successful
                 else
@@ -87,18 +94,19 @@ namespace ARPetPals
                     // Deserialize the JSON response and access the data
                     SignUpResponse responseData = JsonUtility.FromJson<SignUpResponse>(responseJson);
                     Debug.Log("Response: " + JsonUtility.ToJson(responseData, true));
+                    callback("");
                 }
             }
         }
 
         public void SignInTest()
         {
-            SignIn("son", "son");
+            SignIn("son", "son", (str) => {});
         }
 
         public void SignUpTest()
         {
-            SignUp("son", "son");
+            SignUp("son", "son", (str) => { });
         }
 
         public string GetStoredToken()
@@ -110,6 +118,7 @@ namespace ARPetPals
         {
             return PlayerPrefs.GetString(KEY_USER_NAME, "");
         }
+
 
     }
 }

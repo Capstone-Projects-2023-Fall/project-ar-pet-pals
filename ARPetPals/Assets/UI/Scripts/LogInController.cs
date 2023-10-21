@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using ARPetPals;
+
 //This script use for control sign in scene.
 public class LogInController : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class LogInController : MonoBehaviour
     public GameObject gameObject;
     [SerializeField] 
     public TMP_Text EditText;
+    
     
     public void getUserName(string s)
     {
@@ -28,18 +31,30 @@ public class LogInController : MonoBehaviour
 
     public void loginButtonClicked()
     {
-        EditText.text = "get user name and password: " + usernameInput + " " + passwordInput;
-        Debug.Log("Log in Clicked");
-        // if (passwordInput != null && usernameInput != null)
-        // {
-        //     EditText.text = "get user name and password: " + usernameInput + " " + passwordInput;
-        //     Debug.Log("Log in Clicked");
-        // }
+        Debug.Log($"Log in Clicked username: {usernameInput} password: {passwordInput}");
+        if (passwordInput != null && usernameInput != null)
+        {
+            gameObject.GetComponent<APIService>().SignIn(usernameInput, passwordInput, (errMessage) =>
+            {
+                if (errMessage != "")
+                {
+                    Debug.Log("Login Fail: " + errMessage);
+                    EditText.text = errMessage;
+                }
+                else
+                {
+                    Debug.Log("Login Success: " + errMessage);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+                }
+            });
+
+            
+        }
     }
 
     public void registerButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
     
 }

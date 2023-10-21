@@ -24,6 +24,12 @@ namespace ARPetPals
             public string token;
             public UserInfoResponse userInfo = new UserInfoResponse();
         }
+
+        [System.Serializable]
+        public class ErrorMessageResponse
+        {
+            public string message;
+        }
     }
 }
 
