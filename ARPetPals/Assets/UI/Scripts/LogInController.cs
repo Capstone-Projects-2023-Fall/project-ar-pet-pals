@@ -5,8 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-
+//This script use for control sign in scene.
 public class LogInController : MonoBehaviour
 {
     public string usernameInput;

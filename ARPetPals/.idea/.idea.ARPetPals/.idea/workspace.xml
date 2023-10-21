@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1781716-5da8-4ba9-a8bc-654060b64c5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LogoScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LogoScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SigInScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SigInScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/WelcomeScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/WelcomeScene.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/UI/Scripts/LogInController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Scripts/LogInController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI/Scripts/SignUpController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Scripts/SignUpController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,7 @@
       <workItem from="1697855607486" duration="1922000" />
       <workItem from="1697858591562" duration="15000" />
       <workItem from="1697858625641" duration="5672000" />
-      <workItem from="1697909529678" duration="642000" />
+      <workItem from="1697909529678" duration="1265000" />
     </task>
     <servers />
   </component>
