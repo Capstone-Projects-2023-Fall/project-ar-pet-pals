@@ -26,144 +26,75 @@ info:
     virtual pet. ARPetPals will be developed using the Unity 3D game engine,
     version 2022.2.21.
 servers:
-  - url: /api/v3
+  - url: /api/
 tags:
-  - name: object-recognition
-    description: Describes the object-recognition from the AR Foundational API
+  - name: authentication
     externalDocs:
-      description: Find out more about AR Foundational API
-      url: >-
-        https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@6.0/manual/features/features.html
-  - name: display
-    externalDocs:
-      description: API for displaying pets using Unity technology
+      description: API for logging in and logging out
 paths:
-  /display/renderPet:
+  /api/signin:
     post:
-      summary: Renders the pet using Unity.
-      operationId: renderPet
+      summary: Tries to sign in
       tags:
-        - display
+        - authentication
       requestBody:
-        description: Pet details to be rendered.
+        description: The username and password to sign in
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PetDetails'
+              $ref: '#/components/schemas/AuthSchema'
       responses:
         '200':
-          description: Pet rendered successfully.
+          description: Authentication was successful
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RenderResponse'
-  /display/configureDisplay:
+                $ref: '#/components/schemas/AuthSuccess'
+  /api/signup:
     post:
-      summary: Configures display settings for Unity.
-      operationId: configureDisplay
+      summary: Tries to sign up
       tags:
-        - display
+        - authentication
       requestBody:
-        description: Display settings and parameters.
+        description: The username and password to sign up
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DisplayConfiguration'
+              $ref: '#/components/schemas/AuthSchema'
       responses:
         '200':
-          description: Display configured successfully.
-  /display/manageUserDisplay:
-    post:
-      summary: Manages the display of the pet and other elements on the screen.
-      operationId: manageUserDisplay
-      tags:
-        - display
-      requestBody:
-        description: Details for managing user display.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserDisplayRequest'
-      responses:
-        '200':
-          description: User display managed successfully.
-  /object-recogntion/ARTrackedImageManager:
-    get:
-      tags:
-        - object-recognition
-      summary: ARTrackedImageManager
-      description: >-
-        Describes API used in order to track images, which performs 2D image
-        tracking.
-  /object-recogntion/ARTrackedObjectManager:
-    get:
-      tags:
-        - object-recognition
-      summary: ARTrackedObjectManager
-      description: Describes API used in order to track real-world 3D objects
-  /object-recogntion/ARHumanBodyManager:
-    get:
-      tags:
-        - object-recognition
-      summary: ARHumanBodyManager
-      description: Describes API used in order to track  human bodies in an AR scene.
-  /object-recogntion/ARPlaneManager:
-    get:
-      tags:
-        - object-recognition
-      summary: ARPlaneManager
-      description: >-
-        Describes API used in order to track real-world planes ( real world
-        surfaces like desks, floors,etc)
+          description: Authentication was successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSuccess'
 components:
   schemas:
-    PetDetails:
+    AuthSchema:
       type: object
       properties:
-        petId:
+        username:
           type: string
-          description: ID of the pet to be rendered.
-        petModelPath:
+          description: the username to authenticate
+        password:
           type: string
-          description: Path to the Unity model of the pet.
-        additionalParameters:
+          description: the password to authenticate
+    UserInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    AuthSuccess:
+      type: object
+      properties:
+        token:
+          type: string
+          description: the auth token
+        userInfo:
           type: object
-          description: Additional parameters for rendering.
-    DisplayConfiguration:
-      type: object
-      properties:
-        resolution:
-          type: string
-          description: Resolution for the display.
-        quality:
-          type: string
-          description: Quality settings for the display.
-        fullscreen:
-          type: boolean
-          description: Whether to use fullscreen mode.
-    UserDisplayRequest:
-      type: object
-      properties:
-        petId:
-          type: string
-          description: ID of the pet to be displayed.
-        showPet:
-          type: boolean
-          description: Whether to show or hide the pet.
-        additionalElements:
-          type: array
-          description: Other elements to display on the screen.
-          items:
-            type: string
-    RenderResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status of the rendering.
-        message:
-          type: string
-          description: Any additional messages from the renderer.
+          schema:
+            $ref: '#/components/schemas/UserInfo'
