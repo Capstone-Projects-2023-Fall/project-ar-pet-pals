@@ -4,5 +4,7 @@ export interface UserSchema {
     _id: ObjectId;
     username: string;
     password: string;
+    token: string;
+    dateJoined: Date;
+    leaderboardRanking: number;
 }
-

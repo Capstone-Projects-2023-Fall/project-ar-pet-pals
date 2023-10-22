@@ -48,7 +48,15 @@ export const signup = async ({
   });
   const jwt = await createJWT({username, password:hashedPassword, _id})
   response.status = 201;
-  response.body = { message: "User created", userId: _id, user: username, token: jwt };
+  response.body = { 
+    message: "User created", 
+    userInfo: {
+      id: _id, 
+      name: username, 
+    },
+    token: jwt 
+
+  };
 };
 
 export const signin = async ({
@@ -78,8 +86,25 @@ export const signin = async ({
 
   response.status = 200;
   response.body = {
-    userId: user._id,
-    username: user.username,
+    userInfo: {
+      id: user._id, 
+      name: user.username, 
+    },
     token: jwt,
   };
 };
+
+
+export const setUserName =async ({request, response}:{request:any;response:any}) => {
+
+    response.body = {
+        "name": "default name"
+    }
+}
+
+export const getUserName =async ({request, response}:{request:any;response:any}) => {
+    
+    response.body = {
+        "name": "default name"
+    }
+}

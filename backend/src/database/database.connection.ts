@@ -2,7 +2,7 @@ import { MongoClient } from "https://deno.land/x/mongo@v0.32.0/mod.ts";
 
 const client = new MongoClient();
 
-const dbString = "DELETED_ON_PURPOSE";
+const dbString = "REMOVED_ON_PURPOSE;
 
 await client.connect(dbString);
 
