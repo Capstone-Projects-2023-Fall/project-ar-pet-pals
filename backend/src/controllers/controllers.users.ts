@@ -32,6 +32,18 @@ export const signup = async ({
 }) => {
   const { username, password } = await request.body().value;
 
+  if (!username){
+    response.body = { message: "No username provided" };
+    response.status = 400;
+    return;
+  }
+
+  if(!password){
+    response.body = { message: "No password provided" };
+    response.status = 400;
+    return;
+  }
+
   const user = await Users.findOne({ username });
   if (user) {
     response.body = { message: "User already exists" };
@@ -68,6 +80,18 @@ export const signin = async ({
 }) => {
   const { username, password } = await request.body().value;
 
+  if (!username){
+    response.body = { message: "No username provided" };
+    response.status = 400;
+    return;
+  }
+
+  if(!password){
+    response.body = { message: "No password provided" };
+    response.status = 400;
+    return;
+  }
+
   const user = await Users.findOne({ username });
   if (!user) {
     response.body = { message: "User doesn't exist" };
@@ -94,13 +118,6 @@ export const signin = async ({
   };
 };
 
-
-export const setUserName =async ({request, response}:{request:any;response:any}) => {
-
-    response.body = {
-        "name": "default name"
-    }
-}
 
 export const getUserName =async ({request, response}:{request:any;response:any}) => {
     
