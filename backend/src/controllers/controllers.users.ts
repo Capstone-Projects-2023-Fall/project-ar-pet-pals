@@ -1,9 +1,11 @@
 import db from "../database/database.connection.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import UserSchema from "../schema/schema.user.ts";
-import { create } from "https://deno.land/x/djwt@v2.4/mod.ts";
-
+import { create, decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
+import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
 import key from "../utils/utils.apiKey.ts";
+
+
 
 const Users = db.collection<UserSchema>("users");
 
@@ -13,7 +15,7 @@ async function createJWT(user: UserSchema){
     id: user._id,
     name: user.username,
   };
-  const jwt = await create({ alg: "HS512", typ: "JWT" }, { payload }, key);
+  const jwt = await create({ alg: "HS512", typ: "JWT" }, payload, key);
 
   if (!jwt) {
      throw("Could not create JWT")
@@ -120,8 +122,26 @@ export const signin = async ({
 
 
 export const getUserName =async ({request, response}:{request:any;response:any}) => {
-    
-    response.body = {
-        "name": "default name"
-    }
+  const headers: Headers = request.headers
+  const authorization = headers.get("Authorization");
+  const jwt = authorization.split(" ")[1];
+  let [,payload,] = decode(jwt)
+  
+  response.body = {
+    name: payload.name
+  }
+}
+
+export const getUserInfo =async ({request, response}:{request:any;response:any}) => {
+  const headers: Headers = request.headers
+  const authorization = headers.get("Authorization");
+  const jwt = authorization.split(" ")[1];
+  let [,payload,] = decode(jwt)
+
+  response.body = {
+      "userInfo": {
+        id: payload.id,
+        name: payload.name,
+      }
+  }
 }

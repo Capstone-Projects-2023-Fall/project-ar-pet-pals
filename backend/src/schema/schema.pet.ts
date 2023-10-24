@@ -4,6 +4,7 @@ import StatusSchema from "../schema/schema.status.ts";
 
 export interface PetSchema {
     _id: ObjectId;
+    user_id: ObjectId;
     name: string;
     choice: string;    
 		status: StatusSchema;

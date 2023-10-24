@@ -9,7 +9,7 @@ export const authourized = async (ctx: Context, next: any) => {
     if (!authorization) {
       ctx.response.status = 401;
       ctx.response.body = {
-        message: "You are not authorized to access this route",
+        message: "No authorization headers",
       };
       return;
     }
@@ -18,7 +18,7 @@ export const authourized = async (ctx: Context, next: any) => {
     if (!jwt) {
       ctx.response.status = 401;
       ctx.response.body = {
-        message: "You are not authorized to access this route",
+        message: "JWT error",
       };
       return;
     }
@@ -31,7 +31,7 @@ export const authourized = async (ctx: Context, next: any) => {
   } catch (error) {
     ctx.response.status = 401;
     ctx.response.body = {
-      message: "You are not authorized to access this route",
+      message: String(error),
     };
     return;
   }
