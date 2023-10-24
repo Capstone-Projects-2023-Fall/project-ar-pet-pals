@@ -6,19 +6,31 @@ info:
 
 
 servers:
-  - url: /api/
+  - url: https://arpetpals.store/
 
 tags:
  
   - name: authentication
-    externalDocs:
-      description: API for logging in and logging out
+    description: API for logging in and logging out
   
+  - name: pet-status
+    description: API for pet status
+
+  - name: pet-name
+    description: API for pet name
+
+  - name: user-info
+    description: API for user info
+
+  - name: user-name
+    description: API for user name
+
+    
   
 paths:
   /api/signin:
     post:
-      summary: "Tries to sign in"
+      summary: "signin"
       tags:
         - authentication
       requestBody:
@@ -35,10 +47,15 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthSuccess"
- 
+        '400':
+          description: "Authentication failed"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
   /api/signup:
     post:
-      summary: "Tries to sign up"
+      summary: "signup"
       tags:
         - authentication
       requestBody:
@@ -55,11 +72,151 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthSuccess"
- 
+        '400':
+          description: "Authentication failed"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
 
+  /api/pet/name:
+    post:
+      security: 
+        - token: []
+      tags:
+        - pet-name
+      summary: "update pet name"
+
+      requestBody:
+        description: "The new pet's name"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetName"
+      responseBody:
+        description: "status of update"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Status"
+      responses:
+        '200':
+          description: "Updated pet name successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        '400':
+          description: "Could not update pet name"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+    get:
+      security: 
+        - token: []
+      tags:
+        - pet-name  
+      summary: "get pet name"
+      responseBody:
+        description: "the pet's name"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetName"
+      responses:
+        '200':
+          description: "Got pet name"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PetName"
+        '400':
+          description: "Couldn't get pet name"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+  /api/pet/status:
+    post:
+      security: 
+        - token: []
+      tags:
+        - pet-status
+      summary: "update pet status"
+      requestBody:
+        description: "The new pet's status"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetStatus"
+      responseBody:
+        description: "status of update"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Status"
+      responses:
+        '200':
+          description: "Updated pet status successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        '400':
+          description: "Could not update pet status"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+    get:
+      security: 
+        - token: []
+      tags: 
+        - pet-status
+      summary: "get pet status"
+     
+      responseBody:
+        description: "the pet status"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetStatus"
+      responses:
+        '200':
+          description: "Got pet status successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        '400':
+          description: "Could not get pet status"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
 
 components:
+  securitySchemes:
+    token:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT   
   schemas:
+
+    PetStatus:
+      type: object
+      properties:
+        health: int
+
+    PetName:
+      type: object
+      properties:
+        name:
+          type: string
+
     AuthSchema:
       type: object
       properties:
@@ -86,8 +243,19 @@ components:
           description: "the auth token"
         userInfo:
           type: object
-          schema:
-            $ref: "#/components/schemas/UserInfo"
+          $ref: "#/components/schemas/UserInfo"
+    Fail:
+      type: object
+      properties:
+        message:
+          type: string
+          description: why it failed
 
-
+  
+    Status:
+      type: object
+      properties:
+        message: 
+          type: string
+          description: status
         
