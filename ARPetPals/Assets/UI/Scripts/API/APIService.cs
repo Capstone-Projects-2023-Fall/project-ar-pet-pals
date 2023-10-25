@@ -5,11 +5,18 @@ using System.Collections.Generic;
 using static ARPetPals.APIServiceResponse;
 using Newtonsoft.Json;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 namespace ARPetPals
 {
     public class APIService : MonoBehaviour
     {
+
+        public TMP_Text username;
+        public TMP_Text password;
+        public TMP_Text response;
+
         private const string URL = "https://arpetpals.store/api";
         private const string CONTENT_TYPE = "application/json";
 
@@ -59,7 +66,7 @@ namespace ARPetPals
                     // Store the token for later use
                     PlayerPrefs.SetString(KEY_TOKEN, responseData.token);
                     PlayerPrefs.SetString(KEY_USER_NAME, responseData.userInfo.name);
-                    callback("");
+                    callback(JsonUtility.ToJson(responseData, true));
                 }
                 
             }
@@ -94,19 +101,32 @@ namespace ARPetPals
                     // Deserialize the JSON response and access the data
                     SignUpResponse responseData = JsonUtility.FromJson<SignUpResponse>(responseJson);
                     Debug.Log("Response: " + JsonUtility.ToJson(responseData, true));
-                    callback("");
+                    callback(JsonUtility.ToJson(responseData, true));
                 }
             }
         }
 
         public void SignInTest()
         {
-            SignIn("son", "son", (str) => {});
+            SignIn("son", "son", (str) => {
+                
+                response.SetText(str, true);
+                response.ForceMeshUpdate(true);
+            });
         }
 
         public void SignUpTest()
         {
-            SignUp("son", "son", (str) => { });
+            SignUp("son", "son", (str) => {
+                response.text = str;
+                response.ForceMeshUpdate(true);
+            });
+        }
+
+        public void UserTest()
+        {
+            Debug.Log(username.text);
+            Debug.Log(password.text);
         }
 
         public string GetStoredToken()
