@@ -20,8 +20,8 @@ namespace ARPetPals
         private const string URL = "https://arpetpals.store/api";
         private const string CONTENT_TYPE = "application/json";
 
-        private const string KEY_TOKEN = "token";
-        private const string KEY_USER_NAME = "username";
+        private const string KEY_TOKEN = "key_token";
+        private const string KEY_USER_NAME = "key_username";
 
         private (string, string) _GetInput()
         {
@@ -88,7 +88,7 @@ namespace ARPetPals
             string token = GetStoredToken();
             if (token == "")
             {
-                callback("Token is expired!");
+                callback("Invalid token");
             }
             else
             {
