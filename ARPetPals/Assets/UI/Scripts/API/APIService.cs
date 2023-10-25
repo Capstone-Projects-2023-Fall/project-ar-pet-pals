@@ -23,13 +23,9 @@ namespace ARPetPals
         private const string KEY_TOKEN = "token";
         private const string KEY_USER_NAME = "username";
 
-        private const string DEFAULT_TEST_USERNAME = "test";
-        private const string DEFAULT_TEST_PASSWORD = "test";
-
         private (string, string) _GetInput()
         {
-            string username = DEFAULT_TEST_USERNAME;
-            string password = DEFAULT_TEST_PASSWORD;
+            string username = "", password = "";
             if (usernameInput && passwordInput &&
                 !usernameInput.text.Equals("") && !passwordInput.text.Equals(""))
             {
@@ -49,6 +45,15 @@ namespace ARPetPals
         {
             string username, password;
             (username, password) = _GetInput();
+
+            if (username == "" || password == "")
+            {
+                string msg = "Username or password should not be empty";
+                callback(msg);
+                _ShowReponse(msg);
+                return;
+            }
+
             StartCoroutine(_SendSignInRequest(username, password, callback));
         }
 
@@ -61,6 +66,15 @@ namespace ARPetPals
         {
             string username, password;
             (username, password) = _GetInput();
+
+            if (username == "" || password == "")
+            {
+                string msg = "Username or password should not be empty";
+                callback(msg);
+                _ShowReponse(msg);
+                return;
+            }
+
             StartCoroutine(_SendSignUpRequest(username, password, callback));
         }
 
