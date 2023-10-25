@@ -62,9 +62,17 @@ public class MainActivity extends AppCompatActivity {
             V2Grpc.V2BlockingStub stub = V2Grpc.newBlockingStub(ClarifaiChannel.INSTANCE.getGrpcChannel())
                     .withCallCredentials(new ClarifaiCallCredentials("cc7efd10868f4d2882da065a31558673"));
 
+            String PAT = "cc7efd10868f4d2882da065a31558673";
+            String USER_ID = "clarifai";
+            String APP_ID = "main";
+            String MODEL_ID = "food-item-recognition";
+            String MODEL_VERSION_ID = "1d5fd481e0cf4826aa72ec3ff049e044";
+
             MultiOutputResponse response = stub.postModelOutputs(
                     PostModelOutputsRequest.newBuilder()
-                            .setModelId("1d5fd481e0cf4826aa72ec3ff049e044")  // Model ID for General Model
+                            .setUserAppId(UserAppIDSet.newBuilder().setUserId(USER_ID).setAppId(APP_ID))
+                            .setModelId(MODEL_ID)
+                            .setVersionId(MODEL_VERSION_ID)
                             .addInputs(
                                     Input.newBuilder().setData(
                                             Data.newBuilder().setImage(
@@ -76,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                             )
                             .build()
             );
+
+            System.out.println("image processing complete");
 
             handler.post(() -> handleResponse(response));
         });
@@ -99,7 +109,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // Update the TextView with the concept values
                 textView.setText(conceptStr.toString());
+
+                System.out.println(conceptStr.toString());
             }
+            System.out.println("no outputs in response");
+            System.out.println("response: " + response.toString());
+        } else {
+            textView.setText("no response");
+
+            System.out.println("no response");
         }
     }
 
