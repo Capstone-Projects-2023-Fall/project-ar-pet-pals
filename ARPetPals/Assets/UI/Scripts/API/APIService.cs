@@ -64,6 +64,53 @@ namespace ARPetPals
             StartCoroutine(_SendSignUpRequest(username, password, callback));
         }
 
+        public void GetUser(Action<string> callback)
+        {
+            StartCoroutine(_SendGetUserRequest(callback));
+        }
+
+        private IEnumerator _SendGetUserRequest(Action<string> callback)
+        {
+            string token = GetStoredToken();
+            if (token == "")
+            {
+                callback("Token is expired!");
+            }
+            else
+            {
+                string url = URL + "/user";
+
+                UnityWebRequest request = UnityWebRequest.Get(url);
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError("_SendGetUserRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else
+                {
+                    // Deserialize the JSON response
+                    UserInfoResponse responseData = JsonUtility.FromJson<UserInfoResponse>(responseJson);
+                    Debug.Log("_SendGetUserRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                    // Store data locally
+                    PlayerPrefs.SetString(KEY_USER_NAME, responseData.userInfo.name);
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+
+                }
+            }
+        }
+
         private IEnumerator _SendSignInRequest(string username, string password, Action<string> callback)
         {
             string url = URL + "/signin";
@@ -83,21 +130,24 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("Sign-in failed: " + request.downloadHandler.text);
+                    Debug.LogError("_SendSignInRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(responseData.message);
+                    _ShowReponse(responseData.message);
                 }
                 // Signin successful
                 else
                 {
-                    // Deserialize the JSON response and access the data
+                    // Deserialize the JSON response
                     SignInResponse responseData = JsonUtility.FromJson<SignInResponse>(responseJson);
-                    Debug.Log("Response: " + JsonUtility.ToJson(responseData, true));
+                    Debug.Log("_SendSignInRequest response: " + JsonUtility.ToJson(responseData, true));
 
-                    // Store the token for later use
+                    // Store data locally
                     PlayerPrefs.SetString(KEY_TOKEN, responseData.token);
                     PlayerPrefs.SetString(KEY_USER_NAME, responseData.userInfo.name);
-                    callback(JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
                 }
                 
             }
@@ -122,45 +172,47 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("Sign-up failed: " + request.downloadHandler.text);
+                    Debug.LogError("_SendSignUpRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(responseData.message);
+                    _ShowReponse(responseData.message);
                 }
                 // Signup successful
                 else
                 {
-                    // Deserialize the JSON response and access the data
+                    // Deserialize the JSON response
                     SignUpResponse responseData = JsonUtility.FromJson<SignUpResponse>(responseJson);
-                    Debug.Log("Response: " + JsonUtility.ToJson(responseData, true));
-                    callback(JsonUtility.ToJson(responseData, true));
+                    Debug.Log("_SendSignUpRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                    // Store data locally
+                    PlayerPrefs.SetString(KEY_TOKEN, responseData.token);
+                    PlayerPrefs.SetString(KEY_USER_NAME, responseData.userInfo.name);
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
                 }
             }
         }
 
+        private void _ShowReponse(string response)
+        {
+            if (responseInput)
+                responseInput.text = response;
+        }
+
         public void SignInTest()
         {
-            SignIn((str) => {
-                if (responseInput)
-                    responseInput.text = str;
-                else
-                    Debug.Log("Sign-in no response input");
-            });
+            SignIn((str) => {});
         }
 
         public void SignUpTest()
         {
-            SignUp((str) => {
-                if (responseInput)
-                    responseInput.text = str;
-                else
-                    Debug.Log("Sign-up no response input");
-            });
+            SignUp((str) => {});
         }
 
         public void UserTest()
         {
-            Debug.Log(usernameInput.text);
-            Debug.Log(passwordInput.text);
+            GetUser((str) => {});
         }
 
         public string GetStoredToken()
