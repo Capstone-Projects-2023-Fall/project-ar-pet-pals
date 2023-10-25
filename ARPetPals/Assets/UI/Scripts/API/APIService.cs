@@ -13,9 +13,9 @@ namespace ARPetPals
     public class APIService : MonoBehaviour
     {
 
-        public TMP_Text username;
-        public TMP_Text password;
-        public TMP_Text response;
+        public TMP_InputField usernameInput;
+        public TMP_InputField passwordInput;
+        public TMP_InputField responseInput;
 
         private const string URL = "https://arpetpals.store/api";
         private const string CONTENT_TYPE = "application/json";
@@ -23,17 +23,48 @@ namespace ARPetPals
         private const string KEY_TOKEN = "token";
         private const string KEY_USER_NAME = "username";
 
+        private const string DEFAULT_TEST_USERNAME = "test";
+        private const string DEFAULT_TEST_PASSWORD = "test";
+
+        private (string, string) _GetInput()
+        {
+            string username = DEFAULT_TEST_USERNAME;
+            string password = DEFAULT_TEST_PASSWORD;
+            if (usernameInput && passwordInput &&
+                !usernameInput.text.Equals("") && !passwordInput.text.Equals(""))
+            {
+                Debug.Log("_GetInput: Use username and password from input field");
+                username = usernameInput.text;
+                password = passwordInput.text;
+            }
+            return (username, password);
+        }
+
         public void SignIn(string username, string password, Action<string> callback)
         {
-            StartCoroutine(SendSignInRequest(username, password, callback));
+            StartCoroutine(_SendSignInRequest(username, password, callback));
+        }
+
+        public void SignIn(Action<string> callback)
+        {
+            string username, password;
+            (username, password) = _GetInput();
+            StartCoroutine(_SendSignInRequest(username, password, callback));
         }
 
         public void SignUp(string username, string password, Action<string> callback)
         {
-            StartCoroutine(SendSignUpRequest(username, password, callback));
+            StartCoroutine(_SendSignUpRequest(username, password, callback));
         }
 
-        private IEnumerator SendSignInRequest(string username, string password, Action<string> callback)
+        public void SignUp(Action<string> callback)
+        {
+            string username, password;
+            (username, password) = _GetInput();
+            StartCoroutine(_SendSignUpRequest(username, password, callback));
+        }
+
+        private IEnumerator _SendSignInRequest(string username, string password, Action<string> callback)
         {
             string url = URL + "/signin";
 
@@ -72,7 +103,7 @@ namespace ARPetPals
             }
         }
 
-        private IEnumerator SendSignUpRequest(string username, string password, Action<string> callback)
+        private IEnumerator _SendSignUpRequest(string username, string password, Action<string> callback)
         {
             string url = URL + "/signup";
             Dictionary<string, string> body = new Dictionary<string, string>
@@ -108,25 +139,28 @@ namespace ARPetPals
 
         public void SignInTest()
         {
-            SignIn("son", "son", (str) => {
-                
-                response.SetText(str, true);
-                response.ForceMeshUpdate(true);
+            SignIn((str) => {
+                if (responseInput)
+                    responseInput.text = str;
+                else
+                    Debug.Log("Sign-in no response input");
             });
         }
 
         public void SignUpTest()
         {
-            SignUp("son", "son", (str) => {
-                response.text = str;
-                response.ForceMeshUpdate(true);
+            SignUp((str) => {
+                if (responseInput)
+                    responseInput.text = str;
+                else
+                    Debug.Log("Sign-up no response input");
             });
         }
 
         public void UserTest()
         {
-            Debug.Log(username.text);
-            Debug.Log(password.text);
+            Debug.Log(usernameInput.text);
+            Debug.Log(passwordInput.text);
         }
 
         public string GetStoredToken()
