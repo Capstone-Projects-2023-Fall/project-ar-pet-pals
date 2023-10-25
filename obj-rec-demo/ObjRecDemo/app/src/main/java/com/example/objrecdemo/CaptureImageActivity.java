@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.View;
+
 import java.io.ByteArrayOutputStream;
 
 public class CaptureImageActivity extends Activity {
@@ -19,7 +21,7 @@ public class CaptureImageActivity extends Activity {
         setContentView(R.layout.activity_capture_image);
     }
 
-    public void dispatchTakePictureIntent() {
+    public void dispatchTakePictureIntent(View view) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
@@ -33,6 +35,10 @@ public class CaptureImageActivity extends Activity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             // Convert the Bitmap to a format that can be passed to Clarifai
             String imageString = bitmapToBase64(imageBitmap);
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("imageString", imageString);
+            setResult(RESULT_OK, resultIntent);
+            finish();
         }
     }
 

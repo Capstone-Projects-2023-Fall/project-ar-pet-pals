@@ -20,11 +20,19 @@ import com.google.protobuf.ByteString;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.security.Security;
+import org.conscrypt.Conscrypt;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
     private final Executor executor = Executors.newSingleThreadExecutor();
     private final Handler handler = new Handler(Looper.getMainLooper());
+
+    static {
+        Security.insertProviderAt(Conscrypt.newProvider(), 1);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
