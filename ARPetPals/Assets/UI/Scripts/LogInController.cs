@@ -10,27 +10,46 @@ using ARPetPals;
 //This script use for control sign in scene.
 public class LogInController : MonoBehaviour
 {
-    public string usernameInput;
-    public string passwordInput;
+    [SerializeField] public TMP_InputField userNameField;
+    [SerializeField] public TMP_InputField passwordField;
+    [SerializeField] public TMP_Text editText;
+    public string usernameInput = "";
+    public string passwordInput = "";
     public GameObject gameObject;
-    [SerializeField] 
-    public TMP_Text editText;
     
     
-    public void getUserName(string s)
-    {
-        usernameInput = s;
-        Debug.Log("username: " + usernameInput);
-    }
-
-    public void getPassword(string s)
-    {
-        passwordInput = s;
-        Debug.Log("password: " + passwordInput);
-    }
+    
+    // public void getUserName(string s)
+    // {
+    //     usernameInput = s;
+    //     Debug.Log("username: " + usernameInput);
+    // }
+    //
+    // public void getPassword(string s)
+    // {
+    //     passwordInput = s;
+    //     Debug.Log("password: " + passwordInput);
+    // }
 
     public void loginButtonClicked()
     {
+        usernameInput = userNameField.text;
+        passwordInput = passwordField.text;
+        if (usernameInput == "" && passwordInput == "")
+        {
+            editText.text = "Missing username and password";
+            editText.color =  Color.red;
+        }
+        else if (usernameInput == "")
+        {
+            editText.text = "Missing username";
+            editText.color =  Color.red;
+        }
+        else if (passwordInput == "")
+        {
+            editText.text = "Missing password";
+            editText.color =  Color.red;
+        }
         Debug.Log($"Log in Clicked username: {usernameInput} password: {passwordInput}");
         if (passwordInput != "" && usernameInput != "")
         {

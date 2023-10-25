@@ -12,7 +12,7 @@ public class SwitchScene : MonoBehaviour
 {
     public void switchScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
     
 }

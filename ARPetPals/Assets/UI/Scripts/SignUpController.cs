@@ -7,35 +7,23 @@ using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    [SerializeField] public TMP_Text editText;
+    [SerializeField] public TMP_InputField usernameField;
+    [SerializeField] public TMP_InputField passwordField;
+    [SerializeField] public TMP_InputField confirmPasswordField;
+    
     public GameObject gameObject;
-    public string usernameInput = "" ;
+    public string usernameInput = "";
     public string passwordInput = "";
     public string confirmPasswordInput = "";
-    public TMP_Text editText;
     public string errormessage = "";
-    public TMP_InputField usernameField;
-    public TMP_InputField passwordField;
-    public TMP_InputField confirmPasswordField;
 
-    // public void getUsername(string s)
-    // {
-    //     usernameInput = s;
-    //     Debug.Log("username: " + usernameInput);
-    // }
-    //
-    // public void getPassword(string s)
-    // {
-    //     passwordInput = s;
-    //     Debug.Log("password: " + passwordInput);
-    // }
-    //
-    // public void getConfirmPassword(string s)
-    // {
-    //     confirmPasswordInput = s;
-    //     Debug.Log("confirm password input: " + confirmPasswordInput);
-    // }
+    public void BackButtonClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
 
-    public void registerButtonClicked()
+    public void RegisterButtonClicked()
     {
         usernameInput = usernameField.text;
         passwordInput = passwordField.text;
@@ -43,21 +31,33 @@ public class NewBehaviourScript : MonoBehaviour
         
         if (usernameInput == "")
         {
-            errormessage += " username\n";
+            errormessage += " username";
         }
         if (passwordInput == "")
         {
-            errormessage += "password\n";
+            if (errormessage != "")
+            {
+                errormessage += " and";
+            }
+            errormessage += " password";
         }
         if (confirmPasswordInput == "")
         {
-            errormessage += "confirm password";
+            if (errormessage != "")
+            {
+                errormessage += " and";
+            }
+            errormessage += " confirm password";
         }
-        while (errormessage != "")
+
+        if (errormessage != "")
         {
-            editText.text = $"Missing\n{errormessage}.";
-            Debug.Log($"Error message {errormessage}");
+            editText.text = $"Missing{errormessage}.";
+            editText.color =  Color.red;
         }
+        
+        errormessage = "";
+        Debug.Log($"Error message {errormessage}");
         
         Debug.Log("register clicked");
         Debug.Log($"Sign up Clicked username: {usernameInput} password: {passwordInput} confirm password: {confirmPasswordInput}");
