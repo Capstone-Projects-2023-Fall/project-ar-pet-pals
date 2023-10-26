@@ -102,6 +102,9 @@ public class CharacterSelection : MonoBehaviour
 
         Debug.Log(petChoice);
 
+        //save petChoice to playerPrefs
+        PlayerPrefs.SetString("SelectedPet", petChoice);
+
         //send petChoice to database
 
         // Close the confirmation menu
@@ -122,6 +125,9 @@ public class CharacterSelection : MonoBehaviour
         }
 
         Debug.Log("Name is: " + customName);
+
+        //Save name to PlayerPrefs
+        PlayerPrefs.SetString("CustomName", customName);
 
         //send customName to database
 
