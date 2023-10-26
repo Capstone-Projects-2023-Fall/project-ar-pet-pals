@@ -2,26 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CharacterSelection : MonoBehaviour
 {
     private GameObject[] characterList;
 
-    [SerializeField] public GameObject confirmationMenu;
+    [SerializeField] private GameObject confirmationMenu;
+    [SerializeField] private GameObject petNameUI;
 
     private int index = 0;
 
-    public string customName;
+    private string customName;
 
-    public InputField nameInputField;
+    [SerializeField] private TMP_InputField nameInputField;
 
+    private string petChoice;
 
-   
     private void Start() {
 
         confirmationMenu.SetActive(false);
+        petNameUI.SetActive(false);
 
         characterList = new GameObject[transform.childCount];
 
@@ -68,11 +70,62 @@ public class CharacterSelection : MonoBehaviour
         characterList[index].SetActive(true);
     }
 
+    //open and close the confirmation ui
     public void OpenConfirmation() {
         confirmationMenu.SetActive(true);
     }
 
     public void CloseConfirmation() {
         confirmationMenu.SetActive(false);
+    }
+
+    // Add this method to set the petChoice variable and close the confirmation menu
+    public void ConfirmSelection() {
+        //Set petChoice based on the selected character.
+        switch (index) {
+            case 0:
+                petChoice = "Red Dragon";
+                break;
+            case 1:
+                petChoice = "Orange Dragon";
+                break;
+            case 2:
+                petChoice = "Green Dragon";
+                break;
+            case 3:
+                petChoice = "Blue Dragon";
+                break;
+            default:
+                petChoice = "Unknown";
+                break;
+        }
+
+        Debug.Log(petChoice);
+
+        //send petChoice to database
+
+        // Close the confirmation menu
+        confirmationMenu.SetActive(false);
+        //Open the pet name ui
+        petNameUI.SetActive(true);
+
+    }
+
+    public void ConfirmName() {
+        // Check if the user has entered a name
+        customName = nameInputField.text;
+
+        if (string.IsNullOrEmpty(customName.Trim())) {
+            // The user entered no name; you can display an error message or take other action.
+            Debug.Log("Please enter a valid name.");
+            return; // Exit the method without saving the selection.
+        }
+
+        Debug.Log("Name is: " + customName);
+
+        //send customName to database
+
+        SceneManager.LoadScene(1);
+
     }
 }
