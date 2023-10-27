@@ -84,10 +84,10 @@ public class CharacterSelection : MonoBehaviour
         //Set petChoice based on the selected character.
         switch (index) {
             case 0:
-                petChoice = "Red Dragon";
+                petChoice = "Orange Dragon";
                 break;
             case 1:
-                petChoice = "Orange Dragon";
+                petChoice = "Red Dragon";
                 break;
             case 2:
                 petChoice = "Green Dragon";
@@ -99,11 +99,17 @@ public class CharacterSelection : MonoBehaviour
                 petChoice = "Unknown";
                 break;
         }
+        /*
+         * Orange dragon == 0
+         * Red dragon == 1
+         * Green dragon == 2
+         * Blue dragon == 3
+         */
 
         Debug.Log(petChoice);
 
         //save petChoice to playerPrefs
-        PlayerPrefs.SetString("SelectedPet", petChoice);
+        PlayerPrefs.SetInt("SelectedPet", index);
 
         //send petChoice to database
 
