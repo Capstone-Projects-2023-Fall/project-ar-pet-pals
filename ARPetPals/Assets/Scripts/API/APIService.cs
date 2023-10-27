@@ -208,6 +208,66 @@ namespace ARPetPals
             }
         }
 
+        //Send and recieve pet name
+        public void SetPetName(string petName, Action<string> callback) {
+            StartCoroutine(_SendSetPetNameRequest(petName, callback));
+        }
+
+        /* Change or delete
+        public void SetPetName(Action<string> callback) {
+            
+            string username, password;
+            (username, password) = _GetInput();
+
+            if (username == "" || password == "") {
+                string msg = "Username or password should not be empty";
+                callback(msg);
+                _ShowReponse(msg);
+                return;
+            }
+
+            StartCoroutine(_SendSignInRequest(username, password, callback));
+            
+        }*/
+
+        private IEnumerator _SendSetPetNameRequest(string petName, Action<string> callback) {
+            string url = URL + "/pet/name";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "name", petName }
+            };
+
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_SendSetPetNameRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                // Set pet name successful
+                else {
+
+                    // Deserialize the JSON response
+                    SetPetNameResponse responseData = JsonUtility.FromJson<SetPetNameResponse>(responseJson);
+                    Debug.Log("_SendSetPetNameRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                    /*
+                    // Store data locally
+                    PlayerPrefs.SetString(KEY_TOKEN, responseData.token);
+                    PlayerPrefs.SetString(KEY_USER_NAME, responseData.userInfo.name);
+                    */
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+                    
+                }
+            }
+        }
+
         private void _ShowReponse(string response)
         {
             if (responseInput)

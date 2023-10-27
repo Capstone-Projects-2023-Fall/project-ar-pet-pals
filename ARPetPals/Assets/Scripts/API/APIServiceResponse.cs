@@ -36,6 +36,11 @@ namespace ARPetPals
         {
             public UserInfo userInfo = new UserInfo();
         }
+
+        [System.Serializable]
+        public class SetPetNameResponse {
+            public string message;
+        }
     }
 }
 

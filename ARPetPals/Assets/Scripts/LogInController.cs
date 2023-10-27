@@ -63,7 +63,7 @@ public class LogInController : MonoBehaviour
                 else
                 {
                     Debug.Log("Login Success: " + errMessage);
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+                    SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
                 }
             });
 

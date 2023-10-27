@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngineInternal;
+using ARPetPals;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -131,13 +133,23 @@ public class CharacterSelection : MonoBehaviour
         }
 
         Debug.Log("Name is: " + customName);
-
-        //Save name to PlayerPrefs
-        PlayerPrefs.SetString("CustomName", customName);
-
+        /*
         //send customName to database
+        gameObject.GetComponent<APIService>().SetPetName(customName, (errMessage) => {
+            if (errMessage != "") {
+                Debug.Log("Failed to set name: " + errMessage);
+            }
+            else {
+                Debug.Log("Set Name Success: " + errMessage);
 
-        SceneManager.LoadScene(1);
+                //Save name to PlayerPrefs
+                PlayerPrefs.SetString("CustomName", customName);
+
+                SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+            }
+        });
+        */
+        SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
 
     }
 }
