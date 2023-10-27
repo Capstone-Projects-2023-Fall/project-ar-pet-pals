@@ -58,7 +58,7 @@ export const getPetName =async ({request, response}:{request:any;response:any}) 
 
     response.status = 200
     response.body = {
-        "message": pet.name
+        "name": pet.name
     }
 }
 
@@ -101,6 +101,63 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
 
 
 
+export const setPetChoice =async ({request, response}:{request:any;response:any}) => {
+    //get user id
+    //find pet status
+    // update pet status
+
+    const { choice } = await request.body().value;
+
+    if(!choice){
+        response.body = {
+            "message": "No choice provided"
+        }
+        response.status = 400
+        return
+    }
+
+    const headers: Headers = request.headers
+    let userId = getUserIdFromHeaders(headers);
+
+    const pet = await Pets.findOne({ user_id: userId });
+
+    if(!pet){
+        response.body = {
+            "message": "Could not find a pet for your user's id"
+        }
+        response.status = 400
+        return
+    }
+
+   
+    await Pets.updateOne({ _id: pet._id}, { $set: { choice: choice }})
+    
+
+    response.body = {
+        "message": "pet choice updated successfuly"
+    }
+}
+
+export const getPetChoice =async ({request, response}:{request:any;response:any}) => {
+    
+    const headers: Headers = request.headers
+    let userId = getUserIdFromHeaders(headers);
+
+    const pet = await Pets.findOne({ user_id: userId });
+
+    if(!pet){
+        response.body = {
+            "message": "Could not find a pet for your user's id"
+        }
+        response.status = 400
+        return
+    }
+
+    response.status = 200
+    response.body = {
+        "choice": pet.choice
+    }
+}
 export const setPetStatus =async ({request, response}:{request:any;response:any}) => {
     //get user id
     //find pet status
