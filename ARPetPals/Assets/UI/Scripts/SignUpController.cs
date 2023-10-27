@@ -7,34 +7,60 @@ using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    [SerializeField] public TMP_Text editText;
+    [SerializeField] public TMP_InputField usernameField;
+    [SerializeField] public TMP_InputField passwordField;
+    [SerializeField] public TMP_InputField confirmPasswordField;
+    
     public GameObject gameObject;
-    public string usernameInput;
-    public string passwordInput;
-    public string confirmPasswordInput;
-    public TMP_Text editText;
+    public string usernameInput = "";
+    public string passwordInput = "";
+    public string confirmPasswordInput = "";
+    public string errormessage = "";
 
-    public void getUsername(string s)
+    public void BackButtonClicked()
     {
-        usernameInput = s;
-        Debug.Log("username: " + usernameInput);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
-    public void getPassword(string s)
+    public void RegisterButtonClicked()
     {
-        passwordInput = s;
-        Debug.Log("password: " + passwordInput);
-    }
+        usernameInput = usernameField.text;
+        passwordInput = passwordField.text;
+        confirmPasswordInput = confirmPasswordField.text;
+        
+        if (usernameInput == "")
+        {
+            errormessage += " username";
+        }
+        if (passwordInput == "")
+        {
+            if (errormessage != "")
+            {
+                errormessage += " and";
+            }
+            errormessage += " password";
+        }
+        if (confirmPasswordInput == "")
+        {
+            if (errormessage != "")
+            {
+                errormessage += " and";
+            }
+            errormessage += " confirm password";
+        }
 
-    public void getConfirmPassword(string s)
-    {
-        confirmPasswordInput = s;
-        Debug.Log("confirma password input: " + confirmPasswordInput);
-    }
-
-    public void registerButtonClicked()
-    {
-        editText.text = passwordInput.Equals(confirmPasswordInput) ? "Password correct" : "Password incorrect";
+        if (errormessage != "")
+        {
+            editText.text = $"Missing{errormessage}.";
+            editText.color =  Color.red;
+        }
+        
+        errormessage = "";
+        Debug.Log($"Error message {errormessage}");
+        
         Debug.Log("register clicked");
+        Debug.Log($"Sign up Clicked username: {usernameInput} password: {passwordInput} confirm password: {confirmPasswordInput}");
         if (usernameInput != "" && passwordInput != "" && confirmPasswordInput != "" &&
             passwordInput.Equals(confirmPasswordInput))
         {
