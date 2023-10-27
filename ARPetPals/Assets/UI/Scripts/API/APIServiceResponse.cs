@@ -4,7 +4,7 @@ namespace ARPetPals
     public class APIServiceResponse
     {
         [System.Serializable]
-        public class UserInfoResponse
+        public class UserInfo
         {
             public string id;
             public string name;
@@ -14,7 +14,7 @@ namespace ARPetPals
         public class SignInResponse
         {
             public string token;
-            public UserInfoResponse userInfo = new UserInfoResponse();
+            public UserInfo userInfo = new UserInfo();
         }
 
         [System.Serializable]
@@ -22,13 +22,19 @@ namespace ARPetPals
         {
             public string message;
             public string token;
-            public UserInfoResponse userInfo = new UserInfoResponse();
+            public UserInfo userInfo = new UserInfo();
         }
 
         [System.Serializable]
         public class ErrorMessageResponse
         {
             public string message;
+        }
+
+        [System.Serializable]
+        public class UserInfoResponse
+        {
+            public UserInfo userInfo = new UserInfo();
         }
     }
 }
