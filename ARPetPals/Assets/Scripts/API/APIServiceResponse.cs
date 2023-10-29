@@ -41,6 +41,21 @@ namespace ARPetPals
         public class SetPetNameResponse {
             public string message;
         }
+
+        [System.Serializable]
+        public class GetPetNameResponse {
+            public string message;
+        }
+
+        [System.Serializable]
+        public class SetPetChoiceResponse {
+            public string message;
+        }
+
+        [System.Serializable]
+        public class GetPetChoiceResponse {
+            public string message;
+        }
     }
 }
 

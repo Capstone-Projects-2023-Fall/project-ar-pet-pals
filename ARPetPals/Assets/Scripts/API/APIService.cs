@@ -208,29 +208,20 @@ namespace ARPetPals
             }
         }
 
-        //Send and recieve pet name
+        //Set pet name
         public void SetPetName(string petName, Action<string> callback) {
             StartCoroutine(_SendSetPetNameRequest(petName, callback));
         }
 
-        /* Change or delete
-        public void SetPetName(Action<string> callback) {
-            
-            string username, password;
-            (username, password) = _GetInput();
+        private IEnumerator _SendSetPetNameRequest(string petName, Action<string> callback) {
 
-            if (username == "" || password == "") {
-                string msg = "Username or password should not be empty";
-                callback(msg);
-                _ShowReponse(msg);
-                return;
+            string token = GetStoredToken();
+
+            if (string.IsNullOrEmpty(token)) {
+                callback("Invalid token");
+                yield break; // Exit the coroutine
             }
 
-            StartCoroutine(_SendSignInRequest(username, password, callback));
-            
-        }*/
-
-        private IEnumerator _SendSetPetNameRequest(string petName, Action<string> callback) {
             string url = URL + "/pet/name";
             Dictionary<string, string> body = new Dictionary<string, string>
             {
@@ -238,6 +229,8 @@ namespace ARPetPals
             };
 
             using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+
                 yield return request.SendWebRequest();
 
                 // parse response
@@ -256,14 +249,158 @@ namespace ARPetPals
                     SetPetNameResponse responseData = JsonUtility.FromJson<SetPetNameResponse>(responseJson);
                     Debug.Log("_SendSetPetNameRequest response: " + JsonUtility.ToJson(responseData, true));
 
-                    /*
-                    // Store data locally
-                    PlayerPrefs.SetString(KEY_TOKEN, responseData.token);
-                    PlayerPrefs.SetString(KEY_USER_NAME, responseData.userInfo.name);
-                    */
                     _ShowReponse(JsonUtility.ToJson(responseData, true));
                     callback("");
                     
+                }
+            }
+        }
+
+        //Set pet choice
+        public void SetPetChoice(string petChoice, Action<string> callback) {
+            StartCoroutine(_SendSetPetChoiceRequest(petChoice, callback));
+        }
+
+        private IEnumerator _SendSetPetChoiceRequest(string petChoice, Action<string> callback) {
+
+            string token = GetStoredToken();
+
+            if (string.IsNullOrEmpty(token)) {
+                callback("Invalid token");
+                yield break; // Exit the coroutine
+            }
+
+            string url = URL + "/pet/choice";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "choice", petChoice }
+            };
+
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_SendSetPetChoiceRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                // Set pet name successful
+                else {
+
+                    // Deserialize the JSON response
+                    SetPetChoiceResponse responseData = JsonUtility.FromJson<SetPetChoiceResponse>(responseJson);
+                    Debug.Log("_SendSetPetChoiceRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+
+                }
+            }
+        }
+
+        //Get pet name
+        public void GetPetName(string petName, Action<string> callback) {
+            StartCoroutine(_SendGetPetNameRequest(petName, callback));
+        }
+
+        private IEnumerator _SendGetPetNameRequest(string petName, Action<string> callback) {
+            string token = GetStoredToken();
+            if (token == "") {
+                callback("Invalid token");
+            }
+            else {
+                string url = URL + "/pet/name";
+
+                UnityWebRequest request = UnityWebRequest.Get(url);
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_SendGetPetNameRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else {
+                    // Deserialize the JSON response
+                    GetPetNameResponse responseData = JsonUtility.FromJson<GetPetNameResponse>(responseJson);
+                    Debug.Log("_SendGetPetNameRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                    // Store data locally
+                    PlayerPrefs.SetString("CustomName", responseData.message);
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+                }
+            }
+        }
+
+        //Get pet choice
+        public void GetPetChoice(string petChoice, Action<string> callback) {
+            StartCoroutine(_SendGetPetChoiceRequest(petChoice, callback));
+        }
+
+        private IEnumerator _SendGetPetChoiceRequest(string petChoice, Action<string> callback) {
+            string token = GetStoredToken();
+            if (token == "") {
+                callback("Invalid token");
+            }
+            else {
+                string url = URL + "/pet/choice";
+
+                UnityWebRequest request = UnityWebRequest.Get(url);
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_SendGetPetChoiceRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else {
+                    // Deserialize the JSON response
+                    GetPetChoiceResponse responseData = JsonUtility.FromJson<GetPetChoiceResponse>(responseJson);
+                    Debug.Log("_SendGetPetChoiceRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                    int index = 0;
+                    // Store data locally
+                    switch (responseData.message) {
+                        case "Orange Dragon":
+                            index = 0;
+                            break;
+                        case "Red Dragon":
+                            index = 1;
+                            break;
+                        case "Green Dragon":
+                            index = 2;
+                            break;
+                        case "Blue Dragon":
+                            index = 3;
+                            break;
+                        default:
+                            index = 0;
+                            break;
+                    }
+
+                    PlayerPrefs.SetInt("SelectedPet", index);
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
                 }
             }
         }

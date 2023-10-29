@@ -101,19 +101,22 @@ public class CharacterSelection : MonoBehaviour
                 petChoice = "Unknown";
                 break;
         }
-        /*
-         * Orange dragon == 0
-         * Red dragon == 1
-         * Green dragon == 2
-         * Blue dragon == 3
-         */
 
         Debug.Log(petChoice);
 
+        //send petChoice to database
+        gameObject.GetComponent<APIService>().SetPetChoice(petChoice, (errMessage) =>
+        {
+            if (errMessage != "") {
+                Debug.Log("Set Pet Choice Failed: " + errMessage);
+            }
+            else {
+                Debug.Log("Set Pet Choice Success: " + errMessage);
+            }
+        });
+
         //save petChoice to playerPrefs
         PlayerPrefs.SetInt("SelectedPet", index);
-
-        //send petChoice to database
 
         // Close the confirmation menu
         confirmationMenu.SetActive(false);
@@ -133,7 +136,7 @@ public class CharacterSelection : MonoBehaviour
         }
 
         Debug.Log("Name is: " + customName);
-        /*
+        
         //send customName to database
         gameObject.GetComponent<APIService>().SetPetName(customName, (errMessage) => {
             if (errMessage != "") {
@@ -148,8 +151,8 @@ public class CharacterSelection : MonoBehaviour
                 SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
             }
         });
-        */
-        SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+        
+        //SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
 
     }
 }
