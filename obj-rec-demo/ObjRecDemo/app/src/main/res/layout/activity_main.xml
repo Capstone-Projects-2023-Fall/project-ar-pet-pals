@@ -19,11 +19,13 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="AR Pet Pals - Object Recognition Demo"
+        android:textSize="36sp"
         android:background="#AAFFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="end"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -32,6 +34,10 @@
         android:layout_height="wrap_content"
         android:text="Start"
         android:onClick="toggleImageCapture"
+        android:textSize="36sp"
+        android:padding="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
