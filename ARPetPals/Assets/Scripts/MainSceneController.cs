@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -11,6 +12,7 @@ public class MainSceneController : MonoBehaviour
 
     private int characterChoiceIndex;
 
+    [SerializeField] private TMP_Text petNameDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,7 @@ public class MainSceneController : MonoBehaviour
             characterList[characterChoiceIndex].SetActive(true);
         }
 
+        petNameDisplay.text = PlayerPrefs.GetString("CustomName");
     }
 
     // Update is called once per frame

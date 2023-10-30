@@ -44,7 +44,7 @@ namespace ARPetPals
 
         [System.Serializable]
         public class GetPetNameResponse {
-            public string message;
+            public string name;
         }
 
         [System.Serializable]
@@ -54,7 +54,7 @@ namespace ARPetPals
 
         [System.Serializable]
         public class GetPetChoiceResponse {
-            public string message;
+            public string choice;
         }
 
         [System.Serializable]

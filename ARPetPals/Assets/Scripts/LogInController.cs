@@ -16,9 +16,10 @@ public class LogInController : MonoBehaviour
     public string usernameInput = "";
     public string passwordInput = "";
     public GameObject gameObject;
-    
-    
-    
+
+    private bool dataRetrieved = false; // Flag to track if data has been retrieved
+
+
     // public void getUserName(string s)
     // {
     //     usernameInput = s;
@@ -63,11 +64,18 @@ public class LogInController : MonoBehaviour
                 else
                 {
                     Debug.Log("Login Success: " + errMessage);
-                    SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+
+                    retrievePetName();
+
+                    //StartCoroutine(WaitForOneSecond());
+
+                    //retrievePetChoice();
+                    //SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+
+                    StartCoroutine(WaitForDataRetrievalAndLoadScene());
+
                 }
             });
-
-            
         }
     }
 
@@ -75,5 +83,51 @@ public class LogInController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
-    
+
+    //set pet name to PlayerPrefs
+    private void retrievePetName() {
+        gameObject.GetComponent<APIService>().GetPetName((errMessage) =>
+        {
+            if (errMessage != "") {
+                Debug.Log("Get Pet Name Fail: " + errMessage);
+                editText.text = errMessage;
+            }
+            else {
+                Debug.Log("Get Pet Name Success: " + errMessage);
+                dataRetrieved = true; // Set the flag to indicate data has been retrieved
+
+            }
+        });
+    }
+
+    //set pet choice to PlayerPrefs
+    private void retrievePetChoice() {
+        gameObject.GetComponent<APIService>().GetPetChoice((errMessage) => {
+            if (errMessage != "") {
+                Debug.Log("Get Pet Choice Fail: " + errMessage);
+                editText.text = errMessage;
+            }
+            else {
+                Debug.Log("Get Pet Choice Success: " + errMessage);
+                //dataRetrieved = true; // Set the flag to indicate data has been retrieved
+            }
+        });
+    }
+
+    private IEnumerator WaitForDataRetrievalAndLoadScene() {
+        while (!dataRetrieved) // Use a flag to track if data has been retrieved
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        // Now that data has been retrieved, you can proceed to retrievePetChoice and load the scene
+        retrievePetChoice();
+        SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+    }
+
+    private IEnumerator WaitForOneSecond() {
+        yield return new WaitForSeconds(1.0f); // Wait for 1 second
+        // Code to be executed after waiting
+        Debug.Log("One second has passed!");
+    }
 }

@@ -364,11 +364,11 @@ namespace ARPetPals
         }
 
         //Get pet name
-        public void GetPetName(string petName, Action<string> callback) {
-            StartCoroutine(_SendGetPetNameRequest(petName, callback));
+        public void GetPetName(Action<string> callback) {
+            StartCoroutine(_SendGetPetNameRequest(callback));
         }
 
-        private IEnumerator _SendGetPetNameRequest(string petName, Action<string> callback) {
+        private IEnumerator _SendGetPetNameRequest(Action<string> callback) {
             string token = GetStoredToken();
             if (token == "") {
                 callback("Invalid token");
@@ -395,8 +395,10 @@ namespace ARPetPals
                     GetPetNameResponse responseData = JsonUtility.FromJson<GetPetNameResponse>(responseJson);
                     Debug.Log("_SendGetPetNameRequest response: " + JsonUtility.ToJson(responseData, true));
 
+
+                    Debug.Log("Pet name retrieved is: " + responseData.name);
                     // Store data locally
-                    PlayerPrefs.SetString("CustomName", responseData.message);
+                    PlayerPrefs.SetString("CustomName", responseData.name);
 
                     _ShowReponse(JsonUtility.ToJson(responseData, true));
                     callback("");
@@ -405,16 +407,19 @@ namespace ARPetPals
         }
 
         //Get pet choice
-        public void GetPetChoice(string petChoice, Action<string> callback) {
-            StartCoroutine(_SendGetPetChoiceRequest(petChoice, callback));
+        public void GetPetChoice(Action<string> callback) {
+            StartCoroutine(_SendGetPetChoiceRequest(callback));
         }
 
-        private IEnumerator _SendGetPetChoiceRequest(string petChoice, Action<string> callback) {
+        private IEnumerator _SendGetPetChoiceRequest(Action<string> callback) {
+
             string token = GetStoredToken();
             if (token == "") {
                 callback("Invalid token");
             }
+
             else {
+
                 string url = URL + "/pet/choice";
 
                 UnityWebRequest request = UnityWebRequest.Get(url);
@@ -438,7 +443,7 @@ namespace ARPetPals
 
                     int index = 0;
                     // Store data locally
-                    switch (responseData.message) {
+                    switch (responseData.choice) {
                         case "Orange Dragon":
                             index = 0;
                             break;
@@ -456,6 +461,7 @@ namespace ARPetPals
                             break;
                     }
 
+                    Debug.Log("Pet choice index retrieved is: " + index);
                     PlayerPrefs.SetInt("SelectedPet", index);
 
                     _ShowReponse(JsonUtility.ToJson(responseData, true));
