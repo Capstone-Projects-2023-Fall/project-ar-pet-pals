@@ -24,6 +24,16 @@ public class CharacterSelection : MonoBehaviour
 
     private void Start() {
 
+        gameObject.GetComponent<APIService>().CreatePet((errMessage) => {
+            if (errMessage != "") {
+                Debug.Log("Create Pet Failed: " + errMessage);
+            }
+            else {
+                Debug.Log("Create Pet Success: " + errMessage);
+            }
+        });
+
+        //close other menus
         confirmationMenu.SetActive(false);
         petNameUI.SetActive(false);
 
@@ -38,7 +48,7 @@ public class CharacterSelection : MonoBehaviour
         foreach(GameObject go in characterList) {
             go.SetActive(false);
         }
-
+        //set first character as active
         if (characterList[0]) {
             characterList[0].SetActive(true);
         }

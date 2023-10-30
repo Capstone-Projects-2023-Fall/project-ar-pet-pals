@@ -56,6 +56,18 @@ namespace ARPetPals
         public class GetPetChoiceResponse {
             public string message;
         }
+
+        [System.Serializable]
+        public class PetInfo {
+            public string id;
+            public string name;
+        }
+
+        [System.Serializable]
+        public class CreatePetResponse {
+            public string message;
+            public PetInfo petInfo = new PetInfo();
+        }
     }
 }
 

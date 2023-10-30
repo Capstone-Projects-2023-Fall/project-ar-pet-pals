@@ -208,6 +208,65 @@ namespace ARPetPals
             }
         }
 
+
+        //create pet
+
+
+        public void CreatePet(Action<string> callback) {
+            StartCoroutine(_SendCreatePetRequest(callback));
+        }
+
+        private IEnumerator _SendCreatePetRequest(Action<string> callback) {
+
+            string token = GetStoredToken();
+
+            if (string.IsNullOrEmpty(token)) {
+                callback("Invalid token");
+                yield break; // Exit the coroutine
+            }
+
+            string url = URL + "/pet/create";
+
+            /*
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "name", petName }
+            };*/
+
+            using (UnityWebRequest request = UnityWebRequest.PostWwwForm(url, CONTENT_TYPE)) {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_SendCreatePetRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                // Create pet name successful
+                else {
+
+                    // Deserialize the JSON response
+                    CreatePetResponse responseData = JsonUtility.FromJson<CreatePetResponse>(responseJson);
+                    Debug.Log("_SendCreatePetRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+
+                }
+            }
+        }
+
+
+
+
+
+
+
         //Set pet name
         public void SetPetName(string petName, Action<string> callback) {
             StartCoroutine(_SendSetPetNameRequest(petName, callback));
