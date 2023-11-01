@@ -52,6 +52,19 @@ Reliable Database System
 Deployment Format
 Compiled Binary (in APK for Android or IPA for iOS)
 
+## [ARPetPals](https://capstone-projects-2023-fall.github.io/project-ar-pet-pals/) GitHub Stats
+
+### Number of opened pull requests made by each team member
+
+![ARPetPals pull requests](https://courses.ianapplebaum.com/api/pull-requests/Capstone-Projects-2023-Fall/project-ar-pet-pals)
+
+### Number of code reviews made by each team member
+
+![ARPetPals reviews](https://courses.ianapplebaum.com/api/reviews/Capstone-Projects-2023-Fall/project-ar-pet-pals)
+
+### Number of commits made by each team member
+
+![ARPetPals commits](https://courses.ianapplebaum.com/api/commits/Capstone-Projects-2023-Fall/project-ar-pet-pals)
 
 ## Collaborators
 
