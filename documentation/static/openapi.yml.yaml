@@ -5,24 +5,297 @@ info:
     ARPetPals is a mobile augmented reality (AR) application designed for Android. ARPetPals aims to aid users in their health and fitness journey in a fun and interactive way by integrating real-world activity tracking and object recognition, where user's daily movement and nutrition contribute to the health and happiness of their virtual pet, encouraging them to stay active and make healthier eating choices. ARPetPals allows users to adopt and interact with virtual pets in their real-world environments such as one’s desk at work. The virtual pet requires care, attention, and playtime, with their happiness and health metrics affected by user interactions. The game also leverages object recognition AI to enable virtual pets to interact with real-world objects, enhancing the gameplay experience. The health of the virtual pet is directly correlated with the user’s diet and activity habits. Using object recognition, the game will recognize food a user is eating and record the nutrition information. The healthier the food, the more nourished a pet becomes. The app will remind users to nourish their pet throughout the day and to interact with it by exercising. The pet will become more fit and content based on a user's activity level. There is an interactive aspect to the game where the health of a virtual pet is displayed on a public leader board. This gives users incentive to keep up their pets' health status by adding a competitive nature to the game. The game also uses speech to text AI to give commands and interact with the virtual pet. ARPetPals will be developed using the Unity 3D game engine, version 2022.2.21.
 
 servers:
-  - url: /api/v3
+  - url: https://arpetpals.store/
 
 tags:
-  - name: object-recognition
-    description: Describes the object-recognition from the AR Foundational API
-    externalDocs:
-      description: Find out more about AR Foundational API
-      url: https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@6.0/manual/features/features.html
+ 
+  - name: authentication
+    description: API for logging in and logging out
+  
+  - name: pet-status
+    description: API for pet status
 
-  - name: display
-    externalDocs:
-      description: API for displaying pets using Unity technology
+  - name: pet-name
+    description: API for pet name
+
+  - name: pet-choice
+    description: API for pet choice
+
+  - name: user-info
+    description: API for user info
+
+  - name: user-name
+    description: API for user name
 
   - name: front
     externalDocs:
       description: API for managing user interface, inputs, notifications, leaderboard, and exercise reminders
 
+
+    
+  
 paths:
+  /api/signin:
+    post:
+      summary: "signin"
+      tags:
+        - authentication
+      requestBody:
+        description: "The username and password to sign in"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthSchema"
+      responses:
+        '200':
+          description: "Authentication was successful"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthSuccess"
+        '400':
+          description: "Authentication failed"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+  /api/signup:
+    post:
+      summary: "signup"
+      tags:
+        - authentication
+      requestBody:
+        description: "The username and password to sign up"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthSchema"
+      responses:
+        '200':
+          description: "Authentication was successful"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthSuccess"
+        '400':
+          description: "Authentication failed"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+  /api/pet/name:
+    post:
+      security: 
+        - token: []
+      tags:
+        - pet-name
+      summary: "update pet name"
+
+      requestBody:
+        description: "The new pet's name"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetName"
+      responseBody:
+        description: "status of update"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Status"
+      responses:
+        '200':
+          description: "Updated pet name successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        '400':
+          description: "Could not update pet name"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+    get:
+      security: 
+        - token: []
+      tags:
+        - pet-name  
+      summary: "get pet name"
+      responseBody:
+        description: "the pet's name"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetName"
+      responses:
+        '200':
+          description: "Got pet name"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PetName"
+        '400':
+          description: "Couldn't get pet name"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+  /api/pet/status:
+    post:
+      security: 
+        - token: []
+      tags:
+        - pet-status
+      summary: "update pet status"
+      requestBody:
+        description: "The new pet's status"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetStatus"
+      responseBody:
+        description: "status of update"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Status"
+      responses:
+        '200':
+          description: "Updated pet status successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        '400':
+          description: "Could not update pet status"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+    get:
+      security: 
+        - token: []
+      tags: 
+        - pet-status
+      summary: "get pet status"
+     
+      responseBody:
+        description: "the pet status"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetStatus"
+      responses:
+        '200':
+          description: "Got pet status successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PetStatus"
+        '400':
+          description: "Could not get pet status"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+  /api/pet/choice:
+
+    post:
+      security: 
+        - token: []
+      tags:
+        - pet-choice
+      summary: "update pet choice"
+      requestBody:
+        description: "The new pet's choice"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetChoice"
+      responseBody:
+        description: "status of update"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Status"
+      responses:
+        '200':
+          description: "Updated pet choice successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        '400':
+          description: "Could not update pet choice"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+    get:
+      security: 
+        - token: []
+      tags: 
+        - pet-choice
+      summary: "get pet choice"
+     
+      responseBody:
+        description: "the pet choice"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PetChoice"
+      responses:
+        '200':
+          description: "Got pet choice successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PetChoice"
+        '400':
+          description: "Could not get pet choice"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+    
+  /api/token/verify:
+    post:
+      summary: "token validity"
+
+      requestBody:
+        description: "The token to test"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyToken"
+      responseBody:
+        description: "whether token is valid or not"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenValid"
+      responses:
+        '200':
+          description: "Token is valid"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenValid"
+        '400':
+          description: "Token is not valid"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenValid"
+
   /front/displayInterface:
     get:
       summary: "Retrieve the user interface layout."
@@ -101,90 +374,80 @@ paths:
       responses:
         "200":
           description: "Exercise reminder sent successfully."
-
-  /display/renderPet:
-    post:
-      summary: "Renders the pet using Unity."
-      operationId: "renderPet"
-      tags:
-        - display
-      requestBody:
-        description: "Pet details to be rendered."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PetDetails"
-      responses:
-        "200":
-          description: "Pet rendered successfully."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RenderResponse"
-
-  /display/configureDisplay:
-    post:
-      summary: "Configures display settings for Unity."
-      operationId: "configureDisplay"
-      tags:
-        - display
-      requestBody:
-        description: "Display settings and parameters."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DisplayConfiguration"
-      responses:
-        "200":
-          description: "Display configured successfully."
-
-  /display/manageUserDisplay:
-    post:
-      summary: "Manages the display of the pet and other elements on the screen."
-      operationId: "manageUserDisplay"
-      tags:
-        - display
-      requestBody:
-        description: "Details for managing user display."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserDisplayRequest"
-      responses:
-        "200":
-          description: "User display managed successfully."
-
-  /object-recogntion/ARTrackedImageManager:
-    get:
-      tags:
-        - object-recognition
-      summary: ARTrackedImageManager
-      description: Describes API used in order to track images, which performs 2D image tracking.
-  /object-recogntion/ARTrackedObjectManager:
-    get:
-      tags:
-        - object-recognition
-      summary: ARTrackedObjectManager
-      description: Describes API used in order to track real-world 3D objects
-  /object-recogntion/ARHumanBodyManager:
-    get:
-      tags:
-        - object-recognition
-      summary: ARHumanBodyManager
-      description: Describes API used in order to track  human bodies in an AR scene.
-  /object-recogntion/ARPlaneManager:
-    get:
-      tags:
-        - object-recognition
-      summary: ARPlaneManager
-      description: |-
-        Describes API used in order to track real-world planes ( real world surfaces like desks, floors,etc)
-
 components:
+  securitySchemes:
+    token:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT   
   schemas:
+
+    PetStatus:
+      type: object
+      properties:
+        health: int
+    PetChoice:
+      type: object
+      properties:
+        choice: string
+
+    PetName:
+      type: object
+      properties:
+        name:
+          type: string
+    VerifyToken:
+      type: object
+      properties:
+        token: 
+          type: string
+    AuthSchema:
+      type: object
+      properties:
+        username:
+          type: string
+          description: "the username to authenticate"
+        password:
+          type: string
+          description: "the password to authenticate"
+    TokenValid:
+      type: object
+      properties:
+        isValid: 
+          type: boolean
+
+    UserInfo:
+      type: object
+      properties:
+        id: 
+          type: string
+        name: 
+         type: string
+
+    AuthSuccess:
+      type: object
+      properties:
+        token: 
+          type: string
+          description: "the auth token"
+        userInfo:
+          type: object
+          $ref: "#/components/schemas/UserInfo"
+    Fail:
+      type: object
+      properties:
+        message:
+          type: string
+          description: why it failed
+
+  
+    Status:
+      type: object
+      properties:
+        message: 
+          type: string
+          description: status
+
     UserInterfaceLayout:
       type: object
       properties:
@@ -242,54 +505,4 @@ components:
         reminderMessage:
           type: string
           description: "Message for the exercise reminder."
-
-    PetDetails:
-      type: object
-      properties:
-        petId:
-          type: string
-          description: "ID of the pet to be rendered."
-        petModelPath:
-          type: string
-          description: "Path to the Unity model of the pet."
-        additionalParameters:
-          type: object
-          description: "Additional parameters for rendering."
-
-    DisplayConfiguration:
-      type: object
-      properties:
-        resolution:
-          type: string
-          description: "Resolution for the display."
-        quality:
-          type: string
-          description: "Quality settings for the display."
-        fullscreen:
-          type: boolean
-          description: "Whether to use fullscreen mode."
-
-    UserDisplayRequest:
-      type: object
-      properties:
-        petId:
-          type: string
-          description: "ID of the pet to be displayed."
-        showPet:
-          type: boolean
-          description: "Whether to show or hide the pet."
-        additionalElements:
-          type: array
-          description: "Other elements to display on the screen."
-          items:
-            type: string
-
-    RenderResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          description: "Status of the rendering."
-        message:
-          type: string
-          description: "Any additional messages from the renderer."
+        
