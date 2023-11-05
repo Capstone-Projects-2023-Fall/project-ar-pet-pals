@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['khrsimplecontroller_0',['KHRSimpleController',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1Interactions_1_1KHRSimpleControllerProfile_1_1KHRSimpleController.html',1,'UnityEngine::XR::OpenXR::Features::Interactions::KHRSimpleControllerProfile']]],
-  ['khrsimplecontrollerprofile_1',['KHRSimpleControllerProfile',['../classUnityEngine_1_1XR_1_1OpenXR_1_1Features_1_1Interactions_1_1KHRSimpleControllerProfile.html',1,'UnityEngine::XR::OpenXR::Features::Interactions']]]
+  ['setpetchoiceresponse_0',['SetPetChoiceResponse',['../classARPetPals_1_1APIServiceResponse_1_1SetPetChoiceResponse.html',1,'ARPetPals::APIServiceResponse']]],
+  ['setpetnameresponse_1',['SetPetNameResponse',['../classARPetPals_1_1APIServiceResponse_1_1SetPetNameResponse.html',1,'ARPetPals::APIServiceResponse']]],
+  ['signinresponse_2',['SignInResponse',['../classARPetPals_1_1APIServiceResponse_1_1SignInResponse.html',1,'ARPetPals::APIServiceResponse']]],
+  ['signupresponse_3',['SignUpResponse',['../classARPetPals_1_1APIServiceResponse_1_1SignUpResponse.html',1,'ARPetPals::APIServiceResponse']]],
+  ['switchscene_4',['SwitchScene',['../classSwitchScene.html',1,'']]]
 ];
