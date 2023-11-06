@@ -456,6 +456,9 @@ namespace ARPetPals
                         case "Blue Dragon":
                             index = 3;
                             break;
+                        case "Yellow Dragon":
+                            index = 4;
+                            break;
                         default:
                             index = 0;
                             break;
