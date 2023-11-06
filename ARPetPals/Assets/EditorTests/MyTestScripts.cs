@@ -4,9 +4,21 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using UnityEngine.XR.ARFoundation;
 
 public class MyTestScripts
 {
+
+    [Test]
+
+    public void testARSceneExists(){
+        ARSession arSession = GameObject.FindObjectOfType<ARSession>();
+
+        // Check if the ARSession component is not null.
+        Assert.IsNotNull(arSession, "ARSession is missing in the scene.");
+
+
+    }
     // A Test behaves as an ordinary method
     [Test]
     public void MyTestScriptsSimplePasses()

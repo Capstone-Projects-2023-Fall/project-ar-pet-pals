@@ -107,6 +107,9 @@ public class CharacterSelection : MonoBehaviour
             case 3:
                 petChoice = "Blue Dragon";
                 break;
+            case 4:
+                petChoice = "Yellow Dragon";
+                break;
             default:
                 petChoice = "Unknown";
                 break;
