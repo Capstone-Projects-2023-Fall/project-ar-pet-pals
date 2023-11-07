@@ -37,24 +37,34 @@ ARPetPals is a unique mobile AR game concept that combines virtual pet care with
 ## Required Resources
 
 Users need a mobile phone with a Rear-facing camera that has movement detection. 
-iOS: iPhone X or later (original IOS version 11.0.1 or later) 
 
 Hardware Required
-iPhone X or later
-iOS version 11.0.1 or later
-An android phone that supports version 8.0 (Oreo) or later
+Android phone that supports version 8.0 (Oreo) or later
 Functional front facing camera
 Functional microphone and speaker
 
 Development Environment
-Xcode (for iOS) and Android Studio (for Android)
-Unity Hub (for Unity 3D) or Unreal Editor (for Unreal Engine 5)
+Xcode (for macOS) and Visual Studio Code (for Windows)
+Unity Hub (for Unity 3D)
 Github and Jira - for Project and Code Management
 Reliable Database System
 
 Deployment Format
 Compiled Binary (in APK for Android or IPA for iOS)
 
+## [ARPetPals](https://capstone-projects-2023-fall.github.io/project-ar-pet-pals/) GitHub Stats
+
+### Number of opened pull requests made by each team member
+
+![ARPetPals pull requests](https://courses.ianapplebaum.com/api/pull-requests/Capstone-Projects-2023-Fall/project-ar-pet-pals)
+
+### Number of code reviews made by each team member
+
+![ARPetPals reviews](https://courses.ianapplebaum.com/api/reviews/Capstone-Projects-2023-Fall/project-ar-pet-pals)
+
+### Number of commits made by each team member
+
+![ARPetPals commits](https://courses.ianapplebaum.com/api/commits/Capstone-Projects-2023-Fall/project-ar-pet-pals)
 
 ## Collaborators
 
