@@ -2,11 +2,9 @@
 import { decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import db from "../database/database.connection.ts";
 import {PetSchema} from "../schema/schema.pet.ts";
-import {StatusSchema} from "../schema/schema.status.ts";
 
 import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
 const Pets = db.collection<PetSchema>("pets");
-const PetStatus = db.collection<StatusSchema>("pets_status");
 const MAX_HEALTH = 100;
 const MAX_MOOD = 100;
 enum RESET_TYPE {
@@ -86,21 +84,18 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
         return
     }
 
-    const status_id = await PetStatus.insertOne({
-        lastActivity: Date.now(),
-        lastFeeding: Date.now(),
-        lastCalculatedHealth: Date.now(),
-        lastCalculatedMood: Date.now(),
-        health: MAX_HEALTH,
-        mood: MAX_MOOD
-    });
-    const pet_status = await PetStatus.findOne({_id: status_id});
-
     const pet: PetSchema = {
         user_id: userId,
         name: "default_name", // is this a default name for all pet? alex: yeah
         choice: "default_choice",
-        status: pet_status
+        status: {
+            lastActivity: Date.now(),
+            lastFeeding: Date.now(),
+            lastCalculatedHealth: Date.now(),
+            lastCalculatedMood: Date.now(),
+            health: MAX_HEALTH,
+            mood: MAX_MOOD
+        }
     } 
 
     await Pets.insertOne(pet)
@@ -112,9 +107,8 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             id: pet._id,
             name: pet.name,
             status: {
-                id: pet_status._id,
-                health: pet_status.health,
-                mood: pet_status.mood
+                health: pet.status.health,
+                mood: pet.status.mood
             },
         }
     }
@@ -184,9 +178,9 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
     //find pet status
     // update pet status
 
-    const { status } = await request.body().value;
+    const { health, mood } = await request.body().value;
 
-    if(!status){
+    if(!health && !mood){
         response.body = {
             "message": "No status provided"
         }
@@ -207,12 +201,18 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
         return
     }
 
-   
-    await Pets.updateOne({ _id: pet._id}, { $set: { status: status }})
-    
+    pet.status.health = health || pet.status.health;
+    pet.status.mood = mood || pet.status.mood;
 
+
+    await Pets.updateOne({ _id: pet._id}, { 
+        $set: { 
+            status: pet.status 
+        }
+    });
+    
     response.body = {
-        "message": "pet status updated successfuly"
+        "message": "pet status updated successfuly",
     }
 }
 
@@ -241,7 +241,10 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
 
     response.status = 200
     response.body = {
-        "status": pet.status
+        status: {
+            health: pet.status.health,
+            mood: pet.status.mood
+        },
     }
 }
 
@@ -249,10 +252,6 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
 // input: reset_type (0: all, 1: health, 2: mood)
 export const resetPetStatus =async ({request, response}:{request:any;response:any}) => {
     
-    
-    
-    
-
     const headers: Headers = request.headers
     let userId = getUserIdFromHeaders(headers);
 
@@ -269,17 +268,36 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
     // Reset
     const { reset_type } = await request.body().value;
     if (reset_type == RESET_TYPE.ALL) {
+        pet.status = {
+            lastActivity: Date.now(),
+            lastFeeding: Date.now(),
+            lastCalculatedHealth: Date.now(),
+            lastCalculatedMood: Date.now(),
+            health: MAX_HEALTH,
+            mood: MAX_MOOD
+        }
     }
     else if (reset_type == RESET_TYPE.HEALTH) {
-
+        pet.status = {
+            lastFeeding: Date.now(),
+            lastCalculatedHealth: Date.now(),
+            health: MAX_HEALTH,
+        }
     }
     else {
-
+        pet.status = {
+            lastActivity: Date.now(),
+            lastCalculatedMood: Date.now(),
+            mood: MAX_MOOD
+        }
     }
 
-
-    response.status = 200
+    await Pets.updateOne({ _id: pet._id}, { 
+        $set: { 
+            status: pet.status 
+        }
+    });
     response.body = {
-        "status": pet.status
+        "message": "pet status updated successfuly",
     }
 }
