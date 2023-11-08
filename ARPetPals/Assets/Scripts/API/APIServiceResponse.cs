@@ -1,6 +1,7 @@
 
 namespace ARPetPals
 {
+
     public class APIServiceResponse
     {
         [System.Serializable]
@@ -61,6 +62,7 @@ namespace ARPetPals
         public class PetInfo {
             public string id;
             public string name;
+            public GetPetStatusResponse status;
         }
 
         [System.Serializable]
@@ -68,6 +70,33 @@ namespace ARPetPals
             public string message;
             public PetInfo petInfo = new PetInfo();
         }
+
+        [System.Serializable]
+        public class PetStatusExtraResponse
+        {
+            public string minutes_since_last_feeding;
+            public string minutes_since_last_activity;
+        }
+
+        [System.Serializable]
+        public class SetPetStatusResponse
+        {
+            public string message;
+        }
+
+        public class GetPetStatusResponse
+        {
+            public string health;
+            public string mood;
+            public PetStatusExtraResponse extra;
+        }
+
+        [System.Serializable]
+        public class ResetPetStatusResponse
+        {
+            public string message;
+        }
+
     }
 }
 
