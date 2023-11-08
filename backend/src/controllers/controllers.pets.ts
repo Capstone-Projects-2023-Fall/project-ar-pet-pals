@@ -262,14 +262,13 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
 
     response.status = 200
     response.body = {
-        status: {
-            health: displayNumber(pet.status.health),
-            mood: displayNumber(pet.status.mood),
-            // Additional info: not sure if notification logic needs them
-            
+        health: displayNumber(pet.status.health),
+        mood: displayNumber(pet.status.mood),
+        // Additional info: not sure if notification logic needs them
+        extra: {
             minutes_since_last_feeding: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastFeeding)),
             minutes_since_last_activity: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastActivity))
-        },
+        }
         
     }
 }
