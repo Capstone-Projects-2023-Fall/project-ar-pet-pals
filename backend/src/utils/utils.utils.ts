@@ -13,3 +13,7 @@ export function getUserIdFromHeaders(headers: Headers){
 export function displayNumber(number, fixed = 2) {
     return number.toFixed(fixed);
 }
+
+export function calculateTimeDifferentInMinutes(time) {
+    return (Date.now() - time) / (60 * 1000)
+}

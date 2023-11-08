@@ -3,7 +3,7 @@ import { decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import db from "../database/database.connection.ts";
 import {PetSchema} from "../schema/schema.pet.ts";
 
-import { getUserIdFromHeaders, displayNumber } from "../utils/utils.utils.ts";
+import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } from "../utils/utils.utils.ts";
 const Pets = db.collection<PetSchema>("pets");
 const MAX_HEALTH = 100;
 const MAX_MOOD = 100;
@@ -204,8 +204,8 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
         return
     }
 
-    pet.status.health = health || pet.status.health;
-    pet.status.mood = mood || pet.status.mood;
+    pet.status.health = Math.min(health || pet.status.health, 100);
+    pet.status.mood = Math.min(mood || pet.status.mood, 100);
 
 
     await Pets.updateOne({ _id: pet._id}, { 
@@ -241,8 +241,9 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
     }
 
     // Calculating pet's health and mood here
-    let minutesSinceLastFeeding = (Date.now() - pet.status.lastCalculatedHealth) / 60000;
-    let minutesSinceLastActivity = (Date.now() - pet.status.lastCalculatedMood) / 60000;
+    
+    let minutesSinceLastFeeding = calculateTimeDifferentInMinutes(pet.status.lastCalculatedHealth);
+    let minutesSinceLastActivity = calculateTimeDifferentInMinutes(pet.status.lastCalculatedMood);
     if (minutesSinceLastFeeding >= 1) {
         pet.status.health -= HEALTH_DECREASE_PER_MIN * minutesSinceLastFeeding;
         pet.status.lastCalculatedHealth = Date.now();
@@ -265,8 +266,9 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
             health: displayNumber(pet.status.health),
             mood: displayNumber(pet.status.mood),
             // Additional info: not sure if notification logic needs them
-            minutes_since_last_feeding: displayNumber((Date.now() - pet.status.lastFeeding) / 60000),
-            minutes_since_last_activity: displayNumber((Date.now() - pet.status.lastActivity) / 60000)
+            
+            minutes_since_last_feeding: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastFeeding)),
+            minutes_since_last_activity: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastActivity))
         },
         
     }
