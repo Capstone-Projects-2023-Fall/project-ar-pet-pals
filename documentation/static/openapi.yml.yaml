@@ -10,9 +10,6 @@ tags:
  
   - name: authentication
     description: API for logging in and logging out
-  
-  - name: pet-status
-    description: API for pet status
 
   - name: pet-name
     description: API for pet name
@@ -30,7 +27,8 @@ tags:
     externalDocs:
       description: API for managing user interface, inputs, notifications, leaderboard, and exercise reminders
 
-
+  - name: pet
+    description: API for pet
     
   
 paths:
@@ -144,26 +142,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+
+  /api/pet/create:
+    post:
+      security: 
+        - token: []
+      tags:
+        - pet
+      summary: "Create a new pet"
+      responses:
+        '200':
+          description: "Created pet name successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PetCreationSchema"
+        '400':
+          description: "Could not create pet"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
   /api/pet/status:
     post:
       security: 
         - token: []
       tags:
-        - pet-status
-      summary: "update pet status"
+        - pet
+      summary: "Update pet status e.g. health, mood,..."
       requestBody:
         description: "The new pet's status"
-        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetStatus"
-      responseBody:
-        description: "status of update"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Status"
+              $ref: "#/components/schemas/PetStatusRequestBody"
       responses:
         '200':
           description: "Updated pet status successfuly"
@@ -181,30 +194,50 @@ paths:
       security: 
         - token: []
       tags: 
-        - pet-status
-      summary: "get pet status"
-     
-      responseBody:
-        description: "the pet status"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PetStatus"
+        - pet
+      summary: "Get pet status"
       responses:
         '200':
           description: "Got pet status successfuly"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetStatus"
+                $ref: "#/components/schemas/PetStatusSchema"
         '400':
           description: "Could not get pet status"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
-  /api/pet/choice:
 
+  /api/pet/status/reset:
+    post:
+      security: 
+        - token: []
+      tags:
+        - pet
+      summary: "Reset pet status"
+      requestBody:
+        description: "0: Reset All, 1: Reset Health, 2: Reset Mood"
+        content:
+          application/json:
+            schema:
+                $ref: "#/components/schemas/PetStatusResetRequestBody"
+      responses:
+        '200':
+          description: "Reset pet status successfuly"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+        '400':
+          description: "Could not reset pet status"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+  /api/pet/choice:
     post:
       security: 
         - token: []
@@ -385,6 +418,7 @@ components:
       type: object
       properties:
         health: int
+
     PetChoice:
       type: object
       properties:
@@ -504,4 +538,69 @@ components:
         reminderMessage:
           type: string
           description: "Message for the exercise reminder."
-        
+
+    PetStatusRequestBody:
+      type: object
+      properties:
+        health:
+          type: number
+          description: "Pet's health (optional)"
+        mood:
+          type: number
+          description: "Pet's mood (optional)"
+
+    PetStatusResetRequestBody:
+      type: object
+      properties:
+        reset_type:
+          type: integer
+          description: "0: Reset All, 1: Reset Health, 2: Reset Mood"
+      required: [reset_type]
+
+    PetStatusExtraSchema:
+      type: object
+      properties:
+        minutes_since_last_feeding:
+          type: number
+          description: "Minutes since last feeding"
+        minutes_since_last_activity:
+          type: number
+          description: "Minutes since last activity"
+
+    PetStatusSchema:
+      type: object
+      properties:
+        health:
+          type: number
+          description: "Pet's health"
+        mood:
+          type: number
+          description: "Pet's mood"
+        extra: 
+          type: object
+          $ref: "#/components/schemas/PetStatusExtraSchema"
+    PetInfoSchema:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "Pet's id"
+        name:
+          type: string
+          description: "Pet's name"
+        status:
+          type: object
+          $ref: "#/components/schemas/PetStatusSchema"
+    PetCreationSchema:
+      type: object
+      properties:
+        message:
+          type: string
+          description: "successful message"
+        petInfo:
+          type: object
+          $ref: "#/components/schemas/PetInfoSchema"
+
+    
+
+    
