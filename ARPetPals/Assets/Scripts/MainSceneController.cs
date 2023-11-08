@@ -14,6 +14,8 @@ public class MainSceneController : MonoBehaviour
 
     [SerializeField] private TMP_Text petNameDisplay;
 
+    public GameObject selectedCharacter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,9 @@ public class MainSceneController : MonoBehaviour
 
         characterList = new GameObject[transform.childCount];
 
-        //fill array with our egg models
+        GameObject selectedCharacter = new GameObject();
+
+        //fill array with our dragon models
         for (int i = 0; i < transform.childCount; i++) {
             characterList[i] = transform.GetChild(i).gameObject;
         }
@@ -33,16 +37,15 @@ public class MainSceneController : MonoBehaviour
             go.SetActive(false);
         }
 
+        
         if (characterList[characterChoiceIndex]) {
             characterList[characterChoiceIndex].SetActive(true);
+            selectedCharacter = characterList[characterChoiceIndex];
         }
 
-        petNameDisplay.text = PlayerPrefs.GetString("CustomName");
-    }
+        //GameObject newObject = Instantiate(characterList[characterChoiceIndex]);
+        //newObject.transform.position = new Vector3(0, 0, 0);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        petNameDisplay.text = PlayerPrefs.GetString("CustomName");
     }
 }
