@@ -3,7 +3,7 @@ import { decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import db from "../database/database.connection.ts";
 import {PetSchema} from "../schema/schema.pet.ts";
 
-import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
+import { getUserIdFromHeaders, displayNumber } from "../utils/utils.utils.ts";
 const Pets = db.collection<PetSchema>("pets");
 const MAX_HEALTH = 100;
 const MAX_MOOD = 100;
@@ -13,6 +13,9 @@ enum RESET_TYPE {
     MOOD
 }
 
+// health decrease per hour = -1
+const HEALTH_DECREASE_PER_MIN = 0.0167; // 1 / 60
+const MOOD_DECREASE_PER_MIN = 0.0167;
 
 
 export const setPetName =async ({request, response}:{request:any;response:any}) => {
@@ -107,8 +110,8 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             id: pet._id,
             name: pet.name,
             status: {
-                health: pet.status.health,
-                mood: pet.status.mood
+                health: displayNumber(pet.status.health),
+                mood: displayNumber(pet.status.mood)
             },
         }
     }
@@ -219,7 +222,7 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
 export const getPetStatus =async ({request, response}:{request:any;response:any}) => {
     
     // Update pet's health and mood before returning the pet status
-    // 1 hour = -1 hp, If the pet didn't eat in 24 hours, health -= 24 hp
+    // Testing: Pet's health will decrease 1 hp / hour, If users didn't feed the pet for 1 day, pet's health will decrease 24 hp. The same apply to mood
     // Based on lastActivity (for mood) and lastFeeding (for health) compared to the current time.
     // The fields lastCalculatedHealth and lastCalculatedMood are  updated to the current time after calculating
     
@@ -238,13 +241,34 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
     }
 
     // Calculating pet's health and mood here
+    let minutesSinceLastFeeding = (Date.now() - pet.status.lastCalculatedHealth) / 60000;
+    let minutesSinceLastActivity = (Date.now() - pet.status.lastCalculatedMood) / 60000;
+    if (minutesSinceLastFeeding >= 1) {
+        pet.status.health -= HEALTH_DECREASE_PER_MIN * minutesSinceLastFeeding;
+        pet.status.lastCalculatedHealth = Date.now();
+    }
+    if (minutesSinceLastActivity >= 1) {
+        pet.status.mood -= MOOD_DECREASE_PER_MIN * minutesSinceLastActivity;
+        pet.status.lastCalculatedMood = Date.now();
+    }
+
+    // Update
+    await Pets.updateOne({ _id: pet._id}, { 
+        $set: { 
+            status: pet.status 
+        }
+    });
 
     response.status = 200
     response.body = {
         status: {
-            health: pet.status.health,
-            mood: pet.status.mood
+            health: displayNumber(pet.status.health),
+            mood: displayNumber(pet.status.mood),
+            // Additional info: not sure if notification logic needs them
+            minutes_since_last_feeding: displayNumber((Date.now() - pet.status.lastFeeding) / 60000),
+            minutes_since_last_activity: displayNumber((Date.now() - pet.status.lastActivity) / 60000)
         },
+        
     }
 }
 
@@ -301,3 +325,4 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
         "message": "pet status updated successfuly",
     }
 }
+

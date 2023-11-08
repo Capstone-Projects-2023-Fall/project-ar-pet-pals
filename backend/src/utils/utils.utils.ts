@@ -9,3 +9,7 @@ export function getUserIdFromHeaders(headers: Headers){
 
     return payload.id
 }
+
+export function displayNumber(number, fixed = 2) {
+    return number.toFixed(fixed);
+}
