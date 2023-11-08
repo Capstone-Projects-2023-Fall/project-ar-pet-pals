@@ -5,8 +5,6 @@ const client = new MongoClient();
 const dbString = Deno.env.get("DB_CRED");
 if (!dbString) throw new Error('DB_CRED environment variable not set.');
 
-console.log(dbString);
-
 await client.connect(dbString);
 
 console.log("Database connected!");
