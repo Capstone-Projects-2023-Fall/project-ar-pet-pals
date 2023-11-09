@@ -1,6 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import {signin, signup, getUserName, getUserInfo} from "../controllers/controllers.users.ts";
 import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, } from "../controllers/controllers.pets.ts";
+import { recognizeFood } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 
@@ -43,5 +44,8 @@ router.get("/api/user", authourized, getUserInfo  )
 
 //verifies a token
 router.post("/api/token/verify", verifyToken)
+
+// identify food in image
+router.post("/api/food/recognize", authourized, recognizeFood)
 
 export default router;
