@@ -1,12 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// <summary>
-/// For tutorial video, see my YouTube channel: <seealso href="https://www.youtube.com/@xiennastudio">YouTube channel</seealso>
-/// 
-/// Create a new input system with Pointer press as the input.
-/// </summary>
-[HelpURL("https://youtu.be/HkNVp04GOEI")]
 public abstract class PressInputBase : MonoBehaviour
 {
     protected InputAction m_PressAction;
@@ -16,6 +10,7 @@ public abstract class PressInputBase : MonoBehaviour
         // Create a new input within the script.
         m_PressAction = new InputAction("touch", binding: "<Pointer>/press");
 
+        
         // If touch is being started, call the OnPressBegan function.
         m_PressAction.started += ctx =>
         {
