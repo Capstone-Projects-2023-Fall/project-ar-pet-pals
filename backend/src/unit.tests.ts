@@ -7,12 +7,15 @@ import { MongoClient } from "https://deno.land/x/mongo@v0.32.0/mod.ts";
 
 let BASE_URL = "https://arpetpals.store/api";
 
-let valid_token =
-  "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGJmMjAzN2I0ZjM5ZDA3MzU3YzFjNiIsIm5hbWUiOiJhbGV4In0.OMv4GbPLzF9oJlY74UJZHBQNKMHio65Z12cNWsfI-QUT3piXwD7AU8zy9pF6QsgZ3TUSUej2oeSADs6ySzHZRg";
-let invalid_token =
-  "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2VkNjZiZDlmYzY5MGNjMTk1ZWM3OCIsIm5hbWUiOiJiYW5hbmEifQ.NUGsI0uuijhKAwq0i1B7oB55o77RS69y24WtAR9vP9bE-bKQ80CTZmN-vgwXLWC-dh9MSQ7LmINlZWGA_a6rgA";
-let token_with_no_pet =
-  "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGMyNjBjMWRlMTA0MDc2N2Y3ZGNkYiIsIm5hbWUiOiJub3BldDMifQ.N6uPBps5MhbQ1DCtoUvvD7voydUMIijTsbGdji1zEn3nHlDZxMGxqCoAYTBnlr2DW46Adf8uvPJgdCdHRglmjg";
+// ALL OF THESE ENV VARS ARE STORED IN .bashrc
+const valid_token = Deno.env.get("valid_token");
+  if (!valid_token) throw new Error('valid_token environment variable not set.');
+const invalid_token = Deno.env.get("invalid_token");
+  if (!invalid_token) throw new Error('invalid_token environment variable not set.');
+const token_with_no_pet = Deno.env.get("token_with_no_pet");
+  if (!token_with_no_pet) throw new Error('token_with_no_pet environment variable not set.');
+
+
 
 
 function getRandomChar() {
@@ -34,7 +37,9 @@ function generateRandomString(length: number) {
 Deno.test("test database connection", async () => {
   const client = new MongoClient();
 
-  const dbString = "REMOVED_ON_PURPOSE";
+  const dbString = Deno.env.get("DB_CRED");
+  if (!dbString) throw new Error('DB_CRED environment variable not set.');
+  
 
   try {
     let c = await client.connect(dbString);
