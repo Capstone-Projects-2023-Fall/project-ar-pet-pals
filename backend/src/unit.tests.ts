@@ -34,7 +34,7 @@ function generateRandomString(length: number) {
 Deno.test("test database connection", async () => {
   const client = new MongoClient();
 
-  const dbString = "mongodb://ar-admin:t3mpl3univ3rsity@127.0.0.1:27017/?authMechanism=SCRAM-SHA-1";
+  const dbString = "REMOVED_ON_PURPOSE";
 
   try {
     let c = await client.connect(dbString);
