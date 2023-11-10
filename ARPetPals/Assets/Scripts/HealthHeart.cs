@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+// Setting prefab for Heart
 public class HealthHeart : MonoBehaviour
 {
     private Image heartImage;
-    
+    //Adding sprite for each status of heart
     public Sprite fullHeart;
     public Sprite halfHeart;
     public Sprite emptyHeart;
@@ -14,7 +14,7 @@ public class HealthHeart : MonoBehaviour
     {
         heartImage = GetComponent<Image>();
     }
-
+//Checking heart status
     public void SetHeartImage(HealthStatus status)
     {
         switch (status)
@@ -31,6 +31,7 @@ public class HealthHeart : MonoBehaviour
         }
     }
 }
+//Setup heart status
 public enum HealthStatus
 {
     Empty = 0,
