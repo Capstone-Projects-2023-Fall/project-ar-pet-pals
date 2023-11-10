@@ -45,7 +45,12 @@ router.get("/api/user", authourized, getUserInfo  )
 //verifies a token
 router.post("/api/token/verify", verifyToken)
 
-// identify food in image
+// food-related routes --
+
+// recognize food in image
 router.post("/api/food/recognize", authourized, recognizeFood)
+
+// get nutrition info for food
+
 
 export default router;
