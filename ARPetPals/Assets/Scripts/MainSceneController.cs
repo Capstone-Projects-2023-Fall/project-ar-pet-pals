@@ -23,7 +23,7 @@ public class MainSceneController : MonoBehaviour
 
         characterList = new GameObject[transform.childCount];
 
-        //fill array with our egg models
+        //fill array with our dragon models
         for (int i = 0; i < transform.childCount; i++) {
             characterList[i] = transform.GetChild(i).gameObject;
         }
@@ -33,16 +33,11 @@ public class MainSceneController : MonoBehaviour
             go.SetActive(false);
         }
 
+        
         if (characterList[characterChoiceIndex]) {
             characterList[characterChoiceIndex].SetActive(true);
         }
 
         petNameDisplay.text = PlayerPrefs.GetString("CustomName");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
