@@ -28,13 +28,11 @@ public class PlaceOnPlane : PressInputBase {
     //adjusts the speed at which the object moves
     private float moveSpeed = 1.0f;
 
-    public GameObject petPreFab;
-
     protected override void Awake() {
         base.Awake();
         aRRaycastManager = GetComponent<ARRaycastManager>();
         //animator = GetComponent<Animator>();
-        animator = petPreFab.GetComponent<Animator>();
+        animator = objectToMove.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -56,14 +54,6 @@ public class PlaceOnPlane : PressInputBase {
             // Raycast hits are sorted by distance, so the first hit means the closest.
             var hitPose = hits[0].pose;
 
-
-            /*
-            // To make the object always look at the camera. Delete if not needed.            
-            Vector3 lookPos = Camera.main.transform.position - objectToMove.transform.position;
-            lookPos.y = 0;
-            objectToMove.transform.rotation = Quaternion.LookRotation(-lookPos);
-            */
-
             // Set the target position for smooth movement.
             targetPosition = hitPose.position;
 
@@ -75,7 +65,6 @@ public class PlaceOnPlane : PressInputBase {
             if (direction != Vector3.zero) {
                 objectToMove.transform.rotation = Quaternion.LookRotation(direction);
             }
-
 
             isObjectMoving = true;
 
