@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ARPetPals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,17 +10,20 @@ using UnityEngine.Audio;
 
 public class SettingMenuController : MonoBehaviour
 {
+    [Header("Pages")]
     [SerializeField] public GameObject menuPage;
     [SerializeField] public GameObject settingPage;
     [SerializeField] public GameObject menuButton;
+    [Header("Input Field")]
     [SerializeField] public TMP_InputField changePetNameField;
     [SerializeField] public TMP_InputField changeUserNameField;
     [SerializeField] public TMP_InputField changePasswordField;
+    [SerializeField] public Button MenuButton;
     
     public AudioMixer mixer;
 
     public float health, maxHealth;
-    
+    [Header("Happiness Bar")]
     public Slider happinessSlider;
     public Gradient gradient;
     public Image happinessFill;
@@ -31,22 +35,40 @@ public class SettingMenuController : MonoBehaviour
     public string changePetName;
     public string changeUserName;
     public string changePassword;
-    public void Start()
+
+    private void Awake()
     {
         menuPage.SetActive(false);
         settingPage.SetActive(false);
-        
-        SetMaxHappiness(maxHappiness);
-        currentHappniness = maxHappiness;
-        SetHappiness(currentHappniness);
+        // health = 5;
+        // currentHappniness = maxHappiness;
+        // SetMaxHappiness(maxHappiness);
+        // SetHappiness(currentHappniness);
+        //Get Pet Status Api .
+        gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
+        {
+            
+            if (errMessage != "")
+            {
+                Debug.Log($"errorMessage {errMessage}");
+            }
+            else {
+                APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
+                currentHappniness  = (int)float.Parse(responseData.mood);
+                health = float.Parse(responseData.health)/10;
+                
+                Debug.Log($"Current Happiness from Api: {currentHappniness}");
+                Debug.Log($"Current Health from Api: {health}");
+                SetMaxHappiness(maxHappiness);
+                SetHappiness(currentHappniness);
+                Debug.Log($"start Happiness {currentHappniness}");
+                Debug.Log($"start Happiness {currentHappniness}");
+            }
+        });
+
         Debug.Log($"start Happiness {currentHappniness}");
         
-        // SetMaxHealth(maxHealth);
-        // currentHealth = maxHealth;
-        // SetHealth(currentHealth);
     }
-
-
 
     // public void  SetAudioLevel(float sliderValue)
     // {
@@ -131,7 +153,7 @@ public class SettingMenuController : MonoBehaviour
         happinessFill.color = gradient.Evaluate(happinessSlider.normalizedValue);
     }
 
-    public void CurrentHealth(float amount)
+    public void SetCurrentHeart (float amount)
     {
         health = amount;
         

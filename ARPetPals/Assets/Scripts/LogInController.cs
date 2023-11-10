@@ -18,7 +18,6 @@ public class LogInController : MonoBehaviour
 
     public string usernameInput = "";
     public string passwordInput = "";
-    public GameObject gameObject;
 
     private bool dataRetrieved = false; // Flag to track if data has been retrieved
 
@@ -83,8 +82,10 @@ public class LogInController : MonoBehaviour
                 }
                 else
                 {
+                    PlayerPrefs.SetString("usernameInput",usernameInput);
+                    PlayerPrefs.SetString("passwordInput",passwordInput);
                     Debug.Log("Login Success: " + errMessage);
-                    SceneManager.LoadScene(3);
+                    SceneManager.LoadScene("MainGameScene");
                     retrievePetName();
 
                     //StartCoroutine(WaitForOneSecond());
@@ -93,8 +94,7 @@ public class LogInController : MonoBehaviour
                     //SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
 
                     StartCoroutine(WaitForDataRetrievalAndLoadScene());
-
-
+                    
                 }
             });
         }
@@ -102,7 +102,7 @@ public class LogInController : MonoBehaviour
 
     public void registerButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        SceneManager.LoadScene("SignUpScene");
     }
 
     //set pet name to PlayerPrefs
@@ -143,7 +143,7 @@ public class LogInController : MonoBehaviour
 
         // Now that data has been retrieved, you can proceed to retrievePetChoice and load the scene
         retrievePetChoice();
-        SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+        SceneManager.LoadScene("MainGameScene"); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
     }
 
     private IEnumerator WaitForOneSecond() {

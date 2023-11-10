@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 0187475025114284882901d842756b4c
   - enabled: 1
     path: Assets/Scenes/SignInScene.unity
     guid: d9f6b16d6dc8b4340b8bee53e8a3eb62
@@ -17,12 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameScene.unity
     guid: 6bdce89659816455b9f906fc62d19910
-  - enabled: 1
-    path: Assets/Scenes/TestAnimScene.unity
-    guid: 24dfd4046aee43f48b6139bcad7b2208
-  - enabled: 1
-    path: Assets/Scenes/MainGameScene 1.unity
-    guid: d9e91d9de55df274fa195c7aca75323e
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

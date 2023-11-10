@@ -17,7 +17,6 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] public GameObject confirmPasswordError;
     
     
-    public GameObject gameObject;
     public string usernameInput = "";
     public string passwordInput = "";
     public string confirmPasswordInput = "";
@@ -39,7 +38,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void BackButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("SignInScene");
     }
 
     public void RegisterButtonClicked()
@@ -91,7 +90,7 @@ public class NewBehaviourScript : MonoBehaviour
                 else
                 {
                     Debug.Log("Signup Success: " + errMessage);
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene("PetChoiceScene");
                 }
             });
 

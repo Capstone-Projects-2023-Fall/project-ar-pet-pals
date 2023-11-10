@@ -3868,6 +3868,7 @@ GameObject:
   - component: {fileID: 1130342752}
   - component: {fileID: 1130342751}
   - component: {fileID: 1130342750}
+  - component: {fileID: 1130342755}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3889,12 +3890,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuPage: {fileID: 425415747}
   settingPage: {fileID: 1755650361}
-  menuButton: {fileID: 0}
+  menuButton: {fileID: 1740865313}
   changePetNameField: {fileID: 57404215}
   changeUserNameField: {fileID: 331518327}
   changePasswordField: {fileID: 1269580240}
+  MenuButton: {fileID: 0}
   mixer: {fileID: 0}
-  health: 9
+  health: 0
   maxHealth: 10
   happinessSlider: {fileID: 1563619593}
   gradient:
@@ -4021,6 +4023,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1130342755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130342749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e9dc7cd4a9fad46ab1b96a10d42c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameInput: {fileID: 0}
+  passwordInput: {fileID: 0}
+  responseInput: {fileID: 0}
 --- !u!1001 &1169823536
 PrefabInstance:
   m_ObjectHideFlags: 0
