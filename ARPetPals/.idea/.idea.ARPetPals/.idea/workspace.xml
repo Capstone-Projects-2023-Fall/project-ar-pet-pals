@@ -6,6 +6,246 @@
   <component name="ChangeListManager">
     <list default="true" id="e1781716-5da8-4ba9-a8bc-654060b64c5c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fonts/Molot SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/Molot SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fonts/Montserrat-VariableFont_wght SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/Montserrat-VariableFont_wght SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PetChoiceScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PetChoiceScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SignInScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SignInScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SignUpScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SignUpScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LogInController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LogInController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SignUpController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SignUpController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Background_OnOffBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Background_OnOffBackground.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blank_OnOffBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blank_OnOffBackground.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blank_OnOffButton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blank_OnOffButton.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blank_TextField.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blank_TextField.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blank_TextInput.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blank_TextInput.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blue_OnOffBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blue_OnOffBackground.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blue_OnOffButton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blue_OnOffButton.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blue_TextField.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blue_TextField.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blue_TextInput.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Blue_TextInput.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Geen_OnOffButton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Geen_OnOffButton.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Blank_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Blank_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Blank_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Blank_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Blue_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Blue_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Blue_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Blue_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Green_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Green_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Green_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Green_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_GreyOutline_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_GreyOutline_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_GreyOutline_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_GreyOutline_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_GreyOutline_Square_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_GreyOutline_Square_1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Orange_Round - Copy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Orange_Round - Copy.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Orange_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Orange_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Orange_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Orange_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Large_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_OnOffBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_OnOffBackground.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_OnOffButton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_OnOffButton.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Orange_OnOffBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Orange_OnOffBackground.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Orange_OnOffButton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Orange_OnOffButton.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Orange_TextField.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Orange_TextField.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Orange_TextInput.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Orange_TextInput.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Blank_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Blank_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Blank_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Blank_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Blue_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Blue_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Blue_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Blue_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Green_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Green_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Green_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Green_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_GreyOutline_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_GreyOutline_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Orange_Round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Orange_Round.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Orange_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Orange_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_ROund.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_ROund.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Small_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_TextInput.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_TextInput.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Textfield.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/ButtonText_Textfield.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Background_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Background_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Background_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Background_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Background_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Background_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blank_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blank_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blank_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blank_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blank_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blank_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blue_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blue_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blue_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blue_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blue_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Blue_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Green_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Green_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Green_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Green_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Green_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Green_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_GreyOutline_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_GreyOutline_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_GreyOutline_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_GreyOutline_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_GreyOutline_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_GreyOutline_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Orange_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Orange_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Orange_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Orange_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Orange_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Orange_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Red_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Red_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Red_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Red_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Red_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Red_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Large_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Background_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Background_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Background_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Background_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Background_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Background_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blank_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blank_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blank_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blank_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blank_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blank_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blue_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blue_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blue_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blue_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blue_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Blue_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Green_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Green_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Green_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Green_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Green_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Green_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_GreyOutline_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_GreyOutline_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_GreyOutline_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_GreyOutline_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_GreyOutline_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_GreyOutline_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Orange_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Orange_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Orange_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Orange_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Orange_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Orange_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Red_Circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Red_Circle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Red_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Red_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Red_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Red_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Rounded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Rounded.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/IconButton_Small_Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/LoginButton.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/LoginButton.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/LoginButton.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/LoginButton.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Check.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_ExitOrange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_ExitOrange.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_ExitRed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_ExitRed.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Menu.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_No.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_No.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Options.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Options.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Replay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Replay.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Resume.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Resume.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Select.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Select.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Shop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_Shop.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_XGreen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_XGreen.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_XGreenWhiteOutline.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_XGreenWhiteOutline.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_XRed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_XRed.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_XWhiteOutline.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_XWhiteOutline.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_YesGreen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_YesGreen.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_YesOrange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/PremadeButtons_YesOrange.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/Register 1.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/Register 1.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/Register.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/Register.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/backButton.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/backButton.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/backButton2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/icon2/backButton2.psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XR/Settings/Open XR Package Settings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XR/Settings/Open XR Package Settings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XR/UserSimulationSettings/SimulationEnvironmentAssetsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XR/UserSimulationSettings/SimulationEnvironmentAssetsManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/XR/UserSimulationSettings/SimulationEnvironmentAssetsManager.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XR/UserSimulationSettings/SimulationEnvironmentAssetsManager.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +253,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/UI/Scripts/SignUpController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/UI/Scripts/SwitchScene.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HeartBarController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.arfoundation@5.0.7/Editor/Simulation/SimulationEditorUtilities.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -118,6 +358,12 @@
       <workItem from="1698200957725" duration="2285000" />
       <workItem from="1698255004395" duration="735000" />
       <workItem from="1698255754217" duration="3942000" />
+      <workItem from="1699386918630" duration="595000" />
+      <workItem from="1699410389302" duration="611000" />
+      <workItem from="1699495671625" duration="3598000" />
+      <workItem from="1699553747489" duration="598000" />
+      <workItem from="1699565781798" duration="5000" />
+      <workItem from="1699565871086" duration="13433000" />
     </task>
     <servers />
   </component>
@@ -128,5 +374,24 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/HealthHeart.cs</url>
+          <line>31</line>
+          <properties documentPath="C:\Users\nguye\CodingProjects\FinalProject\project-ar-pet-pals\ARPetPals\Assets\Scripts\HealthHeart.cs" initialLine="30" containingFunctionPresentation="Method 'SetHeartImage'">
+            <startOffsets>
+              <option value="775" />
+            </startOffsets>
+            <endOffsets>
+              <option value="776" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
