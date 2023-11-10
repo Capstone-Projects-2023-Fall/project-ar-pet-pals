@@ -92,7 +92,7 @@ public class SettingMenuController : MonoBehaviour
         menuPage.SetActive(true);
         settingPage.SetActive(false);
     }
-    
+    //Saving all change from setting page.
     public void SaveButtonClicked()
     {
         changePetName = changePetNameField.text;
@@ -116,6 +116,7 @@ public class SettingMenuController : MonoBehaviour
         SetHappiness(currentHappniness);
     }
 
+    //Setting Happiness bar
     public void SetMaxHappiness(int happy)
     {
         happinessSlider.maxValue = happy;
