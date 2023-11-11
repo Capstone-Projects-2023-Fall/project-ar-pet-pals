@@ -1,24 +1,7 @@
+// Route Functions --
 
-// import { decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
-import db from "../database/database.connection.ts";
-// import {PetSchema} from "../schema/schema.pet.ts";
-// import { ClarifaiStub, grpc } from "https://deno.land/x/clarifai_grpc_nodejs/clarifai-nodejs-grpc.stub.js";
-// import Clarifai from 'https://cdn.skypack.dev/clarifai-nodejs-grpc';
-
-// import { decode as base64Decode } from "https://deno.land/std/encoding/base64.ts";
-
-// import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } from "../utils/utils.utils.ts";
-// const Pets = db.collection<PetSchema>("pets");
-// const MAX_HEALTH = 100;
-// const MAX_MOOD = 100;
-// enum RESET_TYPE {
-//     ALL = 0,
-//     HEALTH,
-//     MOOD
-// }
-
-// route functions --
-
+// Given a string containing a base64 encoding of an image,
+// return the AI models top 3 guesses of the food in the image.
 export const recognizeFood = async ( { request, response }: { request: any; response: any } ) => {
     const { image64String } = await request.body().value;
 
@@ -50,7 +33,7 @@ export const recognizeFood = async ( { request, response }: { request: any; resp
     }
 }
 
-// eat food
+// TODO: Add route to return the nutrition info of a given food item
 
 // ---
 
