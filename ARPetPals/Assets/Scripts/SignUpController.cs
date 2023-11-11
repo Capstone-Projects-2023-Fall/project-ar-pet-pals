@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ARPetPals;
@@ -11,12 +12,30 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] public TMP_InputField usernameField;
     [SerializeField] public TMP_InputField passwordField;
     [SerializeField] public TMP_InputField confirmPasswordField;
+    [SerializeField] public GameObject userNameError;
+    [SerializeField] public GameObject passWordError;
+    [SerializeField] public GameObject confirmPasswordError;
+    
     
     public GameObject gameObject;
     public string usernameInput = "";
     public string passwordInput = "";
     public string confirmPasswordInput = "";
     public string errormessage = "";
+
+    public void Start()
+    {
+        userNameError.SetActive(false);
+        passWordError.SetActive(false);
+        confirmPasswordError.SetActive(false);
+        
+    }
+    public void onSelected()
+    {
+        userNameError.SetActive(false);
+        passWordError.SetActive(false);
+        confirmPasswordError.SetActive(false);
+    }
 
     public void BackButtonClicked()
     {
@@ -31,29 +50,26 @@ public class NewBehaviourScript : MonoBehaviour
         
         if (usernameInput == "")
         {
-            errormessage += " username";
+            userNameError.SetActive(true);
         }
         if (passwordInput == "")
         {
-            if (errormessage != "")
-            {
-                errormessage += " and";
-            }
-            errormessage += " password";
+            passWordError.SetActive(true);
         }
         if (confirmPasswordInput == "")
         {
-            if (errormessage != "")
-            {
-                errormessage += " and";
-            }
-            errormessage += " confirm password";
+           confirmPasswordError.SetActive(true);
+        }
+
+        if (passwordInput != confirmPasswordInput)
+        {
+            errormessage += "Confirm Password is not correct";
         }
 
         if (errormessage != "")
         {
-            editText.text = $"Missing{errormessage}.";
-            editText.color =  Color.red;
+            editText.text = $"{errormessage}.";
+            
         }
         
         errormessage = "";
@@ -70,11 +86,12 @@ public class NewBehaviourScript : MonoBehaviour
                 {
                     Debug.Log("Signup Fail: " + errMessage);
                     editText.text = errMessage;
+                    editText.color =  Color.red;
                 }
                 else
                 {
                     Debug.Log("Signup Success: " + errMessage);
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    SceneManager.LoadScene(2);
                 }
             });
 
