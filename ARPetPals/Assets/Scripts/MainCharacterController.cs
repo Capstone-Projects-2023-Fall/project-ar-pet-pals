@@ -63,4 +63,13 @@ public class MainCharacterController : MonoBehaviour
         animator.SetBool("isEating", false);
         foodBowl.SetActive(false);
     }
+
+    public void startSadAnimation() {
+        animator.SetBool("lowHealth", true);
+    }
+
+    public void endSadAnimation() {
+        animator.SetBool("lowHealth", false);
+    }
+
 }

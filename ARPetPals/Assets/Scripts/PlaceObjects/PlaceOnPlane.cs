@@ -28,11 +28,17 @@ public class PlaceOnPlane : PressInputBase {
     //adjusts the speed at which the object moves
     private float moveSpeed = 1.0f;
 
+    MainCharacterController mainCharacterController;
+
+    private void Start() {
+        
+    }
+
     protected override void Awake() {
         base.Awake();
         aRRaycastManager = GetComponent<ARRaycastManager>();
-        //animator = GetComponent<Animator>();
         animator = objectToMove.GetComponent<Animator>();
+        mainCharacterController = objectToMove.GetComponent<MainCharacterController>();
     }
 
     // Update is called once per frame
@@ -67,6 +73,11 @@ public class PlaceOnPlane : PressInputBase {
             }
 
             isObjectMoving = true;
+
+            //call end food animation function
+            if (animator.GetBool("isEating")) {
+                mainCharacterController.endEatFoodAnimation();
+            }
 
             // Smoothly move the object towards the target position.
             objectToMove.transform.position = Vector3.Lerp(objectToMove.transform.position, targetPosition, Time.deltaTime * moveSpeed);
