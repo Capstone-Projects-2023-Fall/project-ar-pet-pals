@@ -5,9 +5,11 @@ using ARPetPals;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static ARPetPals.APIService;
 
 public class LoadingSceneController : MonoBehaviour
 {
+    private float progress = 0f;
     [Header("Menu screens")]
     [SerializeField] private GameObject loadingSrceen;
     [SerializeField] private GameObject mainMenu;
@@ -18,7 +20,7 @@ public class LoadingSceneController : MonoBehaviour
 
     private void Awake()
     {
-        String Check_token = PlayerPrefs.GetString("key_token");
+        String Check_token = PlayerPrefs.GetString(KEY_TOKEN);
         if (Check_token != "")
         {
             levelToLoad = "MainGameScene";
@@ -38,15 +40,22 @@ public class LoadingSceneController : MonoBehaviour
 
     IEnumerator LoadLevelAsync(string levelToLoad)
     {
-       
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelToLoad);
-        while (!loadOperation.isDone)
+        loadOperation.allowSceneActivation = false;
+        while (progress <= 1f)
         {
-            float progressValue = Mathf.Clamp01(loadOperation.progress / 0.9f);
+            loadingSlider.value = progress;
+            float progressValue = Mathf.Clamp01(loadOperation.progress);
             loadingSlider.value = progressValue;
+            progress += 0.001f;
+            yield return new WaitForSeconds(0.001f);
+            
+        }
+        while (!loadOperation.isDone && progress >=1f)
+        {
+            loadOperation.allowSceneActivation = true;
             yield return null;
         }
-
         
     }
 }

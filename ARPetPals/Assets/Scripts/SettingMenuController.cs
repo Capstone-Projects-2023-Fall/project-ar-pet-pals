@@ -13,6 +13,7 @@ public class SettingMenuController : MonoBehaviour
     [Header("Pages")]
     [SerializeField] public GameObject menuPage;
     [SerializeField] public GameObject settingPage;
+    [SerializeField] public GameObject ListPage;
     [SerializeField] public GameObject menuButton;
     [Header("Input Field")]
     [SerializeField] public TMP_InputField changePetNameField;
@@ -40,6 +41,7 @@ public class SettingMenuController : MonoBehaviour
     {
         menuPage.SetActive(false);
         settingPage.SetActive(false);
+        ListPage.SetActive(false);
         // health = 5;
         // currentHappniness = maxHappiness;
         // SetMaxHappiness(maxHappiness);
