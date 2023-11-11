@@ -47,8 +47,8 @@ public class LoadingSceneController : MonoBehaviour
             loadingSlider.value = progress;
             float progressValue = Mathf.Clamp01(loadOperation.progress);
             loadingSlider.value = progressValue;
-            progress += 0.001f;
-            yield return new WaitForSeconds(0.001f);
+            progress += 0.01f;
+            yield return new WaitForSeconds(0.01f);
             
         }
         while (!loadOperation.isDone && progress >=1f)
