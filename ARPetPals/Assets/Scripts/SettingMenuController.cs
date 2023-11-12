@@ -20,6 +20,12 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public TMP_InputField changeUserNameField;
     [SerializeField] public TMP_InputField changePasswordField;
     [SerializeField] public Button MenuButton;
+    //Text game object of Food List menu
+    [Header("Menu List")]
+    [SerializeField] public TMP_Text itemText1;
+    [SerializeField] public TMP_Text itemText2;
+    [SerializeField] public TMP_Text itemText3;
+    
     
     public AudioMixer mixer;
 
@@ -132,13 +138,35 @@ public class SettingMenuController : MonoBehaviour
         settingPage.SetActive(false);
     }
     
-    //PetStats function
+    //Food list menu. All the feature of OR process here. 
+    
+    //Scan button to scan the object. 
     public void ScanButtonClicked()
+    {
+        //Process take picture in here.
+        
+        //Enable FoodList
+        ListPage.SetActive(true);
+        //Update List by changing Text in button. This is example, Modify value under here.
+        itemText1.text = "la di da";
+        itemText2.text = "apple";
+        itemText3.text = "banana";
+    }
+
+    public void ChangeHappinessButtonClicked()
     {
         currentHappniness -= 10;
         Debug.Log($"Hy/CurrentHappy {currentHappniness}");
-        SetHappiness(currentHappniness);
+        SetHappiness(currentHappniness); 
     }
+
+    public void ChangeHealthButtonClicked()
+    {
+        health += 1f;
+        
+    }
+    
+
 
     //Setting Happiness bar
     public void SetMaxHappiness(int happy)
@@ -154,13 +182,6 @@ public class SettingMenuController : MonoBehaviour
         happinessSlider.value = happy;
         happinessFill.color = gradient.Evaluate(happinessSlider.normalizedValue);
     }
-
-    public void SetCurrentHeart (float amount)
-    {
-        health = amount;
-        
-    }
-    
 }
 
 
