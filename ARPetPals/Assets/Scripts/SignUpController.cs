@@ -34,7 +34,9 @@ public class NewBehaviourScript : MonoBehaviour
         userNameError.SetActive(false);
         passWordError.SetActive(false);
         confirmPasswordError.SetActive(false);
+        editText.text = "";
     }
+    
 
     public void BackButtonClicked()
     {

@@ -52,23 +52,23 @@ public class SettingMenuController : MonoBehaviour
             
             if (errMessage != "")
             {
-                Debug.Log($"errorMessage {errMessage}");
+                Debug.Log($"Hy/errorMessage {errMessage}");
             }
             else {
                 APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
                 currentHappniness  = (int)float.Parse(responseData.mood);
                 health = float.Parse(responseData.health)/10;
-                
-                Debug.Log($"Current Happiness from Api: {currentHappniness}");
-                Debug.Log($"Current Health from Api: {health}");
+                Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
+                Debug.Log($"Hy/Current Health from Api: {health}");
                 SetMaxHappiness(maxHappiness);
                 SetHappiness(currentHappniness);
-                Debug.Log($"start Happiness {currentHappniness}");
-                Debug.Log($"start Happiness {currentHappniness}");
+                
             }
         });
-
-        Debug.Log($"start Happiness {currentHappniness}");
+        
+        Debug.Log($"Hy/start Happiness {currentHappniness}");
+        Debug.Log($"Hy/start Happiness {health}");
+        Debug.Log($"Hy/Max Happiness {maxHappiness}");
         
     }
 
@@ -136,7 +136,7 @@ public class SettingMenuController : MonoBehaviour
     public void ScanButtonClicked()
     {
         currentHappniness -= 10;
-        Debug.Log($"CurrentHappy {currentHappniness}");
+        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
         SetHappiness(currentHappniness);
     }
 

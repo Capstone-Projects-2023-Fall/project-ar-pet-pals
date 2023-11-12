@@ -24,6 +24,7 @@ public class LoadingSceneController : MonoBehaviour
         if (Check_token != "")
         {
             levelToLoad = "MainGameScene";
+            Debug.Log($"Hy/Loading success-token: {Check_token}");
         }
         else
         {

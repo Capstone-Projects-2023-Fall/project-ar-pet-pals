@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using ARPetPals;
 
+
 //This script use for control sign in scene.
 public class LogInController : MonoBehaviour
 {
@@ -84,7 +85,7 @@ public class LogInController : MonoBehaviour
                 {
                     PlayerPrefs.SetString("usernameInput",usernameInput);
                     PlayerPrefs.SetString("passwordInput",passwordInput);
-                    Debug.Log("Login Success: " + errMessage);
+                    Debug.Log($"Hy/Login Success-Token: {PlayerPrefs.GetString(APIService.KEY_TOKEN)}");
                     SceneManager.LoadScene("MainGameScene");
                     retrievePetName();
 
