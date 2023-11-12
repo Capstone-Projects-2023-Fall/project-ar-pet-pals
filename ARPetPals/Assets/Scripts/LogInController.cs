@@ -13,6 +13,9 @@ public class LogInController : MonoBehaviour
     [SerializeField] public TMP_InputField userNameField;
     [SerializeField] public TMP_InputField passwordField;
     [SerializeField] public TMP_Text editText;
+    [SerializeField] public GameObject userError;
+    [SerializeField] public GameObject passwordError;
+
     public string usernameInput = "";
     public string passwordInput = "";
     public GameObject gameObject;
@@ -32,24 +35,40 @@ public class LogInController : MonoBehaviour
     //     Debug.Log("password: " + passwordInput);
     // }
 
+    public void Start()
+    {
+        userError.SetActive(false);
+        passwordError.SetActive(false);
+    }
+
+    public void Update()
+    {
+      
+        
+    }
+
+    public void onSelected()
+    {
+        userError.SetActive(false);
+        passwordError.SetActive(false);
+    }
+
     public void loginButtonClicked()
     {
         usernameInput = userNameField.text;
         passwordInput = passwordField.text;
-        if (usernameInput == "" && passwordInput == "")
+        // if (usernameInput == "" && passwordInput == "")
+        // {
+        //     editText.text = "Missing username and password";
+        //     editText.color =  Color.red;
+        // }
+        if (usernameInput == "")
         {
-            editText.text = "Missing username and password";
-            editText.color =  Color.red;
+            userError.SetActive(true);
         }
-        else if (usernameInput == "")
+        if (passwordInput == "")
         {
-            editText.text = "Missing username";
-            editText.color =  Color.red;
-        }
-        else if (passwordInput == "")
-        {
-            editText.text = "Missing password";
-            editText.color =  Color.red;
+            passwordError.SetActive(true);
         }
         Debug.Log($"Log in Clicked username: {usernameInput} password: {passwordInput}");
         if (passwordInput != "" && usernameInput != "")
@@ -60,11 +79,12 @@ public class LogInController : MonoBehaviour
                 {
                     Debug.Log("Login Fail: " + errMessage);
                     editText.text = errMessage;
+                    editText.color =  Color.red;
                 }
                 else
                 {
                     Debug.Log("Login Success: " + errMessage);
-
+                    SceneManager.LoadScene(3);
                     retrievePetName();
 
                     //StartCoroutine(WaitForOneSecond());
@@ -73,6 +93,7 @@ public class LogInController : MonoBehaviour
                     //SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
 
                     StartCoroutine(WaitForDataRetrievalAndLoadScene());
+
 
                 }
             });
