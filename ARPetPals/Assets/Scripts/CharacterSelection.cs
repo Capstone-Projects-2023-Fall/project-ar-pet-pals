@@ -107,9 +107,6 @@ public class CharacterSelection : MonoBehaviour
             case 3:
                 petChoice = "Blue Dragon";
                 break;
-            case 4:
-                petChoice = "Yellow Dragon";
-                break;
             default:
                 petChoice = "Unknown";
                 break;
@@ -161,7 +158,7 @@ public class CharacterSelection : MonoBehaviour
                 //Save name to PlayerPrefs
                 PlayerPrefs.SetString("CustomName", customName);
 
-                SceneManager.LoadScene("MainGameScene"); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+                SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
             }
         });
     }
