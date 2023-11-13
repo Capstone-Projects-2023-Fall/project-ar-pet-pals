@@ -17,12 +17,12 @@ namespace ARPetPals
         public TMP_InputField passwordInput;
         public TMP_InputField responseInput;
 
-        private const string URL = "https://arpetpals.store/api";
-        private const string CONTENT_TYPE = "application/json";
+        public const string URL = "https://arpetpals.store/api";
+        public const string CONTENT_TYPE = "application/json";
 
-        private const string KEY_TOKEN = "key_token";
-        private const string KEY_USER_NAME = "key_username";
-        private const string KEY_PET_STATUS = "key_pet_status";
+        public const string KEY_TOKEN = "key_token";
+        public const string KEY_USER_NAME = "key_username";
+        public const string KEY_PET_STATUS = "key_pet_status";
 
         enum RESET_STATUS_TYPE
         {

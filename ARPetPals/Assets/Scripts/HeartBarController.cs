@@ -12,15 +12,20 @@ public class HeartBarController : MonoBehaviour
 
     // private void OnEnable()
     // {
-    //     petHealth.Ontrigger += DrawHeart();
+    //     
     // }
-    //
+    
     // private void OnDisable()
     // {
     //     petHealth.Ontrigger -=DrawHeart();
     // }
 
-    private void Start()
+    // private void Start()
+    // {
+    //     DrawHeart();
+    // }
+
+    private void Update()
     {
         DrawHeart();
     }
