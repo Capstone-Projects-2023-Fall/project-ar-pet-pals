@@ -36,6 +36,8 @@ export const getHealthRating = async ({ request, response }: { request: any; res
         response.status = 500;
         response.body = { error: 'Internal Server Error' };
     }
+    //export the function
+export { getHealthRating };
 };
 
 
