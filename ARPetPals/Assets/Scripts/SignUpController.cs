@@ -4,8 +4,9 @@ using ARPetPals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class NewBehaviourScript : MonoBehaviour
+using ARPetPals.Notifications; //import Notifications namespace
+//public class NewBehaviourScript : MonoBehaviour
+public class SignUpController : MonoBehaviour  //updated class name
 {
     [SerializeField] public TMP_Text editText;
     [SerializeField] public TMP_InputField usernameField;
@@ -64,22 +65,32 @@ public class NewBehaviourScript : MonoBehaviour
         if (usernameInput != "" && passwordInput != "" && confirmPasswordInput != "" &&
             passwordInput.Equals(confirmPasswordInput))
         {
+            // Check if it's the initial registration
+            bool isInitialRegistration = NotificationScheduler.shouldSendInitialNotification(usernameInput);
+            // Register the user and handle notifications
             gameObject.GetComponent<APIService>().SignUp(usernameInput, passwordInput, (errMessage) =>
             {
                 if (errMessage != "")
                 {
                     Debug.Log("Signup Fail: " + errMessage);
                     editText.text = errMessage;
+                    editText.color = Color.red;
                 }
                 else
                 {
                     Debug.Log("Signup Success: " + errMessage);
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+                    //only schedule the initial notification if it's their first registration
+                    if (isInitialRegistration)
+                    {
+                        //schedule initial notification
+                        NotificationScheduler.ScheduleInitialNotification(usernameInput);
+                    }
+
+                    SceneManager.LoadScene("PetChoiceScene");
                 }
             });
-
-
         }
     }
-
 }
+        

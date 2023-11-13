@@ -21,9 +21,9 @@ public class MobileNotification : MonoBehaviour
             Description = "Reminder notifications",
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel);
-//check if initial notification already been sent
+/*check if initial notification already been sent
 if (!PlayerPrefs.HasKey("InitialNotificationSent"))
-{}
+{}*/
         // Set up the notification message and parameters
         var notification = new AndroidNotification();
         notification.Title = "Attention!";
@@ -33,9 +33,9 @@ if (!PlayerPrefs.HasKey("InitialNotificationSent"))
         // Send the notification
         var id = AndroidNotificationCenter.SendNotification(notification, "channel_id");
 
-//set flag to indicate that initial notification has been sent
+/*set flag to indicate that initial notification has been sent
     PlayerPrefs.SetInt("InitialNotificationSent", 1);
-    PlayerPrefs.Save();
+    PlayerPrefs.Save();*/
 
         // If the script is run and a message is already schedule, cancel it and re-schedule another message
         if (AndroidNotificationCenter.CheckScheduledNotificationStatus(id) == NotificationStatus.Scheduled)
