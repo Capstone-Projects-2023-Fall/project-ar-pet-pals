@@ -725,7 +725,7 @@ namespace ARPetPals
 
             // Get fresh token from API. Just for testing.
             // TODO: Get proper token to load in dynamically
-            string token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGU4ZjlkMTQ5MzE4YTk5M2Y5YzUyZSIsIm5hbWUiOiJrYXJsIn0.8FDr3LyPVoxvQ05ekoTDBr4z-2hnUPcimmxOhzsntAFckHoEbZ0lLHRZKFib8PKm2sO6vAMKYnqtzktlF6nBgA";
+            string token = "";
 
             string url = URL + "/food/recognize";
             Dictionary<string, string> body = new Dictionary<string, string>
