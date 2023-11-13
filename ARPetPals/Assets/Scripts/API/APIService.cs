@@ -740,8 +740,6 @@ namespace ARPetPals
 
                 string responseJson = request.downloadHandler.text;
 
-                Debug.Log(responseJson);
-
                 if (request.result != UnityWebRequest.Result.Success) {
                     Debug.LogError("_RecognizeFoodRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);

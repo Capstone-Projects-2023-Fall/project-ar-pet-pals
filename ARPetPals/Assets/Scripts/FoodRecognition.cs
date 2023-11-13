@@ -13,10 +13,27 @@ public class FoodRecognition : MonoBehaviour
     public GameObject gameObject;
     [SerializeField] public TMP_Text foodGuesses;
     
-    // TODO: Refactor this function
-    public void recognizeFood()
+    public void RecognizeFood()
     {
-        // Capture image
+        string imageString = CaptureImage();
+
+        // Send image string to backend server for recognition
+        gameObject.GetComponent<APIService>().RecognizeFood(imageString, (response) =>
+        {
+            ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
+            if (error != null && !string.IsNullOrEmpty(error.message))
+            {
+                Debug.Log("Food Recognition Error: " + error.message);
+                return;
+            }
+
+            RecognizeFoodResponse parsedResponse = JsonUtility.FromJson<RecognizeFoodResponse>(response);
+            DisplayFoodGuesses(parsedResponse);
+        });
+    }
+
+    private string CaptureImage()
+    {
         Camera camera = Camera.main;
         int width = Screen.width;
         int height = Screen.height;
@@ -43,29 +60,18 @@ public class FoodRecognition : MonoBehaviour
         Destroy(rt);
         Destroy(image);
 
-        // Send image string to backend server for recognition
-        gameObject.GetComponent<APIService>().RecognizeFood(imageString, (response) => {
-
-
-            ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
-            if (error != null && !string.IsNullOrEmpty(error.message))
-            {
-                Debug.Log("Food Recognition Error: " + error.message);
-                return;
-            }
-
-            RecognizeFoodResponse parsedResponse = JsonUtility.FromJson<RecognizeFoodResponse>(response);
-            DisplayFoodGuesses(parsedResponse);
-        });
+        return imageString;
     }
-
+    
     private void DisplayFoodGuesses(RecognizeFoodResponse response)
     {
+        foodGuesses.text = "Is it one of these?\n";
+        
         List<Guess> guesses = response.topMatches;
         foreach (Guess guess in guesses)
         {
-            Debug.Log(guess.name + ", " + guess.rank);
-            foodGuesses.text = foodGuesses.text + guess.name + ", " + guess.rank + " ";
+            // Debug.Log(guess.rank + ". " + guess.name);
+            foodGuesses.text = foodGuesses.text + guess.rank + ". " + guess.name + "\n";
         }
     }
 
