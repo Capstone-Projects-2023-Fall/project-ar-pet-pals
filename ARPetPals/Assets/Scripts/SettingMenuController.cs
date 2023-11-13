@@ -153,6 +153,10 @@ public class SettingMenuController : MonoBehaviour
         itemText3.text = "banana";
     }
 
+    public void CloseScannedFoodMenu() {
+        ListPage.SetActive(false);
+    }
+
     public void ChangeHappinessButtonClicked()
     {
         currentHappniness -= 10;
