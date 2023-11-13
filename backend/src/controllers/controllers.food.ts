@@ -28,7 +28,6 @@ export const recognizeFood = async ( { request, response }: { request: any; resp
 	topMatches = JSON.parse(topMatches);
 	
     response.body = {
-        "message": "food recognized",
 		topMatches
     }
 }
