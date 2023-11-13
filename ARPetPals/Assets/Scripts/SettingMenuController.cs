@@ -29,13 +29,13 @@ public class SettingMenuController : MonoBehaviour
     
     public AudioMixer mixer;
 
-    public float health, maxHealth;
+    public float health = 100, maxHealth;
     [Header("Happiness Bar")]
     public Slider happinessSlider;
     public Gradient gradient;
     public Image happinessFill;
     public int maxHappiness = 100;
-    public int currentHappniness;
+    public int currentHappniness = 100;
     // [SerializeField] public
     // [SerializeField] public 
     
@@ -52,7 +52,7 @@ public class SettingMenuController : MonoBehaviour
         // currentHappniness = maxHappiness;
         // SetMaxHappiness(maxHappiness);
         // SetHappiness(currentHappniness);
-        //Get Pet Status Api .
+        //Get Pet Status Api .        
         gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
         {
             
@@ -68,10 +68,13 @@ public class SettingMenuController : MonoBehaviour
                 Debug.Log($"Hy/Current Health from Api: {health}");
                 SetMaxHappiness(maxHappiness);
                 SetHappiness(currentHappniness);
-                
+
+                //Dario
+                PlayerPrefs.SetFloat("health", health);
+                PlayerPrefs.SetInt("happiness", currentHappniness);
             }
         });
-        
+
         Debug.Log($"Hy/start Happiness {currentHappniness}");
         Debug.Log($"Hy/start Happiness {health}");
         Debug.Log($"Hy/Max Happiness {maxHappiness}");
@@ -153,19 +156,58 @@ public class SettingMenuController : MonoBehaviour
         itemText3.text = "banana";
     }
 
+    public void CloseScannedFoodMenu() {
+        ListPage.SetActive(false);
+    }
+
     public void ChangeHappinessButtonClicked()
     {
+        currentHappniness += 10;
+        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
+        SetHappiness(currentHappniness);
+        
+        PlayerPrefs.SetInt("happiness", currentHappniness);
+
+    }
+
+    public void AddHappinessButtonClicked() {
+        currentHappniness += 10;
+        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
+        SetHappiness(currentHappniness);
+
+        PlayerPrefs.SetInt("happiness", currentHappniness);
+
+    }
+
+    public void LoseHappinessButtonClicked() {
         currentHappniness -= 10;
         Debug.Log($"Hy/CurrentHappy {currentHappniness}");
-        SetHappiness(currentHappniness); 
+        SetHappiness(currentHappniness);
+
+        PlayerPrefs.SetInt("happiness", currentHappniness);
+
     }
 
     public void ChangeHealthButtonClicked()
     {
         health += 1f;
-        
+        //Dario
+        PlayerPrefs.SetFloat("health", health);
+        Debug.Log(health);
     }
-    
+
+    //Dario
+    public void AddHealthButtonClicked() {
+        health += 1f;
+        
+        PlayerPrefs.SetFloat("health", health);
+    }
+    public void LoseHealthButtonClicked() {
+        health -= 1f;
+       
+        PlayerPrefs.SetFloat("health", health);
+    }
+
 
 
     //Setting Happiness bar

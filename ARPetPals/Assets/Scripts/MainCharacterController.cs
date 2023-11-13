@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,6 +18,10 @@ public class MainCharacterController : MonoBehaviour
 
     Animator animator;
 
+    int happiness;
+
+    float health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +29,18 @@ public class MainCharacterController : MonoBehaviour
         petNameDisplay.text = PlayerPrefs.GetString("CustomName");  
         animator = GetComponent<Animator>();
         foodBowl.SetActive(false);
+    }
+
+    private void Update() {
+        happiness = PlayerPrefs.GetInt("happiness");
+        health = PlayerPrefs.GetFloat("health");
+
+        if (happiness < 50 || health < 4) {
+            startSadAnimation();
+        }
+        else {
+            endSadAnimation();
+        }
     }
 
     private void changeMat() {
