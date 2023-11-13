@@ -15,23 +15,23 @@ public static class NotificationScheduler
 
     private TimeSpan CalculateNotificationInterval(int healthScore)
 {
-    // Adjust this formula based on your specific requirements
-    // Linear decay with caps for higher and lower health scores
-    int maxInterval = 5;  // Maximum allowed interval
-    int minInterval = 1;  // Minimum allowed interval
-    int capThresholdHigh = 7; // Health score above which the interval is capped
-    int capThresholdLow = 3;  // Health score below which the interval is capped
+    
+    //linear decay with caps for higher and lower health scores
+    int maxInterval = 5;  //max allowed interval
+    int minInterval = 1;  //min allowed interval
+    int capThresholdHigh = 7; //health score above which the interval is capped
+    int capThresholdLow = 3;  //health score below which the interval is capped
 
-    // Linear decay formula
+    //linear decay formula
     int calculatedInterval = Mathf.Max(minInterval, maxInterval - healthScore);
 
-    // Cap the interval for higher health scores
+    //cap interval for higher health scores
     if (healthScore > capThresholdHigh)
     {
         calculatedInterval = maxInterval;
     }
 
-    // Cap the interval for lower health scores
+    //cap interval for lower health scores
     if (healthScore <= capThresholdLow)
     {
         calculatedInterval = Mathf.Min(calculatedInterval, 3);
