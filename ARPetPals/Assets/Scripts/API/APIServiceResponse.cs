@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 
 namespace ARPetPals
 {
@@ -95,6 +96,19 @@ namespace ARPetPals
         public class ResetPetStatusResponse
         {
             public string message;
+        }
+
+        [System.Serializable]
+        public class Guess
+        {
+            public string name;
+            public int rank;
+        }
+
+        [System.Serializable]
+        public class RecognizeFoodResponse
+        {
+            public List<Guess> topMatches;
         }
 
     }

@@ -706,6 +706,62 @@ namespace ARPetPals
             return PlayerPrefs.GetString(KEY_PET_STATUS, "");
         }
 
+        // Food Related Requests
+
+        // Recognize Food
+        public void RecognizeFood(string image64String, Action<string> callback)
+        {
+            StartCoroutine(_SendRecognizeFoodRequest(image64String, callback));
+        }
+
+        private IEnumerator _SendRecognizeFoodRequest(string image64String, Action<string> callback)
+        {
+            // string token = GetStoredToken();
+            // if (string.IsNullOrEmpty(token))
+            // {
+            //     callback("Invalid token");
+            //     yield break;
+            // }
+
+            // Get fresh token from API. Just for testing.
+            // TODO: Get proper token to load in dynamically
+            string token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGU4ZjlkMTQ5MzE4YTk5M2Y5YzUyZSIsIm5hbWUiOiJrYXJsIn0.8FDr3LyPVoxvQ05ekoTDBr4z-2hnUPcimmxOhzsntAFckHoEbZ0lLHRZKFib8PKm2sO6vAMKYnqtzktlF6nBgA";
+
+            string url = URL + "/food/recognize";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "image64String", image64String }
+            };
+
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                string responseJson = request.downloadHandler.text;
+
+                Debug.Log(responseJson);
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_RecognizeFoodRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(errorResponse.message);
+                    _ShowReponse(errorResponse.message);
+                    yield break;
+                }
+
+                // Deserialize the JSON response
+                RecognizeFoodResponse responseData = JsonUtility.FromJson<RecognizeFoodResponse>(responseJson);
+                Debug.Log("_RecognizeFoodRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback(JsonUtility.ToJson(responseData, true));
+            }
+        }
+
+
+
+
     }
 }
 
