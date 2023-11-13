@@ -37,8 +37,21 @@ public class MobileNotification : MonoBehaviour
             AndroidNotificationCenter.CancelAllNotifications();
             AndroidNotificationCenter.SendNotification(notification, "channel_id");
         }
+ string recognizedFood = GetRecognizedFood();
 
+     StartCoroutine(HealthScoreManager.GetHealthScore(recognizedFood, (healthScore) =>
+        {
+    //fetches health score for a recognized food and then the callback function passed to it 
+ //schedules notification with the health score u got
+ //callback function (healthScore) => { ScheduleNotification(healthScore); } invoked after
+ //health score is received, takes health score as a param then calls ScheduleNotification
+      NotificationScheduler.ScheduleNotification(healthScore);
+        }));
+    }
+        //determine how to schedule notification based on health score
 
+//when u run your Unity it will communicate with Deno server to get
+ //health score based on the recognized food.
     }
 
     // Update is called once per frame
@@ -46,4 +59,4 @@ public class MobileNotification : MonoBehaviour
     {
         
     }
-}
+
