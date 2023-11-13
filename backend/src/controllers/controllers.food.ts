@@ -30,9 +30,43 @@ export const recognizeFood = async ( { request, response }: { request: any; resp
     response.body = {
 		topMatches
     }
-}
+
 
 // TODO: Add route to return the nutrition info of a given food item
+ export const getHealthRating = async ({ request, response }: { request: any; response: any }) => {
+    try {
+        //get recognized food from the request
+        const fillerFoodString = (await request.body().value)?.fillerFoodString;
+
+        if (!fillerFoodString) {
+            response.status = 400;
+            response.body = { error: 'Recognized food (filler food string) not provided' };
+            return;
+        }
+
+        //fetch healthScores from the database 
+        const healthScores = await db.collection("healthScores").find().toArray();
+
+        //find the health score based on the recognized food
+        const matchingHealthScore = healthScores.find((score) => score.Food === fillerFoodString);
+
+        //get health rating if match is found, otherwise set to null
+        const healthRating = matchingHealthScore ? matchingHealthScore["Health Rating"] : null;
+
+        //send response
+        response.status = 200;
+        response.body = {
+            "recognizedFood": fillerFoodString,
+            "healthRating": healthRating,
+        };
+    } catch (error) {
+        console.error('Error processing health for recognized food:', error);
+        response.status = 500;
+        response.body = { error: 'Internal Server Error' };
+    }
+    //export the function
+//export { getHealthRating }
+ }
 
 // ---
 
@@ -76,3 +110,5 @@ async function processImage(image64String) {
 
   return response.text();
 }
+}
+
