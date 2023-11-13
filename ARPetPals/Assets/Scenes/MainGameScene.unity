@@ -584,12 +584,12 @@ MonoBehaviour:
       m_Name: Position
       m_Type: 0
       m_ExpectedControlType: Vector3
-      m_Id: 
+      m_Id: 1d9d7645-a8dc-46f3-b8c4-07a59417718a
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 
+        m_Id: 5a40ecfe-175a-4527-8085-8978ddd2aded
         m_Path: <XRHMD>/centerEyePosition
         m_Interactions: 
         m_Processors: 
@@ -612,12 +612,12 @@ MonoBehaviour:
       m_Name: Rotation
       m_Type: 0
       m_ExpectedControlType: Quaternion
-      m_Id: 
+      m_Id: 679294e1-36bf-4c37-91c9-b5c5c2d01f3b
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: 
+        m_Id: b80bfa2b-d0a4-4a5b-95f5-fa2e82ad52e2
         m_Path: <XRHMD>/centerEyeRotation
         m_Interactions: 
         m_Processors: 
@@ -640,7 +640,7 @@ MonoBehaviour:
       m_Name: Tracking State
       m_Type: 0
       m_ExpectedControlType: Integer
-      m_Id: 
+      m_Id: b79bd1cf-0726-4135-abff-acb29432fa76
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -781,14 +781,13 @@ RectTransform:
   m_GameObject: {fileID: 134607671}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8518517, y: 1.8518517, z: 1.8518517}
+  m_LocalScale: {x: 1.5081295, y: 1.5081295, z: 1.5081295}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 995167989}
   - {fileID: 1855871607}
   - {fileID: 321388031}
   - {fileID: 893054811}
-  - {fileID: 375863007}
   - {fileID: 1126378596}
   - {fileID: 1007974329}
   m_Father: {fileID: 810220382}
@@ -796,7 +795,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 699.99994, y: -430.1156}
+  m_AnchoredPosition: {x: 609, y: -385}
   m_SizeDelta: {x: 707.1895, y: 382.5208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &179535852
@@ -1874,15 +1873,15 @@ RectTransform:
   m_GameObject: {fileID: 375863006}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8518516, y: 1.8518516, z: 1.8518516}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 134607672}
+  m_Father: {fileID: 810220382}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 67.5, y: -1079}
+  m_AnchoredPosition: {x: -522.97284, y: 467.5504}
   m_SizeDelta: {x: 485.11316, y: 131.74658}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375863008
@@ -2019,9 +2018,9 @@ RectTransform:
   m_Father: {fileID: 2010679783}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 739.8353, y: -382.2829}
   m_SizeDelta: {x: 1000, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &381950053
@@ -2593,9 +2592,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Change health
-
-'
+  m_text: Lose Happiness
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3518,6 +3515,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 375863007}
   - {fileID: 134607672}
   - {fileID: 1133166427}
   - {fileID: 1566060025}
@@ -3581,9 +3579,9 @@ RectTransform:
   m_Father: {fileID: 2010679783}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 739.8353, y: -552.2829}
   m_SizeDelta: {x: 1000, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &822006407
@@ -3913,9 +3911,9 @@ RectTransform:
   m_Father: {fileID: 2010679783}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 739.8353, y: -212.2829}
   m_SizeDelta: {x: 1000, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957580028
@@ -4351,7 +4349,7 @@ GameObject:
   - component: {fileID: 995167991}
   - component: {fileID: 995167990}
   m_Layer: 5
-  m_Name: EndSadAnimation
+  m_Name: Add Health Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4422,9 +4420,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2121201470}
-        m_TargetAssemblyTypeName: MainCharacterController, Scripts
-        m_MethodName: endSadAnimation
+      - m_Target: {fileID: 810220378}
+        m_TargetAssemblyTypeName: SettingMenuController, Scripts
+        m_MethodName: AddHealthButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4620,7 +4618,7 @@ GameObject:
   - component: {fileID: 1007974331}
   - component: {fileID: 1007974330}
   m_Layer: 5
-  m_Name: ChangeHappiness
+  m_Name: Add Happiness Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4644,7 +4642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -175, y: 60}
+  m_AnchoredPosition: {x: -530, y: -71}
   m_SizeDelta: {x: 350, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007974330
@@ -4693,7 +4691,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 810220378}
         m_TargetAssemblyTypeName: SettingMenuController, Scripts
-        m_MethodName: ChangeHappinessButtonClicked
+        m_MethodName: AddHappinessButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5133,7 +5131,7 @@ GameObject:
   - component: {fileID: 1126378598}
   - component: {fileID: 1126378597}
   m_Layer: 5
-  m_Name: ChangeHealth
+  m_Name: Lose Happiness Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5206,7 +5204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 810220378}
         m_TargetAssemblyTypeName: SettingMenuController, Scripts
-        m_MethodName: ChangeHealthButtonClicked
+        m_MethodName: LoseHappinessButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6525,7 +6523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Good Health
+  m_text: Add Health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6652,7 +6650,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411459924}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -6741,7 +6739,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Change happiness
+  m_text: 'Add Happiness
 
 '
   m_isRightToLeft: 0
@@ -7011,7 +7009,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Low Health
+  m_text: Lose Health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8428,7 +8426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1771817928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8638,7 +8636,7 @@ GameObject:
   - component: {fileID: 1855871609}
   - component: {fileID: 1855871608}
   m_Layer: 5
-  m_Name: StartSadAnimation
+  m_Name: Lose Health Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8709,9 +8707,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2121201470}
-        m_TargetAssemblyTypeName: MainCharacterController, Scripts
-        m_MethodName: startSadAnimation
+      - m_Target: {fileID: 810220378}
+        m_TargetAssemblyTypeName: SettingMenuController, Scripts
+        m_MethodName: LoseHealthButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9521,6 +9519,18 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4492820702981358, guid: 7f51b5e2065bbb145b78b23451c549e0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5735523
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492820702981358, guid: 7f51b5e2065bbb145b78b23451c549e0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5735523
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492820702981358, guid: 7f51b5e2065bbb145b78b23451c549e0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5735523
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492820702981358, guid: 7f51b5e2065bbb145b78b23451c549e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.012
       objectReference: {fileID: 0}
@@ -9581,6 +9591,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2121201470}
+    - targetCorrespondingSourceObject: {fileID: 1317000959904042, guid: 7f51b5e2065bbb145b78b23451c549e0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2121201473}
   m_SourcePrefab: {fileID: 100100000, guid: 7f51b5e2065bbb145b78b23451c549e0, type: 3}
 --- !u!1 &2121201468 stripped
 GameObject:
@@ -9620,6 +9634,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2121201467}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2121201473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121201468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d49101f91ad864fb8e516f9370f9c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2143227250
 GameObject:
   m_ObjectHideFlags: 0
