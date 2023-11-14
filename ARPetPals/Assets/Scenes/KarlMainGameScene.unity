@@ -248,10 +248,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuPage: {fileID: 162426537}
   settingPage: {fileID: 1665410178}
+  ListPage: {fileID: 0}
   menuButton: {fileID: 2131760602}
   changePetNameField: {fileID: 2072202153}
   changeUserNameField: {fileID: 723025584}
   changePasswordField: {fileID: 1508011797}
+  MenuButton: {fileID: 0}
+  itemText1: {fileID: 0}
+  itemText2: {fileID: 0}
+  itemText3: {fileID: 0}
   mixer: {fileID: 0}
   health: 9
   maxHealth: 10
