@@ -161,7 +161,7 @@ public class CharacterSelection : MonoBehaviour
                 //Save name to PlayerPrefs
                 PlayerPrefs.SetString("CustomName", customName);
 
-                SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+                SceneManager.LoadScene("MainGameScene"); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
             }
         });
     }

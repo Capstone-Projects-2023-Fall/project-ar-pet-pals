@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ARPetPals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,44 +10,76 @@ using UnityEngine.Audio;
 
 public class SettingMenuController : MonoBehaviour
 {
+    [Header("Pages")]
     [SerializeField] public GameObject menuPage;
     [SerializeField] public GameObject settingPage;
+    [SerializeField] public GameObject ListPage;
     [SerializeField] public GameObject menuButton;
+    [Header("Input Field")]
     [SerializeField] public TMP_InputField changePetNameField;
     [SerializeField] public TMP_InputField changeUserNameField;
     [SerializeField] public TMP_InputField changePasswordField;
+    [SerializeField] public Button MenuButton;
+    //Text game object of Food List menu
+    [Header("Menu List")]
+    [SerializeField] public TMP_Text itemText1;
+    [SerializeField] public TMP_Text itemText2;
+    [SerializeField] public TMP_Text itemText3;
+    
     
     public AudioMixer mixer;
 
-    public float health, maxHealth;
-    
+    public float health = 100, maxHealth;
+    [Header("Happiness Bar")]
     public Slider happinessSlider;
     public Gradient gradient;
     public Image happinessFill;
     public int maxHappiness = 100;
-    public int currentHappniness;
+    public int currentHappniness = 100;
     // [SerializeField] public
     // [SerializeField] public 
     
     public string changePetName;
     public string changeUserName;
     public string changePassword;
-    public void Start()
+
+    private void Awake()
     {
         menuPage.SetActive(false);
         settingPage.SetActive(false);
+        ListPage.SetActive(false);
+        // health = 5;
+        // currentHappniness = maxHappiness;
+        // SetMaxHappiness(maxHappiness);
+        // SetHappiness(currentHappniness);
+        //Get Pet Status Api .        
+        gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
+        {
+            
+            if (errMessage != "")
+            {
+                Debug.Log($"Hy/errorMessage {errMessage}");
+            }
+            else {
+                APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
+                currentHappniness  = (int)float.Parse(responseData.mood);
+                health = float.Parse(responseData.health)/10;
+                Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
+                Debug.Log($"Hy/Current Health from Api: {health}");
+                SetMaxHappiness(maxHappiness);
+                SetHappiness(currentHappniness);
+
+                //Dario
+                PlayerPrefs.SetFloat("health", health);
+                PlayerPrefs.SetInt("happiness", currentHappniness);
+            }
+        });
+
+        Debug.Log($"Hy/start Happiness {currentHappniness}");
+        Debug.Log($"Hy/start Happiness {health}");
+        Debug.Log($"Hy/Max Happiness {maxHappiness}");
         
-        SetMaxHappiness(maxHappiness);
-        currentHappniness = maxHappiness;
-        SetHappiness(currentHappniness);
-        Debug.Log($"start Happiness {currentHappniness}");
-        
-        // SetMaxHealth(maxHealth);
-        // currentHealth = maxHealth;
-        // SetHealth(currentHealth);
     }
-
-
 
     // public void  SetAudioLevel(float sliderValue)
     // {
@@ -108,13 +141,74 @@ public class SettingMenuController : MonoBehaviour
         settingPage.SetActive(false);
     }
     
-    //PetStats function
+    //Food list menu. All the feature of OR process here. 
+    
+    //Scan button to scan the object. 
     public void ScanButtonClicked()
     {
-        currentHappniness -= 10;
-        Debug.Log($"CurrentHappy {currentHappniness}");
-        SetHappiness(currentHappniness);
+        //Process take picture in here.
+        
+        //Enable FoodList
+        ListPage.SetActive(true);
+        //Update List by changing Text in button. This is example, Modify value under here.
+        itemText1.text = "la di da";
+        itemText2.text = "apple";
+        itemText3.text = "banana";
     }
+
+    public void CloseScannedFoodMenu() {
+        ListPage.SetActive(false);
+    }
+
+    public void ChangeHappinessButtonClicked()
+    {
+        currentHappniness += 10;
+        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
+        SetHappiness(currentHappniness);
+        
+        PlayerPrefs.SetInt("happiness", currentHappniness);
+
+    }
+
+    public void AddHappinessButtonClicked() {
+        currentHappniness += 10;
+        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
+        SetHappiness(currentHappniness);
+
+        PlayerPrefs.SetInt("happiness", currentHappniness);
+
+    }
+
+    public void LoseHappinessButtonClicked() {
+        currentHappniness -= 10;
+        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
+        SetHappiness(currentHappniness);
+
+        PlayerPrefs.SetInt("happiness", currentHappniness);
+
+    }
+
+    public void ChangeHealthButtonClicked()
+    {
+        health += 1f;
+        //Dario
+        PlayerPrefs.SetFloat("health", health);
+        Debug.Log(health);
+    }
+
+    //Dario
+    public void AddHealthButtonClicked() {
+        health += 1f;
+        
+        PlayerPrefs.SetFloat("health", health);
+    }
+    public void LoseHealthButtonClicked() {
+        health -= 1f;
+       
+        PlayerPrefs.SetFloat("health", health);
+    }
+
+
 
     //Setting Happiness bar
     public void SetMaxHappiness(int happy)
@@ -130,13 +224,6 @@ public class SettingMenuController : MonoBehaviour
         happinessSlider.value = happy;
         happinessFill.color = gradient.Evaluate(happinessSlider.normalizedValue);
     }
-
-    public void CurrentHealth(float amount)
-    {
-        health = amount;
-        
-    }
-    
 }
 
 

@@ -320,11 +320,10 @@ MonoBehaviour:
   userNameField: {fileID: 0}
   passwordField: {fileID: 0}
   editText: {fileID: 0}
-  userError: {fileID: 0}
-  passwordError: {fileID: 0}
+  userError: {fileID: 16216363}
+  passwordError: {fileID: 1363997301}
   usernameInput: 
   passwordInput: 
-  gameObject: {fileID: 0}
 --- !u!1 &106840186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,7 +2041,6 @@ MonoBehaviour:
   passwordError: {fileID: 0}
   usernameInput: 
   passwordInput: 
-  gameObject: {fileID: 0}
 --- !u!1 &1140474180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,7 +2154,6 @@ MonoBehaviour:
   passwordError: {fileID: 1363997301}
   usernameInput: 
   passwordInput: 
-  gameObject: {fileID: 1140474180}
 --- !u!114 &1140474185
 MonoBehaviour:
   m_ObjectHideFlags: 0
