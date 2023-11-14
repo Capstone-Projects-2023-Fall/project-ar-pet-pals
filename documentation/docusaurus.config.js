@@ -2,7 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
 
 /**
  * The URL or reference to your projects logo!
@@ -20,11 +20,11 @@ const main_template_jira_scripts = () => {
 }
 
 // You can change the title here. The default is the name of the repository.
-const title = ''+process.env.PROJECT_NAME.replaceAll('-',' ').split(' ').map((word) => {
-  return word[0].toUpperCase() + word.substring(1);
-}).join(' ');
+// const title = ''+process.env.PROJECT_NAME.replaceAll('-',' ').split(' ').map((word) => {
+//   return word[0].toUpperCase() + word.substring(1);
+// }).join(' ');
 
-// const title = 'local test';
+const title = 'AR Pet Pals';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
