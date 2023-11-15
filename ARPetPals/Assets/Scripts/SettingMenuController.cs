@@ -15,6 +15,8 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public GameObject settingPage;
     [SerializeField] public GameObject ListPage;
     [SerializeField] public GameObject menuButton;
+    [SerializeField] public GameObject ExitPage;
+    
     [Header("Input Field")]
     [SerializeField] public TMP_InputField changePetNameField;
     [SerializeField] public TMP_InputField changeUserNameField;
@@ -48,6 +50,7 @@ public class SettingMenuController : MonoBehaviour
         menuPage.SetActive(false);
         settingPage.SetActive(false);
         ListPage.SetActive(false);
+        ExitPage.SetActive(false);
         // health = 5;
         // currentHappniness = maxHappiness;
         // SetMaxHappiness(maxHappiness);
@@ -154,6 +157,11 @@ public class SettingMenuController : MonoBehaviour
         itemText1.text = "la di da";
         itemText2.text = "apple";
         itemText3.text = "banana";
+    }
+
+    public void ExitButtonClicked()
+    {
+        SceneManager.LoadScene("SignInScene");
     }
 
     public void CloseScannedFoodMenu() {
