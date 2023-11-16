@@ -1,7 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import { decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import db from "../database/database.connection.ts";
-{ ObjectId } from "https://deno.land/x/mongo@v0.32.0/bson.ts";
+import { ObjectId } from "https://deno.land/x/mongo@v0.32.0/bson.ts";
 import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } from "../utils/utils.utils.ts";
 
 //assuming the Health Rating is associated with the recognized food in the healthScores array
