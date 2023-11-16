@@ -4,7 +4,7 @@ import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, crea
 import { recognizeFood } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
-import {getHealthRating } from "../controllers/controllers.food.ts";
+import {getHealthRating } from "../controllers/controllers.health.ts";
 
 const home = async({request, response}:{request:any;response:any}) => {
    response.body = { message: "go to https://capstone-projects-2023-fall.github.io/project-ar-pet-pals/docs/api-specification/api for documentation"}
