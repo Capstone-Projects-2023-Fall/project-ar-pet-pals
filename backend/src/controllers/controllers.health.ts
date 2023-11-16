@@ -1,7 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import { decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
-import db from "../database/database.connection.js";
-import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } from "../utils/utils.utils.js";
+import db from "../database/database.connection.ts";
+import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } from "../utils/utils.utils.ts";
 
 //assuming the Health Rating is associated with the recognized food in the healthScores array
 export const getHealthRating = async ({ request, response }: { request: any; response: any }) => {
