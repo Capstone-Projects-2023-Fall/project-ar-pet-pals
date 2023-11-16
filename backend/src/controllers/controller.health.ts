@@ -17,7 +17,7 @@ export const getHealthRating = async ({ request, response }: { request: any; res
         }
 
         //fetch healthScores from the database 
-        const healthScores = await db.collection("healthScores").find().toArray();
+        const healthScores = await db.collection("healthScore").find().toArray();
 
         //find the health score based on the recognized food
         const matchingHealthScore = healthScores.find((score) => score.Food === recognizedFood);
@@ -33,11 +33,11 @@ export const getHealthRating = async ({ request, response }: { request: any; res
         };
     } catch (error) {
         console.error('Error processing health for recognized food:', error);
-        response.status = 500;
-        response.body = { error: 'Internal Server Error' };
+        response.status = 400;
+        response.body = { message: 'Error processing health for recognized food' };
     }
     //export the function
-export { getHealthRating };
+
 };
 
 
