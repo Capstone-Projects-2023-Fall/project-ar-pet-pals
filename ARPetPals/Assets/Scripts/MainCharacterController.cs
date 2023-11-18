@@ -74,7 +74,9 @@ public class MainCharacterController : MonoBehaviour
 
     public void startEatFoodAnimation() {
         animator.SetBool("isEating", true);
+        AudioManager.Instance.PlaySfx("EatingLong");
         foodBowl.SetActive(true);
+        
     }
     public void endEatFoodAnimation() {
         animator.SetBool("isEating", false);
@@ -87,6 +89,11 @@ public class MainCharacterController : MonoBehaviour
 
     public void endSadAnimation() {
         animator.SetBool("lowHealth", false);
+    }
+
+    public void PLaySound()
+    {
+        AudioManager.Instance.PlaySfx("Fly");
     }
 
 }

@@ -5,8 +5,11 @@ using ARPetPals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
+using Slider = UnityEngine.UI.Slider;
 
 public class SettingMenuController : MonoBehaviour
 {
@@ -15,11 +18,24 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public GameObject settingPage;
     [SerializeField] public GameObject ListPage;
     [SerializeField] public GameObject menuButton;
-    [Header("Input Field")]
+    [SerializeField] public GameObject ExitPage;
+    
+    [Header("Setting Field")]
     [SerializeField] public TMP_InputField changePetNameField;
     [SerializeField] public TMP_InputField changeUserNameField;
     [SerializeField] public TMP_InputField changePasswordField;
     [SerializeField] public Button MenuButton;
+
+    [SerializeField] public Slider masterVolumeSlider;
+    [SerializeField] public Image VolumeButton;
+    public Sprite unmuteMusic;
+    public Sprite muteMusic;
+    [SerializeField] public Slider sfxVolumeSlider;
+    [SerializeField] public Image SfxButton;
+    public Sprite unmuteSfx;
+    public Sprite muteSfx;
+    
+    
     //Text game object of Food List menu
     [Header("Menu List")]
     [SerializeField] public TMP_Text itemText1;
@@ -28,6 +44,7 @@ public class SettingMenuController : MonoBehaviour
     
     
     public AudioMixer mixer;
+    
 
     public float health = 100, maxHealth;
     [Header("Happiness Bar")]
@@ -48,6 +65,7 @@ public class SettingMenuController : MonoBehaviour
         menuPage.SetActive(false);
         settingPage.SetActive(false);
         ListPage.SetActive(false);
+        ExitPage.SetActive(false);
         // health = 5;
         // currentHappniness = maxHappiness;
         // SetMaxHappiness(maxHappiness);
@@ -156,6 +174,11 @@ public class SettingMenuController : MonoBehaviour
         itemText3.text = "banana";
     }
 
+    public void ExitButtonClicked()
+    {
+        SceneManager.LoadScene("SignInScene");
+    }
+
     public void CloseScannedFoodMenu() {
         ListPage.SetActive(false);
     }
@@ -223,6 +246,44 @@ public class SettingMenuController : MonoBehaviour
     {
         happinessSlider.value = happy;
         happinessFill.color = gradient.Evaluate(happinessSlider.normalizedValue);
+    }
+
+    public void ToggleMusic()
+    {
+        if (VolumeButton.sprite == unmuteMusic)
+        {
+            VolumeButton.sprite = muteMusic;
+        }
+        else
+        {
+            VolumeButton.sprite = unmuteMusic;
+        }
+        
+        AudioManager.Instance.ToggleMusic();
+    }
+
+    public void ToggleSfx()
+    {
+        if (SfxButton.sprite == unmuteSfx)
+        {
+            SfxButton.sprite = muteSfx;
+        }
+        else
+        {
+            SfxButton.sprite = unmuteSfx;
+        }
+        AudioManager.Instance.ToggleSfx();
+    }
+    
+    //Set up Master volume and sfx volume
+    public void MusicVolume()
+    {
+        AudioManager.Instance.MusicVolume(masterVolumeSlider.value);
+    }
+
+    public void SfxVolume()
+    {
+        AudioManager.Instance.SfxVolume(sfxVolumeSlider.value);
     }
 }
 

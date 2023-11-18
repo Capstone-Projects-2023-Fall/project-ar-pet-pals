@@ -13,6 +13,10 @@ public class CharacterSelection : MonoBehaviour
 
     [SerializeField] private GameObject confirmationMenu;
     [SerializeField] private GameObject petNameUI;
+    
+    public GameObject basePetObject;
+    public Material orangeMat, redMat, greenMat, blueMat, yellowMat;
+    Renderer m_Renderer;
 
     private int index = 0;
 
@@ -23,6 +27,7 @@ public class CharacterSelection : MonoBehaviour
     private string petChoice;
 
     private void Start() {
+        
 
         gameObject.GetComponent<APIService>().CreatePet((errMessage) => {
             if (errMessage != "") {
@@ -52,7 +57,41 @@ public class CharacterSelection : MonoBehaviour
         if (characterList[0]) {
             characterList[0].SetActive(true);
         }
+        m_Renderer = basePetObject.GetComponent<Renderer>();
     }
+
+    public void OrangeClicked()
+    {
+        m_Renderer.material = orangeMat;
+        petChoice = "Orange Dragon";
+        
+    }
+
+    public void YellowClicked()
+    {
+        m_Renderer.material = yellowMat;
+        petChoice = "Yellow Dragon";
+    }
+
+    public void RedClicked()
+    {
+        m_Renderer.material = redMat;
+        petChoice = "Red Dragon";
+    }
+
+    public void GreenClicked()
+    {
+        m_Renderer.material = greenMat;
+        petChoice = "Green Dragon";
+    }
+
+    public void BlueClicked()
+    {
+        m_Renderer.material = blueMat;
+        petChoice = "Blue Dragon";
+    }
+    
+  
 
     public void ToggleLeft() {
 
@@ -92,30 +131,30 @@ public class CharacterSelection : MonoBehaviour
     }
 
     // Add this method to set the petChoice variable and close the confirmation menu
-    public void ConfirmSelection() {
+    public void ConfirmSelection(string petChoice) {
         //Set petChoice based on the selected character.
-        switch (index) {
-            case 0:
-                petChoice = "Orange Dragon";
-                break;
-            case 1:
-                petChoice = "Red Dragon";
-                break;
-            case 2:
-                petChoice = "Green Dragon";
-                break;
-            case 3:
-                petChoice = "Blue Dragon";
-                break;
-            case 4:
-                petChoice = "Yellow Dragon";
-                break;
-            default:
-                petChoice = "Unknown";
-                break;
-        }
-
-        Debug.Log(petChoice);
+        // switch (index) {
+        //     case 0:
+        //         petChoice = "Orange Dragon";
+        //         break;
+        //     case 1:
+        //         petChoice = "Red Dragon";
+        //         break;
+        //     case 2:
+        //         petChoice = "Green Dragon";
+        //         break;
+        //     case 3:
+        //         petChoice = "Blue Dragon";
+        //         break;
+        //     case 4:
+        //         petChoice = "Yellow Dragon";
+        //         break;
+        //     default:
+        //         petChoice = "Unknown";
+        //         break;
+        // }
+        //
+        // Debug.Log(petChoice);
 
         //send petChoice to database
         gameObject.GetComponent<APIService>().SetPetChoice(petChoice, (errMessage) =>
