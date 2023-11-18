@@ -27,6 +27,7 @@ public class CharacterSelection : MonoBehaviour
     private string petChoice;
 
     private void Start() {
+        
 
         gameObject.GetComponent<APIService>().CreatePet((errMessage) => {
             if (errMessage != "") {
