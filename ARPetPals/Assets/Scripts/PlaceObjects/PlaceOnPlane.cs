@@ -30,6 +30,8 @@ public class PlaceOnPlane : PressInputBase {
 
     MainCharacterController mainCharacterController;
 
+    RandomIdleAnimation randomIdleAnimationRef;
+
     private void Start() {
         
     }
@@ -39,6 +41,7 @@ public class PlaceOnPlane : PressInputBase {
         aRRaycastManager = GetComponent<ARRaycastManager>();
         animator = objectToMove.GetComponent<Animator>();
         mainCharacterController = objectToMove.GetComponent<MainCharacterController>();
+        randomIdleAnimationRef = objectToMove.GetComponent<RandomIdleAnimation>();
     }
 
     // Update is called once per frame
@@ -55,8 +58,8 @@ public class PlaceOnPlane : PressInputBase {
         // Store the current touch position.
         var touchPosition = Pointer.current.position.ReadValue();
 
-        // Check if the raycast hit any trackables.
-        if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon)) {
+        // Check if the raycast hit any trackables AND a random idle animation isnt playing
+        if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon) && (randomIdleAnimationRef.randomAnimPlaying == false)) {
             // Raycast hits are sorted by distance, so the first hit means the closest.
             var hitPose = hits[0].pose;
 
