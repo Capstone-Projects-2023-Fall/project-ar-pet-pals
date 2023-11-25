@@ -52,10 +52,13 @@ export const signup = async ({
   const salt = await bcrypt.genSalt(8);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  const _id = await Users.insertOne({
+ const _id = await Users.insertOne({
     username,
     password: hashedPassword,
-    dailyStepGoal, // Add this line to store the daily step goal
+    dailyStepGoal,
+    dailyStepCount: 0,   // Initialize daily step count
+    totalStepCount: 0,   // Initialize total step count
+    weeklyStepCount: 0,  // Initialize weekly step count
   });
 
   const jwt = await createJWT({
