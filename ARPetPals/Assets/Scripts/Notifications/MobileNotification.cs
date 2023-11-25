@@ -21,6 +21,16 @@ public class MobileNotification : MonoBehaviour
             Description = "Reminder notifications",
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel);
+        
+       //register a new notification channel for birthday notifications
+       var birthdayChannel = new AndroidNotificationChannel()
+{
+    Id = "birthday_channel_id",
+    Name = "Birthday Notification Channel",
+    Importance = Importance.Default,
+    Description = "Birthday notifications",
+};
+AndroidNotificationCenter.RegisterNotificationChannel(birthdayChannel);
 /*check if initial notification already been sent
 if (!PlayerPrefs.HasKey("InitialNotificationSent"))
 {}*/
