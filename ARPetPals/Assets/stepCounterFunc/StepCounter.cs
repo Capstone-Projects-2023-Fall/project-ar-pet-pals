@@ -3,11 +3,20 @@ using ARPetPals;
 //script assumes that each step generates a distinct motion in the accelerometer data.
 
 public class StepCounter : MonoBehaviour
-{
-    private const int StepThreshold = 10; // Adjust this threshold based on your testing
 
-    private bool isStepDetected = false;
-    private int stepCount = 0;
+{
+ private bool isStepDetected = false;
+ private int stepCount = 0;
+ 
+#if UNITY_ANDROID
+   # private const float StepThreshold = 0.2f;
+#endif
+
+#if UNITY_IOS
+   # private const float StepThreshold = 0.25f;
+#endif
+
+  //  private const int StepThreshold = 10; // Adjust this threshold based on your testing, this code is for android only
 
     void Update()
     {
