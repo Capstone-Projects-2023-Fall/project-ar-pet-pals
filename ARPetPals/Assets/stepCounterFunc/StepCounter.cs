@@ -1,4 +1,5 @@
 using UnityEngine;
+//script assumes that each step generates a distinct motion in the accelerometer data.
 
 public class StepCounter : MonoBehaviour
 {
@@ -26,3 +27,8 @@ public class StepCounter : MonoBehaviour
         }
     }
 }
+
+//This script uses the Input.acceleration property to get the accelerometer data and checks 
+//if the square magnitude of the acceleration is above a certain threshold (StepThreshold). 
+//This threshold might need adjustment based on testing. When a step is detected, it
+//increments the stepCount variable.
