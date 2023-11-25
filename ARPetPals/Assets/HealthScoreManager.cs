@@ -4,7 +4,8 @@ using System.Collections;
 
 public class HealthScoreManager : MonoBehaviour
 {
-    private const string BaseUrl = "http://localhost:8000"; //replace http://localhost:8000 with 
+    private const string BaseUrl = "https://deno.land/x/mongo@v0.32.0/mod.ts"; 
+    //replaced http://localhost:8000 with 
     //actual address where Deno server (server.ts) is running. This approach lets u to keep 
     //TypeScript and C# codebases separate and communicate over HTTP
 
