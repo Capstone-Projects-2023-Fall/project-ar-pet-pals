@@ -4,6 +4,7 @@ import UserSchema from "../schema/schema.user.ts";
 import { create, decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
 import key from "../utils/utils.apiKey.ts";
+import { updateStepCount, checkStepGoal } from "./controller.steps.ts";
 
 const Users = db.collection<UserSchema>("users");
 
@@ -52,20 +53,20 @@ export const signup = async ({
   const salt = await bcrypt.genSalt(8);
   const hashedPassword = await bcrypt.hash(password, salt);
 
- const _id = await Users.insertOne({
+  const _id = await Users.insertOne({
     username,
     password: hashedPassword,
     dailyStepGoal,
-    dailyStepCount: 0,   // Initialize daily step count
-    totalStepCount: 0,   // Initialize total step count
-    weeklyStepCount: 0,  // Initialize weekly step count
+    dailyStepCount: 0,
+    totalStepCount: 0,
+    weeklyStepCount: 0,
   });
 
   const jwt = await createJWT({
     username,
     password: hashedPassword,
     _id,
-    dailyStepGoal, // Include the daily step goal in the JWT payload
+    dailyStepGoal,
   });
 
   response.status = 201;
@@ -74,7 +75,7 @@ export const signup = async ({
     userInfo: {
       id: _id,
       name: username,
-      dailyStepGoal, // Include the daily step goal in the response
+      dailyStepGoal,
     },
     token: jwt,
   };
@@ -126,7 +127,6 @@ export const signin = async ({
     token: jwt,
   };
 };
-};
 
 export const getUserName = async ({
   request,
@@ -157,6 +157,7 @@ export const getUserInfo = async ({
     },
   };
 };
+
 export const updateStepGoal = async ({
   request,
   response,
@@ -190,3 +191,4 @@ export const updateStepGoal = async ({
   response.body = { message: "Step goal updated successfully" };
   response.status = 200;
 };
+
