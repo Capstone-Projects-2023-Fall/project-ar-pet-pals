@@ -862,6 +862,26 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &382805971
+# New code for the birthdate field
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: [new_birthdate_component_file_id]}
+  m_Layer: 5
+  m_Name: birthdateField  # Adjust the name as needed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &[new_birthdate_gameobject_file_id] 
+#adjust the placeholder values ([new_birthdate_component_file_id] and 
+#[new_birthdate_gameobject_file_id]) with the actual file IDs for the components and 
+#the game object representing ur birthdate field.
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
