@@ -66,13 +66,14 @@ public class SignUpController : MonoBehaviour
             editText.text = $"Missing{errormessage}.";
             editText.color = Color.red;
         }
-        
+
         errormessage = "";
         Debug.Log($"Error message {errormessage}");
         
         Debug.Log("register clicked");
         Debug.Log($"Sign up Clicked username: {usernameInput} password: {passwordInput} confirm password: {confirmPasswordInput} birthdate: {birthdateInput}");
         //added birthdate part to function
+
         if (usernameInput != "" && passwordInput != "" && confirmPasswordInput != "" && birthdateInput != "" &&
             passwordInput.Equals(confirmPasswordInput))
         {
@@ -86,6 +87,8 @@ public class SignUpController : MonoBehaviour
                 else
                 {
                     Debug.Log("Signup Success: " + errMessage);
+                    // Schedule birthday notification after successful registration
+                    BirthdayNotificationManager.ScheduleBirthdayNotification(usernameInput, System.DateTime.Parse(birthdateInput));
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
             });
