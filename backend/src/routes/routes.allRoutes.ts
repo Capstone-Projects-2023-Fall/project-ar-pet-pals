@@ -5,6 +5,8 @@ import { recognizeFood } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import {getHealthRating } from "../controllers/controllers.health.ts";
+import { updateStepGoal } from "../controllers/controllers.users.ts";
+
 
 const home = async({request, response}:{request:any;response:any}) => {
    response.body = { message: "go to https://capstone-projects-2023-fall.github.io/project-ar-pet-pals/docs/api-specification/api for documentation"}
@@ -42,6 +44,9 @@ router.get("/api/pet/choice", authourized, getPetChoice )
 
 //userInfo
 router.get("/api/user", authourized, getUserInfo  )
+
+// Update Step Goal
+router.put("/api/user/step-goal", authourized, updateStepGoal);
 
 //verifies a token
 router.post("/api/token/verify", verifyToken)
