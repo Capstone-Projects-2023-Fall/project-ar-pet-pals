@@ -8,5 +8,5 @@ export interface UserSchema {
   dateJoined: Date;
   leaderboardRanking: number;
   dailyStepGoal: number; // Add the dailyStepGoal property
+  birthday: Date; // Add the birthday property
 }
-
