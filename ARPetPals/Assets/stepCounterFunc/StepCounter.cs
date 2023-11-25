@@ -1,4 +1,5 @@
 using UnityEngine;
+using ARPetPals;
 //script assumes that each step generates a distinct motion in the accelerometer data.
 
 public class StepCounter : MonoBehaviour
