@@ -158,37 +158,5 @@ export const getUserInfo = async ({
   };
 };
 
-export const updateStepGoal = async ({
-  request,
-  response,
-}: {
-  request: any;
-  response: any;
-}) => {
-  const { dailyStepGoal } = await request.body().value;
-  const userId = getUserIdFromHeaders(request.headers);
 
-  // Check if the user exists
-  const existingUser = await Users.findOne({ _id: userId });
-  if (!existingUser) {
-    response.body = { message: "User not found" };
-    response.status = 404;
-    return;
-  }
-
-  // Update the dailyStepGoal
-  const result = await Users.updateOne(
-    { _id: userId },
-    { $set: { dailyStepGoal } }
-  );
-
-  if (!result) {
-    response.body = { message: "Failed to update step goal" };
-    response.status = 500;
-    return;
-  }
-
-  response.body = { message: "Step goal updated successfully" };
-  response.status = 200;
-};
 
