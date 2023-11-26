@@ -1,5 +1,5 @@
-import UserSchema from "../schema/schema.user.js";
-import db from "../database/database.connection.js";
+import UserSchema from "../schema/schema.user.ts";
+import db from "../database/database.connection.ts";
 
 const usersDb = db.collection<UserSchema>("users");
 
