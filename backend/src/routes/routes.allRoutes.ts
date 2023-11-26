@@ -46,7 +46,13 @@ router.get("/api/pet/choice", authourized, getPetChoice )
 router.get("/api/user", authourized, getUserInfo  )
 
 // Update Step Goal
-router.put("/api/user/step-goal", authourized, updateStepGoal);
+router.put("/api/user/step-goal", authorized, updateStepGoal);
+
+// Update Step Count
+router.put("/api/user/step-count", authorized, updateStep);
+
+// Check Step Goal
+router.get("/api/user/check-step-goal", authorized, checkGoal);
 
 //verifies a token
 router.post("/api/token/verify", verifyToken)
