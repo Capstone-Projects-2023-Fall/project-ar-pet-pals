@@ -11,4 +11,5 @@ export interface UserSchema {
   dailyStepCount: number;
   totalStepCount: number;
   weeklyStepCount: number;
+  stepCountScore: number; // New property
 }
