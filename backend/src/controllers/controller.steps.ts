@@ -1,3 +1,5 @@
+// controllers.steps.ts
+
 import { Users } from "../database/database.connection.ts";
 import { ObjectId } from "https://deno.land/x/mongo@v0.30.0/mod.ts";
 
@@ -47,6 +49,11 @@ export const checkStepGoal = async (userId: ObjectId) => {
 export const calculateAverageHealthScore = async (userId: ObjectId) => {
   const user = await Users.findOne({ _id: userId });
 
+  // Calculate the weekly step count
+  const today = new Date();
+  const sevenDaysAgo = new Date(today);
+  sevenDaysAgo.setDate(today.getDate() - 7);
+
   // Filter steps within the past seven days
   const stepsWithinWeek = user.steps.filter(
     (step) => step.timestamp >= sevenDaysAgo
@@ -57,7 +64,7 @@ export const calculateAverageHealthScore = async (userId: ObjectId) => {
   const totalHealthScore = stepsWithinWeek.reduce((total, step) => total + step.healthScore, 0);
 
   // Calculate the average health score
-  const averageHealthScore = totalHealthScore / (stepsWithinWeek.length || 1); // Avoid division by zero
+  const averageHealthScore = totalHealthScore / (totalSteps / 1000); // Divide by 1000 for every 1000 steps
 
   return averageHealthScore;
 };
