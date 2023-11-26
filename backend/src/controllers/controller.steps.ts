@@ -1,9 +1,14 @@
 // controllers.steps.ts
 
-import { Users } from "../database/database.connection.ts";
 import { ObjectId } from "https://deno.land/x/mongo@v0.30.0/mod.ts";
+import UserSchema from "../schema/schema.user.ts";
+import db from "../database/database.connection.ts";
 
-export const updateStepCount = async (userId: ObjectId, steps: number) => {
+const Users = db.collection<UserSchema>("users");
+
+export const updateStepCount = async ({request, response}:{request:any;response:any}) =>{
+  const { userId, steps } = await request.body().value;
+
   const user = await Users.findOne({ _id: userId });
 
   // Update daily step count
@@ -34,7 +39,9 @@ export const updateStepCount = async (userId: ObjectId, steps: number) => {
   return result;
 };
 
-export const checkStepGoal = async (userId: ObjectId) => {
+export const checkStepGoal = async ({request, response}:{request:any;response:any}) => {
+  const { userId, steps } = await request.body().value;
+
   const user = await Users.findOne({ _id: userId });
 
   if (user.dailyStepCount >= user.dailyStepGoal) {
@@ -46,7 +53,9 @@ export const checkStepGoal = async (userId: ObjectId) => {
   }
 };
 
-export const calculateAverageHealthScore = async (userId: ObjectId) => {
+export const calculateAverageHealthScore = async ({request, response}:{request:any;response:any}) => {
+  const { userId, steps } = await request.body().value;
+
   const user = await Users.findOne({ _id: userId });
 
   // Calculate the weekly step count
