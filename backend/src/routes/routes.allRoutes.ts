@@ -5,7 +5,7 @@ import { recognizeFood } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import {getHealthRating } from "../controllers/controllers.health.ts";
-import { updateStepGoal } from "../controllers/controllers.users.ts";
+import { updateStepCount, checkStepGoal, updateStepGoal } from "../controllers/controllers.steps.ts";
 import { leaderboardList } from "../controllers/controllers.leaderbord.ts";
 
 
@@ -47,13 +47,13 @@ router.get("/api/pet/choice", authourized, getPetChoice )
 router.get("/api/user", authourized, getUserInfo  )
 
 // Update Step Goal
-router.put("/api/user/step-goal", authorized, updateStepGoal);
+router.put("/api/user/step-goal", authourized, updateStepGoal);
 
 // Update Step Count
-router.put("/api/user/step-count", authorized, updateStep);
+router.put("/api/user/step-count", authourized, updateStepCount);
 
 // Check Step Goal
-router.get("/api/user/check-step-goal", authorized, checkGoal);
+router.get("/api/user/check-step-goal", authourized, checkStepGoal);
 
 //verifies a token
 router.post("/api/token/verify", verifyToken)
