@@ -10,13 +10,21 @@ export const updateStepCount = async (userId: ObjectId, steps: number) => {
   // Update total step count
   user.totalStepCount += steps;
 
-  // Update weekly step count (you may want to implement logic for a rolling week)
+  // Update weekly step count
+  const today = new Date();
+  const sevenDaysAgo = new Date(today);
+  sevenDaysAgo.setDate(today.getDate() - 7);
 
-  // Calculate step count score
-  const stepCountScore = calculateStepCountScore(user.dailyStepCount);
+  // Filter steps within the past seven days
+  const stepsWithinWeek = user.steps.filter(
+    (step) => step.timestamp >= sevenDaysAgo
+  );
 
-  // Update user's step count score
-  user.stepCountScore = stepCountScore;
+  // Calculate the total steps within the past seven days
+  user.weeklyStepCount = stepsWithinWeek.reduce(
+    (total, step) => total + step.steps,
+    0
+  );
 
   // Save the updated user data
   const result = await Users.updateOne({ _id: userId }, { $set: user });
@@ -36,9 +44,20 @@ export const checkStepGoal = async (userId: ObjectId) => {
   }
 };
 
-export const calculateStepCountScore = (dailyStepCount: number) => {
-  // Calculate the step count score
-  const stepCountScore = Math.min(Math.floor(dailyStepCount / 1000), 10);
+export const calculateAverageHealthScore = async (userId: ObjectId) => {
+  const user = await Users.findOne({ _id: userId });
 
-  return stepCountScore;
+  // Filter steps within the past seven days
+  const stepsWithinWeek = user.steps.filter(
+    (step) => step.timestamp >= sevenDaysAgo
+  );
+
+  // Calculate the total steps and health score within the past seven days
+  const totalSteps = stepsWithinWeek.reduce((total, step) => total + step.steps, 0);
+  const totalHealthScore = stepsWithinWeek.reduce((total, step) => total + step.healthScore, 0);
+
+  // Calculate the average health score
+  const averageHealthScore = totalHealthScore / (stepsWithinWeek.length || 1); // Avoid division by zero
+
+  return averageHealthScore;
 };
