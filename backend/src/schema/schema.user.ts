@@ -1,5 +1,11 @@
 import { ObjectId } from "https://deno.land/x/mongo@v0.30.0/mod.ts";
 
+interface Step {
+  timestamp: Date;
+  steps: number;
+  healthScore: number;
+}
+
 export interface UserSchema {
   _id: ObjectId;
   username: string;
@@ -12,4 +18,5 @@ export interface UserSchema {
   totalStepCount: number;
   weeklyStepCount: number;
   stepCountScore: number; // New property
+  steps: Step[]; // New property
 }
