@@ -6,7 +6,7 @@ import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import {getHealthRating } from "../controllers/controllers.health.ts";
 import { updateStepCount, checkStepGoal, updateStepGoal } from "../controllers/controllers.steps.ts";
-import { leaderboardList } from "../controllers/controllers.leaderbord.ts";
+import { leaderboardList } from "../controllers/controllers.leaderboard.ts";
 
 
 const home = async({request, response}:{request:any;response:any}) => {
