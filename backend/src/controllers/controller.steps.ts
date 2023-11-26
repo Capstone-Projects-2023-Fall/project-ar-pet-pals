@@ -12,6 +12,12 @@ export const updateStepCount = async (userId: ObjectId, steps: number) => {
 
   // Update weekly step count (you may want to implement logic for a rolling week)
 
+  // Calculate step count score
+  const stepCountScore = calculateStepCountScore(user.dailyStepCount);
+
+  // Update user's step count score
+  user.stepCountScore = stepCountScore;
+
   // Save the updated user data
   const result = await Users.updateOne({ _id: userId }, { $set: user });
 
@@ -28,4 +34,11 @@ export const checkStepGoal = async (userId: ObjectId) => {
     // User did not meet the daily step goal
     return false;
   }
+};
+
+export const calculateStepCountScore = (dailyStepCount: number) => {
+  // Calculate the step count score
+  const stepCountScore = Math.min(Math.floor(dailyStepCount / 1000), 10);
+
+  return stepCountScore;
 };
