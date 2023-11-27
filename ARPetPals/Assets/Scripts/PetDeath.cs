@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PetDeath : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PetDeath : MonoBehaviour
     [SerializeField] private GameObject TigerDrago;
     [SerializeField] private GameObject CG;
     [SerializeField] private GameObject tombStone;
+    [SerializeField] private GameObject deathPopUp;
 
     // Start is called before the first frame update
     void Start()
@@ -41,25 +43,28 @@ public class PetDeath : MonoBehaviour
 
         //turn on tomb stone
 
+        //drop down or pop up "Oh no! You neglected your pet to the point of death... yikes. Your account will now be deleted, please register a new account
+
         //delete account
         deleteAccount();
-
-        //drop down or pop up "Oh no! You neglected your pet to the point of death... yikes. Your account will now be deleted, please register a new account
 
         //click red button return to main menu
     }
 
+    //called when death animation ends
     public void enableTombStone() {
         TigerDrago.SetActive(false);
         CG.SetActive(false);
         tombStone.SetActive(true);
+        deathPopUp.SetActive(true);
     }
 
     public void deleteAccount() {
 
     }
 
+    //load sign up scene after exit button is clicked
     public void returnToRegister() {
-
+        SceneManager.LoadScene("SignUpScene");
     }
 }
