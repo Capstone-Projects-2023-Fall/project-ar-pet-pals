@@ -198,6 +198,23 @@ export const updateUser = async ({
 };
 
 
+export const deleteUser = async ({
+    request,
+    response,
+}: {
+    request: any;
+    response: any;
+}) => {
 
+    const headers: Headers = request.headers;
+    let userInfo = getUserInfoFromHeaders(headers);
+   
+    const deleteCount = await Users.deleteOne({ username: userInfo.name});
+
+    let message = deleteCount ? "Deleted user successfuly." : "Couldn't delete user!!!";
+    response.body = {
+        message: message
+    }
+};
 
 
