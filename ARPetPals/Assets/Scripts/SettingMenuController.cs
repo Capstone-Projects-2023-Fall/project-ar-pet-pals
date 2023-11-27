@@ -229,6 +229,8 @@ public class SettingMenuController : MonoBehaviour
         health -= 1f;
        
         PlayerPrefs.SetFloat("health", health);
+
+        Debug.Log(health);
     }
 
 
