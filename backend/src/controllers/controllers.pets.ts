@@ -17,6 +17,25 @@ enum RESET_TYPE {
 const HEALTH_DECREASE_PER_MIN = 0.0167; // 1 / 60
 const MOOD_DECREASE_PER_MIN = 0.0167;
 
+function getActivites() {
+    return [
+        {
+            type: "login",
+            lockedUntil: Date.now(),
+            weeklyPoints: 0
+        },
+        {
+            type: "feeding",
+            lockedUntil: Date.now(),
+            weeklyPoints: 0
+        },
+        {
+            type: "double_tap",
+            lockedUntil: Date.now(),
+            weeklyPoints: 0
+        }
+    ];
+}
 
 export const setPetName =async ({request, response}:{request:any;response:any}) => {
     const { name } = await request.body().value;
@@ -97,7 +116,9 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             lastCalculatedHealth: Date.now(),
             lastCalculatedMood: Date.now(),
             health: MAX_HEALTH,
-            mood: MAX_MOOD
+            mood: MAX_MOOD,
+            // this activity can be used for leaderboard ranking
+            activities: getActivites()
         }
     } 
 
@@ -113,6 +134,7 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
                 health: displayNumber(pet.status.health),
                 mood: displayNumber(pet.status.mood)
             },
+            test: pet
         }
     }
 }
@@ -292,8 +314,9 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
 
     // Reset
     const { reset_type } = await request.body().value;
+    let resetStatus = {};
     if (reset_type == RESET_TYPE.ALL) {
-        pet.status = {
+        resetStatus = {
             lastActivity: Date.now(),
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
@@ -303,19 +326,21 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
         }
     }
     else if (reset_type == RESET_TYPE.HEALTH) {
-        pet.status = {
+        resetStatus = {
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
             health: MAX_HEALTH,
         }
     }
     else {
-        pet.status = {
+        resetStatus = {
             lastActivity: Date.now(),
             lastCalculatedMood: Date.now(),
             mood: MAX_MOOD
         }
     }
+    // update pet status
+    pet.status = {...pet.status, ...resetStatus};
 
     await Pets.updateOne({ _id: pet._id}, { 
         $set: { 
