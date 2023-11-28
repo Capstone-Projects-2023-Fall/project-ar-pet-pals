@@ -4,7 +4,6 @@ import UserSchema from "../schema/schema.user.ts";
 import { create, decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
 import key from "../utils/utils.apiKey.ts";
-import { updateStepCount, checkStepGoal } from "./controller.steps.ts";
 
 const Users = db.collection<UserSchema>("users");
 
@@ -29,7 +28,7 @@ export const signup = async ({
   request: any;
   response: any;
 }) => {
-  const { username, password, dailyStepGoal } = await request.body().value;
+  const { username, password } = await request.body().value;
 
   if (!username) {
     response.body = { message: "No username provided" };
@@ -52,6 +51,8 @@ export const signup = async ({
 
   const salt = await bcrypt.genSalt(8);
   const hashedPassword = await bcrypt.hash(password, salt);
+
+  const dailyStepGoal = 5000; // Default daily step goal
 
   const _id = await Users.insertOne({
     username,
@@ -187,6 +188,11 @@ export const updateStepGoal = async ({
     response.status = 500;
     return;
   }
+
+  response.body = { message: "Step goal updated successfully" };
+  response.status = 200;
+};
+
 
   response.body = { message: "Step goal updated successfully" };
   response.status = 200;
