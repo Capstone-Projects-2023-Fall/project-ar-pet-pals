@@ -134,9 +134,9 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             lastCalculatedMood: Date.now(),
             health: MAX_HEALTH,
             mood: MAX_MOOD,
-            // this activity can be used for leaderboard ranking
-            activities: getActivites()
-        }
+        },
+        // this activity can be used for leaderboard ranking
+        activities: getActivites()
     } 
 
     await Pets.insertOne(pet)
@@ -309,7 +309,7 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
             minutes_since_last_feeding: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastFeeding)),
             minutes_since_last_activity: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastActivity))
         },
-        activities: pet.status.activities
+        activities: pet.activities
     }
 }
 
@@ -388,26 +388,25 @@ export const increasePetMood =async ({request, response}:{request:any;response:a
 
     
     // check this activity's lock status and increase pet mood
-    for (let i = 0; i < pet.status.activities.length; i++) {
+    for (let i = 0; i < pet.activities.length; i++) {
         
-        if (pet.status.activities[i].type == type && pet.status.activities[i].lockedUntil <= Date.now()) {
+        if (pet.activities[i].type == type && pet.activities[i].lockedUntil <= Date.now()) {
             // increase pet mood, accumulate points and lock this activity
             pet.status.lastActivity = Date.now();
             pet.status.mood = Math.min(pet.status.mood + ACTIVITY_POINT[type], MAX_MOOD) ;
-            // activity.lockedUntil = Date.now() + ACTIVITY_LOCK[type];
-            pet.status.activities[i].lockedUntil = 0; // testing without lock (for the demo)
-            pet.status.activities[i].weeklyPoints += ACTIVITY_POINT[type];
+            // pet.activities[i].lockedUntil = Date.now() + ACTIVITY_LOCK[type];
+            pet.activities[i].lockedUntil = 0; // testing without lock (for the demo)
+            pet.activities[i].weeklyPoints += ACTIVITY_POINT[type];
         }
     }
-    
 
-    await Pets.updateOne({ _id: pet._id}, { $set: { status: pet.status}})
+    await Pets.updateOne({ _id: pet._id}, { $set: { status: pet.status, activities: pet.activities}});
     
 
     response.body = {
         "message": "Increased pet's mood successfully",
         mood: displayNumber(pet.status.mood),
-        activities: pet.status.activities
+        activities: pet.activities
     }
 }
 
