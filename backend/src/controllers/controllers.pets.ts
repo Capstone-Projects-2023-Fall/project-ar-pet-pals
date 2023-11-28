@@ -41,11 +41,6 @@ function getActivites() {
             lockedUntil: Date.now(),
             weeklyPoints: 0
         },
-        // {
-        //     type: ACTIVITY_TYPE_FEEDING,
-        //     lockedUntil: Date.now(),
-        //     weeklyPoints: 0
-        // },
         {
             type: ACTIVITY_TYPE_DOUBLE_TAP,
             lockedUntil: Date.now(),
@@ -410,13 +405,18 @@ export const increasePetMood =async ({request, response}:{request:any;response:a
     }
 }
 
+// Using cronjob to run weekly a python script (calling this api to reset all pet's activities)
 export const resetPetActivities = async ({request, response}:{request:any;response:any}) => {
-
     
-    
+    const { matchedCount, modifiedCount } = await Pets.updateMany(
+        { activities: { $ne: null } },
+        { $set: { activities: getActivites() } },
+      );
 
     response.body = {
         "message": "Reset pet's activities successfully",
+        matchedCount, 
+        modifiedCount
     }
 }
 
