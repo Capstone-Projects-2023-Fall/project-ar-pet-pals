@@ -34,6 +34,9 @@ AndroidNotificationCenter.RegisterNotificationChannel(birthdayChannel);
 /*check if initial notification already been sent
 if (!PlayerPrefs.HasKey("InitialNotificationSent"))
 {}*/
+ // Schedule the weekly leaderboard notification
+        NotificationScheduler.ScheduleWeeklyLeaderboardNotification();
+        
         // Set up the notification message and parameters
         var notification = new AndroidNotification();
         notification.Title = "Attention!";
