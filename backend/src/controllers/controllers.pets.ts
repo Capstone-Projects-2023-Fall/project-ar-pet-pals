@@ -204,8 +204,8 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
         return
     }
 
-    pet.status.health = Math.min(health || pet.status.health, 100);
-    pet.status.mood = Math.min(mood || pet.status.mood, 100);
+    pet.status.health = Math.max(Math.min(health || pet.status.health, MAX_HEALTH), 0);
+    pet.status.mood = Math.max(Math.min(mood || pet.status.mood, MAX_MOOD), 0);
 
 
     await Pets.updateOne({ _id: pet._id}, { 
@@ -245,11 +245,11 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
     let minutesSinceLastFeeding = calculateTimeDifferentInMinutes(pet.status.lastCalculatedHealth);
     let minutesSinceLastActivity = calculateTimeDifferentInMinutes(pet.status.lastCalculatedMood);
     if (minutesSinceLastFeeding >= 1) {
-        pet.status.health -= HEALTH_DECREASE_PER_MIN * minutesSinceLastFeeding;
+        pet.status.health = Math.max(0, pet.status.health - HEALTH_DECREASE_PER_MIN * minutesSinceLastFeeding);
         pet.status.lastCalculatedHealth = Date.now();
     }
     if (minutesSinceLastActivity >= 1) {
-        pet.status.mood -= MOOD_DECREASE_PER_MIN * minutesSinceLastActivity;
+        pet.status.mood = Math.max(0, pet.status.mood - MOOD_DECREASE_PER_MIN * minutesSinceLastActivity);
         pet.status.lastCalculatedMood = Date.now();
     }
 

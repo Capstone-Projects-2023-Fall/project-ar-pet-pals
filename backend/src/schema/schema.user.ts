@@ -16,8 +16,5 @@ export interface UserSchema {
   dailyStepGoal: number;
   dailyStepCount: number;
   totalStepCount: number;
-  weeklyStepCount: number; 
-  stepCountScore: number; // New property
-  steps: Step[]; // New property
-birthday: Date; // Add the birthday property
+  birthday: Date; // Add the birthday property
 }
