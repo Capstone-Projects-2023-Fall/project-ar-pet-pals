@@ -13,3 +13,5 @@ setInterval(async () => {
   const { top5Users } = await leaderboardList(); // Get the current top 5 users
   sendTop5Notifications(top5Users);
 }, /* Set an appropriate interval in milliseconds, e.g., one week */);
+
+//run deno run --allow-net --allow-read notificationScheduler.ts
