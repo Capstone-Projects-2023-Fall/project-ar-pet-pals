@@ -14,7 +14,7 @@ export interface StatusSchema {
 
 // We will use cronjob or task to run a python script periodically to reset points
 export interface StatusActivitySchema {
-  type: string;  // login, feeding,...
+  type: string;  // login, double tap,...
   lockedUntil: Date;  
   weeklyPoints: number;  // Weekly accumulated points for the activity (leaderboard), reset weekly
 }
