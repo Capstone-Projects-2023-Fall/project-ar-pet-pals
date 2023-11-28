@@ -410,3 +410,14 @@ export const increasePetMood =async ({request, response}:{request:any;response:a
         activities: pet.status.activities
     }
 }
+
+export const resetPetActivities = async ({request, response}:{request:any;response:any}) => {
+
+    
+    
+
+    response.body = {
+        "message": "Reset pet's activities successfully",
+    }
+}
+
