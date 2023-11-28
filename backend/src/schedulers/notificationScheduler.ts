@@ -14,4 +14,8 @@ setInterval(async () => {
   sendTop5Notifications(top5Users);
 }, /* Set an appropriate interval in milliseconds, e.g., one week */);
 
-//run deno run --allow-net --allow-read notificationScheduler.ts
+// Run the Deno server (controllers.leaderboard.ts)
+//deno run --allow-net controllers/controllers.leaderboard.ts
+
+// Run the notification scheduler (schedulers/notificationScheduler.ts)
+//deno run --allow-net --allow-read schedulers/notificationScheduler.ts
