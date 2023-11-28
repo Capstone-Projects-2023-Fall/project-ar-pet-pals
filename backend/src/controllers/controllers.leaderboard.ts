@@ -47,15 +47,16 @@ export const leaderboardList = async ({
     });
   }
 
-  list.sort((a, b) => (a.score < b.score) ? 1 : -1)
+ // Sort the list
+  list.sort((a, b) => (a.score < b.score ? 1 : -1));
 
-  list = list.slice(0, n+1);
-g
+  // Get the top 5 users
+  const top5Users = list.slice(0, Math.min(5, list.length));
 
-  // return that sorted list
-
+  // Return the sorted list and top 5 users
   response.body = {
     leaderboardList: list,
+    top5Users: top5Users,
   };
 
   response.status = 200;
