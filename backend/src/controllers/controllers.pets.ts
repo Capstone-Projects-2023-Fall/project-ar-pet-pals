@@ -17,19 +17,16 @@ enum RESET_TYPE {
 
 // Activity type
 const ACTIVITY_TYPE_LOGIN = "login";
-// const ACTIVITY_TYPE_FEEDING = "feeding";
 const ACTIVITY_TYPE_DOUBLE_TAP = "double_tap";
 
 // Activity point
 const ACTIVITY_POINT = {};
 ACTIVITY_POINT[ACTIVITY_TYPE_LOGIN] = 10;
-// ACTIVITY_POINT[ACTIVITY_TYPE_FEEDING] = 20;
 ACTIVITY_POINT[ACTIVITY_TYPE_DOUBLE_TAP] = 30;
 
 // Activity locking 
 const ACTIVITY_LOCK = {};
 ACTIVITY_LOCK[ACTIVITY_TYPE_LOGIN] = 8 * 60 * 60 * 1000; // 8 hours
-// ACTIVITY_LOCK[ACTIVITY_TYPE_FEEDING] = 1 * 30 * 60 * 1000; // 30 mins
 ACTIVITY_LOCK[ACTIVITY_TYPE_DOUBLE_TAP] = 1 * 60 * 60 * 1000; // 1 hour
 
 
@@ -153,8 +150,7 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             status: {
                 health: displayNumber(pet.status.health),
                 mood: displayNumber(pet.status.mood)
-            },
-            test: pet
+            }
         }
     }
 }
@@ -258,6 +254,8 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
     
     response.body = {
         "message": "pet status updated successfuly",
+        health: displayNumber(pet.status.health),
+        mood: displayNumber(pet.status.mood),
     }
 }
 
@@ -310,8 +308,8 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
         extra: {
             minutes_since_last_feeding: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastFeeding)),
             minutes_since_last_activity: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastActivity))
-        }
-        
+        },
+        activities: pet.status.activities
     }
 }
 
@@ -397,7 +395,7 @@ export const increasePetMood =async ({request, response}:{request:any;response:a
             pet.status.lastActivity = Date.now();
             pet.status.mood = Math.min(pet.status.mood + ACTIVITY_POINT[type], MAX_MOOD) ;
             // activity.lockedUntil = Date.now() + ACTIVITY_LOCK[type];
-            pet.status.activities[i].lockedUntil = 0; // testing without lock
+            pet.status.activities[i].lockedUntil = 0; // testing without lock (for the demo)
             pet.status.activities[i].weeklyPoints += ACTIVITY_POINT[type];
         }
     }
@@ -408,6 +406,7 @@ export const increasePetMood =async ({request, response}:{request:any;response:a
 
     response.body = {
         "message": "Increased pet's mood successfully",
-        test: pet
+        mood: displayNumber(pet.status.mood),
+        activities: pet.status.activities
     }
 }
