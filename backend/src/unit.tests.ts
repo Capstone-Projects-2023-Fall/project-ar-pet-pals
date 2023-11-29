@@ -905,34 +905,33 @@ Deno.test("recognize food in image", async () => {
   }
 });
 
-// Deno.test("(invalid image string) recognize food in image", async () => {
-  // let headers = {
-    // Authorization: `Bearer ${token_with_no_pet}`,
-    // "Content-Type": "application/json",
-  // };
+Deno.test("invalid (bad image string) recognize food in image", async () => {
+  let headers = {
+    authorization: `bearer ${token_with_no_pet}`,
+    "content-type": "application/json",
+  };
 
-  // let data = {
-    // health: 57,
-    // mood: 57,
-  // };
+  let data = {
+    image64String: "115s1df5s",
+  };
 
-  // try {
-    // let res = await fetch(BASE_URL + "/pet/status", {
-      // headers,
-      // method: "POST",
+  try {
+    let res = await fetch(BASE_URL + "/food/recognize", {
+      headers,
+      method: "post",
 
-      // body: JSON.stringify(data),
-    // });
-    // let json = await res.json();
+      body: JSON.stringify(data),
+    });
+    let json = await res.json();
 
-    // assert(
-      // json.message == "Could not find a pet for your user's id",
-      // JSON.stringify(json)
-    // );
-  // } catch (err) {
-    // assert(true, err);
-  // }
-// });
+    assert(
+      json.status == "400" && json.statusText == "Bad Request",
+      JSON.stringify(json)
+    );
+  } catch (err) {
+    assert(true, err);
+  }
+});
 
 
 /* END FOOD */
