@@ -174,9 +174,11 @@ public class SettingMenuController : MonoBehaviour
         itemText3.text = "banana";
     }
 
+    // Log out to sign in scene
     public void ExitButtonClicked()
     {
         SceneManager.LoadScene("SignInScene");
+        PlayerPrefs.DeleteAll();
     }
 
     public void CloseScannedFoodMenu() {
@@ -250,6 +252,7 @@ public class SettingMenuController : MonoBehaviour
         happinessFill.color = gradient.Evaluate(happinessSlider.normalizedValue);
     }
 
+    //implement audiomanager into ui
     public void ToggleMusic()
     {
         if (VolumeButton.sprite == unmuteMusic)

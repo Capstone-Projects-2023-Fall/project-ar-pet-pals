@@ -1974,7 +1974,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1390362646}
         m_TargetAssemblyTypeName: CharacterSelection, Scripts
         m_MethodName: ConfirmSelection
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2129,6 +2129,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirmationMenu: {fileID: 2072955471}
   petNameUI: {fileID: 950602851}
+  basePetObject: {fileID: 0}
+  orangeMat: {fileID: 0}
+  redMat: {fileID: 0}
+  greenMat: {fileID: 0}
+  blueMat: {fileID: 0}
+  yellowMat: {fileID: 0}
   nameInputField: {fileID: 928654382}
 --- !u!4 &1390362647
 Transform:
