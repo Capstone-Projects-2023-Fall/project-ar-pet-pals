@@ -118,6 +118,19 @@ namespace ARPetPals
             public List<Guess> topMatches;
         }
 
+        [System.Serializable]
+        public class UpdateUserResponse
+        {
+            public string message;
+        }
+
+        [System.Serializable]
+        public class DeleteUserResponse
+        {
+            public string message;
+        }
+
+
     }
 }
 

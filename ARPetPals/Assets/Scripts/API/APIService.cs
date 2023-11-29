@@ -797,7 +797,7 @@ namespace ARPetPals
                 if (request.result != UnityWebRequest.Result.Success)
                 {
                     
-                    Debug.LogError("_IncreasePetHappiness failed: " + JsonUtility.ToJson(request.downloadHandler.text, true));
+                    Debug.LogError("_IncreasePetHappiness failed: " + request.downloadHandler.text);
                     ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(responseData.message);
                     _ShowReponse(responseData.message);
@@ -820,6 +820,126 @@ namespace ARPetPals
         {
             string type = ACTIVITY_TYPE_LOGIN;
             IncreasePetHappiness(type, (str) => { });
+        }
+
+        public void UpdateUser(string username, string password, Action<string> callback)
+        {
+            StartCoroutine(_UpdateUser(username, password, callback));
+        }
+
+        private IEnumerator _UpdateUser(string username, string password, Action<string> callback)
+        {
+
+            string token = GetStoredToken();
+
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break; // Exit the coroutine
+            }
+
+            string url = URL + "/user";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "username", username },
+                { "password", password }
+
+            };
+
+            using (UnityWebRequest request = UnityWebRequest.Put(url, JsonConvert.SerializeObject(body)))
+            {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+
+                    Debug.LogError("_UpdateUser failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else
+                {
+
+                    // Deserialize the JSON response
+                    UpdateUserResponse responseData = JsonUtility.FromJson<UpdateUserResponse>(responseJson);
+                    Debug.Log("_UpdateUser response: " + JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+
+                }
+            }
+        }
+
+        public void UpdateUserTest()
+        {
+            string username = "son9";
+            string password = "son9";
+            UpdateUser(username, password, (str) => { });
+        }
+
+        public void DeleteUser(Action<string> callback)
+        {
+            StartCoroutine(_DeleteUser(callback));
+        }
+
+        private IEnumerator _DeleteUser(Action<string> callback)
+        {
+
+            string token = GetStoredToken();
+
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break; // Exit the coroutine
+            }
+
+            string url = URL + "/user";
+
+            using (UnityWebRequest request = UnityWebRequest.Delete(url))
+            {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+                // Add downloadHandler - there is no downloadHandler for DELETE method
+                request.downloadHandler = new DownloadHandlerBuffer();
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+
+                    Debug.LogError("_DeleteUser failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else
+                {
+
+                    // Deserialize the JSON response
+                    DeleteUserResponse responseData = JsonUtility.FromJson<DeleteUserResponse>(responseJson);
+                    Debug.Log("_DeleteUser response: " + JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+
+                }
+            }
+        }
+
+        public void DeleteUserTest()
+        {
+            DeleteUser((str) => { });
         }
 
     }
