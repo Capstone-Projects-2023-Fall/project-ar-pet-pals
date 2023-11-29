@@ -170,33 +170,69 @@ export const updateUser = async ({
     response: any;
 }) => {
 
-    const { username, password } = await request.body().value;
+    let { username, password } = await request.body().value;
+
+    username = username.trim();
+    password = password.trim();
 
     const headers: Headers = request.headers;
     let userId = getUserIdFromHeaders(headers);
     const user = await Users.findOne({ _id: new ObjectId(userId) });
-
     // check if username exists
     const userCheck = await Users.findOne({ username: username });
-    if (userCheck) {
+
+    let message = "";
+    if (username == "" && password == "") {
         response.body = {
-            "message": "Username exists. Please use another one.",
+            "message": "Username or password must not be empty.",
         }
         return;
     }
+    // only password
+    else if (username == "" && password != "") {
+        const salt = await bcrypt.genSalt(8);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-    const salt = await bcrypt.genSalt(8);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    await Users.updateOne({ username: user.username}, { 
-        $set: { 
-            username: username,
-            password: hashedPassword
+        await Users.updateOne({ username: user.username}, { 
+            $set: { 
+                password: hashedPassword
+            }
+        });
+        message = "Updated password successfuly.";
+    }
+    // only username
+    else if (username != "" && password == "") {
+        if (userCheck) {
+            response.body = {
+                "message": "Username exists. Please use another one.",
+            }
+            return;
         }
-    });
+
+        await Users.updateOne({ username: user.username}, { 
+            $set: { 
+                username: username
+            }
+        });
+        message = "Updated username successfuly.";
+    }
+    // both username and password
+    else {
+
+        const salt = await bcrypt.genSalt(8);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        await Users.updateOne({ username: user.username}, { 
+            $set: { 
+                username: username,
+                password: hashedPassword
+            }
+        });
+        message = "Updated username and password successfuly.";
+    }
     
     response.body = {
-        "message": "Updated username and password successfuly.",
+        "message": message,
     }
 };
 
