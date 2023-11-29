@@ -1,42 +1,31 @@
 openapi: 3.0.2
 info:
-  title: API docs
-  description: AR PET Pals API
+  title: Backend Server API
 
 servers:
   - url: https://arpetpals.store/
 
 tags:
- 
-  - name: authentication
-    description: API for logging in and logging out
+  - name: User
+    description: User Authentication and Management
 
-  - name: pet-name
-    description: API for pet name
+  - name: Pet
+    description: Pet Interaction and Management
 
-  - name: pet-choice
-    description: API for pet choice
+  - name: Food
+    description: Food Recognition and Analytics
 
-  - name: user-info
-    description: API for user info
-
-  - name: user-name
-    description: API for user name
-
-  - name: front
-    externalDocs:
-      description: API for managing user interface, inputs, notifications, leaderboard, and exercise reminders
-
-  - name: pet
-    description: API for pet
+  - name: Leaderboard
+    description: Configuring the User Leaderboard
     
   
 paths:
+  # User Routes
   /api/signin:
     post:
       summary: "signin"
       tags:
-        - authentication
+        - User
       requestBody:
         description: "The username and password to sign in"
         required: true
@@ -57,11 +46,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+  
   /api/signup:
     post:
       summary: "signup"
       tags:
-        - authentication
+        - User
       requestBody:
         description: "The username and password to sign up"
         required: true
@@ -82,13 +72,47 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+  
+  /api/token/verify:
+    post:
+      summary: "token validity"
+      tags:
+        - User
 
+      requestBody:
+        description: "The token to test"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyToken"
+      responseBody:
+        description: "whether token is valid or not"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenValid"
+      responses:
+        '200':
+          description: "Token is valid"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenValid"
+        '400':
+          description: "Token is not valid"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenValid"
+  
+  # Pet Routes
   /api/pet/name:
     post:
       security: 
         - token: []
       tags:
-        - pet-name
+        - Pet
       summary: "update pet name"
 
       requestBody:
@@ -121,7 +145,7 @@ paths:
       security: 
         - token: []
       tags:
-        - pet-name  
+        - Pet 
       summary: "get pet name"
       responseBody:
         description: "the pet's name"
@@ -148,7 +172,7 @@ paths:
       security: 
         - token: []
       tags:
-        - pet
+        - Pet
       summary: "Create a new pet"
       responses:
         '200':
@@ -169,7 +193,7 @@ paths:
       security: 
         - token: []
       tags:
-        - pet
+        - Pet
       summary: "Update pet status e.g. health, mood,..."
       requestBody:
         description: "The new pet's status"
@@ -194,7 +218,7 @@ paths:
       security: 
         - token: []
       tags: 
-        - pet
+        - Pet
       summary: "Get pet status"
       responses:
         '200':
@@ -215,7 +239,7 @@ paths:
       security: 
         - token: []
       tags:
-        - pet
+        - Pet
       summary: "Reset pet status"
       requestBody:
         description: "0: Reset All, 1: Reset Health, 2: Reset Mood"
@@ -237,12 +261,22 @@ paths:
               schema:
                 $ref: "#/components/schemas/Fail"
 
+  /api/pet/status/increaseMood:
+    put:
+      tags:
+        - Pet
+  
+  /api/pet/activities/reset:
+    put:
+      tags:
+        - Pet
+  
   /api/pet/choice:
     post:
       security: 
         - token: []
       tags:
-        - pet-choice
+        - Pet
       summary: "update pet choice"
       requestBody:
         description: "The new pet's choice"
@@ -274,7 +308,7 @@ paths:
       security: 
         - token: []
       tags: 
-        - pet-choice
+        - Pet
       summary: "get pet choice"
      
       responseBody:
@@ -296,116 +330,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
-    
-  /api/token/verify:
+
+  # Food Routes
+  /api/food/recognize:
     post:
-      summary: "token validity"
+      tags:
+        - Food
 
-      requestBody:
-        description: "The token to test"
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/VerifyToken"
-      responseBody:
-        description: "whether token is valid or not"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TokenValid"
-      responses:
-        '200':
-          description: "Token is valid"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TokenValid"
-        '400':
-          description: "Token is not valid"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TokenValid"
+  /api/food/healthRating:
+    post:
+      tags:
+        - Food
 
-  /front/displayInterface:
+  # Leaderboard Routes
+  /api/leaderboard/list:
     get:
-      summary: "Retrieve the user interface layout."
-      operationId: "getDisplayInterface"
       tags:
-        - front
-      responses:
-        "200":
-          description: "Successfully retrieved UI layout."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserInterfaceLayout"
+      - Leaderboard
+  
 
-  /front/userInput:
-    post:
-      summary: "Handle user interactions and inputs."
-      operationId: "handleUserInput"
-      tags:
-        - front
-      requestBody:
-        description: "User input details."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserInputDetails"
-      responses:
-        "200":
-          description: "User input processed successfully."
-
-  /front/sendNotification:
-    post:
-      summary: "Send notifications to the user."
-      operationId: "sendNotification"
-      tags:
-        - front
-      requestBody:
-        description: "Notification details."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NotificationDetails"
-      responses:
-        "200":
-          description: "Notification sent successfully."
-
-  /front/leaderboard:
-    get:
-      summary: "Retrieve the public leaderboard."
-      operationId: "getLeaderboard"
-      tags:
-        - front
-      responses:
-        "200":
-          description: "Successfully retrieved leaderboard."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LeaderboardDetails"
-
-  /front/exerciseReminder:
-    post:
-      summary: "Send exercise reminders to the user."
-      operationId: "sendExerciseReminder"
-      tags:
-        - front
-      requestBody:
-        description: "Details of the exercise reminder."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExerciseReminderDetails"
-      responses:
-        "200":
-          description: "Exercise reminder sent successfully."
 components:
   securitySchemes:
     token:            
@@ -413,7 +356,6 @@ components:
       scheme: bearer
       bearerFormat: JWT   
   schemas:
-
     PetStatus:
       type: object
       properties:
@@ -429,11 +371,13 @@ components:
       properties:
         name:
           type: string
+    
     VerifyToken:
       type: object
       properties:
         token: 
           type: string
+    
     AuthSchema:
       type: object
       properties:
@@ -443,6 +387,7 @@ components:
         password:
           type: string
           description: "the password to authenticate"
+    
     TokenValid:
       type: object
       properties:
@@ -466,6 +411,7 @@ components:
         userInfo:
           type: object
           $ref: "#/components/schemas/UserInfo"
+    
     Fail:
       type: object
       properties:
@@ -473,7 +419,6 @@ components:
           type: string
           description: why it failed
 
-  
     Status:
       type: object
       properties:
@@ -579,6 +524,7 @@ components:
         extra: 
           type: object
           $ref: "#/components/schemas/PetStatusExtraSchema"
+    
     PetInfoSchema:
       type: object
       properties:
@@ -591,6 +537,7 @@ components:
         status:
           type: object
           $ref: "#/components/schemas/PetStatusSchema"
+    
     PetCreationSchema:
       type: object
       properties:
