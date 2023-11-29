@@ -99,6 +99,13 @@ namespace ARPetPals
         }
 
         [System.Serializable]
+        public class IncreasePetMoodResponse
+        {
+            public string message;
+            public string mood;
+        }
+
+        [System.Serializable]
         public class Guess
         {
             public string name;

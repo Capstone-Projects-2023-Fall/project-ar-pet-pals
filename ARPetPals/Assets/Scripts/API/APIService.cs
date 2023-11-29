@@ -24,6 +24,9 @@ namespace ARPetPals
         public const string KEY_USER_NAME = "key_username";
         public const string KEY_PET_STATUS = "key_pet_status";
 
+        public const string ACTIVITY_TYPE_LOGIN = "login";
+        public const string ACTIVITY_TYPE_DOUBLETAP = "double_tap";
+
         enum RESET_STATUS_TYPE
         {
             ALL = 0,
@@ -758,7 +761,66 @@ namespace ARPetPals
         }
 
 
+        public void IncreasePetHappiness(string type, Action<string> callback)
+        {
+            StartCoroutine(_IncreasePetHappiness(type, callback));
+        }
 
+        private IEnumerator _IncreasePetHappiness(string type, Action<string> callback)
+        {
+
+            string token = GetStoredToken();
+
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break; // Exit the coroutine
+            }
+
+            string url = URL + "/pet/status/increaseMood";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "type", type }
+                
+            };
+
+            using (UnityWebRequest request = UnityWebRequest.Put(url, JsonConvert.SerializeObject(body)))
+            {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    
+                    Debug.LogError("_IncreasePetHappiness failed: " + JsonUtility.ToJson(request.downloadHandler.text, true));
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else
+                {
+
+                    // Deserialize the JSON response
+                    IncreasePetMoodResponse responseData = JsonUtility.FromJson<IncreasePetMoodResponse>(responseJson);
+                    Debug.Log("_IncreasePetHappiness response: " + JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+
+                }
+            }
+        }
+
+        public void IncreasePetHappinessTest()
+        {
+            string type = ACTIVITY_TYPE_LOGIN;
+            IncreasePetHappiness(type, (str) => { });
+        }
 
     }
 }
