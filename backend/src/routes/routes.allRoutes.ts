@@ -37,8 +37,8 @@ router.post("/api/pet/status/reset", authourized, resetPetStatus  )
 
 //username
 router.get("/api/user/name", authourized, getUserName  )
-router.post("/api/user/update", authourized, updateUser  )
-router.post("/api/user/delete", authourized, deleteUser  )
+router.put("/api/user", authourized, updateUser  )
+router.delete("/api/user", authourized, deleteUser  )
 
 
 //pet-choice

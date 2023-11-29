@@ -2,8 +2,10 @@ import db from "../database/database.connection.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import UserSchema from "../schema/schema.user.ts";
 import { create, decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
-import { getUserIdFromHeaders, getUserInfoFromHeaders } from "../utils/utils.utils.ts";
+import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
 import key from "../utils/utils.apiKey.ts";
+import {ObjectId} from "https://deno.land/x/mongo@v0.32.0/mod.ts"
+
 
 const Users = db.collection<UserSchema>("users");
 
@@ -171,7 +173,8 @@ export const updateUser = async ({
     const { username, password } = await request.body().value;
 
     const headers: Headers = request.headers;
-    let userInfo = getUserInfoFromHeaders(headers);
+    let userId = getUserIdFromHeaders(headers);
+    const user = await Users.findOne({ _id: new ObjectId(userId) });
 
     // check if username exists
     const userCheck = await Users.findOne({ username: username });
@@ -185,7 +188,7 @@ export const updateUser = async ({
     const salt = await bcrypt.genSalt(8);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    await Users.updateOne({ username: userInfo.name}, { 
+    await Users.updateOne({ username: user.username}, { 
         $set: { 
             username: username,
             password: hashedPassword
@@ -207,13 +210,14 @@ export const deleteUser = async ({
 }) => {
 
     const headers: Headers = request.headers;
-    let userInfo = getUserInfoFromHeaders(headers);
+    let userId = getUserIdFromHeaders(headers);
+    const user = await Users.findOne({ _id: new ObjectId(userId) });
    
-    const deleteCount = await Users.deleteOne({ username: userInfo.name});
+    const deleteCount = await Users.deleteOne({ username: user.username});
 
     let message = deleteCount ? "Deleted user successfuly." : "Couldn't delete user!!!";
     response.body = {
-        message: message
+        message: message,
     }
 };
 
