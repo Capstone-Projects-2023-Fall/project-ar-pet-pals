@@ -1,16 +1,11 @@
 import UserSchema from "../schema/schema.user.ts";
 import db from "../database/database.connection.ts";
+import { PetSchema } from "../schema/schema.pet.ts";
 
 const usersDb = db.collection<UserSchema>("users");
+const Pets = db.collection<PetSchema>("pets");
 
-// implement a sorting algorithm for those values
 
-function sortUsers(a: UserSchema, b: UserSchema) {
-  let aScore = a.mood + a.health;
-  let bScore = b.mood + b.health;
-
-  return aScore - bScore;
-}
 
 export const leaderboardList = async ({
   request,
@@ -28,21 +23,39 @@ export const leaderboardList = async ({
     response.status = 400;
     return;
   }
-  //   const { n } = await request.body().value;
+  let n = 5
+  
+
   // n is the top (n) of users. for instance, top 5 or top 12
 
   // get a list of users
 
   // get the happinness and health of user
 
-  let sorted = users.sort(sortUsers);
+  let score = 0;
 
-  let sortedNames = sorted.map((user) => user.name);
+  let list: {username: string, score: number}[] = []
+  for (let user of users) {
+    const pet = await Pets.findOne({ user_id: user._id.toString() });
+    console.log(user._id, pet)
+
+    if(!pet) continue;
+    score = pet.status.mood + pet.status.health;
+    list.push( {
+      username: user.username,
+      score,
+    });
+  }
+
+  list.sort((a, b) => (a.score < b.score) ? 1 : -1)
+
+  list = list.slice(0, n+1);
+g
 
   // return that sorted list
 
   response.body = {
-    leaderboardList: sortedNames,
+    leaderboardList: list,
   };
 
   response.status = 200;
