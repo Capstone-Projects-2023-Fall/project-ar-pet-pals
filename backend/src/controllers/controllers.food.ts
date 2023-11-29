@@ -88,7 +88,7 @@ async function processImage(image64String) {
       "/outputs",
     requestOptions
   );
-  if (!response.ok) throw new Error(`Error, status: ${response.status}`);
+  if (!response.ok) throw new Error(`Error, status: ${response.status}, message: ${response.statusText}`);
 
   return response.text();
 }
