@@ -13,10 +13,41 @@ enum RESET_TYPE {
     MOOD
 }
 
+
+
+// Activity type
+const ACTIVITY_TYPE_LOGIN = "login";
+const ACTIVITY_TYPE_DOUBLE_TAP = "double_tap";
+
+// Activity point
+const ACTIVITY_POINT = {};
+ACTIVITY_POINT[ACTIVITY_TYPE_LOGIN] = 10;
+ACTIVITY_POINT[ACTIVITY_TYPE_DOUBLE_TAP] = 30;
+
+// Activity locking 
+const ACTIVITY_LOCK = {};
+ACTIVITY_LOCK[ACTIVITY_TYPE_LOGIN] = 8 * 60 * 60 * 1000; // 8 hours
+ACTIVITY_LOCK[ACTIVITY_TYPE_DOUBLE_TAP] = 1 * 60 * 60 * 1000; // 1 hour
+
+
 // health decrease per hour = -1
 const HEALTH_DECREASE_PER_MIN = 0.0167; // 1 / 60
 const MOOD_DECREASE_PER_MIN = 0.0167;
 
+function getActivites() {
+    return [
+        {
+            type: ACTIVITY_TYPE_LOGIN,
+            lockedUntil: Date.now(),
+            weeklyPoints: 0
+        },
+        {
+            type: ACTIVITY_TYPE_DOUBLE_TAP,
+            lockedUntil: Date.now(),
+            weeklyPoints: 0
+        }
+    ];
+}
 
 export const setPetName =async ({request, response}:{request:any;response:any}) => {
     const { name } = await request.body().value;
@@ -97,8 +128,10 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             lastCalculatedHealth: Date.now(),
             lastCalculatedMood: Date.now(),
             health: MAX_HEALTH,
-            mood: MAX_MOOD
-        }
+            mood: MAX_MOOD,
+        },
+        // this activity can be used for leaderboard ranking
+        activities: getActivites()
     } 
 
     await Pets.insertOne(pet)
@@ -112,7 +145,7 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             status: {
                 health: displayNumber(pet.status.health),
                 mood: displayNumber(pet.status.mood)
-            },
+            }
         }
     }
 }
@@ -204,8 +237,8 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
         return
     }
 
-    pet.status.health = Math.min(health || pet.status.health, 100);
-    pet.status.mood = Math.min(mood || pet.status.mood, 100);
+    pet.status.health = Math.max(Math.min(health || pet.status.health, MAX_HEALTH), 0);
+    pet.status.mood = Math.max(Math.min(mood || pet.status.mood, MAX_MOOD), 0);
 
 
     await Pets.updateOne({ _id: pet._id}, { 
@@ -216,6 +249,8 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
     
     response.body = {
         "message": "pet status updated successfuly",
+        health: displayNumber(pet.status.health),
+        mood: displayNumber(pet.status.mood),
     }
 }
 
@@ -245,11 +280,11 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
     let minutesSinceLastFeeding = calculateTimeDifferentInMinutes(pet.status.lastCalculatedHealth);
     let minutesSinceLastActivity = calculateTimeDifferentInMinutes(pet.status.lastCalculatedMood);
     if (minutesSinceLastFeeding >= 1) {
-        pet.status.health -= HEALTH_DECREASE_PER_MIN * minutesSinceLastFeeding;
+        pet.status.health = Math.max(0, pet.status.health - HEALTH_DECREASE_PER_MIN * minutesSinceLastFeeding);
         pet.status.lastCalculatedHealth = Date.now();
     }
     if (minutesSinceLastActivity >= 1) {
-        pet.status.mood -= MOOD_DECREASE_PER_MIN * minutesSinceLastActivity;
+        pet.status.mood = Math.max(0, pet.status.mood - MOOD_DECREASE_PER_MIN * minutesSinceLastActivity);
         pet.status.lastCalculatedMood = Date.now();
     }
 
@@ -268,8 +303,8 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
         extra: {
             minutes_since_last_feeding: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastFeeding)),
             minutes_since_last_activity: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastActivity))
-        }
-        
+        },
+        activities: pet.activities
     }
 }
 
@@ -292,8 +327,9 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
 
     // Reset
     const { reset_type } = await request.body().value;
+    let resetStatus = {};
     if (reset_type == RESET_TYPE.ALL) {
-        pet.status = {
+        resetStatus = {
             lastActivity: Date.now(),
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
@@ -303,19 +339,21 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
         }
     }
     else if (reset_type == RESET_TYPE.HEALTH) {
-        pet.status = {
+        resetStatus = {
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
             health: MAX_HEALTH,
         }
     }
     else {
-        pet.status = {
+        resetStatus = {
             lastActivity: Date.now(),
             lastCalculatedMood: Date.now(),
             mood: MAX_MOOD
         }
     }
+    // update pet status
+    pet.status = {...pet.status, ...resetStatus};
 
     await Pets.updateOne({ _id: pet._id}, { 
         $set: { 
@@ -324,6 +362,61 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
     });
     response.body = {
         "message": "pet status updated successfuly",
+    }
+}
+
+export const increasePetMood =async ({request, response}:{request:any;response:any}) => {
+    const { type } = await request.body().value;
+
+    const headers: Headers = request.headers
+    let userId = getUserIdFromHeaders(headers);
+
+    const pet = await Pets.findOne({ user_id: userId });
+
+    if(!pet){
+        response.body = {
+            "message": "Could not find a pet for your user's id"
+        }
+        response.status = 400
+        return
+    }
+
+    
+    // check this activity's lock status and increase pet mood
+    for (let i = 0; i < pet.activities.length; i++) {
+        
+        if (pet.activities[i].type == type && pet.activities[i].lockedUntil <= Date.now()) {
+            // increase pet mood, accumulate points and lock this activity
+            pet.status.lastActivity = Date.now();
+            pet.status.mood = Math.min(pet.status.mood + ACTIVITY_POINT[type], MAX_MOOD) ;
+            // pet.activities[i].lockedUntil = Date.now() + ACTIVITY_LOCK[type];
+            pet.activities[i].lockedUntil = 0; // testing without lock (for the demo)
+            pet.activities[i].weeklyPoints += ACTIVITY_POINT[type];
+        }
+    }
+
+    await Pets.updateOne({ _id: pet._id}, { $set: { status: pet.status, activities: pet.activities}});
+    
+
+    response.body = {
+        "message": "Increased pet's mood successfully",
+        mood: displayNumber(pet.status.mood),
+        activities: pet.activities
+    }
+}
+
+// Using cronjob to run weekly a python script (calling this api to reset all pet's activities)
+export const resetPetActivities = async ({request, response}:{request:any;response:any}) => {
+    
+    const { matchedCount, modifiedCount } = await Pets.updateMany(
+        { activities: { $ne: null } },
+        { $set: { activities: getActivites() } },
+      );
+
+    response.body = {
+        "message": "Reset pet's activities successfully",
+        matchedCount, 
+        modifiedCount
     }
 }
 

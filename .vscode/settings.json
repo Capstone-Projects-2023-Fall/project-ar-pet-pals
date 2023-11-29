@@ -1,3 +1,6 @@
 {
-    "dotnet.preferCSharpExtension": true
+    "dotnet.preferCSharpExtension": true,
+    "deno.enable": true,
+    "deno.lint": true,
+    "deno.unstable": true
 }
