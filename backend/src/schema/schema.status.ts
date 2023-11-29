@@ -10,3 +10,5 @@ export interface StatusSchema {
 		health: number;
     mood: number;
 }
+
+
