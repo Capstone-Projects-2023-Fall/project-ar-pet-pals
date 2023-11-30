@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace ARPetPals
 {
+
     public class APIServiceResponse
     {
         [System.Serializable]
@@ -62,6 +63,7 @@ namespace ARPetPals
         public class PetInfo {
             public string id;
             public string name;
+            public GetPetStatusResponse status;
         }
 
         [System.Serializable]

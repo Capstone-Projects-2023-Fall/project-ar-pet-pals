@@ -148,7 +148,37 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/HealthHeart.cs</url>
+          <line>31</line>
+          <properties documentPath="C:\Users\nguye\CodingProjects\FinalProject\project-ar-pet-pals\ARPetPals\Assets\Scripts\HealthHeart.cs" initialLine="30" containingFunctionPresentation="Method 'SetHeartImage'">
+            <startOffsets>
+              <option value="865" />
+            </startOffsets>
+            <endOffsets>
+              <option value="866" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
