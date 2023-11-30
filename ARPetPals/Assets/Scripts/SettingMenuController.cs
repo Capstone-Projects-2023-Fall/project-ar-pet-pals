@@ -55,6 +55,22 @@ public class SettingMenuController : MonoBehaviour
     public int currentHappniness = 100;
     // [SerializeField] public
     // [SerializeField] public 
+
+    [Header("LeaderBoard Field")] 
+    [SerializeField] public TMP_Text name1;
+    [SerializeField] public TMP_Text name2;
+    [SerializeField] public TMP_Text name3;
+    [SerializeField] public TMP_Text name4;
+    [SerializeField] public TMP_Text name5;
+    
+    [SerializeField] public TMP_Text score1;
+    [SerializeField] public TMP_Text score2;
+    [SerializeField] public TMP_Text score3;
+    [SerializeField] public TMP_Text score4;
+    [SerializeField] public TMP_Text score5;
+    
+    
+    
     
     public string changePetName;
     public string changeUserName;
