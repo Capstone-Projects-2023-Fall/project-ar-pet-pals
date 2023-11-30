@@ -3837,7 +3837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSounds:
   - name: Theme
-    clip: {fileID: 8300000, guid: b7da48c15e710a741842583fac3307c7, type: 3}
+    clip: {fileID: 8300000, guid: 390e7a99cb0560f49a1dd255b0e3b819, type: 3}
   sfxSounds:
   - name: Fly
     clip: {fileID: 8300000, guid: 5d899c056941065488afa4b7af4e16ae, type: 3}
