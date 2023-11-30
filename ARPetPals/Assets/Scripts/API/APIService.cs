@@ -885,6 +885,11 @@ namespace ARPetPals
             UpdateUser(username, password, (str) => { });
         }
 
+        public void LeaderBoardTest()
+        {
+            GetLeaderBoardList((str) => { });
+        }
+
         public void DeleteUser(Action<string> callback)
         {
             StartCoroutine(_DeleteUser(callback));
@@ -940,6 +945,40 @@ namespace ARPetPals
         public void DeleteUserTest()
         {
             DeleteUser((str) => { });
+        }
+        
+        
+        public void GetLeaderBoardList(Action<string> callback)
+        {
+            StartCoroutine( _GetLeaderBoardList(callback));
+        }
+
+        private IEnumerator _GetLeaderBoardList(Action<string> callback)
+        {
+            string token = "";
+            string url = URL + "/leaderboard/list";
+            
+            using (UnityWebRequest request = UnityWebRequest.Get(url)){
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_LeaderBoardRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(errorResponse.message);
+                    _ShowReponse(errorResponse.message);
+                    yield break;
+                }
+
+                // Deserialize the JSON response
+                GetLeaderBoardResponse responseData = JsonUtility.FromJson<GetLeaderBoardResponse>(responseJson);
+                Debug.Log("_LeaderBoardRequest response: " + JsonUtility.ToJson(responseData, true));
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback(JsonUtility.ToJson(responseData, true));
+            }
         }
 
     }

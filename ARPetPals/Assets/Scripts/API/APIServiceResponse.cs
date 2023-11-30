@@ -129,8 +129,20 @@ namespace ARPetPals
         {
             public string message;
         }
+        
+        [System.Serializable]
+        public class LeaderBoardInfo
+        {
+            public string username;
+            public int score;
+        }
 
-
+        [System.Serializable]
+        public class GetLeaderBoardResponse
+        {
+            public List<LeaderBoardInfo> leaderboardList;
+        }
+        
     }
 }
 

@@ -19,6 +19,8 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public GameObject ListPage;
     [SerializeField] public GameObject menuButton;
     [SerializeField] public GameObject ExitPage;
+    [SerializeField] public GameObject LeaderBoardPage;
+    
     
     [Header("Setting Field")]
     [SerializeField] public TMP_InputField changePetNameField;
@@ -34,6 +36,9 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public Image SfxButton;
     public Sprite unmuteSfx;
     public Sprite muteSfx;
+    public PlayerPrefs currentMusicVolume;
+    public PlayerPrefs currentSfxVolume;
+    
     
     
     //Text game object of Food List menu
@@ -55,6 +60,22 @@ public class SettingMenuController : MonoBehaviour
     public int currentHappniness = 100;
     // [SerializeField] public
     // [SerializeField] public 
+
+    [Header("LeaderBoard Field")] 
+    [SerializeField] public TMP_Text name1;
+    [SerializeField] public TMP_Text name2;
+    [SerializeField] public TMP_Text name3;
+    [SerializeField] public TMP_Text name4;
+    [SerializeField] public TMP_Text name5;
+    
+    [SerializeField] public TMP_Text score1;
+    [SerializeField] public TMP_Text score2;
+    [SerializeField] public TMP_Text score3;
+    [SerializeField] public TMP_Text score4;
+    [SerializeField] public TMP_Text score5;
+    
+    
+    
     
     public string changePetName;
     public string changeUserName;
@@ -66,10 +87,12 @@ public class SettingMenuController : MonoBehaviour
         settingPage.SetActive(false);
         ListPage.SetActive(false);
         ExitPage.SetActive(false);
-        // health = 5;
-        // currentHappniness = maxHappiness;
-        // SetMaxHappiness(maxHappiness);
-        // SetHappiness(currentHappniness);
+        LeaderBoardPage.SetActive(false);
+        
+        //Setup saved volume when started.
+        masterVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume",100f);
+        sfxVolumeSlider.value = PlayerPrefs.GetFloat("SfxVolume",100f);
+        
         //Get Pet Status Api .        
         gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
         {
@@ -132,9 +155,40 @@ public class SettingMenuController : MonoBehaviour
         SceneManager.LoadScene("SignInScene");
     }
 
-    public void PetStatButtonClicked()
+    public void LeaderBoardButtonClicked()
     {
-        //DoSomething
+        menuPage.SetActive(false);
+        LeaderBoardPage.SetActive(true);
+        gameObject.GetComponent<APIService>().GetLeaderBoardList((response) =>
+        {
+            APIServiceResponse.GetLeaderBoardResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetLeaderBoardResponse>(response);
+            List<APIServiceResponse.LeaderBoardInfo> boardList = responseData.leaderboardList;
+            if (boardList[0] != null)
+            {
+                name1.text = boardList[0].username;
+                score1.text = boardList[0].score.ToString();
+            }
+            if (boardList[1] != null)
+            {
+                name2.text = boardList[1].username;
+                score2.text = boardList[1].score.ToString(); 
+            }
+            if (boardList[2] != null)
+            {
+                name3.text = boardList[2].username;
+                score3.text = boardList[2].score.ToString();
+            }
+            if (boardList[3] != null)
+            {
+                name4.text = boardList[3].username;
+                score4.text = boardList[3].score.ToString();
+            }
+            if (boardList[4] != null)
+            {
+                name5.text = boardList[4].username;
+                score5.text = boardList[4].score.ToString(); 
+            }
+        });
     }
     
     //Fucntion For setting Button
@@ -149,6 +203,8 @@ public class SettingMenuController : MonoBehaviour
         changePetName = changePetNameField.text;
         changeUserName = changeUserNameField.text;
         changePassword = changePasswordField.text;
+        PlayerPrefs.SetFloat("MusicVolume",masterVolumeSlider.value);
+        PlayerPrefs.SetFloat("SfxVolume",sfxVolumeSlider.value);
         
         //Do something
         // if (changePetName != null)
@@ -252,7 +308,7 @@ public class SettingMenuController : MonoBehaviour
         happinessFill.color = gradient.Evaluate(happinessSlider.normalizedValue);
     }
 
-    //implement audiomanager into ui
+    //implement audio manager to ui
     public void ToggleMusic()
     {
         if (VolumeButton.sprite == unmuteMusic)
