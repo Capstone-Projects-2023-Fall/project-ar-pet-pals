@@ -18,7 +18,6 @@ tags:
   - name: Leaderboard
     description: Configuring the User Leaderboard
     
-  
 paths:
   # User Routes
   /api/signin:
@@ -49,7 +48,7 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
+                    type: number
                     description: User ID
                   name:
                     type: string
@@ -90,13 +89,13 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
+                    type: number
                     description: User ID
                   name:
                     type: string
                     description: Username
                   dailyStepGoal:
-                    type: string
+                    type: object
                     description: User's Daily Step Goal
 
         '400':
@@ -129,11 +128,11 @@ paths:
           description: "Success"
           content:
             application/json:
-            schema:
-              type: object
-              properties:
-                isValid:
-                  type: boolean
+              schema:
+                type: object
+                properties:
+                  isValid:
+                    type: boolean
 
         '400':
           description: "Failure"
@@ -218,20 +217,48 @@ paths:
 
   /api/pet/create:
     post:
-      security: 
-        - token: []
       tags:
         - Pet
-      summary: "Create a new pet"
+
+      security: 
+        - token: []
+      
+      summary: "Create a New Pet"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
       responses:
         '200':
-          description: "Created pet name successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetCreationSchema"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  petInfo:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: Pet ID
+                      name:
+                        type: string
+                        description: Pet Name
+                      status:
+                        type: object
+                        properties:
+                          health:
+                            type: number
+                          mood:
+                            type: number
+
         '400':
-          description: "Could not create pet"
+          description: "Failure"
           content:
             application/json:
               schema:
@@ -239,45 +266,87 @@ paths:
 
   /api/pet/status:
     post:
-      security: 
-        - token: []
       tags:
         - Pet
-      summary: "Update pet status e.g. health, mood,..."
+
+      security: 
+        - token: []
+
+      summary: "Update Pet Status"
+
       requestBody:
-        description: "The new pet's status"
+        description: "User ID is provided in the request headers."
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetStatusRequestBody"
+              type: object
+              properties:
+                health:
+                  type: number
+                mood:
+                  type: number
+
       responses:
         '200':
-          description: "Updated pet status successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Status"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  health:
+                    type: number
+                  mood:
+                    type: number
+
         '400':
-          description: "Could not update pet status"
+          description: "Failure"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+
     get:
-      security: 
-        - token: []
       tags: 
         - Pet
-      summary: "Get pet status"
+      
+      security: 
+        - token: []
+      
+      summary: "Get Pet's Status"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
       responses:
         '200':
-          description: "Got pet status successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetStatusSchema"
+                type: object
+                properties:
+                  health:
+                    type: number
+                  mood:
+                    type: number
+                  extra:
+                    type: object
+                    properties:
+                      minutes_since_last_feeding:
+                        type: number
+                      minutes_since_last_activity:
+                        type: number
+                  activities:
+                    type: array
+
         '400':
-          description: "Could not get pet status"
+          description: "Failure"
           content:
             application/json:
               schema:
@@ -285,26 +354,40 @@ paths:
 
   /api/pet/status/reset:
     post:
-      security: 
-        - token: []
       tags:
         - Pet
-      summary: "Reset pet status"
+
+      security: 
+        - token: []
+
+      summary: "Reset the Pet's Status"
+
       requestBody:
-        description: "0: Reset All, 1: Reset Health, 2: Reset Mood"
+        description: "User ID is provided in the request headers."
+        required: true
         content:
           application/json:
             schema:
-                $ref: "#/components/schemas/PetStatusResetRequestBody"
+                type: object
+                properties:
+                  reset_type:
+                    type: number
+                    description: "ENUM - 0: ALL, 1: HEALTH, 2: MOOD"
+
       responses:
         '200':
-          description: "Reset pet status successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Status"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
         '400':
-          description: "Could not reset pet status"
+          description: "Failure"
           content:
             application/json:
               schema:
@@ -314,67 +397,150 @@ paths:
     put:
       tags:
         - Pet
+
+      security: 
+        - token: []
+
+      summary: "Increase the Pet's Mood"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Activity Type
+      
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  mood:
+                    type: number
+                  activities:
+                    type: array
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
   
   /api/pet/activities/reset:
     put:
       tags:
         - Pet
-  
-  /api/pet/choice:
-    post:
+
       security: 
         - token: []
-      tags:
-        - Pet
-      summary: "update pet choice"
-      requestBody:
-        description: "The new pet's choice"
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PetChoice"
-      responseBody:
-        description: "status of update"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Status"
+
+      summary: "Reset the Pet's Activities"
+      description: Run as a Cron Job.
+      
       responses:
         '200':
-          description: "Updated pet choice successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Status"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  matchedCount:
+                    type: number
+                  modifiedCount:
+                    type: number
+
         '400':
-          description: "Could not update pet choice"
+          description: "Failure"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
-    get:
+  
+  /api/pet/choice:
+    post:
+      tags:
+        - Pet
+
       security: 
         - token: []
-      tags: 
-        - Pet
-      summary: "get pet choice"
-     
-      responseBody:
-        description: "the pet choice"
+
+      summary: "Update Pet Choice"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetChoice"
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Choice
+
       responses:
         '200':
-          description: "Got pet choice successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetChoice"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
         '400':
-          description: "Could not get pet choice"
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+    get:
+      tags: 
+        - Pet
+
+      security: 
+        - token: []
+
+      summary: "Get Pet Choice"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  choice:
+                    type: string
+                    description: Pet Choice
+                
+        '400':
+          description: "Failure"
           content:
             application/json:
               schema:
