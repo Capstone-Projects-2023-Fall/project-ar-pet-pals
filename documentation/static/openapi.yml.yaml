@@ -549,19 +549,51 @@ paths:
   # Food Routes
   /api/food/recognize:
     post:
-      tags:
+      tags: 
         - Food
 
-  /api/food/healthRating:
-    post:
-      tags:
-        - Food
+      security: 
+        - token: []
+
+      summary: "Recognize Food"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  topMatches:
+                    type: array
+                    description: Top Potential Food Matches
+                
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+  # /api/food/healthRating:
+  #   post:
+  #     tags:
+  #       - Food
+      
+  #     security: 
+  #       - token: []
+
 
   # Leaderboard Routes
-  /api/leaderboard/list:
-    get:
-      tags:
-      - Leaderboard
+  # /api/leaderboard/list:
+  #   get:
+  #     tags:
+  #     - Leaderboard
   
 
 components:
