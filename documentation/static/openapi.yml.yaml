@@ -23,25 +23,40 @@ paths:
   # User Routes
   /api/signin:
     post:
-      summary: "signin"
       tags:
         - User
+      
+      summary: "Sign In"
+      
       requestBody:
-        description: "The username and password to sign in"
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AuthSchema"
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+
       responses:
         '200':
-          description: "Authentication was successful"
-          content:
+          description: Success
+          content:  
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthSuccess"
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: User ID
+                  name:
+                    type: string
+                    description: Username
+
         '400':
-          description: "Authentication failed"
+          description: Failure
           content:
             application/json:
               schema:
@@ -49,25 +64,43 @@ paths:
   
   /api/signup:
     post:
-      summary: "signup"
       tags:
         - User
+
+      summary: "Sign Up"
+      
       requestBody:
-        description: "The username and password to sign up"
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AuthSchema"
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+
       responses:
         '200':
-          description: "Authentication was successful"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthSuccess"
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: User ID
+                  name:
+                    type: string
+                    description: Username
+                  dailyStepGoal:
+                    type: string
+                    description: User's Daily Step Goal
+
         '400':
-          description: "Authentication failed"
+          description: "Failure"
           content:
             application/json:
               schema:
@@ -75,93 +108,109 @@ paths:
   
   /api/token/verify:
     post:
-      summary: "token validity"
       tags:
         - User
 
-      requestBody:
-        description: "The token to test"
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/VerifyToken"
-      responseBody:
-        description: "whether token is valid or not"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TokenValid"
-      responses:
-        '200':
-          description: "Token is valid"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TokenValid"
-        '400':
-          description: "Token is not valid"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TokenValid"
-  
-  # Pet Routes
-  /api/pet/name:
-    post:
-      security: 
-        - token: []
-      tags:
-        - Pet
-      summary: "update pet name"
+      summary: "Validate User Token"
 
       requestBody:
-        description: "The new pet's name"
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetName"
-      responseBody:
-        description: "status of update"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Status"
+              type: object
+              properties:
+                token:
+                  type: string
+                  string: User Token
+
       responses:
         '200':
-          description: "Updated pet name successfuly"
+          description: "Success"
           content:
             application/json:
-              schema:
-                $ref: "#/components/schemas/Status"
+            schema:
+              type: object
+              properties:
+                isValid:
+                  type: boolean
+
         '400':
-          description: "Could not update pet name"
+          description: "Failure"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+  
+  # Pet Routes
+  /api/pet/name:
     get:
       security: 
         - token: []
+
       tags:
         - Pet 
-      summary: "get pet name"
-      responseBody:
-        description: "the pet's name"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PetName"
+
+      summary: "Get Pet Name"
+      
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+  
       responses:
         '200':
-          description: "Got pet name"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetName"
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Pet Name
+
         '400':
-          description: "Couldn't get pet name"
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"                    
+
+    post:
+      security: 
+        - token: []
+
+      tags:
+        - Pet
+
+      summary: "Update Pet Name"
+
+      requestBody:
+        required: true
+        description: "User ID is provided in the request headers."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Updated Pet Name
+      
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Pet name updated successfully.
+      
+        '400':
+          description: "Failure"
           content:
             application/json:
               schema:
@@ -355,6 +404,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT   
+  
   schemas:
     PetStatus:
       type: object
@@ -366,27 +416,11 @@ components:
       properties:
         choice: string
 
-    PetName:
-      type: object
-      properties:
-        name:
-          type: string
-    
     VerifyToken:
       type: object
       properties:
         token: 
           type: string
-    
-    AuthSchema:
-      type: object
-      properties:
-        username:
-          type: string
-          description: "the username to authenticate"
-        password:
-          type: string
-          description: "the password to authenticate"
     
     TokenValid:
       type: object
@@ -417,7 +451,7 @@ components:
       properties:
         message:
           type: string
-          description: why it failed
+          description: Reason for Failure
 
     Status:
       type: object
