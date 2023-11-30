@@ -17,8 +17,8 @@ namespace ARPetPals
         public TMP_InputField passwordInput;
         public TMP_InputField responseInput;
 
-        public const string URL = "https://arpetpals.store/api";
-        public const string CONTENT_TYPE = "application/json";
+        private const string URL = "https://arpetpals.store/api";
+        private const string CONTENT_TYPE = "application/json";
 
         public const string KEY_TOKEN = "key_token";
         public const string KEY_USER_NAME = "key_username";
@@ -100,8 +100,6 @@ namespace ARPetPals
             if (token == "")
             {
                 callback("Invalid token");
-                yield break; // Exit the coroutine
-
             }
             else
             {
@@ -260,7 +258,7 @@ namespace ARPetPals
                     callback(responseData.message);
                     _ShowReponse(responseData.message);
                 }
-                // Create pet successful
+                // Create pet name successful
                 else {
 
                     // Deserialize the JSON response
@@ -385,7 +383,6 @@ namespace ARPetPals
             string token = GetStoredToken();
             if (token == "") {
                 callback("Invalid token");
-                yield break; // Exit the coroutine
             }
             else {
                 string url = URL + "/pet/name";
@@ -430,7 +427,6 @@ namespace ARPetPals
             string token = GetStoredToken();
             if (token == "") {
                 callback("Invalid token");
-                yield break; // Exit the coroutine
             }
 
             else {
@@ -471,9 +467,6 @@ namespace ARPetPals
                         case "Blue Dragon":
                             index = 3;
                             break;
-                        case "Yellow Dragon":
-                            index = 4;
-                            break;
                         default:
                             index = 0;
                             break;
@@ -484,163 +477,6 @@ namespace ARPetPals
 
                     _ShowReponse(JsonUtility.ToJson(responseData, true));
                     callback("");
-                }
-            }
-        }
-
-        //Set pet status
-        public void SetPetStatus(float health, float mood, Action<string> callback)
-        {
-            StartCoroutine(_SendSetPetStatusRequest(health, mood, callback));
-        }
-
-        private IEnumerator _SendSetPetStatusRequest(float health, float mood, Action<string> callback)
-        {
-
-            string token = GetStoredToken();
-
-            if (string.IsNullOrEmpty(token))
-            {
-                callback("Invalid token");
-                yield break; // Exit the coroutine
-            }
-
-            string url = URL + "/pet/status";
-            Dictionary<string, float> body = new Dictionary<string, float>
-            {
-                { "health", health },
-                { "mood", mood },
-            };
-
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
-            {
-                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
-
-                yield return request.SendWebRequest();
-
-                // parse response
-                string responseJson = request.downloadHandler.text;
-
-                if (request.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.LogError("_SendSetPetStatusRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
-                }
-                // Set pet status successful
-                else
-                {
-
-                    // Deserialize the JSON response
-                    SetPetStatusResponse responseData = JsonUtility.FromJson<SetPetStatusResponse>(responseJson);
-                    Debug.Log("_SendSetPetStatusRequest response: " + JsonUtility.ToJson(responseData, true));
-
-                    _ShowReponse(JsonUtility.ToJson(responseData, true));
-                    callback("");
-
-                }
-            }
-        }
-
-        //Get pet status
-        public void GetPetStatus(Action<string> callback)
-        {
-            StartCoroutine(_SendGetPetStatusRequest(callback));
-        }
-
-        private IEnumerator _SendGetPetStatusRequest(Action<string> callback)
-        {
-            string token = GetStoredToken();
-            if (token == "")
-            {
-                callback("Invalid token");
-                yield break; // Exit the coroutine
-            }
-            else
-            {
-                string url = URL + "/pet/status";
-
-                UnityWebRequest request = UnityWebRequest.Get(url);
-                request.SetRequestHeader("Authorization", "Bearer " + token);
-
-                yield return request.SendWebRequest();
-
-                // parse response
-                string responseJson = request.downloadHandler.text;
-
-                if (request.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.LogError("_SendGetPetStatusRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
-                }
-                else
-                {
-                    // Deserialize the JSON response
-                    GetPetStatusResponse responseData = JsonUtility.FromJson<GetPetStatusResponse>(responseJson);
-                    Debug.Log("_SendGetPetStatusRequest response: " + JsonUtility.ToJson(responseData, true));
-
-
-                    // Store data locally
-                    PlayerPrefs.SetString(KEY_PET_STATUS, responseJson);
-                    _ShowReponse(JsonUtility.ToJson(responseData, true));
-                    callback("");
-                }
-            }
-        }
-
-        //Reset pet status
-        public void ResetPetStatus(int type, Action<string> callback)
-        {
-            StartCoroutine(_SendResetPetStatusRequest(type, callback));
-        }
-
-        private IEnumerator _SendResetPetStatusRequest(int type, Action<string> callback)
-        {
-
-            string token = GetStoredToken();
-
-            if (string.IsNullOrEmpty(token))
-            {
-                callback("Invalid token");
-                yield break; // Exit the coroutine
-            }
-
-            string url = URL + "/pet/status/reset";
-            Dictionary<string, float> body = new Dictionary<string, float>
-            {
-                { "reset_type", type },
-            };
-
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
-            {
-                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
-
-                yield return request.SendWebRequest();
-
-                // parse response
-                string responseJson = request.downloadHandler.text;
-
-                if (request.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.LogError("_SendResetPetStatusRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
-                }
-                // Reset pet status successful
-                else
-                {
-
-                    // Deserialize the JSON response
-                    ResetPetStatusResponse responseData = JsonUtility.FromJson<ResetPetStatusResponse>(responseJson);
-                    Debug.Log("_SendResetPetStatusRequest response: " + JsonUtility.ToJson(responseData, true));
-
-                    _ShowReponse(JsonUtility.ToJson(responseData, true));
-                    callback("");
-
                 }
             }
         }
@@ -666,34 +502,6 @@ namespace ARPetPals
             GetUser((str) => {});
         }
 
-        public void CreatePetTest()
-        {
-            CreatePet((str) => { });
-        }
-
-        public void SetPetStatusTest()
-        {
-            float health = UnityEngine.Random.Range(10, 100);
-            float mood = UnityEngine.Random.Range(10, 100);
-            SetPetStatus(health, mood, (str) => { });
-        }
-
-        public void GetPetStatusTest()
-        {
-            GetPetStatus((str) => {
-                // Deserialize the stored JSON
-                GetPetStatusResponse responseData = JsonUtility.FromJson<GetPetStatusResponse>(GetStoredPetStatus());
-                Debug.Log("GetPetStatusTest health: " + responseData.health);
-                Debug.Log("GetPetStatusTest mood: " + responseData.mood);
-            });
-        }
-
-        public void ResetPetStatusTest()
-        {
-            int type = (int) RESET_STATUS_TYPE.ALL;
-            ResetPetStatus(type, (str) => { });
-        }
-
         public string GetStoredToken()
         {
             return PlayerPrefs.GetString(KEY_TOKEN, "");
@@ -704,10 +512,6 @@ namespace ARPetPals
             return PlayerPrefs.GetString(KEY_USER_NAME, "");
         }
 
-        public string GetStoredPetStatus()
-        {
-            return PlayerPrefs.GetString(KEY_PET_STATUS, "");
-        }
 
         // Food Related Requests
 

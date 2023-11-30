@@ -4,9 +4,7 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Scripts",
-        "Unity.XR.ARFoundation",
-        ""
+        "Scripts"
     ],
     "includePlatforms": [
         "Editor"
