@@ -92,10 +92,7 @@ public class SettingMenuController : MonoBehaviour
         //Setup saved volume when started.
         masterVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume",100f);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat("SfxVolume",100f);
-        // health = 5;
-        // currentHappniness = maxHappiness;
-        // SetMaxHappiness(maxHappiness);
-        // SetHappiness(currentHappniness);
+        
         //Get Pet Status Api .        
         gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
         {
