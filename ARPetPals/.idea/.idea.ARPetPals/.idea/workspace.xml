@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Fonts/Molot SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/Molot SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PetDeath.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PetDeath.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/SettingMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SettingMenuController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
