@@ -14,49 +14,47 @@ export const leaderboardList = async ({
   request: any;
   response: any;
 }) => {
-  const users = await usersDb.find({}).toArray();
+  let list:  any[] = []
+  let pets = Pets.findMany(
+    { activities: { $ne: null } },
+  ).toArray();
 
-  if (!users) {
-    response.body = {
-      message: "could not find any users",
-    };
-    response.status = 400;
-    return;
+  for( let pet of pets){
+    let score = 0
+    let obj = {}
+    for( let act of pet.activities){
+      score += act.weeklyPoints
+    }
+
+
+    let user = usersDb.findOne({_id: pet.user_id})
+
+    if (!user){
+      continue
+    }
+
+    obj = { 
+      username: user.username,
+      score: score
+    }
+    list.push(obj)
+
+    
   }
-  let n = 5
+
+  // top 5
+  let n = 5;
+
+  list = list.splice(0, Math.max(list.length, n+1));
+  
+  response.body = {
+    leaderboardList: list
+  }
+
+
+
   
 
-  // n is the top (n) of users. for instance, top 5 or top 12
+  
 
-  // get a list of users
-
-  // get the happinness and health of user
-
-  let score = 0;
-
-  let list: {username: string, score: number}[] = []
-  for (let user of users) {
-    const pet = await Pets.findOne({ user_id: user._id.toString() });
-    console.log(user._id, pet)
-
-    if(!pet) continue;
-    score = pet.status.mood + pet.status.health;
-    list.push( {
-      username: user.username,
-      score,
-    });
-  }
-
-  list.sort((a, b) => (a.score < b.score) ? 1 : -1)
-
-  list = list.slice(0, n+1);
-g
-
-  // return that sorted list
-
-  response.body = {
-    leaderboardList: list,
-  };
-
-  response.status = 200;
 };

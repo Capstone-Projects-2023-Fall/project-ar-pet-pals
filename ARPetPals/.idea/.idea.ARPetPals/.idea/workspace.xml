@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e1781716-5da8-4ba9-a8bc-654060b64c5c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fonts/Molot SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/Molot SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SettingMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SettingMenuController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +16,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/UI/Scripts/SignUpController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/UI/Scripts/SwitchScene.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PlaySound.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HeartBarController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LoadingSceneController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Sound.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.arfoundation@5.0.7/Editor/Simulation/SimulationEditorUtilities.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -118,6 +125,25 @@
       <workItem from="1698200957725" duration="2285000" />
       <workItem from="1698255004395" duration="735000" />
       <workItem from="1698255754217" duration="3942000" />
+      <workItem from="1699386918630" duration="595000" />
+      <workItem from="1699410389302" duration="611000" />
+      <workItem from="1699495671625" duration="3598000" />
+      <workItem from="1699553747489" duration="598000" />
+      <workItem from="1699565781798" duration="5000" />
+      <workItem from="1699565871086" duration="15835000" />
+      <workItem from="1699638095747" duration="9681000" />
+      <workItem from="1699668434221" duration="5638000" />
+      <workItem from="1699739336689" duration="4316000" />
+      <workItem from="1699828875839" duration="2202000" />
+      <workItem from="1700087228059" duration="3019000" />
+      <workItem from="1700106014192" duration="6115000" />
+      <workItem from="1700112464209" duration="2567000" />
+      <workItem from="1700161368962" duration="3358000" />
+      <workItem from="1700245627966" duration="1435000" />
+      <workItem from="1700247495576" duration="5207000" />
+      <workItem from="1701120724230" duration="2617000" />
+      <workItem from="1701286875607" duration="150000" />
+      <workItem from="1701318912739" duration="2914000" />
     </task>
     <servers />
   </component>
@@ -126,7 +152,37 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/HealthHeart.cs</url>
+          <line>31</line>
+          <properties documentPath="C:\Users\nguye\CodingProjects\FinalProject\project-ar-pet-pals\ARPetPals\Assets\Scripts\HealthHeart.cs" initialLine="30" containingFunctionPresentation="Method 'SetHeartImage'">
+            <startOffsets>
+              <option value="865" />
+            </startOffsets>
+            <endOffsets>
+              <option value="866" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
