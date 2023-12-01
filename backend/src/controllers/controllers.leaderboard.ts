@@ -55,7 +55,7 @@ export const leaderboardList = async ({
 
   list = list.splice(0, Math.max(list.length, n+1));
 
-	lists = list.sort(compareScores)
+	list = list.sort(compareScores)
   
   response.body = {
     leaderboardList: list
