@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ARPetPals;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -60,11 +61,13 @@ public class PetDeath : MonoBehaviour
     }
 
     public void deleteAccount() {
-
+        
     }
 
     //load sign up scene after exit button is clicked
     public void returnToRegister() {
+        gameObject.GetComponent<APIService>().DeleteUser(str => {});
+        Debug.Log("Deleted Account");
         SceneManager.LoadScene("SignUpScene");
     }
 }

@@ -17,39 +17,21 @@ const router = new Router();
 
 //UNAUTHORIZED ROUTES
 router.get("/", home)
-router.post("/api/signup", signup )
-router.post("/api/signin",signin)
 
 // AUTHORIZED ROUTES
 
-//createPet
-router.post("/api/pet/create", authourized, createPet  )
+// -- User --
 
-//name
-router.post("/api/pet/name", authourized, setPetName  )
-router.get("/api/pet/name", authourized, getPetName  )
+// Login and Registration
+router.post("/api/signup", signup)
+router.post("/api/signin", signin)
+router.post("/api/token/verify", verifyToken)
 
-//status
-router.post("/api/pet/status", authourized, setPetStatus  )
-router.get("/api/pet/status", authourized, getPetStatus  )
-router.post("/api/pet/status/reset", authourized, resetPetStatus  )
-router.put("/api/pet/status/increaseMood", authourized, increasePetMood  )
-router.put("/api/pet/activities/reset", authourized, resetPetActivities  )
-
-
-//username
-router.get("/api/user/name", authourized, getUserName  )
-router.put("/api/user", authourized, updateUser  )
-router.delete("/api/user", authourized, deleteUser  )
-
-
-//pet-choice
-router.post("/api/pet/choice", authourized, setPetChoice  )
-router.get("/api/pet/choice", authourized, getPetChoice )
-
-
-//userInfo
-router.get("/api/user", authourized, getUserInfo  )
+// User Management
+router.get("/api/user/name", authourized, getUserName)
+router.put("/api/user", authourized, updateUser)
+router.delete("/api/user", authourized, deleteUser)
+router.get("/api/user", authourized, getUserInfo)
 
 // Update Step Goal
 router.put("/api/user/step-goal", authourized, updateStepGoal);
@@ -60,19 +42,56 @@ router.put("/api/user/step-count", authourized, updateStepCount);
 // Check Step Goal
 router.get("/api/user/check-step-goal", authourized, checkStepGoal);
 
-//verifies a token
-router.post("/api/token/verify", verifyToken)
+// -- Pet --
+
+// Create
+router.post("/api/pet/create", authourized, createPet  )
+
+// Name
+router.post("/api/pet/name", authourized, setPetName  )
+router.get("/api/pet/name", authourized, getPetName  )
+
+// Status
+router.post("/api/pet/status", authourized, setPetStatus  )
+router.get("/api/pet/status", authourized, getPetStatus  )
+router.post("/api/pet/status/reset", authourized, resetPetStatus  )
+router.put("/api/pet/status/increaseMood", authourized, increasePetMood  )
+router.put("/api/pet/activities/reset", authourized, resetPetActivities  )
+
+// Choice
+router.post("/api/pet/choice", authourized, setPetChoice  )
+router.get("/api/pet/choice", authourized, getPetChoice )
+
+// -- Food --
+
+// Recognize
+router.post("/api/food/recognize", authourized, recognizeFood)
+
+// Nutrition Info
+router.post("/api/food/healthRating", authourized, getHealthRating);
+
+// -- Leaderboard --
+
+// User List 
+router.get("/api/leaderboard/list", leaderboardList)
+
+
+
+
+
+
+
+
+
+
+
+
 
 // food-related routes --
 
-// recognize food in image
-router.post("/api/food/recognize", authourized, recognizeFood)
-
-// get nutrition info for food
-router.post("/api/food/healthRating", authourized, getHealthRating);
 
 
-// get user list 
-router.get("/api/leaderboard/list", leaderboardList)
+
+
 
 export default router;
