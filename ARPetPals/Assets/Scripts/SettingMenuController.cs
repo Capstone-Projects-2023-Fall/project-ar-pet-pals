@@ -215,6 +215,11 @@ public class SettingMenuController : MonoBehaviour
         menuPage.SetActive(true);
         settingPage.SetActive(false);
     }
+    public void LeaderBoardCancelButtonClicked()
+    {
+        menuPage.SetActive(true);
+        LeaderBoardPage.SetActive(false);
+    }
     //Saving all change from setting page.
     public void SaveButtonClicked()
     {

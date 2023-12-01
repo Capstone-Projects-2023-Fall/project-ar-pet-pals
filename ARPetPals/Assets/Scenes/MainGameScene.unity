@@ -15677,7 +15677,7 @@ GameObject:
   - component: {fileID: 2129502186}
   - component: {fileID: 2129502185}
   m_Layer: 5
-  m_Name: SettingCancelButton
+  m_Name: LeaderBoardCancelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15749,7 +15749,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 810220378}
         m_TargetAssemblyTypeName: SettingMenuController, Scripts
-        m_MethodName: SettingCancelButtonClicked
+        m_MethodName: LeaderBoardCancelButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
