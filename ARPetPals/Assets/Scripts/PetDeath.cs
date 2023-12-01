@@ -61,12 +61,12 @@ public class PetDeath : MonoBehaviour
     }
 
     public void deleteAccount() {
-        gameObject.GetComponent<APIService>().DeleteUser(str => {});
+        
     }
 
     //load sign up scene after exit button is clicked
     public void returnToRegister() {
-        
+        gameObject.GetComponent<APIService>().DeleteUser(str => {});
         Debug.Log("Deleted Account");
         SceneManager.LoadScene("SignUpScene");
     }
