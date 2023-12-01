@@ -5018,7 +5018,6 @@ MonoBehaviour:
   menuButton: {fileID: 1133166423}
   ExitPage: {fileID: 817079411}
   LeaderBoardPage: {fileID: 1435384693}
-  Group: {fileID: 0}
   changePetNameField: {fileID: 1251100990}
   changeUserNameField: {fileID: 990456921}
   changePasswordField: {fileID: 452640490}
@@ -15564,10 +15563,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2121201477}
-    - targetCorrespondingSourceObject: {fileID: 1317000959904042, guid: 7f51b5e2065bbb145b78b23451c549e0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2121201478}
   m_SourcePrefab: {fileID: 100100000, guid: 7f51b5e2065bbb145b78b23451c549e0, type: 3}
 --- !u!1 &2121201468 stripped
 GameObject:
@@ -15649,21 +15644,6 @@ MonoBehaviour:
   CG: {fileID: 1925235068}
   tombStone: {fileID: 956109451}
   deathPopUp: {fileID: 838238150}
---- !u!114 &2121201478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121201468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2e9dc7cd4a9fad46ab1b96a10d42c6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameInput: {fileID: 0}
-  passwordInput: {fileID: 0}
-  responseInput: {fileID: 0}
 --- !u!1 &2129502183
 GameObject:
   m_ObjectHideFlags: 0
@@ -15677,7 +15657,7 @@ GameObject:
   - component: {fileID: 2129502186}
   - component: {fileID: 2129502185}
   m_Layer: 5
-  m_Name: LeaderBoardCancelButton
+  m_Name: SettingCancelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15749,7 +15729,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 810220378}
         m_TargetAssemblyTypeName: SettingMenuController, Scripts
-        m_MethodName: LeaderBoardCancelButtonClicked
+        m_MethodName: SettingCancelButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

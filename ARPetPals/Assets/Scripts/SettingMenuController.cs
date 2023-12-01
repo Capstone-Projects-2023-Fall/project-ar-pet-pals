@@ -20,7 +20,6 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public GameObject menuButton;
     [SerializeField] public GameObject ExitPage;
     [SerializeField] public GameObject LeaderBoardPage;
-    [SerializeField] public GameObject Group;
     
     
     [Header("Setting Field")]
@@ -164,48 +163,31 @@ public class SettingMenuController : MonoBehaviour
         {
             APIServiceResponse.GetLeaderBoardResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetLeaderBoardResponse>(response);
             List<APIServiceResponse.LeaderBoardInfo> boardList = responseData.leaderboardList;
-                
-            int index = 0;
-            foreach (var VARIABLE in boardList)
+            if (boardList[0] != null)
             {
-                string indexString = (index+1).ToString();
-                GameObject.Find("Name"+indexString).GetComponent<TMP_Text>().text = boardList[index].username;
-                GameObject.Find("Score"+indexString).GetComponent<TMP_Text>().text = boardList[index].score.ToString();
-                index++;
+                name1.text = boardList[0].username;
+                score1.text = boardList[0].score.ToString();
             }
-            
-           
-            // if (index ++ <= totalSize)
-            // {
-            //     
-            //     // name1.text = boardList[index].username;
-            //     // score1.text = boardList[index].score.ToString();
-            // }
-            // if (boardList[1] != null)
-            // {
-            //     name2.text = boardList[1].username;
-            //     score2.text = boardList[1].score.ToString(); 
-            // }
-            // if (boardList[2] != null)
-            // {
-            //     name3.text = boardList[2].username;
-            //     score3.text = boardList[2].score.ToString();
-            // }
-            // if (boardList[3] != null)
-            // {
-            //     name4.text = boardList[3].username;
-            //     score4.text = boardList[3].score.ToString();
-            // }
-            // if (boardList[4] != null)
-            // {
-            //     name5.text = boardList[4].username;
-            //     score5.text = boardList[4].score.ToString(); 
-            // }
-            //
-            // if (boardList[4] == null)
-            // {
-            //     Debug.Log("4 is null");
-            // }
+            if (boardList[1] != null)
+            {
+                name2.text = boardList[1].username;
+                score2.text = boardList[1].score.ToString(); 
+            }
+            if (boardList[2] != null)
+            {
+                name3.text = boardList[2].username;
+                score3.text = boardList[2].score.ToString();
+            }
+            if (boardList[3] != null)
+            {
+                name4.text = boardList[3].username;
+                score4.text = boardList[3].score.ToString();
+            }
+            if (boardList[4] != null)
+            {
+                name5.text = boardList[4].username;
+                score5.text = boardList[4].score.ToString(); 
+            }
         });
     }
     
@@ -214,11 +196,6 @@ public class SettingMenuController : MonoBehaviour
     {
         menuPage.SetActive(true);
         settingPage.SetActive(false);
-    }
-    public void LeaderBoardCancelButtonClicked()
-    {
-        menuPage.SetActive(true);
-        LeaderBoardPage.SetActive(false);
     }
     //Saving all change from setting page.
     public void SaveButtonClicked()
