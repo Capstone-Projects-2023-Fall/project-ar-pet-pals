@@ -7,6 +7,15 @@ const Pets = db.collection<PetSchema>("pets");
 
 
 
+function compareScores( a:any, b:any ) {
+  if ( a.score < b.score ){
+    return -1;
+  }
+  if ( a.score > b.score ){
+    return 1;
+  }
+  return 0;
+}
 export const leaderboardList = async ({
   request,
   response,
@@ -41,20 +50,14 @@ export const leaderboardList = async ({
 
     
   }
-
   // top 5
   let n = 5;
 
   list = list.splice(0, Math.max(list.length, n+1));
+
+	lists = list.sort(compareScores)
   
   response.body = {
     leaderboardList: list
   }
-
-
-
-  
-
-  
-
 };
