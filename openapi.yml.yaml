@@ -1,143 +1,456 @@
 openapi: 3.0.2
 info:
-  title: API docs
-  description: AR PET Pals API
+  title: Backend Server API
 
 servers:
   - url: https://arpetpals.store/
 
 tags:
- 
-  - name: authentication
-    description: API for logging in and logging out
+  - name: User
+    description: User Authentication and Management
 
-  - name: pet-name
-    description: API for pet name
+  - name: Pet
+    description: Pet Interaction and Management
 
-  - name: pet-choice
-    description: API for pet choice
+  - name: Food
+    description: Food Recognition and Analytics
 
-  - name: user-info
-    description: API for user info
-
-  - name: user-name
-    description: API for user name
-
-  - name: front
-    externalDocs:
-      description: API for managing user interface, inputs, notifications, leaderboard, and exercise reminders
-
-  - name: pet
-    description: API for pet
+  - name: Leaderboard
+    description: Configuring the User Leaderboard
     
-  
 paths:
+  # User Routes
   /api/signin:
     post:
-      summary: "signin"
       tags:
-        - authentication
+        - User
+      
+      summary: "Sign In"
+      
       requestBody:
-        description: "The username and password to sign in"
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AuthSchema"
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+
       responses:
         '200':
-          description: "Authentication was successful"
-          content:
+          description: Success
+          content:  
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthSuccess"
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: User ID
+                  name:
+                    type: string
+                    description: Username
+
         '400':
-          description: "Authentication failed"
+          description: Failure
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+  
   /api/signup:
     post:
-      summary: "signup"
       tags:
-        - authentication
+        - User
+
+      summary: "Sign Up"
+      
       requestBody:
-        description: "The username and password to sign up"
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AuthSchema"
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+
       responses:
         '200':
-          description: "Authentication was successful"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthSuccess"
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: User ID
+                  name:
+                    type: string
+                    description: Username
+                  dailyStepGoal:
+                    type: object
+                    description: User's Daily Step Goal
+
         '400':
-          description: "Authentication failed"
+          description: "Failure"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
-
-  /api/pet/name:
+  
+  /api/token/verify:
     post:
-      security: 
-        - token: []
       tags:
-        - pet-name
-      summary: "update pet name"
+        - User
+
+      summary: "Validate User Token"
 
       requestBody:
-        description: "The new pet's name"
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetName"
-      responseBody:
-        description: "status of update"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Status"
+              type: object
+              properties:
+                token:
+                  type: string
+                  string: User Token
+
       responses:
         '200':
-          description: "Updated pet name successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Status"
+                type: object
+                properties:
+                  isValid:
+                    type: boolean
+
         '400':
-          description: "Could not update pet name"
+          description: "Failure"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+  
+  /api/user:
     get:
       security: 
         - token: []
+
       tags:
-        - pet-name  
-      summary: "get pet name"
-      responseBody:
-        description: "the pet's name"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PetName"
+        - User
+
+      summary: "Get User Info"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
       responses:
         '200':
-          description: "Got pet name"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetName"
+                type: object
+                properties:
+                  userInfo:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: User ID
+                      name:
+                        type: string
+                        description: Username
+        
         '400':
-          description: "Couldn't get pet name"
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+    post:
+      security: 
+        - token: []
+
+      tags:
+        - User
+
+      summary: "Update User"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+    
+    delete:
+      security: 
+        - token: []
+
+      tags:
+        - User
+
+      summary: "Delete User"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+  /api/user/step-count:
+    put:
+      security:
+        - token: []
+
+      tags:
+        - User
+
+      summary: "Update Step Count"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                  description: User ID
+                steps:
+                  type: number
+                  description: Step Count
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Result
+        
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"    
+
+  /api/user/step-goal:
+    put:
+      security: 
+        - token: []
+
+      tags:
+        - User
+
+      summary: "Update User's Step Goal"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dailyStepGoal:
+                  type: number
+                  description: Daily Step Goal
+
+      responses:
+        '404':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: User not found.
+
+        '500':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Failed to update step goal.
+
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Step goal updated successfully.
+
+  /api/user/check-step-goal:
+    get:
+        security: 
+          - token: []
+
+        tags:
+          - User
+
+        summary: "Check User's Step Goal"
+
+        requestBody:
+          description: "User ID is provided in the request headers."
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: number
+                    description: User ID
+                  steps:
+                    type: number
+                    description: User's Steps
+
+        responses:
+          '200':
+            description: "Success"
+            content:
+              application/json:
+                schema:
+                  type: boolean
+                  description: Whether the user met the step goal.
+          
+          '400':
+            description: "Failure"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Fail"
+
+  # Pet Routes
+  /api/pet/name:
+    get:
+      security: 
+        - token: []
+
+      tags:
+        - Pet 
+
+      summary: "Get Pet Name"
+      
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+  
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Pet Name
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"                    
+
+    post:
+      security: 
+        - token: []
+
+      tags:
+        - Pet
+
+      summary: "Update Pet Name"
+
+      requestBody:
+        required: true
+        description: "User ID is provided in the request headers."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Updated Pet Name
+      
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Pet name updated successfully.
+      
+        '400':
+          description: "Failure"
           content:
             application/json:
               schema:
@@ -145,66 +458,136 @@ paths:
 
   /api/pet/create:
     post:
+      tags:
+        - Pet
+
       security: 
         - token: []
-      tags:
-        - pet
-      summary: "Create a new pet"
+      
+      summary: "Create a New Pet"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
       responses:
         '200':
-          description: "Created pet name successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PetCreationSchema"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  petInfo:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: Pet ID
+                      name:
+                        type: string
+                        description: Pet Name
+                      status:
+                        type: object
+                        properties:
+                          health:
+                            type: number
+                          mood:
+                            type: number
+
         '400':
-          description: "Could not create pet"
+          description: "Failure"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
 
   /api/pet/status:
+    get:
+        tags: 
+          - Pet
+        
+        security: 
+          - token: []
+        
+        summary: "Get Pet's Status"
+
+        requestBody:
+          description: "User ID is provided in the request headers."
+          required: true
+
+        responses:
+          '200':
+            description: "Success"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    health:
+                      type: number
+                    mood:
+                      type: number
+                    extra:
+                      type: object
+                      properties:
+                        minutes_since_last_feeding:
+                          type: number
+                        minutes_since_last_activity:
+                          type: number
+                    activities:
+                      type: array
+
+          '400':
+            description: "Failure"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Fail"
+
     post:
+      tags:
+        - Pet
+
       security: 
         - token: []
-      tags:
-        - pet
-      summary: "Update pet status e.g. health, mood,..."
+
+      summary: "Update Pet Status"
+
       requestBody:
-        description: "The new pet's status"
+        description: "User ID is provided in the request headers."
+        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PetStatusRequestBody"
+              type: object
+              properties:
+                health:
+                  type: number
+                mood:
+                  type: number
+
       responses:
         '200':
-          description: "Updated pet status successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Status"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  health:
+                    type: number
+                  mood:
+                    type: number
+
         '400':
-          description: "Could not update pet status"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Fail"
-    get:
-      security: 
-        - token: []
-      tags: 
-        - pet
-      summary: "Get pet status"
-      responses:
-        '200':
-          description: "Got pet status successfuly"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PetStatusSchema"
-        '400':
-          description: "Could not get pet status"
+          description: "Failure"
           content:
             application/json:
               schema:
@@ -212,395 +595,253 @@ paths:
 
   /api/pet/status/reset:
     post:
+      tags:
+        - Pet
+
       security: 
         - token: []
-      tags:
-        - pet
-      summary: "Reset pet status"
+
+      summary: "Reset the Pet's Status"
+
       requestBody:
-        description: "0: Reset All, 1: Reset Health, 2: Reset Mood"
+        description: "User ID is provided in the request headers."
+        required: true
         content:
           application/json:
             schema:
-                $ref: "#/components/schemas/PetStatusResetRequestBody"
+                type: object
+                properties:
+                  reset_type:
+                    type: number
+                    description: "ENUM - 0: ALL, 1: HEALTH, 2: MOOD"
+
       responses:
         '200':
-          description: "Reset pet status successfuly"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Status"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
         '400':
-          description: "Could not reset pet status"
+          description: "Failure"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
 
+  /api/pet/status/increaseMood:
+    put:
+      tags:
+        - Pet
+
+      security: 
+        - token: []
+
+      summary: "Increase the Pet's Mood"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Activity Type
+      
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  mood:
+                    type: number
+                  activities:
+                    type: array
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+  /api/pet/activities/reset:
+    put:
+      tags:
+        - Pet
+
+      security: 
+        - token: []
+
+      summary: "Reset the Pet's Activities"
+      description: Run as a Cron Job.
+      
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  matchedCount:
+                    type: number
+                  modifiedCount:
+                    type: number
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+  
   /api/pet/choice:
-    post:
-      security: 
-        - token: []
-      tags:
-        - pet-choice
-      summary: "update pet choice"
-      requestBody:
-        description: "The new pet's choice"
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PetChoice"
-      responseBody:
-        description: "status of update"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Status"
-      responses:
-        '200':
-          description: "Updated pet choice successfuly"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Status"
-        '400':
-          description: "Could not update pet choice"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Fail"
     get:
-      security: 
-        - token: []
-      tags: 
-        - pet-choice
-      summary: "get pet choice"
-     
-      responseBody:
-        description: "the pet choice"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PetChoice"
-      responses:
-        '200':
-          description: "Got pet choice successfuly"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PetChoice"
-        '400':
-          description: "Could not get pet choice"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Fail"
+        tags: 
+          - Pet
+
+        security: 
+          - token: []
+
+        summary: "Get Pet Choice"
+
+        requestBody:
+          description: "User ID is provided in the request headers."
+          required: true
+
+        responses:
+          '200':
+            description: "Success"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    choice:
+                      type: string
+                      description: Pet Choice
+                  
+          '400':
+            description: "Failure"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Fail"
     
-  /api/token/verify:
     post:
-      summary: "token validity"
+      tags:
+        - Pet
+
+      security: 
+        - token: []
+
+      summary: "Update Pet Choice"
 
       requestBody:
-        description: "The token to test"
+        description: "User ID is provided in the request headers."
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VerifyToken"
-      responseBody:
-        description: "whether token is valid or not"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TokenValid"
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Choice
+
       responses:
         '200':
-          description: "Token is valid"
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TokenValid"
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
         '400':
-          description: "Token is not valid"
+          description: "Failure"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TokenValid"
+                $ref: "#/components/schemas/Fail"
 
-  /front/displayInterface:
-    get:
-      summary: "Retrieve the user interface layout."
-      operationId: "getDisplayInterface"
-      tags:
-        - front
+  # Food Routes
+  /api/food/recognize:
+    post:
+      tags: 
+        - Food
+
+      security: 
+        - token: []
+
+      summary: "Recognize Food"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
       responses:
-        "200":
-          description: "Successfully retrieved UI layout."
+        '200':
+          description: "Success"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserInterfaceLayout"
-
-  /front/userInput:
-    post:
-      summary: "Handle user interactions and inputs."
-      operationId: "handleUserInput"
-      tags:
-        - front
-      requestBody:
-        description: "User input details."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserInputDetails"
-      responses:
-        "200":
-          description: "User input processed successfully."
-
-  /front/sendNotification:
-    post:
-      summary: "Send notifications to the user."
-      operationId: "sendNotification"
-      tags:
-        - front
-      requestBody:
-        description: "Notification details."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NotificationDetails"
-      responses:
-        "200":
-          description: "Notification sent successfully."
-
-  /front/leaderboard:
-    get:
-      summary: "Retrieve the public leaderboard."
-      operationId: "getLeaderboard"
-      tags:
-        - front
-      responses:
-        "200":
-          description: "Successfully retrieved leaderboard."
+                type: object
+                properties:
+                  topMatches:
+                    type: array
+                    description: Top Potential Food Matches
+                
+        '400':
+          description: "Failure"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LeaderboardDetails"
+                $ref: "#/components/schemas/Fail"
 
-  /front/exerciseReminder:
-    post:
-      summary: "Send exercise reminders to the user."
-      operationId: "sendExerciseReminder"
-      tags:
-        - front
-      requestBody:
-        description: "Details of the exercise reminder."
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExerciseReminderDetails"
-      responses:
-        "200":
-          description: "Exercise reminder sent successfully."
+  # Implement Function
+  # /api/food/healthRating:
+  #   post:
+  #     tags:
+  #       - Food
+      
+  #     security: 
+  #       - token: []
+
+
+  # Leaderboard Routes
+  # /api/leaderboard/list:
+  #   get:
+  #     tags:
+  #     - Leaderboard
+  
+
 components:
-  securitySchemes:
-    token:            
-      type: http
-      scheme: bearer
-      bearerFormat: JWT   
   schemas:
-
-    PetStatus:
-      type: object
-      properties:
-        health: int
-
-    PetChoice:
-      type: object
-      properties:
-        choice: string
-
-    PetName:
-      type: object
-      properties:
-        name:
-          type: string
-    VerifyToken:
-      type: object
-      properties:
-        token: 
-          type: string
-    AuthSchema:
-      type: object
-      properties:
-        username:
-          type: string
-          description: "the username to authenticate"
-        password:
-          type: string
-          description: "the password to authenticate"
-    TokenValid:
-      type: object
-      properties:
-        isValid: 
-          type: boolean
-
-    UserInfo:
-      type: object
-      properties:
-        id: 
-          type: string
-        name: 
-         type: string
-
-    AuthSuccess:
-      type: object
-      properties:
-        token: 
-          type: string
-          description: "the auth token"
-        userInfo:
-          type: object
-          $ref: "#/components/schemas/UserInfo"
     Fail:
       type: object
       properties:
         message:
           type: string
-          description: why it failed
-
-  
-    Status:
-      type: object
-      properties:
-        message: 
-          type: string
-          description: status
-
-    UserInterfaceLayout:
-      type: object
-      properties:
-        layoutId:
-          type: string
-          description: "ID of the UI layout."
-        components:
-          type: array
-          items:
-            type: string
-          description: "Components present in the UI layout."
-
-    UserInputDetails:
-      type: object
-      properties:
-        inputType:
-          type: string
-          description: "Type of user input."
-        inputValue:
-          type: string
-          description: "Value of the user input."
-
-    NotificationDetails:
-      type: object
-      properties:
-        notificationType:
-          type: string
-          description: "Type of notification."
-        message:
-          type: string
-          description: "Message content of the notification."
-
-    LeaderboardDetails:
-      type: object
-      properties:
-        rank:
-          type: array
-          items:
-            $ref: "#/components/schemas/UserRank"
-          description: "List of users and their rankings."
-
-    UserRank:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: "ID of the user."
-        score:
-          type: integer
-          description: "User's score on the leaderboard."
-
-    ExerciseReminderDetails:
-      type: object
-      properties:
-        reminderMessage:
-          type: string
-          description: "Message for the exercise reminder."
-
-    PetStatusRequestBody:
-      type: object
-      properties:
-        health:
-          type: number
-          description: "Pet's health (optional)"
-        mood:
-          type: number
-          description: "Pet's mood (optional)"
-
-    PetStatusResetRequestBody:
-      type: object
-      properties:
-        reset_type:
-          type: integer
-          description: "0: Reset All, 1: Reset Health, 2: Reset Mood"
-      required: [reset_type]
-
-    PetStatusExtraSchema:
-      type: object
-      properties:
-        minutes_since_last_feeding:
-          type: number
-          description: "Minutes since last feeding"
-        minutes_since_last_activity:
-          type: number
-          description: "Minutes since last activity"
-
-    PetStatusSchema:
-      type: object
-      properties:
-        health:
-          type: number
-          description: "Pet's health"
-        mood:
-          type: number
-          description: "Pet's mood"
-        extra: 
-          type: object
-          $ref: "#/components/schemas/PetStatusExtraSchema"
-    PetInfoSchema:
-      type: object
-      properties:
-        id:
-          type: string
-          description: "Pet's id"
-        name:
-          type: string
-          description: "Pet's name"
-        status:
-          type: object
-          $ref: "#/components/schemas/PetStatusSchema"
-    PetCreationSchema:
-      type: object
-      properties:
-        message:
-          type: string
-          description: "successful message"
-        petInfo:
-          type: object
-          $ref: "#/components/schemas/PetInfoSchema"
-
-    
-
-    
+          description: Reason for Failure
