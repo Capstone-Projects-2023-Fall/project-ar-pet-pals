@@ -1,6 +1,8 @@
+using System;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using ARPetPals;
 using TMPro;
 using UnityEngine;
 
@@ -23,6 +25,11 @@ public class MainCharacterController : MonoBehaviour
     float health;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        
+    }
+
     void Start()
     {
         changeMat();
@@ -46,9 +53,9 @@ public class MainCharacterController : MonoBehaviour
     private void changeMat() {
         //Fetch the Renderer from the GameObject
         m_Renderer = basePetObject.GetComponent<Renderer>();
-
         int petChoice = PlayerPrefs.GetInt("SelectedPet");
-
+        Debug.Log($"Hy/PetChoice at Main:  {petChoice}");
+        
         switch (petChoice) {
             case 0:
                 m_Renderer.material = orangeMat;
