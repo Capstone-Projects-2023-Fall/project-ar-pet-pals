@@ -5,7 +5,7 @@ import { recognizeFood } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import {getHealthRating } from "../controllers/controllers.health.ts";
-import { updateStepCount, checkStepGoal, updateStepGoal } from "../controllers/controllers.steps.ts";
+import { updateStepCount, checkStepGoal,getStepCount, updateStepGoal, resetDailyStepCountForAllUsers, resetWeeklyStepCountForAllUsers } from "../controllers/controllers.steps.ts";
 import { leaderboardList } from "../controllers/controllers.leaderboard.ts";
 
 
@@ -39,9 +39,14 @@ router.put("/api/user/step-goal", authourized, updateStepGoal);
 // Update Step Count
 router.put("/api/user/step-count", authourized, updateStepCount);
 
+// get step count
+router.get("/api/user/step-count", authourized, getStepCount);
+
 // Check Step Goal
 router.get("/api/user/check-step-goal", authourized, checkStepGoal);
 
+router.get("/api/user/reset-daily-step-count",authourized, resetDailyStepCountForAllUsers )
+router.get("/api/user/reset-weekly-step-count", authourized, resetWeeklyStepCountForAllUsers )
 // -- Pet --
 
 // Create
@@ -74,17 +79,6 @@ router.post("/api/food/healthRating", authourized, getHealthRating);
 
 // User List 
 router.get("/api/leaderboard/list", leaderboardList)
-
-
-
-
-
-
-
-
-
-
-
 
 
 // food-related routes --

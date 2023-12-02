@@ -61,6 +61,7 @@ export const signup = async ({
         dailyStepCount: 0,
         totalStepCount: 0,
         weeklyStepCount: 0,
+        steps: []
     });
 
     const jwt = await createJWT({
