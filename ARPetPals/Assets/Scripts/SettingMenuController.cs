@@ -61,6 +61,8 @@ public class SettingMenuController : MonoBehaviour
     public int currentHappniness = 100;
     // [SerializeField] public
     // [SerializeField] public 
+    
+    //
 
     [Header("LeaderBoard Field")] 
     [SerializeField] public TMP_Text name1;
@@ -113,7 +115,7 @@ public class SettingMenuController : MonoBehaviour
 
                 //Dario
                 PlayerPrefs.SetFloat("health", health);
-                PlayerPrefs.SetInt("happiness", currentHappniness);
+                PlayerPrefs.SetFloat("happiness", currentHappniness);
             }
         });
 
@@ -121,6 +123,42 @@ public class SettingMenuController : MonoBehaviour
         Debug.Log($"Hy/start Happiness {health}");
         Debug.Log($"Hy/Max Happiness {maxHappiness}");
         
+    }
+
+    public void Start()
+    {
+        //Call the update pet status function every 1 second to get the newest value.
+        InvokeRepeating("UpdatePetStatus", 2f,1f);
+        
+    }
+    
+    //Update pet function: calling api to get the newest happiness and mood. 
+    private void UpdatePetStatus()
+    {
+        
+        //Get Pet Status Api .        
+        gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
+        {
+            
+            if (errMessage != "")
+            {
+                Debug.Log($"Hy/errorMessage {errMessage}");
+            }
+            else {
+                APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
+                currentHappniness  = (int)float.Parse(responseData.mood);
+                health = float.Parse(responseData.health)/10;
+                Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
+                Debug.Log($"Hy/Current Health from Api: {health}");
+                SetMaxHappiness(maxHappiness);
+                SetHappiness(currentHappniness);
+
+                //Dario
+                PlayerPrefs.SetFloat("health", health);
+                PlayerPrefs.SetFloat("happiness", currentHappniness);
+            }
+        });
+        Debug.Log("Update status run.");
     }
 
     // public void  SetAudioLevel(float sliderValue)

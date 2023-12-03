@@ -26,6 +26,7 @@ namespace ARPetPals
 
         public const string ACTIVITY_TYPE_LOGIN = "login";
         public const string ACTIVITY_TYPE_DOUBLETAP = "double_tap";
+        public const string ACTIVITY_TYPE_STEPTRACKING = "step_tracking";
 
         enum RESET_STATUS_TYPE
         {

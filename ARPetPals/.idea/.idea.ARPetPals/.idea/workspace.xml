@@ -4,25 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1781716-5da8-4ba9-a8bc-654060b64c5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/API/APIService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/API/APIService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LogInController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LogInController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MainCharacterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MainCharacterController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI/20 Logos PSD/PSD/Title 5.psd" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/20 Logos PSD/PSD/Title 5.psd" afterDir="false" />
-    </list>
+    <list default="true" id="e1781716-5da8-4ba9-a8bc-654060b64c5c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/PlaySound.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AudioManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HeartBarController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LoadingSceneController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Sound.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.arfoundation@5.0.7/Editor/Simulation/SimulationEditorUtilities.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.arfoundation@5.0.7/Runtime/Simulation/Subsystems/SimulationSessionSubsystem.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -145,8 +139,7 @@
       <workItem from="1701120724230" duration="2617000" />
       <workItem from="1701286875607" duration="150000" />
       <workItem from="1701318912739" duration="2914000" />
-      <workItem from="1701464705807" duration="1312000" />
-      <workItem from="1701539264589" duration="325000" />
+      <workItem from="1701630309744" duration="4399000" />
     </task>
     <servers />
   </component>

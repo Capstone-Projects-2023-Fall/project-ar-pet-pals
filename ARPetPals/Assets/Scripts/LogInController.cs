@@ -86,16 +86,18 @@ public class LogInController : MonoBehaviour
                     PlayerPrefs.SetString("usernameInput",usernameInput);
                     PlayerPrefs.SetString("passwordInput",passwordInput);
                     Debug.Log($"Hy/Login Success-Token: {PlayerPrefs.GetString(APIService.KEY_TOKEN)}");
+                    gameObject.GetComponent<APIService>().IncreasePetHappiness(APIService.ACTIVITY_TYPE_LOGIN, s => {});
                     retrievePetName();
-                    retrievePetChoice();
-                    SceneManager.LoadScene("MainGameScene");
+                    StartCoroutine(WaitForDataRetrievalAndLoadScene());
+                    // SceneManager.LoadScene("MainGameScene");
                     
+
                     //StartCoroutine(WaitForOneSecond());
 
-                    
+                    //retrievePetChoice();
                     //SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
 
-                    // StartCoroutine(WaitForDataRetrievalAndLoadScene());
+                    
                     
                 }
             });
@@ -104,6 +106,7 @@ public class LogInController : MonoBehaviour
 
     public void registerButtonClicked()
     {
+        
         SceneManager.LoadScene("SignUpScene");
     }
 
@@ -117,7 +120,7 @@ public class LogInController : MonoBehaviour
             }
             else {
                 Debug.Log("Get Pet Name Success: " + errMessage);
-                // dataRetrieved = true; // Set the flag to indicate data has been retrieved
+                dataRetrieved = true; // Set the flag to indicate data has been retrieved
 
             }
         });
@@ -137,20 +140,20 @@ public class LogInController : MonoBehaviour
         });
     }
 
-    // private IEnumerator WaitForDataRetrievalAndLoadScene() {
-    //     while (!dataRetrieved) // Use a flag to track if data has been retrieved
-    //     {
-    //         yield return null; // Wait for the next frame
-    //     }
-    //
-    //     // Now that data has been retrieved, you can proceed to retrievePetChoice and load the scene
-    //     retrievePetChoice();
-    //     SceneManager.LoadScene("MainGameScene"); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
-    // }
+    private IEnumerator WaitForDataRetrievalAndLoadScene() {
+        while (!dataRetrieved) // Use a flag to track if data has been retrieved
+        {
+            yield return null; // Wait for the next frame
+        }
 
-    // private IEnumerator WaitForOneSecond() {
-    //     yield return new WaitForSeconds(1.0f); // Wait for 1 second
-    //     // Code to be executed after waiting
-    //     Debug.Log("One second has passed!");
-    // }
+        // Now that data has been retrieved, you can proceed to retrievePetChoice and load the scene
+        retrievePetChoice();
+        SceneManager.LoadScene("MainGameScene"); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+    }
+
+    private IEnumerator WaitForOneSecond() {
+        yield return new WaitForSeconds(1.0f); // Wait for 1 second
+        // Code to be executed after waiting
+        Debug.Log("One second has passed!");
+    }
 }

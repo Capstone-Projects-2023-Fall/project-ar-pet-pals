@@ -1,3 +1,4 @@
+using ARPetPals;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,11 +49,11 @@ public class StepCounter : MonoBehaviour {
             if (stepCount >= maxSteps) {
                 isTracking = false; // Stop tracking when 1000 steps are reached
                 Debug.Log("Congratulations! You reached 1000 steps.");
-                //add health to pet
-
+                //add happiness to pet
+                //Calling API to update happiness on server.
+                gameObject.GetComponent<APIService>().IncreasePetHappiness(APIService.ACTIVITY_TYPE_STEPTRACKING, s => {});
                 //reset count to zero
                 stepCount = 0;
-
                 //Show congrats ui
             }
 
