@@ -37,10 +37,45 @@ export const recognizeFood = async ({
     topMatches,
   };
 
-  // TODO: Add route to return the nutrition info of a given food item
 
-  //export the function
-  //export { getHealthRating }
+};
+
+// TODO: Add the following functions:
+// getHealthRating, getNutritionInfo, getPossibleFoods (return list of potentials for manual choice)
+
+export const getHealthRating = async ({ request, response }: { request: any; response: any }) => {
+    try {
+        //get recognized food from the request
+        const recognizedFood = (await request.body().value)?.recognizedFood;
+
+        if (!recognizedFood) {
+            response.status = 400;
+            response.body = { error: 'Recognized food not provided' };
+            return;
+        }
+
+        //fetch healthScores from the database 
+        const healthScores = await db.collection("healthScore").find().toArray();
+
+        //find the health score based on the recognized food
+        const matchingHealthScore = healthScores.find((score) => score.Food === recognizedFood);
+
+        //get health rating if match is found, otherwise set to null
+        const healthRating = matchingHealthScore ? matchingHealthScore["Health Rating"] : null;
+
+        //send response
+        response.status = 200;
+        response.body = {
+            "recognizedFood": recognizedFood,
+            "healthRating": healthRating,
+        };
+    } catch (error) {
+        console.error('Error processing health for recognized food:', error);
+        response.status = 400;
+        response.body = { message: 'Error processing health for recognized food' };
+    }
+    //export the function
+
 };
 
 // ---
