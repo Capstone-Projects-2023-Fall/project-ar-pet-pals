@@ -14,16 +14,25 @@ export const recognizeFood = async ({
   const { image64String } = await request.body().value;
 
   if (!image64String) {
-    response.body = {
+    response.status = 400;
+		response.body = {
       message: "Image not provided",
     };
-    response.status = 400;
     return;
   }
 
   let results = await processImage(image64String);
-  results = JSON.parse(results);
+	results = JSON.parse(results);
+	
+	if (results.status == 400) {
+		response.status = results.status;
+		response.body = {
+			message: `Image Recognition Error: ${results.message}`
+		};
+		return;
+	}
 
+  
   // Return top 3 food matches
   const matches = results.outputs[0].data.concepts;
   let topMatches = matches.sort((a, b) => b.value - a.value);
@@ -122,7 +131,15 @@ async function processImage(image64String) {
       "/outputs",
     requestOptions
   );
-  if (!response.ok) throw new Error(`Error, status: ${response.status}, message: ${response.statusText}`);
+	
+	if (!response.ok) {
+		const error = {
+			status: response.status,
+			message: response.statusText
+		};
+		
+		return JSON.stringify(error);
+	}
 
   return response.text();
 }

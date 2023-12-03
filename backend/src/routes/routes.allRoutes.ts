@@ -68,7 +68,7 @@ router.post("/api/food/recognize", authourized, recognizeFood)
 
 // Nutrition Info
 router.post("/api/food/healthRating", authourized, getHealthRating);
-router.post("/api/food/nutritionInfo", authorized, getNutritionInfo);
+// router.post("/api/food/nutritionInfo", authourized, getNutritionInfo);
 
 // -- Leaderboard --
 
