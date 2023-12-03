@@ -99,7 +99,7 @@ export const getNutritionInfo = async ({ request, response }: { request: any; re
             return;
         }
 				
-				// query food's health rating from database
+				// query food's nutrition info from database
 				const collection = await db.collection("healthScore");
 				const query = { Food: food };
 				const result = await collection.find(query).toArray();
@@ -121,6 +121,33 @@ export const getNutritionInfo = async ({ request, response }: { request: any; re
 				};
     }
 };
+
+export const listFoodOptions = async ({ response }: { response: any }) => {
+    try {				
+				// query all available foods in the database
+				const collection = await db.collection("healthScore");
+				const projection = { Food: 1, _id: 0 };
+				const result = await collection.find({}, { projection }).toArray();
+				
+				const foodOptions: string[] = result.map(option => option.Food);
+
+        response.status = 200;
+        response.body = {
+            "foodOptions": foodOptions
+        };
+				
+				
+    } catch (error) {
+        response.status = 400;
+        response.body = {
+					message: 'Could not process nutrition info.',
+					error: error.message,
+					food: food, 
+				};
+    }
+};
+
+
 
 
 
