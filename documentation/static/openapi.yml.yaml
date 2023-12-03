@@ -180,7 +180,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Fail"
 
-    post:
+    put:
       security: 
         - token: []
 
@@ -191,7 +191,18 @@ paths:
 
       requestBody:
         description: "User ID is provided in the request headers."
-        required: true
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: User Name
+                password:
+                  type: string
+                  description: Password
 
       responses:
         '200':
