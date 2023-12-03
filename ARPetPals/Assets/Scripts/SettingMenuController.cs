@@ -28,7 +28,9 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public TMP_InputField changeUserNameField;
     [SerializeField] public TMP_InputField changePasswordField;
     [SerializeField] public Button MenuButton;
-
+    
+    [SerializeField] public TMP_Text petNameDisplay;
+    
     [SerializeField] public Slider masterVolumeSlider;
     [SerializeField] public Image VolumeButton;
     public Sprite unmuteMusic;
@@ -268,10 +270,17 @@ public class SettingMenuController : MonoBehaviour
         PlayerPrefs.SetFloat("SfxVolume",sfxVolumeSlider.value);
         
         //Do something
-        // if (changePetName != null)
-        // {
-        //     
-        // } 
+        
+        if (changeUserName != "n" || changePassword !="")
+        {
+            gameObject.GetComponent<APIService>().UpdateUser(changeUserName,changePassword, s => { });
+        }
+
+        if (changePetName != "")
+        {
+            gameObject.GetComponent<APIService>().SetPetName(changePetName,s => {});
+            petNameDisplay.text = changePetName;
+        }
         menuPage.SetActive(true);
         settingPage.SetActive(false);
     }
