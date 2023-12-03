@@ -1,3 +1,5 @@
+import db from "../database/database.connection.ts";
+
 // Route Functions --
 
 // Given a string containing a base64 encoding of an image,
@@ -33,7 +35,8 @@ export const recognizeFood = async ({
   topMatches = JSON.stringify(topMatches, null, 2);
   topMatches = JSON.parse(topMatches);
 
-  response.body = {
+  response.status = 200;
+	response.body = {
     topMatches,
   };
 
@@ -45,36 +48,32 @@ export const recognizeFood = async ({
 
 export const getHealthRating = async ({ request, response }: { request: any; response: any }) => {
     try {
-        //get recognized food from the request
-        const recognizedFood = (await request.body().value)?.recognizedFood;
+				const { food } = await request.body().value;
 
-        if (!recognizedFood) {
+        if (!food) {
             response.status = 400;
-            response.body = { error: 'Recognized food not provided' };
+            response.body = { error: 'No food not provided' };
             return;
         }
+				
+				// query food's health rating from database
+				const collection = await db.collection("healthScore");
+				const query = { Food: food };
+				const result = await collection.find(query).toArray();
+				const healthRating = result[0]["Health Rating"];
 
-        //fetch healthScores from the database 
-        const healthScores = await db.collection("healthScore").find().toArray();
-
-        //find the health score based on the recognized food
-        const matchingHealthScore = healthScores.find((score) => score.Food === recognizedFood);
-
-        //get health rating if match is found, otherwise set to null
-        const healthRating = matchingHealthScore ? matchingHealthScore["Health Rating"] : null;
-
-        //send response
         response.status = 200;
         response.body = {
-            "recognizedFood": recognizedFood,
-            "healthRating": healthRating,
+            "food": food,
+            "healthRating": healthRating
         };
+				
+				
     } catch (error) {
-        console.error('Error processing health for recognized food:', error);
+        console.error('Error processing health rating for food:', error);
         response.status = 400;
-        response.body = { message: 'Error processing health for recognized food' };
+        response.body = { message: 'Error processing health rating for food' };
     }
-    //export the function
 
 };
 
