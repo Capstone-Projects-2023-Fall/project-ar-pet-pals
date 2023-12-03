@@ -53,9 +53,6 @@ export const recognizeFood = async ({
 
 };
 
-// TODO: Add the following functions:
-// getHealthRating, getNutritionInfo, getPossibleFoods (return list of potentials for manual choice)
-
 export const getHealthRating = async ({ request, response }: { request: any; response: any }) => {
     try {
 				const { food } = await request.body().value;
