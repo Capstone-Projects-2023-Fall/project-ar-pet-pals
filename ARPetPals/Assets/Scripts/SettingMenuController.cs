@@ -28,6 +28,7 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public TMP_InputField changeUserNameField;
     [SerializeField] public TMP_InputField changePasswordField;
     [SerializeField] public Button MenuButton;
+    [SerializeField] public TMP_Text PetnameDisplay;
 
     [SerializeField] public Slider masterVolumeSlider;
     [SerializeField] public Image VolumeButton;
@@ -78,9 +79,9 @@ public class SettingMenuController : MonoBehaviour
     
     
     
-    public string changePetName;
-    public string changeUserName;
-    public string changePassword;
+    public string changePetName = "";
+    public string changeUserName= "";
+    public string changePassword= "";
 
     private void Awake()
     {
@@ -230,10 +231,16 @@ public class SettingMenuController : MonoBehaviour
         PlayerPrefs.SetFloat("SfxVolume",sfxVolumeSlider.value);
         
         //Do something
-        // if (changePetName != null)
-        // {
-        //     
-        // } 
+        if (changeUserName != "n" || changePassword !="")
+        {
+            gameObject.GetComponent<APIService>().UpdateUser(changeUserName,changePassword, s => { });
+        }
+
+        if (changePetName != "")
+        {
+            gameObject.GetComponent<APIService>().SetPetName(changePetName,s => {});
+            PetnameDisplay.text = changePetName;
+        }
         menuPage.SetActive(true);
         settingPage.SetActive(false);
     }

@@ -2737,8 +2737,9 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ac09f95855ed7145b70a4546b91057f, type: 2}
+  m_sharedMaterial: {fileID: -8965224884501965737, guid: 0ac09f95855ed7145b70a4546b91057f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5023,6 +5024,7 @@ MonoBehaviour:
   changeUserNameField: {fileID: 990456921}
   changePasswordField: {fileID: 452640490}
   MenuButton: {fileID: 0}
+  PetnameDisplay: {fileID: 375863008}
   masterVolumeSlider: {fileID: 1159266143}
   VolumeButton: {fileID: 859357910}
   unmuteMusic: {fileID: 21300000, guid: 93a969f4c16bfc54c9428a917882ae62, type: 3}
@@ -5336,7 +5338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &817079412
 RectTransform:
   m_ObjectHideFlags: 0
