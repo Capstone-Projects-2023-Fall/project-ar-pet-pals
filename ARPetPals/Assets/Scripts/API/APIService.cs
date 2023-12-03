@@ -433,58 +433,56 @@ namespace ARPetPals
                 yield break; // Exit the coroutine
             }
 
+            string url = URL + "/pet/choice";
+
+            UnityWebRequest request = UnityWebRequest.Get(url);
+            request.SetRequestHeader("Authorization", "Bearer " + token);
+
+            yield return request.SendWebRequest();
+
+            // parse response
+            string responseJson = request.downloadHandler.text;
+
+            if (request.result != UnityWebRequest.Result.Success) {
+                Debug.LogError("_SendGetPetChoiceRequest failed: " + request.downloadHandler.text);
+                ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                callback(responseData.message);
+                _ShowReponse(responseData.message);
+            }
             else {
+                // Deserialize the JSON response
+                GetPetChoiceResponse responseData = JsonUtility.FromJson<GetPetChoiceResponse>(responseJson);
+                Debug.Log("_SendGetPetChoiceRequest response: " + JsonUtility.ToJson(responseData, true));
 
-                string url = URL + "/pet/choice";
-
-                UnityWebRequest request = UnityWebRequest.Get(url);
-                request.SetRequestHeader("Authorization", "Bearer " + token);
-
-                yield return request.SendWebRequest();
-
-                // parse response
-                string responseJson = request.downloadHandler.text;
-
-                if (request.result != UnityWebRequest.Result.Success) {
-                    Debug.LogError("_SendGetPetChoiceRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                int index = 0;
+                // Store data locally
+                switch (responseData.choice) {
+                    case "Orange Dragon":
+                        index = 0;
+                        break;
+                    case "Red Dragon":
+                        index = 1;
+                        break;
+                    case "Green Dragon":
+                        index = 2;
+                        break;
+                    case "Blue Dragon":
+                        index = 3;
+                        break;
+                    case "Yellow Dragon":
+                        index = 4;
+                        break;
+                    default:
+                        index = 0;
+                        break;
                 }
-                else {
-                    // Deserialize the JSON response
-                    GetPetChoiceResponse responseData = JsonUtility.FromJson<GetPetChoiceResponse>(responseJson);
-                    Debug.Log("_SendGetPetChoiceRequest response: " + JsonUtility.ToJson(responseData, true));
 
-                    int index = 0;
-                    // Store data locally
-                    switch (responseData.choice) {
-                        case "Orange Dragon":
-                            index = 0;
-                            break;
-                        case "Red Dragon":
-                            index = 1;
-                            break;
-                        case "Green Dragon":
-                            index = 2;
-                            break;
-                        case "Blue Dragon":
-                            index = 3;
-                            break;
-                        case "Yellow Dragon":
-                            index = 4;
-                            break;
-                        default:
-                            index = 0;
-                            break;
-                    }
+                Debug.Log("Pet choice index retrieved is: " + index);
+                PlayerPrefs.SetInt("SelectedPet", index);
+                
 
-                    Debug.Log("Pet choice index retrieved is: " + index);
-                    PlayerPrefs.SetInt("SelectedPet", index);
-
-                    _ShowReponse(JsonUtility.ToJson(responseData, true));
-                    callback("");
-                }
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback("");
             }
         }
 
@@ -884,6 +882,7 @@ namespace ARPetPals
             string password = "son9";
             UpdateUser(username, password, (str) => { });
         }
+        
 
         public void LeaderBoardTest()
         {
