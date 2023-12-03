@@ -321,7 +321,7 @@ Deno.test("invalid( invalid token) get pet name", async () => {
 
     assert(!json.name, JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 Deno.test("invalid( no pet created) get pet name", async () => {
@@ -340,7 +340,7 @@ Deno.test("invalid( no pet created) get pet name", async () => {
 
     assert(!json.name, JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 
@@ -397,7 +397,7 @@ Deno.test("invalid ( invalid token) set pet name", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 Deno.test("invalid ( no pet created) set pet name", async () => {
@@ -425,7 +425,7 @@ Deno.test("invalid ( no pet created) set pet name", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 /* END PET NAME */
@@ -465,7 +465,7 @@ Deno.test("invalid( invalid token) get pet status", async () => {
 
     assert(!json.name, JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 Deno.test("invalid( no pet created) get pet status", async () => {
@@ -484,7 +484,7 @@ Deno.test("invalid( no pet created) get pet status", async () => {
 
     assert(!json.name, JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 
@@ -542,7 +542,7 @@ Deno.test("invalid ( invalid token) set pet name", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 Deno.test("invalid ( no pet created) set pet name", async () => {
@@ -571,7 +571,7 @@ Deno.test("invalid ( no pet created) set pet name", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 /* END PET STATUS */
@@ -612,7 +612,7 @@ Deno.test("invalid( invalid token) get pet choice", async () => {
 
     assert(!json.choice, JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 Deno.test("invalid( no pet created) get pet choice", async () => {
@@ -631,7 +631,7 @@ Deno.test("invalid( no pet created) get pet choice", async () => {
 
     assert(!json.choice, JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 
@@ -689,7 +689,7 @@ Deno.test("invalid ( invalid token) set pet choice", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 Deno.test("invalid ( no pet created) set pet choice", async () => {
@@ -716,7 +716,7 @@ Deno.test("invalid ( no pet created) set pet choice", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 /* END PET CHOICE */
@@ -757,7 +757,7 @@ Deno.test("invalid( invalid token) get pet status", async () => {
 
     assert(!json.health, JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 Deno.test("invalid( no pet created) get pet status", async () => {
@@ -776,7 +776,7 @@ Deno.test("invalid( no pet created) get pet status", async () => {
 
     assert(!json.health, JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 
@@ -837,7 +837,7 @@ Deno.test("invalid ( invalid token) set pet status", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 Deno.test("invalid ( no pet created) set pet status", async () => {
@@ -865,7 +865,7 @@ Deno.test("invalid ( no pet created) set pet status", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 /* END PET STATUS*/
@@ -901,7 +901,7 @@ Deno.test("recognize food in image", async () => {
 		}
 		
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 
@@ -924,12 +924,10 @@ Deno.test("invalid (bad image string) recognize food in image", async () => {
     });
     let json = await res.json();
 
-    assert(
-      json.status == "400" && json.statusText == "Bad Request",
-      JSON.stringify(json)
-    );
+    assert(json.message == "Image Recognition Error: Bad Request", JSON.stringify(json));
+		assert(json.image64String == "115s1df5s", JSON.stringify(json));
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
   }
 });
 
@@ -957,7 +955,169 @@ Deno.test("invalid (no image string) recognize food in image", async () => {
       JSON.stringify(json)
     );
   } catch (err) {
-    assert(true, err);
+    assert(false, err);
+  }
+});
+
+Deno.test("get food's health rating", async () => {
+  let headers = {
+    Authorization: `Bearer ${token_with_no_pet}`,
+    "Content-Type": "application/json",
+  };
+
+  let data = {
+    food: "apple",
+  };
+
+  try {
+    let res = await fetch(BASE_URL + "/food/healthRating", {
+			headers,
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+    
+		let json = await res.json();
+		
+		assert(json.food == "apple", JSON.stringify(json));
+		assert(json.healthRating == 8, JSON.stringify(json));
+		
+  } catch (err) {
+    assert(false, err);
+  }
+});
+
+Deno.test("invalid (no food) get food's health rating", async () => {
+  let headers = {
+    Authorization: `Bearer ${token_with_no_pet}`,
+    "Content-Type": "application/json",
+  };
+
+  let data = {
+    food: "",
+  };
+
+  try {
+    let res = await fetch(BASE_URL + "/food/healthRating", {
+			headers,
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+    
+		let json = await res.json();
+		
+		assert(json.message == "No food provided.", JSON.stringify(json));
+		
+  } catch (err) {
+    assert(false, err);
+  }
+});
+
+Deno.test("invalid (invalid food) get food's health rating", async () => {
+  let headers = {
+    Authorization: `Bearer ${token_with_no_pet}`,
+    "Content-Type": "application/json",
+  };
+
+  let data = {
+    food: "1234",
+  };
+
+  try {
+    let res = await fetch(BASE_URL + "/food/healthRating", {
+			headers,
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+		
+		let json = await res.json();
+		
+  } catch (err) {
+		assert(err.status == 401, JSON.stringify(err));
+		assert(err.message == "ReferenceError: food is not defined.", JSON.stringify(err));
+  }
+});
+
+Deno.test("get food's nutrition info", async () => {
+  let headers = {
+    Authorization: `Bearer ${token_with_no_pet}`,
+    "Content-Type": "application/json",
+  };
+
+  let data = {
+    food: "apple",
+  };
+
+  try {
+    let res = await fetch(BASE_URL + "/food/nutritionInfo", {
+			headers,
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+    
+		let json = await res.json();
+		
+		assert(json.food == "apple", JSON.stringify(json));
+		assert(json.nutritionInfo == "", JSON.stringify(json));
+		
+  } catch (err) {
+    assert(false, err);
+  }
+});
+
+Deno.test("invalid (no food) get food's nutrition info", async () => {
+  let headers = {
+    Authorization: `Bearer ${token_with_no_pet}`,
+    "Content-Type": "application/json",
+  };
+
+  let data = {
+    food: "",
+  };
+
+  try {
+    let res = await fetch(BASE_URL + "/food/nutritionInfo", {
+			headers,
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+    
+		let json = await res.json();
+		
+		assert(json.message == "No food provided.", JSON.stringify(json));
+		
+  } catch (err) {
+    assert(false, err);
+  }
+});
+
+Deno.test("invalid (invalid food) get food's nutrition info", async () => {
+  let headers = {
+    Authorization: `Bearer ${token_with_no_pet}`,
+    "Content-Type": "application/json",
+  };
+
+  let data = {
+    food: "1234",
+  };
+
+  try {
+    let res = await fetch(BASE_URL + "/food/nutritionInfo", {
+			headers,
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+		
+		let json = await res.json();
+		
+  } catch (err) {
+		assert(err.status == 401, JSON.stringify(err));
+		assert(err.message == "ReferenceError: food is not defined.", JSON.stringify(err));
   }
 });
 
