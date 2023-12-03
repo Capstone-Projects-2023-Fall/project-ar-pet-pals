@@ -37,9 +37,13 @@ ACTIVITY_LOCK[ACTIVITY_TYPE_STEP_TRACKING] = 0 * 60 * 60 * 1000; // no lock
 const HEALTH_DECREASE_PER_MIN = 0.0167; // 1 / 60
 const MOOD_DECREASE_PER_MIN = 0.0167;
 
+function getArrayActivitesType() {
+    return [ACTIVITY_TYPE_LOGIN, ACTIVITY_TYPE_DOUBLE_TAP, ACTIVITY_TYPE_STEP_TRACKING];
+}
+
 function getActivites() {
     let arr = [];
-    for (let activity of [ACTIVITY_TYPE_LOGIN, ACTIVITY_TYPE_DOUBLE_TAP, ACTIVITY_TYPE_STEP_TRACKING]) {
+    for (let activity of getArrayActivitesType()) {
         arr.push({
             type: activity,
             lockedUntil: Date.now(),
@@ -288,11 +292,30 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
         pet.status.lastCalculatedMood = Date.now();
     }
 
+    
+    let updateStatus = { 
+        status: pet.status
+    }
+
+    // if there is no activities field, add it
+    if (!pet.activities) {
+        // add all activities
+        updateStatus.activities = getActivites();
+    }
+    // Missing new activities
+    else if (pet.activities.length && pet.activities.length < getActivites().length) {
+        updateStatus.activities = pet.activities;
+        // only add new activities
+        getActivites().forEach(defaultActivity => {
+            if (!updateStatus.activities.find(activity => activity.type === defaultActivity.type)) {
+                updateStatus.activities.push(defaultActivity);
+            }
+        });
+    }
+
     // Update
     await Pets.updateOne({ _id: pet._id}, { 
-        $set: { 
-            status: pet.status 
-        }
+        $set: updateStatus
     });
 
     response.status = 200
@@ -304,7 +327,7 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
             minutes_since_last_feeding: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastFeeding)),
             minutes_since_last_activity: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastActivity))
         },
-        activities: pet.activities
+        activities: pet.activities || updateStatus.activities
     }
 }
 
