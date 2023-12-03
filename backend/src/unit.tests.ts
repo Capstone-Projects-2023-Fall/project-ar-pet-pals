@@ -1068,5 +1068,58 @@ Deno.test("get food's nutrition info", async () => {
   }
 });
 
+Deno.test("invalid (no food) get food's nutrition info", async () => {
+  let headers = {
+    Authorization: `Bearer ${token_with_no_pet}`,
+    "Content-Type": "application/json",
+  };
+
+  let data = {
+    food: "",
+  };
+
+  try {
+    let res = await fetch(BASE_URL + "/food/nutritionInfo", {
+			headers,
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+    
+		let json = await res.json();
+		
+		assert(json.message == "No food provided.", JSON.stringify(json));
+		
+  } catch (err) {
+    assert(false, err);
+  }
+});
+
+Deno.test("invalid (invalid food) get food's nutrition info", async () => {
+  let headers = {
+    Authorization: `Bearer ${token_with_no_pet}`,
+    "Content-Type": "application/json",
+  };
+
+  let data = {
+    food: "1234",
+  };
+
+  try {
+    let res = await fetch(BASE_URL + "/food/nutritionInfo", {
+			headers,
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+		
+		let json = await res.json();
+		
+  } catch (err) {
+		assert(err.status == 401, JSON.stringify(err));
+		assert(err.message == "ReferenceError: food is not defined.", JSON.stringify(err));
+  }
+});
+
 
 /* END FOOD */
