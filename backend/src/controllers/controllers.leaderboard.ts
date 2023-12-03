@@ -1,11 +1,23 @@
+
 import UserSchema from "../schema/schema.user.ts";
 import db from "../database/database.connection.ts";
 import { PetSchema } from "../schema/schema.pet.ts";
+import {ObjectId} from "https://deno.land/x/mongo@v0.32.0/mod.ts"
+
 
 const usersDb = db.collection<UserSchema>("users");
 const Pets = db.collection<PetSchema>("pets");
 
 
+function compareScores( a:any, b:any ) {
+  if ( a.score < b.score ){
+    return 1;
+  }
+  if ( a.score > b.score ){
+    return -1;
+  }
+  return 0;
+}
 
 export const leaderboardList = async ({
   request,
@@ -15,7 +27,7 @@ export const leaderboardList = async ({
   response: any;
 }) => {
   let list:  any[] = []
-  let pets = Pets.findMany(
+  let pets = await Pets.find(
     { activities: { $ne: null } },
   ).toArray();
 
@@ -27,7 +39,7 @@ export const leaderboardList = async ({
     }
 
 
-    let user = usersDb.findOne({_id: pet.user_id})
+    let user = await usersDb.findOne({_id: new ObjectId(pet.user_id)})
 
     if (!user){
       continue
@@ -46,15 +58,9 @@ export const leaderboardList = async ({
   let n = 5;
 
   list = list.splice(0, Math.max(list.length, n+1));
-  
+	list = list.sort(compareScores)
+
   response.body = {
     leaderboardList: list
   }
-
-
-
-  
-
-  
-
 };
