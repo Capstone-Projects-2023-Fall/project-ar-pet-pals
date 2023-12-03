@@ -86,15 +86,18 @@ public class LogInController : MonoBehaviour
                     PlayerPrefs.SetString("usernameInput",usernameInput);
                     PlayerPrefs.SetString("passwordInput",passwordInput);
                     Debug.Log($"Hy/Login Success-Token: {PlayerPrefs.GetString(APIService.KEY_TOKEN)}");
-                    SceneManager.LoadScene("MainGameScene");
+                    gameObject.GetComponent<APIService>().IncreasePetHappiness(APIService.ACTIVITY_TYPE_LOGIN, s => {});
                     retrievePetName();
+                    StartCoroutine(WaitForDataRetrievalAndLoadScene());
+                    // SceneManager.LoadScene("MainGameScene");
+                    
 
                     //StartCoroutine(WaitForOneSecond());
 
                     //retrievePetChoice();
                     //SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
 
-                    StartCoroutine(WaitForDataRetrievalAndLoadScene());
+                    
                     
                 }
             });
@@ -103,6 +106,7 @@ public class LogInController : MonoBehaviour
 
     public void registerButtonClicked()
     {
+        
         SceneManager.LoadScene("SignUpScene");
     }
 
