@@ -27,7 +27,8 @@ export const recognizeFood = async ({
 	if (results.status == 400) {
 		response.status = results.status;
 		response.body = {
-			message: `Image Recognition Error: ${results.message}`
+			message: `Image Recognition Error: ${results.message}`,
+			image64String: image64String
 		};
 		return;
 	}
@@ -61,7 +62,7 @@ export const getHealthRating = async ({ request, response }: { request: any; res
 
         if (!food) {
             response.status = 400;
-            response.body = { error: 'No food not provided' };
+            response.body = { message: 'No food provided.' };
             return;
         }
 				
@@ -79,9 +80,12 @@ export const getHealthRating = async ({ request, response }: { request: any; res
 				
 				
     } catch (error) {
-        console.error('Error processing health rating for food:', error);
         response.status = 400;
-        response.body = { message: 'Error processing health rating for food' };
+        response.body = {
+					message: 'Could not process health rating.',
+					error: error.message,
+					food: food, 
+				};
     }
 
 };
