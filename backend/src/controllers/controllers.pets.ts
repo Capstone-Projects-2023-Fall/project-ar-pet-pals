@@ -18,16 +18,19 @@ enum RESET_TYPE {
 // Activity type
 const ACTIVITY_TYPE_LOGIN = "login";
 const ACTIVITY_TYPE_DOUBLE_TAP = "double_tap";
+const ACTIVITY_TYPE_STEP_TRACKING = "step_tracking";
 
 // Activity point
 const ACTIVITY_POINT = {};
 ACTIVITY_POINT[ACTIVITY_TYPE_LOGIN] = 10;
 ACTIVITY_POINT[ACTIVITY_TYPE_DOUBLE_TAP] = 30;
+ACTIVITY_POINT[ACTIVITY_TYPE_STEP_TRACKING] = 100;
 
 // Activity locking 
 const ACTIVITY_LOCK = {};
 ACTIVITY_LOCK[ACTIVITY_TYPE_LOGIN] = 8 * 60 * 60 * 1000; // 8 hours
 ACTIVITY_LOCK[ACTIVITY_TYPE_DOUBLE_TAP] = 1 * 60 * 60 * 1000; // 1 hour
+ACTIVITY_LOCK[ACTIVITY_TYPE_STEP_TRACKING] = 0 * 60 * 60 * 1000; // no lock
 
 
 // health decrease per hour = -1
@@ -35,18 +38,15 @@ const HEALTH_DECREASE_PER_MIN = 0.0167; // 1 / 60
 const MOOD_DECREASE_PER_MIN = 0.0167;
 
 function getActivites() {
-    return [
-        {
-            type: ACTIVITY_TYPE_LOGIN,
+    let arr = [];
+    for (let activity of [ACTIVITY_TYPE_LOGIN, ACTIVITY_TYPE_DOUBLE_TAP, ACTIVITY_TYPE_STEP_TRACKING]) {
+        arr.push({
+            type: activity,
             lockedUntil: Date.now(),
             weeklyPoints: 0
-        },
-        {
-            type: ACTIVITY_TYPE_DOUBLE_TAP,
-            lockedUntil: Date.now(),
-            weeklyPoints: 0
-        }
-    ];
+        });
+    }
+    return arr;
 }
 
 export const setPetName =async ({request, response}:{request:any;response:any}) => {
