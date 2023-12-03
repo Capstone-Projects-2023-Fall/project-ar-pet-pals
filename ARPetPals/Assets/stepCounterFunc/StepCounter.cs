@@ -5,6 +5,7 @@ using ARPetPals;
 public class StepCounter : MonoBehaviour
 
 {
+/*
  private bool isStepDetected = false;
  private int stepCount = 0;
  
@@ -36,6 +37,7 @@ public class StepCounter : MonoBehaviour
             isStepDetected = false;
         }
     }
+*/
 }
 
 //This script uses the Input.acceleration property to get the accelerometer data and checks 
