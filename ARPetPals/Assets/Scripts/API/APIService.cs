@@ -126,58 +126,63 @@ namespace ARPetPals
         }
 
     public void SaveBirthday(string username, string birthday, Action<string> callback)
-    {
-        StartCoroutine(_SendSaveBirthdayRequest(username, birthday, callback));
-    }
+{
+    StartCoroutine(_SendSaveBirthdayRequest(username, birthday, callback));
+}
 
-    private IEnumerator _SendSaveBirthdayRequest(string username, string birthday, Action<string> callback)
+private IEnumerator _SendSaveBirthdayRequest(string username, string birthday, Action<string> callback)
+{
+    string token = GetStoredToken();
+    if (token == "")
     {
-        string token = GetStoredToken();
-        if (token == "")
+        callback("Invalid token");
+    }
+    else
+    {
+        string url = URL + "/api/savebirthday"; // birthday endpoint
+        // Create the request payload
+        Dictionary<string, string> requestData = new Dictionary<string, string>
         {
-            callback("Invalid token");
+            { "username", username },
+            { "birthday", birthday }
+        };
+
+        string jsonData = JsonConvert.SerializeObject(requestData);
+
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+
+        request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+        request.SetRequestHeader("Authorization", "Bearer " + token);
+
+        yield return request.SendWebRequest();
+
+        // parse response
+        string responseJson = request.downloadHandler.text;
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("_SendSaveBirthdayRequest failed: " + request.downloadHandler.text);
+            ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+            callback(responseData.message);
+            _ShowReponse(responseData.message);
         }
         else
         {
-            string url = URL + "/api/savebirthday"; //birthday endpoint
-            // Create the request payload
-            Dictionary<string, string> requestData = new Dictionary<string, string>
-            {
-                { "username", username },
-                { "birthday", birthday }
-            };
+            // Handle the success response if needed
+            // ...
 
-            string jsonData = JsonConvert.SerializeObject(requestData);
+            // Birthday saved successfully, schedule the notification
+            System.DateTime birthdayDate = System.DateTime.Parse(birthday);
+            BirthdayNotificationManager.ScheduleBirthdayNotification(username, birthdayDate);
 
-            UnityWebRequest request = new UnityWebRequest(url, "POST");
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-
-            request.SetRequestHeader("Content-Type", CONTENT_TYPE);
-            request.SetRequestHeader("Authorization", "Bearer " + token);
-
-            yield return request.SendWebRequest();
-
-            // parse response
-            string responseJson = request.downloadHandler.text;
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("_SendSaveBirthdayRequest failed: " + request.downloadHandler.text);
-                ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                callback(responseData.message);
-                _ShowReponse(responseData.message);
-            }
-            else
-            {
-                // Handle the success response if needed
-                // ...
-
-                callback("");
-            }
+            callback("");
         }
     }
+}
+
         private IEnumerator _SendSignInRequest(string username, string password, Action<string> callback)
         {
             string url = URL + "/signin";
