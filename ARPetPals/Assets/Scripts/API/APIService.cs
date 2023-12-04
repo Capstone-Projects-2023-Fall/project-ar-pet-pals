@@ -192,6 +192,34 @@ namespace ARPetPals
                 }
             }
         }
+ public void GetLeaderboard(Action<GetLeaderboardResponse> callback)
+    {
+        StartCoroutine(_GetLeaderboard(callback));
+    }
+
+    private IEnumerator _GetLeaderboard(Action<GetLeaderboardResponse> callback)
+    {
+         string apiUrl = $"{URL}/api/leaderboard/list"; // leaderboard endpoint
+        using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+        {
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+            yield return request.SendWebRequest();
+
+            if (request.isNetworkError || request.isHttpError)
+            {
+                Debug.LogError($"Error fetching leaderboard: {request.error}");
+                callback?.Invoke(null);
+            }
+            else
+            {
+                GetLeaderboardResponse response = JsonUtility.FromJson<GetLeaderboardResponse>(request.downloadHandler.text);
+                callback?.Invoke(response);
+            }
+        }
+    }
+
 
         private IEnumerator _SendSignUpRequest(string username, string password, Action<string> callback)
         {
