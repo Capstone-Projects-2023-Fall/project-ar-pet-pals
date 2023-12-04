@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yourcompany.yourapp">
+  
+    <!-- Permissions, Activities, Services, etc. -->
+
+    <application>
+    <!-- Other application components -->
+
+    <service
+        android:name="com.ARPetPals.BackgroundNotificationService"
+        android:exported="false"
+        android:process=":background">
+    </service>
+</application>
+</manifest>
