@@ -1,9 +1,16 @@
-import { leaderboardList } from "./controllers.leaderboard.ts";
+import { leaderboardList } from "../controllers/controllers.leaderboard.ts";
+
+
+function sendNotification(username: string, message: string) {
+  // Your notification logic goes here
+  console.log(`Sending notification to ${username}: ${message}`);
+}
 
 // Pseudo-code for a function that sends notifications to the top 5 users
 function sendTop5Notifications(top5Users: { username: string; score: number }[]) {
   for (const user of top5Users) {
     // Use a notification library or service to send a notification to each user
+    
     sendNotification(user.username, "Congrats, you are in the top 5 this week! Open the app to celebrate with your pet!");
   }
 }

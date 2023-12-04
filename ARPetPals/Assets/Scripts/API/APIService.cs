@@ -125,6 +125,64 @@ namespace ARPetPals
             }
         }
 
+    public void SaveBirthday(string username, string birthday, Action<string> callback)
+{
+    StartCoroutine(_SendSaveBirthdayRequest(username, birthday, callback));
+}
+
+private IEnumerator _SendSaveBirthdayRequest(string username, string birthday, Action<string> callback)
+{
+    string token = GetStoredToken();
+    if (token == "")
+    {
+        callback("Invalid token");
+    }
+    else
+    {
+        string url = URL + "/api/savebirthday"; // birthday endpoint
+        // Create the request payload
+        Dictionary<string, string> requestData = new Dictionary<string, string>
+        {
+            { "username", username },
+            { "birthday", birthday }
+        };
+
+        string jsonData = JsonConvert.SerializeObject(requestData);
+
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+
+        request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+        request.SetRequestHeader("Authorization", "Bearer " + token);
+
+        yield return request.SendWebRequest();
+
+        // parse response
+        string responseJson = request.downloadHandler.text;
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("_SendSaveBirthdayRequest failed: " + request.downloadHandler.text);
+            ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+            callback(responseData.message);
+            _ShowReponse(responseData.message);
+        }
+        else
+        {
+            // Handle the success response if needed
+            // ...
+
+            // Birthday saved successfully, schedule the notification
+            System.DateTime birthdayDate = System.DateTime.Parse(birthday);
+            BirthdayNotificationManager.ScheduleBirthdayNotification(username, birthdayDate);
+
+            callback("");
+        }
+    }
+}
+
         private IEnumerator _SendSignInRequest(string username, string password, Action<string> callback)
         {
             string url = URL + "/signin";
@@ -166,6 +224,98 @@ namespace ARPetPals
                 
             }
         }
+//send notifications, from mobilenotifications.cs
+ public static IEnumerator SendNotificationRequest(string userId, string notificationType, Action<string> callback)
+        {
+            string url = $"{URL}/sendNotification";
+            var requestData = new { userId, notificationType };
+
+            using (UnityWebRequest www = UnityWebRequest.Post(url, JsonUtility.ToJson(requestData)))
+            {
+                www.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+                yield return www.SendWebRequest();
+
+                if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+                {
+                    Debug.LogError($"Error: {www.error}");
+                }
+                else
+                {
+                    // Deserialize the response using your response class
+                    APIServiceResponse response = JsonUtility.FromJson<APIServiceResponse>(www.downloadHandler.text);
+
+                    // Invoke the callback with the response
+                    callback?.Invoke(response.Message);
+                }
+            }
+        }
+ public void GetLeaderboard(Action<GetLeaderboardResponse> callback)
+    {
+        StartCoroutine(_GetLeaderboard(callback));
+    }
+
+    private IEnumerator _GetLeaderboard(Action<GetLeaderboardResponse> callback)
+    {
+         string apiUrl = $"{URL}/api/leaderboard/list"; // leaderboard endpoint
+        using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+        {
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+            yield return request.SendWebRequest();
+
+            if (request.isNetworkError || request.isHttpError)
+            {
+                Debug.LogError($"Error fetching leaderboard: {request.error}");
+                callback?.Invoke(null);
+            }
+            else
+            {
+                GetLeaderboardResponse response = JsonUtility.FromJson<GetLeaderboardResponse>(request.downloadHandler.text);
+                callback?.Invoke(response);
+            }
+        }
+    }
+
+ public void CheckAccountActivityAndSendNotifications()
+        {
+            StartCoroutine(_CheckAccountActivityAndSendNotifications());
+        }
+
+        private IEnumerator _CheckAccountActivityAndSendNotifications()
+{
+    string apiUrl = $"{URL}/api/checkAccountActivity";
+
+    using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+    {
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
+        {
+            Debug.LogError($"Error checking account activity: {request.error}");
+        }
+        else
+        {
+            // Parse the response as needed
+            CheckAccountActivityResponse response = JsonUtility.FromJson<CheckAccountActivityResponse>(request.downloadHandler.text);
+
+            // Handle the response based on its structure
+            if (response != null)
+            {
+                Debug.Log($"Server Response: {response.message}");
+                // You might want to check other fields in the response
+                // For example: if (response.success) { /* handle success */ }
+            }
+            else
+            {
+                Debug.LogError("Failed to parse server response.");
+            }
+        }
+    }
 
         private IEnumerator _SendSignUpRequest(string username, string password, Action<string> callback)
         {

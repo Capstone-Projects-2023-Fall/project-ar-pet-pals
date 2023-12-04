@@ -15,7 +15,7 @@ public static class BirthdayNotificationManager
         // Set up the birthday notification
         var birthdayNotification = new AndroidNotification();
         birthdayNotification.Title = "Happy Birthday, " + userName + "!";
-        birthdayNotification.Text = "As a gift, we would like to give you some extra health. Open this notification to accept your gift!";
+        birthdayNotification.Text = " Open this notification to celebrate with your pet!";
         birthdayNotification.FireTime = System.DateTime.Now.Add(timeUntilBirthday);
 
         // Send the notification

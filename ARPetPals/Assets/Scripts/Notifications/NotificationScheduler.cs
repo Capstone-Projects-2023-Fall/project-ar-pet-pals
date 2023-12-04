@@ -1,51 +1,97 @@
-using { calculateTimeDifferenceInMinutes } from "./yourUtilityFile.ts";
-using { Pets } from "./controllers.pets.ts";
 using Unity.Notifications.Android;
 using System;
 
 public static class NotificationScheduler
 {
-  private void ScheduleNotification(int healthScore)
+    private static void SendNotification(string username, string message)
     {
         var notification = new AndroidNotification();
         notification.Title = "Attention!";
-        notification.Text = "Come to check on your pet!!!";
-
-        //calculate next notification time based on health score
-        notification.FireTime = System.DateTime.Now.Add(CalculateNotificationInterval(healthScore));
-
-        //send notification
+        notification.Text = message;
+        notification.FireTime = DateTime.Now;
         AndroidNotificationCenter.SendNotification(notification, "channel_id");
     }
 
-    private TimeSpan CalculateNotificationInterval(int healthScore)
-{
-    
-    //linear decay with caps for higher and lower health scores
-    int maxInterval = 5;  //max allowed interval
-    int minInterval = 1;  //min allowed interval
-    int capThresholdHigh = 7; //health score above which the interval is capped
-    int capThresholdLow = 3;  //health score below which the interval is capped
-
-    //linear decay formula
-    int calculatedInterval = Mathf.Max(minInterval, maxInterval - healthScore);
-
-    //cap interval for higher health scores
-    if (healthScore > capThresholdHigh)
+    public static void ScheduleNotification(int healthScore)
     {
-        calculatedInterval = maxInterval;
+        DateTime nextNotificationTime = DateTime.Now.Add(CalculateNotificationInterval(healthScore));
+        SendNotification("username_placeholder", "Your account is at risk of termination. Log in to feed your pet!");
     }
 
-    //cap interval for lower health scores
-    if (healthScore <= capThresholdLow)
+    public static void CheckAccountActivityAndSendNotifications(List<User> users)
     {
-        calculatedInterval = Mathf.Min(calculatedInterval, 3);
+        foreach (var user in users)
+        {
+            var pet = Pets.FindOne(user.Id.ToString());
+
+            if (pet == null)
+            {
+                continue; // Skip users without pets
+            }
+
+            var minutesSinceLastActivity = CalculateTimeDifferenceInMinutes(pet.status.lastActivity);
+
+            var thirtyDaysInMinutes = 30 * 24 * 60;
+            if (minutesSinceLastActivity > thirtyDaysInMinutes)
+            {
+                ScheduleNotification(pet.status.health);
+            }
+        }
     }
 
-    return TimeSpan.FromHours(calculatedInterval);
+    private static TimeSpan CalculateNotificationInterval(int healthScore)
+    {
+        int maxInterval = 5;
+        int minInterval = 1;
+        int capThresholdHigh = 7;
+        int capThresholdLow = 3;
+
+        int calculatedInterval = Math.Max(minInterval, maxInterval - healthScore);
+
+        if (healthScore > capThresholdHigh)
+        {
+            calculatedInterval = maxInterval;
+        }
+
+        if (healthScore <= capThresholdLow)
+        {
+            calculatedInterval = Math.Min(calculatedInterval, 3);
+        }
+
+        return TimeSpan.FromHours(calculatedInterval);
+    }
 }
-  // Pseudo-code for checking account activity and sending notifications
-async function checkAccountActivityAndSendNotifications() {
+
+
+/*In this modified code, the CheckAccountActivityAndSendNotifications method now accepts
+ a list of users (List<User> users). This list of users should be passed from C# application
+  when calling this method. The method then iterates over the users, retrieves the associated pets, 
+  checks for low account activity, and schedules notifications accordingly.*/
+    public static void CheckAccountActivityAndSendNotifications(List<User> users)
+    {
+        foreach (var user in users)
+        {
+            // Retrieve the pet for the user
+            var pet = Pets.FindOne(user.Id.ToString());
+
+            if (pet == null)
+            {
+                continue; // Skip users without pets
+            }
+
+            var minutesSinceLastActivity = CalculateTimeDifferenceInMinutes(pet.status.lastActivity);
+
+            // Check if the user has low/no account activity (30 days threshold)
+            var thirtyDaysInMinutes = 30 * 24 * 60; // 30 days * 24 hours/day * 60 minutes/hour
+            if (minutesSinceLastActivity > thirtyDaysInMinutes)
+            {
+                // Schedule a notification instead of sending it directly
+                ScheduleNotification(pet.status.health);
+            }
+        }
+    }
+}
+/*async function checkAccountActivityAndSendNotifications() {
   const users = await Users.find({}).toArray(); // Retrieve all users
 
   for (const user of users) {
@@ -69,9 +115,13 @@ async function checkAccountActivityAndSendNotifications() {
 // Pseudo-code for scheduling the periodic task
 setInterval(async () => {
   await checkAccountActivityAndSendNotifications();
-}, /* Set an appropriate interval in milliseconds */);
+}, /* Set an appropriate interval in milliseconds */ //);
 
-}
+
+//}
+
+
+
   /*private void SendNotification(string username, string message)
     {
         // Implement your notification sending logic here
