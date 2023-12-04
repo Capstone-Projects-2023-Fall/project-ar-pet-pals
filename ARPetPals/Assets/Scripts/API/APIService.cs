@@ -166,6 +166,32 @@ namespace ARPetPals
                 
             }
         }
+//send notifications, from mobilenotifications.cs
+ public static IEnumerator SendNotificationRequest(string userId, string notificationType, Action<string> callback)
+        {
+            string url = $"{URL}/sendNotification";
+            var requestData = new { userId, notificationType };
+
+            using (UnityWebRequest www = UnityWebRequest.Post(url, JsonUtility.ToJson(requestData)))
+            {
+                www.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+                yield return www.SendWebRequest();
+
+                if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+                {
+                    Debug.LogError($"Error: {www.error}");
+                }
+                else
+                {
+                    // Deserialize the response using your response class
+                    APIServiceResponse response = JsonUtility.FromJson<APIServiceResponse>(www.downloadHandler.text);
+
+                    // Invoke the callback with the response
+                    callback?.Invoke(response.Message);
+                }
+            }
+        }
 
         private IEnumerator _SendSignUpRequest(string username, string password, Action<string> callback)
         {

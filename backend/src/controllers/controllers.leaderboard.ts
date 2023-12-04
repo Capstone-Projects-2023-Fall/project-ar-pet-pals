@@ -1,4 +1,4 @@
-import UserSchema from "../schema/schema.user.ts";
+import { UserSchema } from "../schema/schema.user.ts";
 import db from "../database/database.connection.ts";
 import { PetSchema } from "../schema/schema.pet.ts";
 
