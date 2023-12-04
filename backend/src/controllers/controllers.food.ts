@@ -97,6 +97,20 @@ export const getNutritionInfo = async ({ request, response }: { request: any; re
         }
 				
 				// query food's nutrition info from database
+ /* notification branches version
+				const collection = await db.collection("healthScore");
+				const query = { Food: food };
+				const result = await collection.find(query).toArray();
+				const nutritionInfo = result[0]["Nutrition Info"];
+
+        response.status = 200;
+        response.body = {
+            "food": food,
+            "nutritionInfo": nutritionInfo
+        };
+				*/
+				
+//karls version from staging
 				const collection = await db.collection("nutrition_info");
 				const query = { name: food };
 				const result = await collection.find(query).toArray();
@@ -109,6 +123,7 @@ export const getNutritionInfo = async ({ request, response }: { request: any; re
 						"nutritionInfo": info
         };
 				
+
     } catch (error) {
         response.status = 400;
         response.body = {

@@ -2,8 +2,9 @@
 import { decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import db from "../database/database.connection.ts";
 import {PetSchema} from "../schema/schema.pet.ts";
-
+import { Context } from "https://deno.land/x/oak/mod.ts";
 import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } from "../utils/utils.utils.ts";
+
 const Pets = db.collection<PetSchema>("pets");
 const MAX_HEALTH = 100;
 const MAX_MOOD = 100;
@@ -37,6 +38,7 @@ ACTIVITY_LOCK[ACTIVITY_TYPE_STEP_TRACKING] = 0 * 60 * 60 * 1000; // no lock
 const HEALTH_DECREASE_PER_MIN = 0.0167; // 1 / 60
 const MOOD_DECREASE_PER_MIN = 0.0167;
 
+
 function getArrayActivitesType() {
     return [ACTIVITY_TYPE_LOGIN, ACTIVITY_TYPE_DOUBLE_TAP, ACTIVITY_TYPE_STEP_TRACKING];
 }
@@ -52,6 +54,7 @@ function getActivites() {
     }
     return arr;
 }
+
 
 export const setPetName =async ({request, response}:{request:any;response:any}) => {
     const { name } = await request.body().value;
@@ -84,6 +87,22 @@ export const setPetName =async ({request, response}:{request:any;response:any}) 
     response.body = {
         "message": "pet name updated successfully"
     }
+}
+//check account activity
+export const checkAccountActivity = async ({ request, response }: { request: any; response: any }) => {
+    const headers: Headers = request.headers;
+    let userId = getUserIdFromHeaders(headers);
+
+    const pet = await Pets.findOne({ user_id: userId });
+
+    if (!pet) {
+        response.body = {
+            "message": "Could not find a pet for your user's id"
+        }
+        response.status = 400;
+        return;
+    }
+    
 }
 
 export const getPetName =async ({request, response}:{request:any;response:any}) => {
@@ -388,6 +407,9 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
     }
 }
 
+
+}
+
 export const increasePetMood =async ({request, response}:{request:any;response:any}) => {
     const { type } = await request.body().value;
 
@@ -442,4 +464,5 @@ export const resetPetActivities = async ({request, response}:{request:any;respon
         modifiedCount
     }
 }
+
 

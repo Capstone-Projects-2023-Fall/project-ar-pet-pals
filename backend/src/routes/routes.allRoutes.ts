@@ -1,11 +1,13 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
-import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser } from "../controllers/controllers.users.ts";
+import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser, saveBirthday } from "../controllers/controllers.users.ts";
+import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, } from "../controllers/controllers.pets.ts";
 import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, increasePetMood, resetPetActivities } from "../controllers/controllers.pets.ts";
 import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import { updateStepCount, checkStepGoal,getStepCount, updateStepGoal, resetDailyStepCountForAllUsers, resetWeeklyStepCountForAllUsers } from "../controllers/controllers.steps.ts";
 import { leaderboardList } from "../controllers/controllers.leaderboard.ts";
+import { checkAccountActivity } from "../controllers//controllers.pets.ts";
 
 
 const home = async({request, response}:{request:any;response:any}) => {
@@ -51,7 +53,11 @@ router.get("/api/user/reset-weekly-step-count", authourized, resetWeeklyStepCoun
 // Create
 router.post("/api/pet/create", authourized, createPet  )
 
-// Name
+
+//check account activity
+router.get("/api/checkAccountActivity", authourized, checkAccountActivity);
+
+//name
 router.post("/api/pet/name", authourized, setPetName  )
 router.get("/api/pet/name", authourized, getPetName  )
 
@@ -71,24 +77,28 @@ router.get("/api/pet/choice", authourized, getPetChoice )
 // Recognize
 router.post("/api/food/recognize", authourized, recognizeFood)
 
+
+//user birthday
+router.post("/api/savebirthday", authourized,saveBirthday) 
+
+// Update Step Goal
+router.put("/api/user/step-goal", authourized, updateStepGoal);
+
 // Nutrition Info
 router.post("/api/food/healthRating", authourized, getHealthRating);
 router.post("/api/food/nutritionInfo", authourized, getNutritionInfo);
+
 
 // List Possible Foods
 router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
 
 // -- Leaderboard --
 
-// User List 
-router.get("/api/leaderboard/list", leaderboardList)
+// get leaderboard user list 
+router.get("/api/leaderboard/list", authourized, leaderboardList)
 
 
 // food-related routes --
-
-
-
-
 
 
 export default router;
