@@ -124,6 +124,35 @@ namespace ARPetPals
         }
 
         [System.Serializable]
+        public class ListFoodOptionsResponse
+        {
+            public List<string> foodOptions;
+        }
+
+        [System.Serializable]
+        public class GetNutritionInfoResponse
+        {
+            public string food;
+            public NutritionInfo nutritionInfo;
+        }
+
+        [System.Serializable]
+        public class NutritionInfo
+        {
+            public double calories;
+            public double serving_size_g;
+            public double fat_total_g;
+            public double fat_saturated_g;
+            public double protein_g;
+            public double sodium_mg;
+            public double potassium_mg;
+            public double cholesterol_mg;
+            public double carbohydrates_total_g;
+            public double fiber_g;
+            public double sugar_g;
+        }
+
+        [System.Serializable]
         public class UpdateUserResponse
         {
             public string message;

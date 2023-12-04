@@ -858,9 +858,8 @@ private IEnumerator _SendSaveBirthdayRequest(string username, string birthday, A
             return PlayerPrefs.GetString(KEY_PET_STATUS, "");
         }
 
-        // Food Related Requests
+        // -- START FOOD --
 
-        // Recognize Food
         public void RecognizeFood(string image64String, Action<string> callback)
         {
             StartCoroutine(_SendRecognizeFoodRequest(image64String, callback));
@@ -868,16 +867,12 @@ private IEnumerator _SendSaveBirthdayRequest(string username, string birthday, A
 
         private IEnumerator _SendRecognizeFoodRequest(string image64String, Action<string> callback)
         {
-            // string token = GetStoredToken();
-            // if (string.IsNullOrEmpty(token))
-            // {
-            //     callback("Invalid token");
-            //     yield break;
-            // }
-
-            // Get fresh token from API. Just for testing.
-            // TODO: Get proper token to load in dynamically
-            string token = "";
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
 
             string url = URL + "/food/recognize";
             Dictionary<string, string> body = new Dictionary<string, string>
@@ -909,6 +904,91 @@ private IEnumerator _SendSaveBirthdayRequest(string username, string birthday, A
             }
         }
 
+        public void ListFoodOptions(Action<string> callback)
+        {
+            StartCoroutine(_SendListFoodOptionsRequest(callback));
+        }
+
+        private IEnumerator _SendListFoodOptionsRequest(Action<string> callback)
+        {
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
+
+            string url = URL + "/food/listFoodOptions";            
+
+            using (UnityWebRequest request = UnityWebRequest.Get(url)) {
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_SendListFoodOptionsRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(errorResponse.message);
+                    _ShowReponse(errorResponse.message);
+                    yield break;
+                }
+
+                // Deserialize the JSON response
+                ListFoodOptionsResponse responseData = JsonUtility.FromJson<ListFoodOptionsResponse>(responseJson);
+                Debug.Log("_SendListFoodOptionsRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback(JsonUtility.ToJson(responseData, true));
+            }
+        }
+
+        public void GetNutritionInfo(string food, Action<string> callback)
+        {
+            StartCoroutine(_SendGetNutritionInfoRequest(food, callback));
+        }
+
+        private IEnumerator _SendGetNutritionInfoRequest(string food, Action<string> callback)
+        {
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
+
+            string url = URL + "/food/nutritionInfo";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "food", food }
+            };                     
+
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_GetNutritionInfoRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(errorResponse.message);
+                    _ShowReponse(errorResponse.message);
+                    yield break;
+                }
+
+                // Deserialize the JSON response
+                GetNutritionInfoResponse responseData = JsonUtility.FromJson<GetNutritionInfoResponse>(responseJson);
+                Debug.Log("_GetNutritionInfoRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback(JsonUtility.ToJson(responseData, true));
+            }
+        }
+        
+        // -- END FOOD --
 
         public void IncreasePetHappiness(string type, Action<string> callback)
         {

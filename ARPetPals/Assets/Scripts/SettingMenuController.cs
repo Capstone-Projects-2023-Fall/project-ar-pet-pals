@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using ARPetPals;
 using TMPro;
 using UnityEngine;
@@ -44,12 +46,22 @@ public class SettingMenuController : MonoBehaviour
     
     
     
-    //Text game object of Food List menu
+    // Food List Objects
     [Header("Menu List")]
-    [SerializeField] public TMP_Text itemText1;
-    [SerializeField] public TMP_Text itemText2;
-    [SerializeField] public TMP_Text itemText3;
+    [SerializeField] public TMP_Text Match1Text;
+    [SerializeField] public TMP_Text Match2Text;
+    [SerializeField] public TMP_Text Match3Text;
+    [SerializeField] public Button Match1;
+    [SerializeField] public Button Match2;
+    [SerializeField] public Button Match3;
     
+    public Transform contentPanel;
+    public GameObject foodOptionPrefab;
+    [SerializeField] public TMP_InputField OptionInput;
+
+    [SerializeField] public TMP_Text NutritionInfoPanel;
+    [SerializeField] public TMP_Text NutritionInfoFacts;
+    [SerializeField] public Button NutritionInfoHideButton;
     
     public AudioMixer mixer;
     
@@ -288,16 +300,141 @@ public class SettingMenuController : MonoBehaviour
     //Food list menu. All the feature of OR process here. 
     
     //Scan button to scan the object. 
-    public void ScanButtonClicked()
+    public async void ScanButtonClicked()
     {
-        //Process take picture in here.
+        FoodRecognition foodRecognition = new FoodRecognition(gameObject);
         
-        //Enable FoodList
+        // Capture Image and Recognize It
+        Dictionary<int, string> topMatches = await foodRecognition.RecognizeFood();
+
+        // Display User Options
+        if (topMatches.TryGetValue(1, out string value))
+        {
+            Match1Text.text = CapitalizeEachWord(value);
+            Match1.onClick.AddListener(
+                () => SelectFoodOption(Match1Text.text.ToLower(), foodRecognition)
+            );
+        }
+        
+        if (topMatches.TryGetValue(2, out value))
+        {
+            Match2Text.text = CapitalizeEachWord(value);
+            Match2.onClick.AddListener(
+                () => SelectFoodOption(Match2Text.text.ToLower(), foodRecognition)
+            );
+        }
+
+        if (topMatches.TryGetValue(3, out value))
+        {
+            Match3Text.text = CapitalizeEachWord(value);
+            Match3.onClick.AddListener(
+                () => SelectFoodOption(Match3Text.text.ToLower(), foodRecognition)
+            );
+        }
+
+        // Make Food List Visible
+        NutritionInfoPanel.gameObject.SetActive(false);
         ListPage.SetActive(true);
-        //Update List by changing Text in button. This is example, Modify value under here.
-        itemText1.text = "la di da";
-        itemText2.text = "apple";
-        itemText3.text = "banana";
+
+        // Get Food Options List from BE
+        List<string> foodOptions = await foodRecognition.ListFoodOptions();
+
+        // Create Input Listener
+        OptionInput.onValueChanged.AddListener((string text) => {
+
+            // Clear out old options
+            foreach (Transform optButton in contentPanel)
+            {
+                Destroy(optButton.gameObject);
+            }
+            
+            if (!string.IsNullOrEmpty(text))
+            {
+                // Create sublist of options that include given text
+                List<string> matchingOptions = foodOptions.Where(opt => opt.Contains(text)).ToList();
+                
+                // Generate a button for each matching option
+                foreach (var option in matchingOptions)
+                {
+                    GameObject newOption = Instantiate(foodOptionPrefab);
+                    newOption.transform.SetParent(contentPanel, false);
+
+                    TMP_Text textComponent = newOption.GetComponentInChildren<TMP_Text>();
+                    if (textComponent != null)
+                    {
+                        textComponent.text = CapitalizeEachWord(option);
+                    }
+
+                    Button buttonComponent = newOption.GetComponent<Button>();
+                    if (buttonComponent != null)
+                    {
+                        buttonComponent.onClick.AddListener(
+                            () => SelectFoodOption(option.ToLower(), foodRecognition)
+                        );
+                    }
+                }
+            }
+
+        });
+    }
+
+    public async void SelectFoodOption(string food, FoodRecognition foodRecognition)
+    {
+        Dictionary<string, string> nutritionInfo = await foodRecognition.GetNutritionInfo(food);
+
+        // Close Down Food List
+        ListPage.SetActive(false);
+
+        // Populate and Enable Nutrition Info Display
+        NutritionInfoPanel.gameObject.SetActive(true);
+
+        // Set Nutr Info Title and Facts
+        NutritionInfoPanel.text = "-- " + food + " --\nNutrition Facts";
+
+        nutritionInfo.TryGetValue("calories", out string calories);
+        nutritionInfo.TryGetValue("serving_size_g", out string servSize);
+        nutritionInfo.TryGetValue("fat_total_g", out string fat);
+        nutritionInfo.TryGetValue("fat_saturated_g", out string fatSat);
+        nutritionInfo.TryGetValue("protein_g", out string protein);
+        nutritionInfo.TryGetValue("carbohydrates_total_g", out string carbs);
+        nutritionInfo.TryGetValue("fiber_g", out string fiber);
+        nutritionInfo.TryGetValue("sugar_g", out string sugar);
+        nutritionInfo.TryGetValue("sodium_mg", out string sodium);
+        nutritionInfo.TryGetValue("potassium_mg", out string potassium);
+        nutritionInfo.TryGetValue("cholesterol_mg", out string cholesterol);
+
+        StringBuilder facts = new StringBuilder();
+        facts.AppendLine("Calories: " + calories);
+        facts.AppendLine("Serving Size: " + servSize + "g");
+        facts.AppendLine("Total Fat: " + fat + "g");
+        facts.AppendLine("Sat. Fat: " + fatSat + "g");
+        facts.AppendLine("Protein: " + protein + "g");
+        facts.AppendLine("Carbs: " + carbs + "g");
+        facts.AppendLine("Fiber: " + fiber + "g");
+        facts.AppendLine("Sugar: " + sugar + "g");
+        facts.AppendLine("Sodium: " + sodium + "g");
+        facts.AppendLine("Potassium: "  + potassium + "mg");
+        facts.AppendLine("Cholesterol: "  + cholesterol + "mg");
+        NutritionInfoFacts.text = facts.ToString();
+
+        NutritionInfoHideButton.onClick.AddListener(
+            () => { NutritionInfoPanel.gameObject.SetActive(false); }
+        );
+        
+    }
+
+    public string CapitalizeEachWord(string str)
+    {
+        var words = str.Split(' ');
+        for (int i = 0; i < words.Length; i++)
+        {
+            if (words[i].Length > 0)
+            {
+                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+            }
+        }
+
+        return string.Join(" ", words);
     }
 
     // Log out to sign in scene
