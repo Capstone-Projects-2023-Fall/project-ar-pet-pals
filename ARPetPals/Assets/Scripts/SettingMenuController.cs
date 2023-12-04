@@ -117,7 +117,7 @@ public class SettingMenuController : MonoBehaviour
 
                 //Dario
                 PlayerPrefs.SetFloat("health", health);
-                PlayerPrefs.SetFloat("happiness", currentHappniness);
+                PlayerPrefs.SetInt("happiness", currentHappniness);
             }
         });
 
@@ -157,7 +157,7 @@ public class SettingMenuController : MonoBehaviour
 
                 //Dario
                 PlayerPrefs.SetFloat("health", health);
-                PlayerPrefs.SetFloat("happiness", currentHappniness);
+                PlayerPrefs.SetInt("happiness", currentHappniness);
             }
         });
         Debug.Log("Update status run.");
