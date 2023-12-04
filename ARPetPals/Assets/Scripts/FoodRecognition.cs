@@ -96,6 +96,32 @@ public class FoodRecognition : MonoBehaviour
         return await tcs.Task;
     }
     
-    
-    // TODO: Add function to select food from list of guesses
+    public async Task<Dictionary<string, string>> GetNutritionInfo(string food)
+    {
+        var tcs = new TaskCompletionSource<Dictionary<string, string>>();
+
+        gameObject.GetComponent<APIService>().GetNutritionInfo(food, (response) =>
+        {
+            ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
+            if (error != null && !string.IsNullOrEmpty(error.message))
+            {   
+                Debug.Log("Get Nutrition Info Error: " + error.message);
+                tcs.SetResult(null);
+            }
+            else
+            {
+                GetNutritionInfoResponse parsedResponse = JsonUtility.FromJson<GetNutritionInfoResponse>(response);
+
+                var nutritionInfo = new Dictionary<string, string>();
+                foreach (var prop in parsedResponse.nutritionInfo.GetType().GetProperties())
+                {
+                    nutritionInfo.Add(prop.Name, prop.GetValue(parsedResponse.nutritionInfo)?.ToString());
+                }
+
+                tcs.SetResult(nutritionInfo);
+            }                         
+        });
+
+        return await tcs.Task;
+    }
 }

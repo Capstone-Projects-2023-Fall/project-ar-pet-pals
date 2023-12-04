@@ -314,9 +314,6 @@ public class SettingMenuController : MonoBehaviour
 
         // Create Input Listener
         OptionInput.onValueChanged.AddListener((string text) => {
-            
-            // Create sublist of options that include given text
-            List<string> matchingOptions = foodOptions.Where(opt => opt.Contains(text)).ToList();
 
             // Clear out old options
             foreach (Transform optButton in contentPanel)
@@ -324,9 +321,12 @@ public class SettingMenuController : MonoBehaviour
                 Destroy(optButton.gameObject);
             }
             
-            // Generate a button for each matching option
             if (!string.IsNullOrEmpty(text))
             {
+                // Create sublist of options that include given text
+                List<string> matchingOptions = foodOptions.Where(opt => opt.Contains(text)).ToList();
+                
+                // Generate a button for each matching option
                 foreach (var option in matchingOptions)
                 {
                     GameObject newOption = Instantiate(foodOptionPrefab);
@@ -342,11 +342,16 @@ public class SettingMenuController : MonoBehaviour
 
         });
 
+        Dictionary<string, string> nutritionInfo = await foodRecognition.GetNutritionInfo("apple");
+        foreach (KeyValuePair<string, string> pair in nutritionInfo)
+        {
+            Debug.Log(pair.Key + ", " + pair.Value);
+        }
+
         
         // TODO --
         
-        // Get User Decision to Work
-        // Recevive User Input
+        // Get User Decisions to Work - call GetNutritionInfo(string food) - assign to button prefab
         // Format Food List Graphics
         // Get Nutrition Info Displaying
         
