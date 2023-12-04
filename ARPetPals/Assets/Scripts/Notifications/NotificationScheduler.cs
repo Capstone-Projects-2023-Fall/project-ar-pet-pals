@@ -1,8 +1,5 @@
-using { calculateTimeDifferenceInMinutes } from "./yourUtilityFile.ts";
-using { Pets } from "./controllers.pets.ts";
 using Unity.Notifications.Android;
 using System;
-using System.Collections.Generic; // Added this import for List
 
 public static class NotificationScheduler
 {
@@ -11,41 +8,51 @@ public static class NotificationScheduler
         var notification = new AndroidNotification();
         notification.Title = "Attention!";
         notification.Text = message;
-
-        // calculate next notification time based on health score
         notification.FireTime = DateTime.Now;
-
-        // send notification
         AndroidNotificationCenter.SendNotification(notification, "channel_id");
     }
 
     public static void ScheduleNotification(int healthScore)
     {
-        // calculate next notification time based on health score
         DateTime nextNotificationTime = DateTime.Now.Add(CalculateNotificationInterval(healthScore));
-
-        // send notification
         SendNotification("username_placeholder", "Your account is at risk of termination. Log in to feed your pet!");
+    }
+
+    public static void CheckAccountActivityAndSendNotifications(List<User> users)
+    {
+        foreach (var user in users)
+        {
+            var pet = Pets.FindOne(user.Id.ToString());
+
+            if (pet == null)
+            {
+                continue; // Skip users without pets
+            }
+
+            var minutesSinceLastActivity = CalculateTimeDifferenceInMinutes(pet.status.lastActivity);
+
+            var thirtyDaysInMinutes = 30 * 24 * 60;
+            if (minutesSinceLastActivity > thirtyDaysInMinutes)
+            {
+                ScheduleNotification(pet.status.health);
+            }
+        }
     }
 
     private static TimeSpan CalculateNotificationInterval(int healthScore)
     {
-        // linear decay with caps for higher and lower health scores
-        int maxInterval = 5;  // max allowed interval
-        int minInterval = 1;  // min allowed interval
-        int capThresholdHigh = 7; // health score above which the interval is capped
-        int capThresholdLow = 3;  // health score below which the interval is capped
+        int maxInterval = 5;
+        int minInterval = 1;
+        int capThresholdHigh = 7;
+        int capThresholdLow = 3;
 
-        // linear decay formula
         int calculatedInterval = Math.Max(minInterval, maxInterval - healthScore);
 
-        // cap interval for higher health scores
         if (healthScore > capThresholdHigh)
         {
             calculatedInterval = maxInterval;
         }
 
-        // cap interval for lower health scores
         if (healthScore <= capThresholdLow)
         {
             calculatedInterval = Math.Min(calculatedInterval, 3);
@@ -53,8 +60,9 @@ public static class NotificationScheduler
 
         return TimeSpan.FromHours(calculatedInterval);
     }
+}
 
-   
+
 /*In this modified code, the CheckAccountActivityAndSendNotifications method now accepts
  a list of users (List<User> users). This list of users should be passed from C# application
   when calling this method. The method then iterates over the users, retrieves the associated pets, 
