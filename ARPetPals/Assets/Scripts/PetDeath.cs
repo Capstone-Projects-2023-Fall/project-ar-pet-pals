@@ -14,6 +14,8 @@ public class PetDeath : MonoBehaviour
     [SerializeField] private GameObject tombStone;
     [SerializeField] private GameObject deathPopUp;
 
+    public bool isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class PetDeath : MonoBehaviour
 
         float health = PlayerPrefs.GetFloat("health");
         if (health <= 0) {
+            isDead = true;
             deathSequence();
         }
 
@@ -28,6 +31,7 @@ public class PetDeath : MonoBehaviour
     private void Update() {
         float health = PlayerPrefs.GetFloat("health");
         if (health <= 0) {
+            isDead = true;
             deathSequence();
         }
     }
@@ -47,7 +51,6 @@ public class PetDeath : MonoBehaviour
         //drop down or pop up "Oh no! You neglected your pet to the point of death... yikes. Your account will now be deleted, please register a new account
 
         //delete account
-        deleteAccount();
 
         //click red button return to main menu
     }
@@ -58,10 +61,6 @@ public class PetDeath : MonoBehaviour
         CG.SetActive(false);
         tombStone.SetActive(true);
         deathPopUp.SetActive(true);
-    }
-
-    public void deleteAccount() {
-        
     }
 
     //load sign up scene after exit button is clicked
