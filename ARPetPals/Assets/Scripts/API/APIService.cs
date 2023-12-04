@@ -220,6 +220,36 @@ namespace ARPetPals
         }
     }
 
+ public void CheckAccountActivityAndSendNotifications()
+        {
+            StartCoroutine(_CheckAccountActivityAndSendNotifications());
+        }
+
+        private IEnumerator _CheckAccountActivityAndSendNotifications()
+        {
+            // Replace "your-server-endpoint" with the actual endpoint for checking account activity
+            string apiUrl = $"{URL}/api/checkAccountActivity";
+            
+            using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+            {
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+                yield return request.SendWebRequest();
+
+                if (request.isNetworkError || request.isHttpError)
+                {
+                    Debug.LogError($"Error checking account activity: {request.error}");
+                }
+                else
+                {
+                    // Handle the response as needed
+                    // For example, you might parse the response and show a warning notification
+                    // For simplicity, I'm just logging the response text here
+                    Debug.Log(request.downloadHandler.text);
+                }
+            }
+        }
 
         private IEnumerator _SendSignUpRequest(string username, string password, Action<string> callback)
         {
