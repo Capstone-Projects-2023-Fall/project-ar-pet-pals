@@ -2281,7 +2281,7 @@ Transform:
   m_Children:
   - {fileID: 1958842178}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &301861488
 MonoBehaviour:
@@ -12551,7 +12551,7 @@ PrefabInstance:
     - target: {fileID: 8482017780723374618, guid: 3738bd65ede154463b2c35064b9e5fdb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8482017780723374618, guid: 3738bd65ede154463b2c35064b9e5fdb,
         type: 3}
@@ -15234,7 +15234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1898917199
 RectTransform:
   m_ObjectHideFlags: 0
