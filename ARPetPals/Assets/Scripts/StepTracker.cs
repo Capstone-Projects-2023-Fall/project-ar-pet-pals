@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StepCounter : MonoBehaviour {
     public TMP_Text stepText;
-    public int maxSteps = 1000;
+    public int maxSteps = 50;
     private int stepCount = 0;
     private bool isTracking = false;
 
@@ -48,7 +48,7 @@ public class StepCounter : MonoBehaviour {
             // Check if the user reached 1000 steps
             if (stepCount >= maxSteps) {
                 isTracking = false; // Stop tracking when 1000 steps are reached
-                Debug.Log("Congratulations! You reached 1000 steps.");
+                Debug.Log("Congratulations! You reached 50 steps.");
                 //add happiness to pet
                 //Calling API to update happiness on server.
                 gameObject.GetComponent<APIService>().IncreasePetHappiness(APIService.ACTIVITY_TYPE_STEPTRACKING, s => {});

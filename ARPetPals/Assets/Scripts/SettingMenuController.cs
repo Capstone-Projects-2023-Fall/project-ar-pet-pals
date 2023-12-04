@@ -149,14 +149,14 @@ public class SettingMenuController : MonoBehaviour
             else {
                 APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
                 currentHappniness  = (int)float.Parse(responseData.mood);
-                health = float.Parse(responseData.health)/10;
+                // health = float.Parse(responseData.health)/10;
                 Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
                 Debug.Log($"Hy/Current Health from Api: {health}");
                 SetMaxHappiness(maxHappiness);
                 SetHappiness(currentHappniness);
 
                 //Dario
-                PlayerPrefs.SetFloat("health", health);
+                // PlayerPrefs.SetFloat("health", health);
                 PlayerPrefs.SetInt("happiness", currentHappniness);
             }
         });
@@ -193,7 +193,7 @@ public class SettingMenuController : MonoBehaviour
     public void LogoutButtonClicked()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("SignInScene");
+        SceneManager.LoadScene("SignInScene",LoadSceneMode.Additive);
     }
 
     public void LeaderBoardButtonClicked()
