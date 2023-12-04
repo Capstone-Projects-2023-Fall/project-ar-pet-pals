@@ -279,16 +279,26 @@ public class SettingMenuController : MonoBehaviour
     //Food list menu. All the feature of OR process here. 
     
     //Scan button to scan the object. 
-    public void ScanButtonClicked()
+    public async void ScanButtonClicked()
     {
-        //Process take picture in here.
-        
-        //Enable FoodList
-        ListPage.SetActive(true);
-        //Update List by changing Text in button. This is example, Modify value under here.
-        itemText1.text = "la di da";
-        itemText2.text = "apple";
-        itemText3.text = "banana";
+        // Capture Image and Recognize It
+        FoodRecognition foodRecognition = new FoodRecognition();
+        Dictionary<int, string> topMatches = await foodRecognition.RecognizeFood();
+
+        var builder = new System.Text.StringBuilder();
+        foreach(var pair in topMatches)
+        {
+            builder.AppendLine($"Rank {pair.Key}: {pair.Value}");
+        }
+
+        Debug.Log(builder.ToString());
+
+        // //Enable FoodList
+        // ListPage.SetActive(true);
+        // //Update List by changing Text in button. This is example, Modify value under here.
+        // itemText1.text = "la di da";
+        // itemText2.text = "apple";
+        // itemText3.text = "banana";
     }
 
     // Log out to sign in scene
