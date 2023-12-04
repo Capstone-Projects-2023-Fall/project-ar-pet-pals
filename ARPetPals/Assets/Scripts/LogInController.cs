@@ -7,15 +7,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using ARPetPals;
 
+
 //This script use for control sign in scene.
 public class LogInController : MonoBehaviour
 {
     [SerializeField] public TMP_InputField userNameField;
     [SerializeField] public TMP_InputField passwordField;
     [SerializeField] public TMP_Text editText;
+    [SerializeField] public GameObject userError;
+    [SerializeField] public GameObject passwordError;
+
     public string usernameInput = "";
     public string passwordInput = "";
-    public GameObject gameObject;
 
     private bool dataRetrieved = false; // Flag to track if data has been retrieved
 
@@ -32,24 +35,40 @@ public class LogInController : MonoBehaviour
     //     Debug.Log("password: " + passwordInput);
     // }
 
+    public void Start()
+    {
+        userError.SetActive(false);
+        passwordError.SetActive(false);
+    }
+
+    public void Update()
+    {
+      
+        
+    }
+
+    public void onSelected()
+    {
+        userError.SetActive(false);
+        passwordError.SetActive(false);
+    }
+
     public void loginButtonClicked()
     {
         usernameInput = userNameField.text;
         passwordInput = passwordField.text;
-        if (usernameInput == "" && passwordInput == "")
+        // if (usernameInput == "" && passwordInput == "")
+        // {
+        //     editText.text = "Missing username and password";
+        //     editText.color =  Color.red;
+        // }
+        if (usernameInput == "")
         {
-            editText.text = "Missing username and password";
-            editText.color =  Color.red;
+            userError.SetActive(true);
         }
-        else if (usernameInput == "")
+        if (passwordInput == "")
         {
-            editText.text = "Missing username";
-            editText.color =  Color.red;
-        }
-        else if (passwordInput == "")
-        {
-            editText.text = "Missing password";
-            editText.color =  Color.red;
+            passwordError.SetActive(true);
         }
         Debug.Log($"Log in Clicked username: {usernameInput} password: {passwordInput}");
         if (passwordInput != "" && usernameInput != "")
@@ -60,20 +79,26 @@ public class LogInController : MonoBehaviour
                 {
                     Debug.Log("Login Fail: " + errMessage);
                     editText.text = errMessage;
+                    editText.color =  Color.red;
                 }
                 else
                 {
-                    Debug.Log("Login Success: " + errMessage);
-
+                    PlayerPrefs.SetString("usernameInput",usernameInput);
+                    PlayerPrefs.SetString("passwordInput",passwordInput);
+                    Debug.Log($"Hy/Login Success-Token: {PlayerPrefs.GetString(APIService.KEY_TOKEN)}");
+                    gameObject.GetComponent<APIService>().IncreasePetHappiness(APIService.ACTIVITY_TYPE_LOGIN, s => {});
                     retrievePetName();
+                    StartCoroutine(WaitForDataRetrievalAndLoadScene());
+                    // SceneManager.LoadScene("MainGameScene");
+                    
 
                     //StartCoroutine(WaitForOneSecond());
 
                     //retrievePetChoice();
                     //SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
 
-                    StartCoroutine(WaitForDataRetrievalAndLoadScene());
-
+                    
+                    
                 }
             });
         }
@@ -81,7 +106,8 @@ public class LogInController : MonoBehaviour
 
     public void registerButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        
+        SceneManager.LoadScene("SignUpScene");
     }
 
     //set pet name to PlayerPrefs
@@ -122,7 +148,7 @@ public class LogInController : MonoBehaviour
 
         // Now that data has been retrieved, you can proceed to retrievePetChoice and load the scene
         retrievePetChoice();
-        SceneManager.LoadScene(3); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+        SceneManager.LoadScene("MainGameScene"); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
     }
 
     private IEnumerator WaitForOneSecond() {
