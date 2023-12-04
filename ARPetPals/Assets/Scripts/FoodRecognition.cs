@@ -12,8 +12,12 @@ using static ARPetPals.APIServiceResponse;
 
 public class FoodRecognition : MonoBehaviour
 {
-    public GameObject gameObject;
-    [SerializeField] public TMP_Text foodGuesses;
+    private GameObject gameObject;
+
+    public FoodRecognition(GameObject gameObject)
+    {
+        this.gameObject = gameObject;
+    }
     
     public async Task<Dictionary<int, string>> RecognizeFood()
     {
@@ -24,7 +28,7 @@ public class FoodRecognition : MonoBehaviour
         {
             ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
             if (error != null && !string.IsNullOrEmpty(error.message))
-            {
+            {   
                 Debug.Log("Food Recognition Error: " + error.message);
                 tcs.SetResult(null);
             }
@@ -69,18 +73,6 @@ public class FoodRecognition : MonoBehaviour
 
         return imageString;
     }
-    
-    // private void DisplayFoodGuesses(RecognizeFoodResponse response)
-    // {
-    //     foodGuesses.text = "Is it one of these?\n";
-        
-    //     List<Guess> guesses = response.topMatches;
-    //     foreach (Guess guess in guesses)
-    //     {
-    //         // Debug.Log(guess.rank + ". " + guess.name);
-    //         foodGuesses.text = foodGuesses.text + guess.rank + ". " + guess.name + "\n";
-    //     }
-    // }
 
     // TODO: Add function to select food from list of guesses
 }

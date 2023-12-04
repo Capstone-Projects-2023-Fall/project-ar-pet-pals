@@ -282,7 +282,7 @@ public class SettingMenuController : MonoBehaviour
     public async void ScanButtonClicked()
     {
         // Capture Image and Recognize It
-        FoodRecognition foodRecognition = new FoodRecognition();
+        FoodRecognition foodRecognition = new FoodRecognition(gameObject);
         Dictionary<int, string> topMatches = await foodRecognition.RecognizeFood();
 
         var builder = new System.Text.StringBuilder();

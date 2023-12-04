@@ -718,16 +718,12 @@ namespace ARPetPals
 
         private IEnumerator _SendRecognizeFoodRequest(string image64String, Action<string> callback)
         {
-            // string token = GetStoredToken();
-            // if (string.IsNullOrEmpty(token))
-            // {
-            //     callback("Invalid token");
-            //     yield break;
-            // }
-
-            // Get fresh token from API. Just for testing.
-            // TODO: Get proper token to load in dynamically
-            string token = "";
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
 
             string url = URL + "/food/recognize";
             Dictionary<string, string> body = new Dictionary<string, string>
