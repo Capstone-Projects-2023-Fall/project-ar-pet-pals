@@ -1,5 +1,5 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
-import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser } from "../controllers/controllers.users.ts";
+import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser, saveBirthday } from "../controllers/controllers.users.ts";
 import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, } from "../controllers/controllers.pets.ts";
 import { recognizeFood } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
@@ -27,7 +27,7 @@ router.post("/api/signin",signin)
 router.post("/api/pet/create", authourized, createPet  )
 
 //check account activity
-router.get("/api/checkAccountActivity", checkAccountActivity);
+router.get("/api/checkAccountActivity", authourized, checkAccountActivity);
 
 //name
 router.post("/api/pet/name", authourized, setPetName  )
@@ -53,6 +53,9 @@ router.get("/api/pet/choice", authourized, getPetChoice )
 //userInfo
 router.get("/api/user", authourized, getUserInfo  )
 
+//user birthday
+router.post("/api/savebirthday", authourized,saveBirthday) 
+
 // Update Step Goal
 router.put("/api/user/step-goal", authourized, updateStepGoal);
 
@@ -75,6 +78,6 @@ router.post("/api/food/healthRating", authourized, getHealthRating);
 
 
 // get leaderboard user list 
-router.get("/api/leaderboard/list", leaderboardList)
+router.get("/api/leaderboard/list", authourized, leaderboardList)
 
 export default router;
