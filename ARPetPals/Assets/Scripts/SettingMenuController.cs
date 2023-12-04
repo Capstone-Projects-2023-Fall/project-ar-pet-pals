@@ -117,7 +117,7 @@ public class SettingMenuController : MonoBehaviour
 
                 //Dario
                 PlayerPrefs.SetFloat("health", health);
-                PlayerPrefs.SetFloat("happiness", currentHappniness);
+                PlayerPrefs.SetInt("happiness", currentHappniness);
             }
         });
 
@@ -139,28 +139,28 @@ public class SettingMenuController : MonoBehaviour
     {
         
         //Get Pet Status Api .        
-        gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
-        {
-            
-            if (errMessage != "")
-            {
-                Debug.Log($"Hy/errorMessage {errMessage}");
-            }
-            else {
-                APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
-                currentHappniness  = (int)float.Parse(responseData.mood);
-                health = float.Parse(responseData.health)/10;
-                Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
-                Debug.Log($"Hy/Current Health from Api: {health}");
-                SetMaxHappiness(maxHappiness);
-                SetHappiness(currentHappniness);
-
-                //Dario
-                PlayerPrefs.SetFloat("health", health);
-                PlayerPrefs.SetFloat("happiness", currentHappniness);
-            }
-        });
-        Debug.Log("Update status run.");
+        // gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
+        // {
+        //     
+        //     if (errMessage != "")
+        //     {
+        //         Debug.Log($"Hy/errorMessage {errMessage}");
+        //     }
+        //     else {
+        //         APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
+        //         currentHappniness  = (int)float.Parse(responseData.mood);
+        //         health = float.Parse(responseData.health)/10;
+        //         Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
+        //         Debug.Log($"Hy/Current Health from Api: {health}");
+        //         SetMaxHappiness(maxHappiness);
+        //         SetHappiness(currentHappniness);
+        //
+        //         //Dario
+        //         PlayerPrefs.SetFloat("health", health);
+        //         PlayerPrefs.SetFloat("happiness", currentHappniness);
+        //     }
+        // });
+        // Debug.Log("Update status run.");
     }
 
     // public void  SetAudioLevel(float sliderValue)

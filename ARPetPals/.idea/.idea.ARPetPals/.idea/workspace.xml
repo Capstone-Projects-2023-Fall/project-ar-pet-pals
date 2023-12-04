@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e1781716-5da8-4ba9-a8bc-654060b64c5c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SettingMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SettingMenuController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +142,8 @@
       <workItem from="1701286875607" duration="150000" />
       <workItem from="1701318912739" duration="2914000" />
       <workItem from="1701630309744" duration="4399000" />
-      <workItem from="1701646563096" duration="768000" />
+      <workItem from="1701646563096" duration="913000" />
+      <workItem from="1701649072804" duration="1280000" />
     </task>
     <servers />
   </component>
