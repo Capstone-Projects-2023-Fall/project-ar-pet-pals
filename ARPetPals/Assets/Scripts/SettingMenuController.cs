@@ -301,25 +301,25 @@ public class SettingMenuController : MonoBehaviour
         // Display User Options
         if (topMatches.TryGetValue(1, out string value))
         {
-            Match1Text.text = value;
+            Match1Text.text = CapitalizeEachWord(value);
             Match1.onClick.AddListener(
-                () => SelectFoodOption(Match1Text.text, foodRecognition)
+                () => SelectFoodOption(Match1Text.text.ToLower(), foodRecognition)
             );
         }
         
         if (topMatches.TryGetValue(2, out value))
         {
-            Match2Text.text = value;
+            Match2Text.text = CapitalizeEachWord(value);
             Match2.onClick.AddListener(
-                () => SelectFoodOption(Match2Text.text, foodRecognition)
+                () => SelectFoodOption(Match2Text.text.ToLower(), foodRecognition)
             );
         }
 
         if (topMatches.TryGetValue(3, out value))
         {
-            Match3Text.text = value;
+            Match3Text.text = CapitalizeEachWord(value);
             Match3.onClick.AddListener(
-                () => SelectFoodOption(Match3Text.text, foodRecognition)
+                () => SelectFoodOption(Match3Text.text.ToLower(), foodRecognition)
             );
         }
 
@@ -353,34 +353,25 @@ public class SettingMenuController : MonoBehaviour
                     TMP_Text textComponent = newOption.GetComponentInChildren<TMP_Text>();
                     if (textComponent != null)
                     {
-                        textComponent.text = option;
+                        textComponent.text = CapitalizeEachWord(option);
                     }
 
                     Button buttonComponent = newOption.GetComponent<Button>();
                     if (buttonComponent != null)
                     {
                         buttonComponent.onClick.AddListener(
-                            () => SelectFoodOption(option, foodRecognition)
+                            () => SelectFoodOption(option.ToLower(), foodRecognition)
                         );
                     }
                 }
             }
 
         });
-
-        
-        // TODO --
-        // Format Food List Graphics
-        // Get Nutrition Info Displaying
     }
 
     public async void SelectFoodOption(string food, FoodRecognition foodRecognition)
     {
         Dictionary<string, string> nutritionInfo = await foodRecognition.GetNutritionInfo(food);
-        foreach (KeyValuePair<string, string> pair in nutritionInfo)
-        {
-            Debug.Log(pair.Key + ", " + pair.Value);
-        }
 
         // Close Down Food List
         ListPage.SetActive(false);
@@ -421,6 +412,20 @@ public class SettingMenuController : MonoBehaviour
             () => { NutritionInfoPanel.gameObject.SetActive(false); }
         );
         
+    }
+
+    public string CapitalizeEachWord(string str)
+    {
+        var words = str.Split(' ');
+        for (int i = 0; i < words.Length; i++)
+        {
+            if (words[i].Length > 0)
+            {
+                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+            }
+        }
+
+        return string.Join(" ", words);
     }
 
     // Log out to sign in scene
