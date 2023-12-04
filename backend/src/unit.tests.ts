@@ -1061,7 +1061,19 @@ Deno.test("get food's nutrition info", async () => {
 		let json = await res.json();
 		
 		assert(json.food == "apple", JSON.stringify(json));
-		assert(json.nutritionInfo == "", JSON.stringify(json));
+		
+		assert(json.nutritionInfo.calories == 53, JSON.stringify(json));
+		assert(json.nutritionInfo.serving_size_g == 100, JSON.stringify(json));
+		assert(json.nutritionInfo.fat_total_g == 0.2, JSON.stringify(json));
+		assert(json.nutritionInfo.fat_saturated_g == 0, JSON.stringify(json));
+		assert(json.nutritionInfo.protein_g == 0.3, JSON.stringify(json));
+		assert(json.nutritionInfo.sodium_mg == 1, JSON.stringify(json));
+		assert(json.nutritionInfo.potassium_mg == 11, JSON.stringify(json));
+		assert(json.nutritionInfo.cholesterol_mg == 0, JSON.stringify(json));
+		assert(json.nutritionInfo.carbohydrates_total_g == 14.1, JSON.stringify(json));
+		assert(json.nutritionInfo.fiber_g == 2.4, JSON.stringify(json));
+		assert(json.nutritionInfo.sugar_g == 10.3, JSON.stringify(json));
+		
 		
   } catch (err) {
     assert(false, err);
