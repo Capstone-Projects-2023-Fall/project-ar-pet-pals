@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ARPetPals;
 using TMPro;
 using UnityEngine;
@@ -50,7 +51,7 @@ public class SettingMenuController : MonoBehaviour
     
     public Transform contentPanel;
     public GameObject foodOptionPrefab;
-    
+    [SerializeField] public TMP_InputField OptionInput;
     
     public AudioMixer mixer;
     
@@ -284,17 +285,10 @@ public class SettingMenuController : MonoBehaviour
     //Scan button to scan the object. 
     public async void ScanButtonClicked()
     {
-        // Capture Image and Recognize It
         FoodRecognition foodRecognition = new FoodRecognition(gameObject);
+        
+        // Capture Image and Recognize It
         Dictionary<int, string> topMatches = await foodRecognition.RecognizeFood();
-
-        var builder = new System.Text.StringBuilder();
-        foreach(var pair in topMatches)
-        {
-            builder.AppendLine($"Rank {pair.Key}: {pair.Value}");
-        }
-
-        Debug.Log(builder.ToString());
 
         // Display User Options
         if (topMatches.TryGetValue(1, out string value))
@@ -312,30 +306,49 @@ public class SettingMenuController : MonoBehaviour
             Match3Text.text = value;
         }
 
-        // Get Food Options List from BE
-        List<string> foodOptions = await foodRecognition.ListFoodOptions();
-        
-        string strList = String.Join(", ", foodOptions);
-        Debug.Log(strList);
-
         // Make Food List Visible
         ListPage.SetActive(true);
 
-        // Dynamically Populate Button List As 
-        // User Types in Input
+        // Get Food Options List from BE
+        List<string> foodOptions = await foodRecognition.ListFoodOptions();
 
-        // -- Ensure button prefab is looks and
-        // -- is set correctly
+        // Create Input Listener
+        OptionInput.onValueChanged.AddListener((string text) => {
+            
+            // Create sublist of options that include given text
+            List<string> matchingOptions = foodOptions.Where(opt => opt.Contains(text)).ToList();
 
-        GameObject newOption = Instantiate(foodOptionPrefab);
-        newOption.transform.SetParent(contentPanel, false);
+            // Clear out old options
+            foreach (Transform optButton in contentPanel)
+            {
+                Destroy(optButton.gameObject);
+            }
+            
+            // Generate a button for each matching option
+            if (!string.IsNullOrEmpty(text))
+            {
+                foreach (var option in matchingOptions)
+                {
+                    GameObject newOption = Instantiate(foodOptionPrefab);
+                    newOption.transform.SetParent(contentPanel, false);
 
-        TMP_Text textComponent = newOption.GetComponentInChildren<TMP_Text>();
-        if (textComponent != null)
-        {
-            textComponent.text = "New Button";
-        }
+                    TMP_Text textComponent = newOption.GetComponentInChildren<TMP_Text>();
+                    if (textComponent != null)
+                    {
+                        textComponent.text = option;
+                    }
+                }
+            }
 
+        });
+
+        
+        // TODO --
+        
+        // Get User Decision to Work
+        // Recevive User Input
+        // Format Food List Graphics
+        // Get Nutrition Info Displaying
         
     }
 

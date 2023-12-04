@@ -5692,6 +5692,7 @@ MonoBehaviour:
   contentPanel: {fileID: 1748114081}
   foodOptionPrefab: {fileID: 4361652794695241579, guid: 569a777ded5a5b3408799384b4bddd67,
     type: 3}
+  OptionInput: {fileID: 1445385153}
   mixer: {fileID: 0}
   health: 0
   maxHealth: 10
