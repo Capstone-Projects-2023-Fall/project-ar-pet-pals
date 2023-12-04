@@ -147,8 +147,13 @@ namespace ARPetPals
         {
             public string message;
         }
+        
+        [System.Serializable]
+            public class CheckAccountActivityResponse
+        {
+             public string message;
 
 
-    }
+        }
 }
 

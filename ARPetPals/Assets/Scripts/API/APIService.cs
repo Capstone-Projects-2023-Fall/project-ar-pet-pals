@@ -226,30 +226,38 @@ namespace ARPetPals
         }
 
         private IEnumerator _CheckAccountActivityAndSendNotifications()
+{
+    string apiUrl = $"{URL}/api/checkAccountActivity";
+
+    using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+    {
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
         {
-            // Replace "your-server-endpoint" with the actual endpoint for checking account activity
-            string apiUrl = $"{URL}/api/checkAccountActivity";
-            
-            using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+            Debug.LogError($"Error checking account activity: {request.error}");
+        }
+        else
+        {
+            // Parse the response as needed
+            CheckAccountActivityResponse response = JsonUtility.FromJson<CheckAccountActivityResponse>(request.downloadHandler.text);
+
+            // Handle the response based on its structure
+            if (response != null)
             {
-                request.downloadHandler = new DownloadHandlerBuffer();
-                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
-
-                yield return request.SendWebRequest();
-
-                if (request.isNetworkError || request.isHttpError)
-                {
-                    Debug.LogError($"Error checking account activity: {request.error}");
-                }
-                else
-                {
-                    // Handle the response as needed
-                    // For example, you might parse the response and show a warning notification
-                    // For simplicity, I'm just logging the response text here
-                    Debug.Log(request.downloadHandler.text);
-                }
+                Debug.Log($"Server Response: {response.message}");
+                // You might want to check other fields in the response
+                // For example: if (response.success) { /* handle success */ }
+            }
+            else
+            {
+                Debug.LogError("Failed to parse server response.");
             }
         }
+    }
 
         private IEnumerator _SendSignUpRequest(string username, string password, Action<string> callback)
         {

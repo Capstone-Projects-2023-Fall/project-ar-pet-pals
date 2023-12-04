@@ -7,6 +7,7 @@ import { verifyToken } from "../controllers/controllers.token.ts";
 import {getHealthRating } from "../controllers/controllers.health.ts";
 import { updateStepCount, checkStepGoal, updateStepGoal } from "../controllers/controllers.steps.ts";
 import { leaderboardList } from "../controllers/controllers.leaderboard.ts";
+import { checkAccountActivity } from "../controllers//controllers.pets.ts";
 
 
 const home = async({request, response}:{request:any;response:any}) => {
@@ -24,6 +25,9 @@ router.post("/api/signin",signin)
 
 //createPet
 router.post("/api/pet/create", authourized, createPet  )
+
+//check account activity
+router.get("/api/checkAccountActivity", checkAccountActivity);
 
 //name
 router.post("/api/pet/name", authourized, setPetName  )
@@ -70,7 +74,7 @@ router.post("/api/food/recognize", authourized, recognizeFood)
 router.post("/api/food/healthRating", authourized, getHealthRating);
 
 
-// get user list 
+// get leaderboard user list 
 router.get("/api/leaderboard/list", leaderboardList)
 
 export default router;
