@@ -4,7 +4,6 @@ import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, crea
 import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
-import {getHealthRating } from "../controllers/controllers.health.ts";
 import { updateStepCount, checkStepGoal,getStepCount, updateStepGoal, resetDailyStepCountForAllUsers, resetWeeklyStepCountForAllUsers } from "../controllers/controllers.steps.ts";
 import { leaderboardList } from "../controllers/controllers.leaderboard.ts";
 
