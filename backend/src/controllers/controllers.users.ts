@@ -194,7 +194,4 @@ export const updateStepGoal = async ({
 };
 
 
-  response.body = { message: "Step goal updated successfully" };
-  response.status = 200;
-};
 
