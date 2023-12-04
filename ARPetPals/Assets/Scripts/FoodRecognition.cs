@@ -74,5 +74,28 @@ public class FoodRecognition : MonoBehaviour
         return imageString;
     }
 
+    public async Task<List<string>> ListFoodOptions()
+    {
+        var tcs = new TaskCompletionSource<List<string>>();
+
+        gameObject.GetComponent<APIService>().ListFoodOptions((response) =>
+        {
+            ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
+            if (error != null && !string.IsNullOrEmpty(error.message))
+            {   
+                Debug.Log("List Food Options Error: " + error.message);
+                tcs.SetResult(null);
+            }
+            else
+            {
+                ListFoodOptionsResponse parsedResponse = JsonUtility.FromJson<ListFoodOptionsResponse>(response);
+                tcs.SetResult(parsedResponse.foodOptions);
+            }                    
+        });
+
+        return await tcs.Task;
+    }
+    
+    
     // TODO: Add function to select food from list of guesses
 }

@@ -119,6 +119,12 @@ namespace ARPetPals
         }
 
         [System.Serializable]
+        public class ListFoodOptionsResponse
+        {
+            public List<string> foodOptions;
+        }
+
+        [System.Serializable]
         public class UpdateUserResponse
         {
             public string message;

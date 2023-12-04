@@ -42,11 +42,14 @@ public class SettingMenuController : MonoBehaviour
     
     
     
-    //Text game object of Food List menu
+    // Food List Objects
     [Header("Menu List")]
-    [SerializeField] public TMP_Text itemText1;
-    [SerializeField] public TMP_Text itemText2;
-    [SerializeField] public TMP_Text itemText3;
+    [SerializeField] public TMP_Text Match1Text;
+    [SerializeField] public TMP_Text Match2Text;
+    [SerializeField] public TMP_Text Match3Text;
+    
+    public Transform contentPanel;
+    public GameObject foodOptionPrefab;
     
     
     public AudioMixer mixer;
@@ -293,12 +296,47 @@ public class SettingMenuController : MonoBehaviour
 
         Debug.Log(builder.ToString());
 
-        // //Enable FoodList
-        // ListPage.SetActive(true);
-        // //Update List by changing Text in button. This is example, Modify value under here.
-        // itemText1.text = "la di da";
-        // itemText2.text = "apple";
-        // itemText3.text = "banana";
+        // Display User Options
+        if (topMatches.TryGetValue(1, out string value))
+        {
+            Match1Text.text = value;
+        }
+        
+        if (topMatches.TryGetValue(2, out value))
+        {
+            Match2Text.text = value;
+        }
+
+        if (topMatches.TryGetValue(3, out value))
+        {
+            Match3Text.text = value;
+        }
+
+        // Get Food Options List from BE
+        List<string> foodOptions = await foodRecognition.ListFoodOptions();
+        
+        string strList = String.Join(", ", foodOptions);
+        Debug.Log(strList);
+
+        // Make Food List Visible
+        ListPage.SetActive(true);
+
+        // Dynamically Populate Button List As 
+        // User Types in Input
+
+        // -- Ensure button prefab is looks and
+        // -- is set correctly
+
+        GameObject newOption = Instantiate(foodOptionPrefab);
+        newOption.transform.SetParent(contentPanel, false);
+
+        TMP_Text textComponent = newOption.GetComponentInChildren<TMP_Text>();
+        if (textComponent != null)
+        {
+            textComponent.text = "New Button";
+        }
+
+        
     }
 
     // Log out to sign in scene

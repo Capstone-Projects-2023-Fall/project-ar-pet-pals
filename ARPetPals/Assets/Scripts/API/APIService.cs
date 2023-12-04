@@ -755,6 +755,47 @@ namespace ARPetPals
             }
         }
 
+        // Get Food Options
+        public void ListFoodOptions(Action<string> callback)
+        {
+            StartCoroutine(_SendListFoodOptionsRequest(callback));
+        }
+
+        private IEnumerator _SendListFoodOptionsRequest(Action<string> callback)
+        {
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
+
+            string url = URL + "/food/listFoodOptions";            
+
+            using (UnityWebRequest request = UnityWebRequest.Get(url)) {
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_SendListFoodOptionsRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(errorResponse.message);
+                    _ShowReponse(errorResponse.message);
+                    yield break;
+                }
+
+                // Deserialize the JSON response
+                ListFoodOptionsResponse responseData = JsonUtility.FromJson<ListFoodOptionsResponse>(responseJson);
+                Debug.Log("_SendListFoodOptionsRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback(JsonUtility.ToJson(responseData, true));
+            }
+        }
+
 
         public void IncreasePetHappiness(string type, Action<string> callback)
         {
