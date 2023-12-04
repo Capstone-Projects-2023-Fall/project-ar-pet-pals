@@ -5,15 +5,16 @@ using ARPetPals;
 public class StepCounter : MonoBehaviour
 
 {
+/*
  private bool isStepDetected = false;
  private int stepCount = 0;
  
 #if UNITY_ANDROID
-   # private const float StepThreshold = 0.2f;
+   private const float StepThreshold = 0.2f;
 #endif
 
 #if UNITY_IOS
-   # private const float StepThreshold = 0.25f;
+   private const float StepThreshold = 0.25f;
 #endif
 
   //  private const int StepThreshold = 10; // Adjust this threshold based on your testing, this code is for android only
@@ -36,6 +37,7 @@ public class StepCounter : MonoBehaviour
             isStepDetected = false;
         }
     }
+*/
 }
 
 //This script uses the Input.acceleration property to get the accelerometer data and checks 

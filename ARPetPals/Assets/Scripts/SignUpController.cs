@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ARPetPals;
@@ -12,17 +13,34 @@ public class SignUpController : MonoBehaviour
     [SerializeField] public TMP_InputField passwordField;
     [SerializeField] public TMP_InputField confirmPasswordField;
     [SerializeField] public TMP_InputField birthdateField;  // Added birthdate field
-    
-    public GameObject gameObject;
+    [SerializeField] public GameObject userNameError;
+    [SerializeField] public GameObject passWordError;
+    [SerializeField] public GameObject confirmPasswordError;
+
     public string usernameInput = "";
     public string passwordInput = "";
     public string confirmPasswordInput = "";
     public string birthdateInput = "";  // Added birthdate input
     public string errormessage = "";
 
+    public void Start()
+    {
+        userNameError.SetActive(false);
+        passWordError.SetActive(false);
+        confirmPasswordError.SetActive(false);
+    }
+
+    public void onSelected()
+    {
+        userNameError.SetActive(false);
+        passWordError.SetActive(false);
+        confirmPasswordError.SetActive(false);
+        editText.text = "";
+    }
+
     public void BackButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("SignInScene");
     }
 
     public void RegisterButtonClicked()
@@ -31,26 +49,23 @@ public class SignUpController : MonoBehaviour
         passwordInput = passwordField.text;
         confirmPasswordInput = confirmPasswordField.text;
         birthdateInput = birthdateField.text;  // Get birthdate input
-        
+
         if (usernameInput == "")
         {
-            errormessage += " username";
+            userNameError.SetActive(true);
         }
         if (passwordInput == "")
         {
-            if (errormessage != "")
-            {
-                errormessage += " and";
-            }
-            errormessage += " password";
+            passWordError.SetActive(true);
         }
         if (confirmPasswordInput == "")
         {
-            if (errormessage != "")
-            {
-                errormessage += " and";
-            }
-            errormessage += " confirm password";
+            confirmPasswordError.SetActive(true);
+        }
+
+        if (passwordInput != confirmPasswordInput)
+        {
+            errormessage += "Confirm Password is not correct";
         }
         if (birthdateInput == "") //asking birthdate 
         {
@@ -63,13 +78,12 @@ public class SignUpController : MonoBehaviour
 
         if (errormessage != "")
         {
-            editText.text = $"Missing{errormessage}.";
-            editText.color = Color.red;
+            editText.text = $"{errormessage}.";
         }
 
         errormessage = "";
         Debug.Log($"Error message {errormessage}");
-        
+
         Debug.Log("register clicked");
         Debug.Log($"Sign up Clicked username: {usernameInput} password: {passwordInput} confirm password: {confirmPasswordInput} birthdate: {birthdateInput}");
         //added birthdate part to function
@@ -83,13 +97,14 @@ public class SignUpController : MonoBehaviour
                 {
                     Debug.Log("Signup Fail: " + errMessage);
                     editText.text = errMessage;
+                    editText.color = Color.red;
                 }
                 else
                 {
                     Debug.Log("Signup Success: " + errMessage);
                     // Schedule birthday notification after successful registration
                     BirthdayNotificationManager.ScheduleBirthdayNotification(usernameInput, System.DateTime.Parse(birthdateInput));
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    SceneManager.LoadScene("PetChoiceScene");
                 }
             });
         }

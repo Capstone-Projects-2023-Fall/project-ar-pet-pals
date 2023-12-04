@@ -1,11 +1,20 @@
-import { UserSchema } from "../schema/schema.user.ts";
+import UserSchema from "../schema/schema.user.ts";
 import db from "../database/database.connection.ts";
 import { PetSchema } from "../schema/schema.pet.ts";
+import { ObjectId } from "https://deno.land/x/mongo@v0.32.0/mod.ts";
 
 const usersDb = db.collection<UserSchema>("users");
 const Pets = db.collection<PetSchema>("pets");
 
-
+function compareScores(a: any, b: any) {
+  if (a.score < b.score) {
+    return 1;
+  }
+  if (a.score > b.score) {
+    return -1;
+  }
+  return 0;
+}
 
 export const leaderboardList = async ({
   request,
@@ -14,40 +23,32 @@ export const leaderboardList = async ({
   request: any;
   response: any;
 }) => {
-  const users = await usersDb.find({}).toArray();
+  let list: any[] = [];
+  let pets = await Pets.find(
+    { activities: { $ne: null } },
+  ).toArray();
 
-  if (!users) {
-    response.body = {
-      message: "could not find any users",
-    };
-    response.status = 400;
-    return;
-  }
-  let n = 5
-  
+  for (let pet of pets) {
+    let score = 0;
+    let obj = {};
+    for (let act of pet.activities) {
+      score += act.weeklyPoints;
+    }
 
-  // n is the top (n) of users. for instance, top 5 or top 12
+    let user = await usersDb.findOne({ _id: new ObjectId(pet.user_id) });
 
-  // get a list of users
+    if (!user) {
+      continue;
+    }
 
-  // get the happinness and health of user
-
-  let score = 0;
-
-  let list: {username: string, score: number}[] = []
-  for (let user of users) {
-    const pet = await Pets.findOne({ user_id: user._id.toString() });
-    console.log(user._id, pet)
-
-    if(!pet) continue;
-    score = pet.status.mood + pet.status.health;
-    list.push( {
+    obj = {
       username: user.username,
-      score,
-    });
+      score: score,
+    };
+    list.push(obj);
   }
 
- // Sort the list
+  // Sort the list
   list.sort((a, b) => (a.score < b.score ? 1 : -1));
 
   // Get the top 5 users
@@ -61,3 +62,4 @@ export const leaderboardList = async ({
 
   response.status = 200;
 };
+
