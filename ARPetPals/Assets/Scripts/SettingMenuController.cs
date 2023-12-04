@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using ARPetPals;
 using TMPro;
 using UnityEngine;
@@ -55,6 +56,10 @@ public class SettingMenuController : MonoBehaviour
     public Transform contentPanel;
     public GameObject foodOptionPrefab;
     [SerializeField] public TMP_InputField OptionInput;
+
+    [SerializeField] public TMP_Text NutritionInfoPanel;
+    [SerializeField] public TMP_Text NutritionInfoFacts;
+    [SerializeField] public Button NutritionInfoHideButton;
     
     public AudioMixer mixer;
     
@@ -319,6 +324,7 @@ public class SettingMenuController : MonoBehaviour
         }
 
         // Make Food List Visible
+        NutritionInfoPanel.gameObject.SetActive(false);
         ListPage.SetActive(true);
 
         // Get Food Options List from BE
@@ -364,11 +370,8 @@ public class SettingMenuController : MonoBehaviour
 
         
         // TODO --
-        
-        // Get User Decisions to Work - call GetNutritionInfo(string food) - assign to button prefab
         // Format Food List Graphics
         // Get Nutrition Info Displaying
-        
     }
 
     public async void SelectFoodOption(string food, FoodRecognition foodRecognition)
@@ -380,8 +383,44 @@ public class SettingMenuController : MonoBehaviour
         }
 
         // Close Down Food List
+        ListPage.SetActive(false);
 
         // Populate and Enable Nutrition Info Display
+        NutritionInfoPanel.gameObject.SetActive(true);
+
+        // Set Nutr Info Title and Facts
+        NutritionInfoPanel.text = "-- " + food + " --\nNutrition Facts";
+
+        nutritionInfo.TryGetValue("calories", out string calories);
+        nutritionInfo.TryGetValue("serving_size_g", out string servSize);
+        nutritionInfo.TryGetValue("fat_total_g", out string fat);
+        nutritionInfo.TryGetValue("fat_saturated_g", out string fatSat);
+        nutritionInfo.TryGetValue("protein_g", out string protein);
+        nutritionInfo.TryGetValue("carbohydrates_total_g", out string carbs);
+        nutritionInfo.TryGetValue("fiber_g", out string fiber);
+        nutritionInfo.TryGetValue("sugar_g", out string sugar);
+        nutritionInfo.TryGetValue("sodium_mg", out string sodium);
+        nutritionInfo.TryGetValue("potassium_mg", out string potassium);
+        nutritionInfo.TryGetValue("cholesterol_mg", out string cholesterol);
+
+        StringBuilder facts = new StringBuilder();
+        facts.AppendLine("Calories: " + calories);
+        facts.AppendLine("Serving Size: " + servSize + "g");
+        facts.AppendLine("Total Fat: " + fat + "g");
+        facts.AppendLine("Sat. Fat: " + fatSat + "g");
+        facts.AppendLine("Protein: " + protein + "g");
+        facts.AppendLine("Carbs: " + carbs + "g");
+        facts.AppendLine("Fiber: " + fiber + "g");
+        facts.AppendLine("Sugar: " + sugar + "g");
+        facts.AppendLine("Sodium: " + sodium + "g");
+        facts.AppendLine("Potassium: "  + potassium + "mg");
+        facts.AppendLine("Cholesterol: "  + cholesterol + "mg");
+        NutritionInfoFacts.text = facts.ToString();
+
+        NutritionInfoHideButton.onClick.AddListener(
+            () => { NutritionInfoPanel.gameObject.SetActive(false); }
+        );
+        
     }
 
     // Log out to sign in scene

@@ -111,11 +111,11 @@ public class FoodRecognition : MonoBehaviour
             else
             {
                 GetNutritionInfoResponse parsedResponse = JsonUtility.FromJson<GetNutritionInfoResponse>(response);
-
+                
                 var nutritionInfo = new Dictionary<string, string>();
-                foreach (var prop in parsedResponse.nutritionInfo.GetType().GetProperties())
+                foreach (var field in parsedResponse.nutritionInfo.GetType().GetFields())
                 {
-                    nutritionInfo.Add(prop.Name, prop.GetValue(parsedResponse.nutritionInfo)?.ToString());
+                    nutritionInfo.Add(field.Name, field.GetValue(parsedResponse.nutritionInfo)?.ToString());
                 }
 
                 tcs.SetResult(nutritionInfo);
