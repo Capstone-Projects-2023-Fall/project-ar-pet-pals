@@ -2,10 +2,12 @@ import { Router } from "https://deno.land/x/oak/mod.ts";
 import {signin, signup, getUserName, getUserInfo} from "../controllers/controllers.users.ts";
 import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, } from "../controllers/controllers.pets.ts";
 import { recognizeFood } from "../controllers/controllers.food.ts";
-import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
+import {authourized} from "../middlewares/middlewares.isAuthorized.ts";
+import {updateStepCount} from "../controllers/controllers.steps.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import {getHealthRating } from "../controllers/controllers.health.ts";
-import { updateStepGoal } from "../controllers/controllers.users.ts";
+import { updateStepGoal } from "../controllers/controllers.steps.ts";
+import {checkStepGoal } from "../controllers/controllers.steps.ts";
 
 
 const home = async({request, response}:{request:any;response:any}) => {
@@ -46,13 +48,13 @@ router.get("/api/pet/choice", authourized, getPetChoice )
 router.get("/api/user", authourized, getUserInfo  )
 
 // Update Step Goal
-router.put("/api/user/step-goal", authorized, updateStepGoal);
+router.put("/api/user/step-goal", authourized, updateStepGoal);
 
 // Update Step Count
-router.put("/api/user/step-count", authorized, updateStep);
+router.put("/api/user/update-step-count", authourized, updateStepCount);
 
 // Check Step Goal
-router.get("/api/user/check-step-goal", authorized, checkGoal);
+router.get("/api/user/check-step-goal", authourized, checkStepGoal);
 
 //verifies a token
 router.post("/api/token/verify", verifyToken)

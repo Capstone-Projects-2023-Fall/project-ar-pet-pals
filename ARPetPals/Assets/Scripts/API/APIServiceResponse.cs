@@ -10,6 +10,12 @@ namespace ARPetPals
             public string name;
         }
 
+[System.Serializable]
+        public class UpdateStepCount
+        {
+            public string id;
+            
+        }
         [System.Serializable]
         public class SignInResponse
         {
@@ -18,13 +24,17 @@ namespace ARPetPals
         }
 
         [System.Serializable]
-        public class SignUpResponse
+        public class UpdateStepCountResponse
         {
             public string message;
-            public string token;
-            public UserInfo userInfo = new UserInfo();
         }
 
+         [System.Serializable]
+         public UpdateStepGoalResponse
+         {
+            public string message;
+         }
+        
         [System.Serializable]
         public class ErrorMessageResponse
         {

@@ -405,6 +405,80 @@ namespace ARPetPals
                 }
             }
         }
+ public static void UpdateStepCount(int stepCount, Action<APIServiceResponse> callback)
+    {
+        StartCoroutine(SendUpdateStepCountRequest(stepCount, callback));
+    }
+
+    private static IEnumerator SendUpdateStepCountRequest(int stepCount, Action<APIServiceResponse> callback)
+    {
+        string endpoint = "/api/user/update-step-count";
+        string url = URL + endpoint;
+
+        // Create a JSON object with the step count data
+        var requestData = new { stepCount = stepCount };
+
+        // Convert the data to JSON
+        string jsonData = JsonUtility.ToJson(requestData);
+
+        //Make POST Request Using UnityWebRequest
+        UnityWebRequest request = UnityWebRequest.Post(url, jsonData, "application/json");
+        request.SetRequestHeader("Authorization", "Bearer " + token);
+       {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("steps upload complete!");
+            }
+        }
+/*
+        // Make the API request
+        using (var request = new WWW(url, System.Text.Encoding.UTF8.GetBytes(jsonData), new Dictionary<string, string> { { "Content-Type", "application/json" } }))
+        {
+            yield return request;
+
+            if (!string.IsNullOrEmpty(request.error))
+            {
+                Debug.LogError("API Request Error: " + request.error);
+                callback?.Invoke(new APIServiceResponse(false, "API Request Error"));
+            }
+            else
+            {
+                // Parse the response JSON
+                var responseData = JsonUtility.FromJson<APIServiceResponse>(request.text);
+                callback?.Invoke(responseData);
+            }
+        }
+        */
+    }
+      public IEnumerator UpdateStepGoal(int userId, int newStepGoal)
+    {
+        string endpoint = $"/api/user/{userId}/update-step-goal?newStepGoal={newStepGoal}";
+        string url = BaseURL + endpoint;
+
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            // Handle the successful response
+            string responseText = request.downloadHandler.text;
+            UpdateStepGoalResponse response = JsonUtility.FromJson<UpdateStepGoalResponse>(responseText);
+
+            // Use the 'response' object as needed
+            Debug.Log($"Update Step Goal: {response.Message}");
+        }
+        else
+        {
+            // Handle the error
+            Debug.LogError($"Failed to update step goal. Error: {request.error}");
+        }
+    }
 
         //Get pet choice
         public void GetPetChoice(Action<string> callback) {
