@@ -48,6 +48,9 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public TMP_Text Match1Text;
     [SerializeField] public TMP_Text Match2Text;
     [SerializeField] public TMP_Text Match3Text;
+    [SerializeField] public Button Match1;
+    [SerializeField] public Button Match2;
+    [SerializeField] public Button Match3;
     
     public Transform contentPanel;
     public GameObject foodOptionPrefab;
@@ -294,16 +297,25 @@ public class SettingMenuController : MonoBehaviour
         if (topMatches.TryGetValue(1, out string value))
         {
             Match1Text.text = value;
+            Match1.onClick.AddListener(
+                () => SelectFoodOption(Match1Text.text, foodRecognition)
+            );
         }
         
         if (topMatches.TryGetValue(2, out value))
         {
             Match2Text.text = value;
+            Match2.onClick.AddListener(
+                () => SelectFoodOption(Match2Text.text, foodRecognition)
+            );
         }
 
         if (topMatches.TryGetValue(3, out value))
         {
             Match3Text.text = value;
+            Match3.onClick.AddListener(
+                () => SelectFoodOption(Match3Text.text, foodRecognition)
+            );
         }
 
         // Make Food List Visible
@@ -337,16 +349,18 @@ public class SettingMenuController : MonoBehaviour
                     {
                         textComponent.text = option;
                     }
+
+                    Button buttonComponent = newOption.GetComponent<Button>();
+                    if (buttonComponent != null)
+                    {
+                        buttonComponent.onClick.AddListener(
+                            () => SelectFoodOption(option, foodRecognition)
+                        );
+                    }
                 }
             }
 
         });
-
-        Dictionary<string, string> nutritionInfo = await foodRecognition.GetNutritionInfo("apple");
-        foreach (KeyValuePair<string, string> pair in nutritionInfo)
-        {
-            Debug.Log(pair.Key + ", " + pair.Value);
-        }
 
         
         // TODO --
@@ -355,6 +369,19 @@ public class SettingMenuController : MonoBehaviour
         // Format Food List Graphics
         // Get Nutrition Info Displaying
         
+    }
+
+    public async void SelectFoodOption(string food, FoodRecognition foodRecognition)
+    {
+        Dictionary<string, string> nutritionInfo = await foodRecognition.GetNutritionInfo(food);
+        foreach (KeyValuePair<string, string> pair in nutritionInfo)
+        {
+            Debug.Log(pair.Key + ", " + pair.Value);
+        }
+
+        // Close Down Food List
+
+        // Populate and Enable Nutrition Info Display
     }
 
     // Log out to sign in scene
