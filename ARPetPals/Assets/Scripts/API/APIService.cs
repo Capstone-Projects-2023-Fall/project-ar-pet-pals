@@ -610,7 +610,7 @@ namespace ARPetPals
                 {
                     // Deserialize the JSON response
                     GetPetStatusResponse responseData = JsonUtility.FromJson<GetPetStatusResponse>(responseJson);
-                    Debug.Log("_SendGetPetStatusRequest response: " + JsonUtility.ToJson(responseData, true));
+                    //Debug.Log("_SendGetPetStatusRequest response: " + JsonUtility.ToJson(responseData, true));
 
 
                     // Store data locally
