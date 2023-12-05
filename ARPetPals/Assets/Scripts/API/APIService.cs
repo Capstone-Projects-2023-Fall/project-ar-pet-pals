@@ -1073,7 +1073,12 @@ namespace ARPetPals
 
         private IEnumerator _GetLeaderBoardList(Action<string> callback)
         {
-            string token = "";
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
             string url = URL + "/leaderboard/list";
 
             using (UnityWebRequest request = UnityWebRequest.Get(url))
