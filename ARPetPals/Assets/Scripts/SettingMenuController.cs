@@ -122,8 +122,8 @@ public class SettingMenuController : MonoBehaviour
                 APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
                 currentHappniness  = (int)float.Parse(responseData.mood);
                 health = float.Parse(responseData.health)/10;
-                Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
-                Debug.Log($"Hy/Current Health from Api: {health}");
+                // Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
+                // Debug.Log($"Hy/Current Health from Api: {health}");
                 SetMaxHappiness(maxHappiness);
                 SetHappiness(currentHappniness);
 
@@ -133,9 +133,9 @@ public class SettingMenuController : MonoBehaviour
             }
         });
 
-        Debug.Log($"Hy/start Happiness {currentHappniness}");
-        Debug.Log($"Hy/start Happiness {health}");
-        Debug.Log($"Hy/Max Happiness {maxHappiness}");
+        // Debug.Log($"Hy/start Happiness {currentHappniness}");
+        // Debug.Log($"Hy/start Happiness {health}");
+        // Debug.Log($"Hy/Max Happiness {maxHappiness}");
         
     }
 
@@ -162,8 +162,8 @@ public class SettingMenuController : MonoBehaviour
                 APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
                 currentHappniness  = (int)float.Parse(responseData.mood);
                 health = float.Parse(responseData.health)/10;
-                Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
-                Debug.Log($"Hy/Current Health from Api: {health}");
+                // Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
+                // Debug.Log($"Hy/Current Health from Api: {health}");
                 SetMaxHappiness(maxHappiness);
                 SetHappiness(currentHappniness);
 
@@ -172,7 +172,7 @@ public class SettingMenuController : MonoBehaviour
                 PlayerPrefs.SetInt("happiness", currentHappniness);
             }
         });
-        Debug.Log("Update status run.");
+        //Debug.Log("Update status run.");
     }
 
     // public void  SetAudioLevel(float sliderValue)
@@ -341,18 +341,17 @@ public class SettingMenuController : MonoBehaviour
 
         // Create Input Listener
         OptionInput.onValueChanged.AddListener((string text) => {
-
             // Clear out old options
             foreach (Transform optButton in contentPanel)
             {
                 Destroy(optButton.gameObject);
             }
-            
+
             if (!string.IsNullOrEmpty(text))
             {
                 // Create sublist of options that include given text
                 List<string> matchingOptions = foodOptions.Where(opt => opt.Contains(text)).ToList();
-                
+
                 // Generate a button for each matching option
                 foreach (var option in matchingOptions)
                 {
