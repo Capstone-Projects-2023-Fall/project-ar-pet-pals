@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using Unity.Notifications.Android;
 using UnityEngine;
@@ -21,22 +21,22 @@ public class MobileNotification : MonoBehaviour
             Description = "Reminder notifications",
         };
         AndroidNotificationCenter.RegisterNotificationChannel(channel);
-        
-       //register a new notification channel for birthday notifications
-       var birthdayChannel = new AndroidNotificationChannel()
-{
-    Id = "birthday_channel_id",
-    Name = "Birthday Notification Channel",
-    Importance = Importance.Default,
-    Description = "Birthday notifications",
-};
-AndroidNotificationCenter.RegisterNotificationChannel(birthdayChannel);
-/*check if initial notification already been sent
-if (!PlayerPrefs.HasKey("InitialNotificationSent"))
-{}*/
-  // Schedule the weekly leaderboard notification
+
+        //register a new notification channel for birthday notifications
+        var birthdayChannel = new AndroidNotificationChannel()
+        {
+            Id = "birthday_channel_id",
+            Name = "Birthday Notification Channel",
+            Importance = Importance.Default,
+            Description = "Birthday notifications",
+        };
+        AndroidNotificationCenter.RegisterNotificationChannel(birthdayChannel);
+        //check if initial notification already been sent
+        //if (!PlayerPrefs.HasKey("InitialNotificationSent"))
+        //{}
+        // Schedule the weekly leaderboard notification
         LeaderboardNotification.ScheduleWeeklyLeaderboardNotification();
-        
+
         // Set up the notification message and parameters
         var notification = new AndroidNotification();
         notification.Title = "Attention!";
@@ -46,9 +46,9 @@ if (!PlayerPrefs.HasKey("InitialNotificationSent"))
         // Send the notification
         var id = AndroidNotificationCenter.SendNotification(notification, "channel_id");
 
-/*set flag to indicate that initial notification has been sent
-    PlayerPrefs.SetInt("InitialNotificationSent", 1);
-    PlayerPrefs.Save();*/
+        //set flag to indicate that initial notification has been sent
+        //PlayerPrefs.SetInt("InitialNotificationSent", 1);
+        //PlayerPrefs.Save();
 
         // If the script is run and a message is already schedule, cancel it and re-schedule another message
         if (AndroidNotificationCenter.CheckScheduledNotificationStatus(id) == NotificationStatus.Scheduled)
@@ -57,16 +57,16 @@ if (!PlayerPrefs.HasKey("InitialNotificationSent"))
             AndroidNotificationCenter.SendNotification(notification, "channel_id");
         }
     }
- string recognizedFood = GetRecognizedFood();
+    string recognizedFood = GetRecognizedFood();
 
-     StartCoroutine(HealthScoreManager.GetHealthScore(recognizedFood, (healthScore) =>
+    StartCoroutine(HealthScoreManager.GetHealthScore(recognizedFood, (healthScore) =>
         {
-    //fetches health score for a recognized food and then the callback function passed to it 
- //schedules notification with the health score u got
- //callback function (healthScore) => { ScheduleNotification(healthScore); } invoked after
- //health score is received, takes health score as a param then calls ScheduleNotification
-      NotificationScheduler.ScheduleNotification(healthScore);
-        }));
+        //fetches health score for a recognized food and then the callback function passed to it 
+        //schedules notification with the health score u got
+        //callback function (healthScore) => { ScheduleNotification(healthScore); } invoked after
+        //health score is received, takes health score as a param then calls ScheduleNotification
+        NotificationScheduler.ScheduleNotification(healthScore);
+    }));
     }
         //determine how to schedule notification based on health score
 
@@ -76,7 +76,8 @@ if (!PlayerPrefs.HasKey("InitialNotificationSent"))
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
+{
 
+}
+
+*/
