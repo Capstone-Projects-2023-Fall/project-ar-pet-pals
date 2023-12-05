@@ -1,13 +1,12 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser, saveBirthday } from "../controllers/controllers.users.ts";
-import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, } from "../controllers/controllers.pets.ts";
 import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, increasePetMood, resetPetActivities } from "../controllers/controllers.pets.ts";
 import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import { updateStepCount, checkStepGoal,getStepCount, updateStepGoal, resetDailyStepCountForAllUsers, resetWeeklyStepCountForAllUsers } from "../controllers/controllers.steps.ts";
 import { leaderboardList } from "../controllers/controllers.leaderboard.ts";
-import { checkAccountActivity } from "../controllers//controllers.pets.ts";
+import { checkAccountActivity } from "../controllers/controllers.pets.ts";
 
 
 const home = async({request, response}:{request:any;response:any}) => {

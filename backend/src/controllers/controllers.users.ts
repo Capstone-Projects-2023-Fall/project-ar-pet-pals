@@ -1,6 +1,6 @@
 import db from "../database/database.connection.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
-import UserSchema from "../schema/schema.user.ts";
+import {UserSchema} from "../schema/schema.user.ts";
 import { create, decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
 import key from "../utils/utils.apiKey.ts";
