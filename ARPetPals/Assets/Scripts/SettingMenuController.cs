@@ -109,7 +109,16 @@ public class SettingMenuController : MonoBehaviour
         //Setup saved volume when started.
         masterVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume",100f);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat("SfxVolume",100f);
-        
+
+        int musicToggle = PlayerPrefs.GetInt("MusicVolumeToggle", 1);
+        int sfxToggle = PlayerPrefs.GetInt("SfxVolumeToggle", 1);
+
+        AudioManager.Instance.musicSource.mute = (musicToggle == 1 ? true : false);
+        AudioManager.Instance.sfxSource.mute = (sfxToggle == 1 ? true : false);
+        ToggleMusic();
+        ToggleSfx();
+
+
         //Get Pet Status Api .        
         gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
         {
@@ -280,9 +289,12 @@ public class SettingMenuController : MonoBehaviour
         changePassword = changePasswordField.text;
         PlayerPrefs.SetFloat("MusicVolume",masterVolumeSlider.value);
         PlayerPrefs.SetFloat("SfxVolume",sfxVolumeSlider.value);
-        
+        PlayerPrefs.SetInt("MusicVolumeToggle", AudioManager.Instance.musicSource.mute ? 0 : 1);
+        PlayerPrefs.SetInt("SfxVolumeToggle", AudioManager.Instance.sfxSource.mute ? 0 : 1);
+
+
         //Do something
-        
+
         if (changeUserName != "n" || changePassword !="")
         {
             gameObject.GetComponent<APIService>().UpdateUser(changeUserName,changePassword, s => { });
@@ -517,7 +529,7 @@ public class SettingMenuController : MonoBehaviour
     //implement audio manager to ui
     public void ToggleMusic()
     {
-        if (VolumeButton.sprite == unmuteMusic)
+        if (!AudioManager.Instance.musicSource.mute)
         {
             VolumeButton.sprite = muteMusic;
         }
@@ -531,7 +543,7 @@ public class SettingMenuController : MonoBehaviour
 
     public void ToggleSfx()
     {
-        if (SfxButton.sprite == unmuteSfx)
+        if (!AudioManager.Instance.sfxSource.mute)
         {
             SfxButton.sprite = muteSfx;
         }
