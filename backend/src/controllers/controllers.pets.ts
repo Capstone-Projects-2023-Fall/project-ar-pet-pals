@@ -408,7 +408,7 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
 }
 
 
-}
+
 
 export const increasePetMood =async ({request, response}:{request:any;response:any}) => {
     const { type } = await request.body().value;
