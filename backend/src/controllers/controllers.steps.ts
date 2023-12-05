@@ -100,13 +100,32 @@ export const calculateAverageHealthScore = async (userId: ObjectId) => {
   };
 // New function to update step goal
 export const updateStepGoal = async (userId: ObjectId, newStepGoal: number) => {
-  const user = await Users.findOne({ _id: userId });
+  try {
+    const user = await Users.findOne({ _id: userId });
 
-  // Update user's step goal
-  user.dailyStepGoal = newStepGoal;
+    if (!user) {
+      return {
+        success: false,
+        message: "User not found",
+      };
+    }
 
-  // Save the updated user data
-  const result = await Users.updateOne({ _id: userId }, { $set: user });
+    // Update user's step goal
+    user.dailyStepGoal = newStepGoal;
 
-  return result;
+    // Save the updated user data
+    const result = await Users.updateOne({ _id: userId }, { $set: user });
+
+    return {
+      success: true,
+      message: "Step goal updated successfully",
+      data: result, // Include any additional data you want to send back
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Internal server error",
+      error: error.toString(), // Include the error details for debugging
+    };
+  }
 };

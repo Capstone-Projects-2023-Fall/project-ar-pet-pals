@@ -64,7 +64,7 @@ router.post("/api/token/verify", verifyToken)
 // recognize food in image
 router.post("/api/food/recognize", authourized, recognizeFood)
 
-// get nutrition info for food
+// get health rating score for food
 router.post("/api/food/healthRating", authourized, getHealthRating);
 
 export default router;
