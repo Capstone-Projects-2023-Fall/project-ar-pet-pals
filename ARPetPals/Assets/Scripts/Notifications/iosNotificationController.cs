@@ -4,7 +4,7 @@ using Unity.Notifications.IOS;
 using UnityEngine;
 using UnityEngine.Andriod;
 
-public class iosNotificationController : MonoBehaviour
+public class IosNotificationController : MonoBehaviour
 {
     public IEnumerator RequestAuthorization()
     {
