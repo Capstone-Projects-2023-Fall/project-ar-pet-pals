@@ -36,14 +36,15 @@ public class AndroidNotificationsController : MonoBehaviour
         notification.Text = text;
         notification.FireTime = System.DateTime.Now.AddSeconds(FireTimeInSeconds);
 
+        AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification");
 //send notification
 //if script is run and a notification is already scheduled, cancel it and resend another message
-       var Identifier = AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification");
+      /* var Identifier = AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification");
        if(AndroidNotificationCenter.CheckScheduledNotificationStatus(Identifier) == NotificationStatus.Scheduled)
        {
         AndroidNotificationCenter.CancelAllNotifications();
         AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification");
-       }
+       }*/
     }
     #endif 
 }
