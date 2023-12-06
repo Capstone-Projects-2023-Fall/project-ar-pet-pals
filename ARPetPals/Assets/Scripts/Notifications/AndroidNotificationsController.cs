@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_ANDROID
 using Unity.Notifications.Android;
-using UnityEngine.Andriod;
+using UnityEngine.Android;
 #endif
 
 public class AndroidNotificationsController : MonoBehaviour
@@ -39,7 +39,7 @@ public class AndroidNotificationsController : MonoBehaviour
 //send notification
 //if script is run and a notification is already scheduled, cancel it and resend another message
        var Identifier = AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification");
-       if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Scheduled)
+       if(AndroidNotificationCenter.CheckScheduledNotificationStatus(Identifier) == NotificationStatus.Scheduled)
        {
         AndroidNotificationCenter.CancelAllNotifications();
         AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification");
@@ -86,3 +86,4 @@ public class AndroidNotificationsController : MonoBehaviour
 {
 
 }
+    */

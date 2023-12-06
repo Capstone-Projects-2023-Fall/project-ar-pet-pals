@@ -1145,7 +1145,7 @@ namespace ARPetPals
                     // ...
                     // Birthday saved successfully, schedule the notification
                     System.DateTime birthdayDate = System.DateTime.Parse(birthday);
-                    BirthdayNotificationManager.ScheduleBirthdayNotification(username, birthdayDate);
+                    //BirthdayNotificationManager.ScheduleBirthdayNotification(username, birthdayDate);
                     callback("");
                 }
             }
