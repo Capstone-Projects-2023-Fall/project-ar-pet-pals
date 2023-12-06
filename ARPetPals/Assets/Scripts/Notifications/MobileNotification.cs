@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Notifications.Android;
 using UnityEngine;
+#if UNITY_ANDROID
+using Unity.Notifications.Android;
 using UnityEngine.Andriod;
+#endif
 
 public class MobileNotification : MonoBehaviour
 {
+    #if UNITY_ANDROID
     public void RequestAuthorization()
     {
         if(!Permission.HasUserAuthorizedPermission("android.permission.POST_NOTIFICATIONS"))
@@ -33,6 +36,7 @@ public class MobileNotification : MonoBehaviour
 
         AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification")
     }
+    #endif 
 }
     /* Start is called before the first frame update
     void Start()

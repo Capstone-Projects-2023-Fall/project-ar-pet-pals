@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Notifications.IOS;
 using UnityEngine;
-using UnityEngine.Andriod;
+using System;
+#if UNITY_IOS
+using Unity.Notifications.iOS;
+#endif
+
 
 public class IosNotificationController : MonoBehaviour
 {
+    #if UNITY_IOS
     public IEnumerator RequestAuthorization()
     {
         using var req = new AuthorizationRequest(AuthorizationOption.Alert | AuthorizationOption.Badge, true);
@@ -39,6 +43,6 @@ public class IosNotificationController : MonoBehaviour
 
         iOSNotificationCenter.ScheduleNotification(notification);
     }
-
+#endif
     }
-}
+    

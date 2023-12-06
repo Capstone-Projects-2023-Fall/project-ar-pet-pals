@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Notifications.Android;
 using UnityEngine;
-using UnityEngine.Andriod;
-
 public class NativeNotificationsController : MonoBehaviour
 {
     [SerializeField]
@@ -21,7 +16,7 @@ public class NativeNotificationsController : MonoBehaviour
         StartCoroutine(iosNotificationController.RequestAuthorization());
         iosNotificationController.SendNotification("ARPetPals: Come Check on your pet!","Your pet misses you! Open the app and play with them!", 15);
         #endif
-
+// above function exists only in unity ios, if doesnt work check preprocesser docs
     }
 }
     

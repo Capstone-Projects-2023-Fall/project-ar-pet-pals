@@ -64,8 +64,6 @@ public static class NotificationScheduler
     }
 }*/
 
-<<<<<<< HEAD
-=======
 
 /*In this modified code, the CheckAccountActivityAndSendNotifications method now accepts
  a list of users (List<User> users). This list of users should be passed from C# application
@@ -95,7 +93,6 @@ public static class NotificationScheduler
         }
     }
 }*/
->>>>>>> 4df0dbba957318d703bd2214c801ed85c3f605fa
 /*async function checkAccountActivityAndSendNotifications() {
   const users = await Users.find({}).toArray(); // Retrieve all users
 
