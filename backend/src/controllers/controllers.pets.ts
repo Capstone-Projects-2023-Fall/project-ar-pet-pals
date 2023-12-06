@@ -2,8 +2,9 @@
 import { decode } from "https://deno.land/x/djwt@v2.4/mod.ts";
 import db from "../database/database.connection.ts";
 import {PetSchema} from "../schema/schema.pet.ts";
-
+import { Context } from "https://deno.land/x/oak/mod.ts";
 import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } from "../utils/utils.utils.ts";
+
 const Pets = db.collection<PetSchema>("pets");
 const MAX_HEALTH = 100;
 const MAX_MOOD = 100;
@@ -18,36 +19,42 @@ enum RESET_TYPE {
 // Activity type
 const ACTIVITY_TYPE_LOGIN = "login";
 const ACTIVITY_TYPE_DOUBLE_TAP = "double_tap";
+const ACTIVITY_TYPE_STEP_TRACKING = "step_tracking";
 
 // Activity point
 const ACTIVITY_POINT = {};
 ACTIVITY_POINT[ACTIVITY_TYPE_LOGIN] = 10;
 ACTIVITY_POINT[ACTIVITY_TYPE_DOUBLE_TAP] = 30;
+ACTIVITY_POINT[ACTIVITY_TYPE_STEP_TRACKING] = 100;
 
 // Activity locking 
 const ACTIVITY_LOCK = {};
 ACTIVITY_LOCK[ACTIVITY_TYPE_LOGIN] = 8 * 60 * 60 * 1000; // 8 hours
 ACTIVITY_LOCK[ACTIVITY_TYPE_DOUBLE_TAP] = 1 * 60 * 60 * 1000; // 1 hour
+ACTIVITY_LOCK[ACTIVITY_TYPE_STEP_TRACKING] = 0 * 60 * 60 * 1000; // no lock
 
 
 // health decrease per hour = -1
 const HEALTH_DECREASE_PER_MIN = 0.0167; // 1 / 60
 const MOOD_DECREASE_PER_MIN = 0.0167;
 
-function getActivites() {
-    return [
-        {
-            type: ACTIVITY_TYPE_LOGIN,
-            lockedUntil: Date.now(),
-            weeklyPoints: 0
-        },
-        {
-            type: ACTIVITY_TYPE_DOUBLE_TAP,
-            lockedUntil: Date.now(),
-            weeklyPoints: 0
-        }
-    ];
+
+function getArrayActivitesType() {
+    return [ACTIVITY_TYPE_LOGIN, ACTIVITY_TYPE_DOUBLE_TAP, ACTIVITY_TYPE_STEP_TRACKING];
 }
+
+function getActivites() {
+    let arr = [];
+    for (let activity of getArrayActivitesType()) {
+        arr.push({
+            type: activity,
+            lockedUntil: Date.now(),
+            weeklyPoints: 0
+        });
+    }
+    return arr;
+}
+
 
 export const setPetName =async ({request, response}:{request:any;response:any}) => {
     const { name } = await request.body().value;
@@ -80,6 +87,22 @@ export const setPetName =async ({request, response}:{request:any;response:any}) 
     response.body = {
         "message": "pet name updated successfully"
     }
+}
+//check account activity
+export const checkAccountActivity = async ({ request, response }: { request: any; response: any }) => {
+    const headers: Headers = request.headers;
+    let userId = getUserIdFromHeaders(headers);
+
+    const pet = await Pets.findOne({ user_id: userId });
+
+    if (!pet) {
+        response.body = {
+            "message": "Could not find a pet for your user's id"
+        }
+        response.status = 400;
+        return;
+    }
+    
 }
 
 export const getPetName =async ({request, response}:{request:any;response:any}) => {
@@ -288,11 +311,30 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
         pet.status.lastCalculatedMood = Date.now();
     }
 
+    
+    let updateStatus = { 
+        status: pet.status
+    }
+
+    // if there is no activities field, add it
+    if (!pet.activities) {
+        // add all activities
+        updateStatus.activities = getActivites();
+    }
+    // Missing new activities
+    else if (pet.activities.length && pet.activities.length < getActivites().length) {
+        updateStatus.activities = pet.activities;
+        // only add new activities
+        getActivites().forEach(defaultActivity => {
+            if (!updateStatus.activities.find(activity => activity.type === defaultActivity.type)) {
+                updateStatus.activities.push(defaultActivity);
+            }
+        });
+    }
+
     // Update
     await Pets.updateOne({ _id: pet._id}, { 
-        $set: { 
-            status: pet.status 
-        }
+        $set: updateStatus
     });
 
     response.status = 200
@@ -304,7 +346,7 @@ export const getPetStatus =async ({request, response}:{request:any;response:any}
             minutes_since_last_feeding: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastFeeding)),
             minutes_since_last_activity: displayNumber(calculateTimeDifferentInMinutes(pet.status.lastActivity))
         },
-        activities: pet.activities
+        activities: pet.activities || updateStatus.activities
     }
 }
 
@@ -365,6 +407,9 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
     }
 }
 
+
+
+
 export const increasePetMood =async ({request, response}:{request:any;response:any}) => {
     const { type } = await request.body().value;
 
@@ -419,4 +464,5 @@ export const resetPetActivities = async ({request, response}:{request:any;respon
         modifiedCount
     }
 }
+
 

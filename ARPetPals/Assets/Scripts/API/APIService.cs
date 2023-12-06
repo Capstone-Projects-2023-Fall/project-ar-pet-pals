@@ -26,6 +26,7 @@ namespace ARPetPals
 
         public const string ACTIVITY_TYPE_LOGIN = "login";
         public const string ACTIVITY_TYPE_DOUBLETAP = "double_tap";
+        public const string ACTIVITY_TYPE_STEPTRACKING = "step_tracking";
 
         enum RESET_STATUS_TYPE
         {
@@ -68,9 +69,9 @@ namespace ARPetPals
             StartCoroutine(_SendSignInRequest(username, password, callback));
         }
 
-        public void SignUp(string username, string password, Action<string> callback)
+        public void SignUp(string username, string password, string birthdate, Action<string> callback)
         {
-            StartCoroutine(_SendSignUpRequest(username, password, callback));
+            StartCoroutine(_SendSignUpRequest(username, password, birthdate, callback));
         }
 
         public void SignUp(Action<string> callback)
@@ -86,7 +87,7 @@ namespace ARPetPals
                 return;
             }
 
-            StartCoroutine(_SendSignUpRequest(username, password, callback));
+            StartCoroutine(_SendSignUpRequest(username, password, "", callback));
         }
 
         public void GetUser(Action<string> callback)
@@ -176,17 +177,18 @@ namespace ARPetPals
                     _ShowReponse(JsonUtility.ToJson(responseData, true));
                     callback("");
                 }
-                
+
             }
         }
 
-        private IEnumerator _SendSignUpRequest(string username, string password, Action<string> callback)
+        private IEnumerator _SendSignUpRequest(string username, string password, string birthdate, Action<string> callback)
         {
             string url = URL + "/signup";
             Dictionary<string, string> body = new Dictionary<string, string>
             {
                 { "username", username },
-                { "password", password }
+                { "password", password },
+                { "birthdate", birthdate }
             };
 
 
@@ -225,15 +227,18 @@ namespace ARPetPals
         //create pet
 
 
-        public void CreatePet(Action<string> callback) {
+        public void CreatePet(Action<string> callback)
+        {
             StartCoroutine(_SendCreatePetRequest(callback));
         }
 
-        private IEnumerator _SendCreatePetRequest(Action<string> callback) {
+        private IEnumerator _SendCreatePetRequest(Action<string> callback)
+        {
 
             string token = GetStoredToken();
 
-            if (string.IsNullOrEmpty(token)) {
+            if (string.IsNullOrEmpty(token))
+            {
                 callback("Invalid token");
                 yield break; // Exit the coroutine
             }
@@ -246,7 +251,8 @@ namespace ARPetPals
                 { "name", petName }
             };*/
 
-            using (UnityWebRequest request = UnityWebRequest.PostWwwForm(url, CONTENT_TYPE)) {
+            using (UnityWebRequest request = UnityWebRequest.PostWwwForm(url, CONTENT_TYPE))
+            {
                 request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
 
                 yield return request.SendWebRequest();
@@ -254,14 +260,16 @@ namespace ARPetPals
                 // parse response
                 string responseJson = request.downloadHandler.text;
 
-                if (request.result != UnityWebRequest.Result.Success) {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
                     Debug.LogError("_SendCreatePetRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(responseData.message);
                     _ShowReponse(responseData.message);
                 }
                 // Create pet successful
-                else {
+                else
+                {
 
                     // Deserialize the JSON response
                     CreatePetResponse responseData = JsonUtility.FromJson<CreatePetResponse>(responseJson);
@@ -281,15 +289,18 @@ namespace ARPetPals
 
 
         //Set pet name
-        public void SetPetName(string petName, Action<string> callback) {
+        public void SetPetName(string petName, Action<string> callback)
+        {
             StartCoroutine(_SendSetPetNameRequest(petName, callback));
         }
 
-        private IEnumerator _SendSetPetNameRequest(string petName, Action<string> callback) {
+        private IEnumerator _SendSetPetNameRequest(string petName, Action<string> callback)
+        {
 
             string token = GetStoredToken();
 
-            if (string.IsNullOrEmpty(token)) {
+            if (string.IsNullOrEmpty(token))
+            {
                 callback("Invalid token");
                 yield break; // Exit the coroutine
             }
@@ -300,7 +311,8 @@ namespace ARPetPals
                 { "name", petName }
             };
 
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
+            {
                 request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
 
                 yield return request.SendWebRequest();
@@ -308,14 +320,16 @@ namespace ARPetPals
                 // parse response
                 string responseJson = request.downloadHandler.text;
 
-                if (request.result != UnityWebRequest.Result.Success) {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
                     Debug.LogError("_SendSetPetNameRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(responseData.message);
                     _ShowReponse(responseData.message);
                 }
                 // Set pet name successful
-                else {
+                else
+                {
 
                     // Deserialize the JSON response
                     SetPetNameResponse responseData = JsonUtility.FromJson<SetPetNameResponse>(responseJson);
@@ -323,21 +337,24 @@ namespace ARPetPals
 
                     _ShowReponse(JsonUtility.ToJson(responseData, true));
                     callback("");
-                    
+
                 }
             }
         }
 
         //Set pet choice
-        public void SetPetChoice(string petChoice, Action<string> callback) {
+        public void SetPetChoice(string petChoice, Action<string> callback)
+        {
             StartCoroutine(_SendSetPetChoiceRequest(petChoice, callback));
         }
 
-        private IEnumerator _SendSetPetChoiceRequest(string petChoice, Action<string> callback) {
+        private IEnumerator _SendSetPetChoiceRequest(string petChoice, Action<string> callback)
+        {
 
             string token = GetStoredToken();
 
-            if (string.IsNullOrEmpty(token)) {
+            if (string.IsNullOrEmpty(token))
+            {
                 callback("Invalid token");
                 yield break; // Exit the coroutine
             }
@@ -348,7 +365,8 @@ namespace ARPetPals
                 { "choice", petChoice }
             };
 
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
+            {
                 request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
 
                 yield return request.SendWebRequest();
@@ -356,14 +374,16 @@ namespace ARPetPals
                 // parse response
                 string responseJson = request.downloadHandler.text;
 
-                if (request.result != UnityWebRequest.Result.Success) {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
                     Debug.LogError("_SendSetPetChoiceRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(responseData.message);
                     _ShowReponse(responseData.message);
                 }
                 // Set pet name successful
-                else {
+                else
+                {
 
                     // Deserialize the JSON response
                     SetPetChoiceResponse responseData = JsonUtility.FromJson<SetPetChoiceResponse>(responseJson);
@@ -377,17 +397,21 @@ namespace ARPetPals
         }
 
         //Get pet name
-        public void GetPetName(Action<string> callback) {
+        public void GetPetName(Action<string> callback)
+        {
             StartCoroutine(_SendGetPetNameRequest(callback));
         }
 
-        private IEnumerator _SendGetPetNameRequest(Action<string> callback) {
+        private IEnumerator _SendGetPetNameRequest(Action<string> callback)
+        {
             string token = GetStoredToken();
-            if (token == "") {
+            if (token == "")
+            {
                 callback("Invalid token");
                 yield break; // Exit the coroutine
             }
-            else {
+            else
+            {
                 string url = URL + "/pet/name";
 
                 UnityWebRequest request = UnityWebRequest.Get(url);
@@ -398,13 +422,15 @@ namespace ARPetPals
                 // parse response
                 string responseJson = request.downloadHandler.text;
 
-                if (request.result != UnityWebRequest.Result.Success) {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
                     Debug.LogError("_SendGetPetNameRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(responseData.message);
                     _ShowReponse(responseData.message);
                 }
-                else {
+                else
+                {
                     // Deserialize the JSON response
                     GetPetNameResponse responseData = JsonUtility.FromJson<GetPetNameResponse>(responseJson);
                     Debug.Log("_SendGetPetNameRequest response: " + JsonUtility.ToJson(responseData, true));
@@ -421,70 +447,74 @@ namespace ARPetPals
         }
 
         //Get pet choice
-        public void GetPetChoice(Action<string> callback) {
+        public void GetPetChoice(Action<string> callback)
+        {
             StartCoroutine(_SendGetPetChoiceRequest(callback));
         }
 
-        private IEnumerator _SendGetPetChoiceRequest(Action<string> callback) {
+        private IEnumerator _SendGetPetChoiceRequest(Action<string> callback)
+        {
 
             string token = GetStoredToken();
-            if (token == "") {
+            if (token == "")
+            {
                 callback("Invalid token");
                 yield break; // Exit the coroutine
             }
 
-            else {
+            string url = URL + "/pet/choice";
 
-                string url = URL + "/pet/choice";
+            UnityWebRequest request = UnityWebRequest.Get(url);
+            request.SetRequestHeader("Authorization", "Bearer " + token);
 
-                UnityWebRequest request = UnityWebRequest.Get(url);
-                request.SetRequestHeader("Authorization", "Bearer " + token);
+            yield return request.SendWebRequest();
 
-                yield return request.SendWebRequest();
+            // parse response
+            string responseJson = request.downloadHandler.text;
 
-                // parse response
-                string responseJson = request.downloadHandler.text;
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("_SendGetPetChoiceRequest failed: " + request.downloadHandler.text);
+                ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                callback(responseData.message);
+                _ShowReponse(responseData.message);
+            }
+            else
+            {
+                // Deserialize the JSON response
+                GetPetChoiceResponse responseData = JsonUtility.FromJson<GetPetChoiceResponse>(responseJson);
+                Debug.Log("_SendGetPetChoiceRequest response: " + JsonUtility.ToJson(responseData, true));
 
-                if (request.result != UnityWebRequest.Result.Success) {
-                    Debug.LogError("_SendGetPetChoiceRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                int index = 0;
+                // Store data locally
+                switch (responseData.choice)
+                {
+                    case "Orange Dragon":
+                        index = 0;
+                        break;
+                    case "Red Dragon":
+                        index = 1;
+                        break;
+                    case "Green Dragon":
+                        index = 2;
+                        break;
+                    case "Blue Dragon":
+                        index = 3;
+                        break;
+                    case "Yellow Dragon":
+                        index = 4;
+                        break;
+                    default:
+                        index = 0;
+                        break;
                 }
-                else {
-                    // Deserialize the JSON response
-                    GetPetChoiceResponse responseData = JsonUtility.FromJson<GetPetChoiceResponse>(responseJson);
-                    Debug.Log("_SendGetPetChoiceRequest response: " + JsonUtility.ToJson(responseData, true));
 
-                    int index = 0;
-                    // Store data locally
-                    switch (responseData.choice) {
-                        case "Orange Dragon":
-                            index = 0;
-                            break;
-                        case "Red Dragon":
-                            index = 1;
-                            break;
-                        case "Green Dragon":
-                            index = 2;
-                            break;
-                        case "Blue Dragon":
-                            index = 3;
-                            break;
-                        case "Yellow Dragon":
-                            index = 4;
-                            break;
-                        default:
-                            index = 0;
-                            break;
-                    }
+                Debug.Log("Pet choice index retrieved is: " + index);
+                PlayerPrefs.SetInt("SelectedPet", index);
 
-                    Debug.Log("Pet choice index retrieved is: " + index);
-                    PlayerPrefs.SetInt("SelectedPet", index);
 
-                    _ShowReponse(JsonUtility.ToJson(responseData, true));
-                    callback("");
-                }
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback("");
             }
         }
 
@@ -580,7 +610,7 @@ namespace ARPetPals
                 {
                     // Deserialize the JSON response
                     GetPetStatusResponse responseData = JsonUtility.FromJson<GetPetStatusResponse>(responseJson);
-                    Debug.Log("_SendGetPetStatusRequest response: " + JsonUtility.ToJson(responseData, true));
+                    //Debug.Log("_SendGetPetStatusRequest response: " + JsonUtility.ToJson(responseData, true));
 
 
                     // Store data locally
@@ -653,17 +683,17 @@ namespace ARPetPals
 
         public void SignInTest()
         {
-            SignIn((str) => {});
+            SignIn((str) => { });
         }
 
         public void SignUpTest()
         {
-            SignUp((str) => {});
+            SignUp((str) => { });
         }
 
         public void UserTest()
         {
-            GetUser((str) => {});
+            GetUser((str) => { });
         }
 
         public void CreatePetTest()
@@ -680,7 +710,8 @@ namespace ARPetPals
 
         public void GetPetStatusTest()
         {
-            GetPetStatus((str) => {
+            GetPetStatus((str) =>
+            {
                 // Deserialize the stored JSON
                 GetPetStatusResponse responseData = JsonUtility.FromJson<GetPetStatusResponse>(GetStoredPetStatus());
                 Debug.Log("GetPetStatusTest health: " + responseData.health);
@@ -690,7 +721,7 @@ namespace ARPetPals
 
         public void ResetPetStatusTest()
         {
-            int type = (int) RESET_STATUS_TYPE.ALL;
+            int type = (int)RESET_STATUS_TYPE.ALL;
             ResetPetStatus(type, (str) => { });
         }
 
@@ -709,9 +740,8 @@ namespace ARPetPals
             return PlayerPrefs.GetString(KEY_PET_STATUS, "");
         }
 
-        // Food Related Requests
+        // -- START FOOD --
 
-        // Recognize Food
         public void RecognizeFood(string image64String, Action<string> callback)
         {
             StartCoroutine(_SendRecognizeFoodRequest(image64String, callback));
@@ -719,16 +749,12 @@ namespace ARPetPals
 
         private IEnumerator _SendRecognizeFoodRequest(string image64String, Action<string> callback)
         {
-            // string token = GetStoredToken();
-            // if (string.IsNullOrEmpty(token))
-            // {
-            //     callback("Invalid token");
-            //     yield break;
-            // }
-
-            // Get fresh token from API. Just for testing.
-            // TODO: Get proper token to load in dynamically
-            string token = "";
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
 
             string url = URL + "/food/recognize";
             Dictionary<string, string> body = new Dictionary<string, string>
@@ -736,14 +762,16 @@ namespace ARPetPals
                 { "image64String", image64String }
             };
 
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
+            {
                 request.SetRequestHeader("Authorization", "Bearer " + token);
 
                 yield return request.SendWebRequest();
 
                 string responseJson = request.downloadHandler.text;
 
-                if (request.result != UnityWebRequest.Result.Success) {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
                     Debug.LogError("_RecognizeFoodRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(errorResponse.message);
@@ -760,6 +788,95 @@ namespace ARPetPals
             }
         }
 
+        public void ListFoodOptions(Action<string> callback)
+        {
+            StartCoroutine(_SendListFoodOptionsRequest(callback));
+        }
+
+        private IEnumerator _SendListFoodOptionsRequest(Action<string> callback)
+        {
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
+
+            string url = URL + "/food/listFoodOptions";
+
+            using (UnityWebRequest request = UnityWebRequest.Get(url))
+            {
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError("_SendListFoodOptionsRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(errorResponse.message);
+                    _ShowReponse(errorResponse.message);
+                    yield break;
+                }
+
+                // Deserialize the JSON response
+                ListFoodOptionsResponse responseData = JsonUtility.FromJson<ListFoodOptionsResponse>(responseJson);
+                Debug.Log("_SendListFoodOptionsRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback(JsonUtility.ToJson(responseData, true));
+            }
+        }
+
+        public void GetNutritionInfo(string food, Action<string> callback)
+        {
+            StartCoroutine(_SendGetNutritionInfoRequest(food, callback));
+        }
+
+        private IEnumerator _SendGetNutritionInfoRequest(string food, Action<string> callback)
+        {
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
+
+            string url = URL + "/food/nutritionInfo";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "food", food }
+            };
+
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
+            {
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError("_GetNutritionInfoRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(errorResponse.message);
+                    _ShowReponse(errorResponse.message);
+                    yield break;
+                }
+
+                // Deserialize the JSON response
+                GetNutritionInfoResponse responseData = JsonUtility.FromJson<GetNutritionInfoResponse>(responseJson);
+                Debug.Log("_GetNutritionInfoRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback(JsonUtility.ToJson(responseData, true));
+            }
+        }
+
+        // -- END FOOD --
 
         public void IncreasePetHappiness(string type, Action<string> callback)
         {
@@ -781,7 +898,7 @@ namespace ARPetPals
             Dictionary<string, string> body = new Dictionary<string, string>
             {
                 { "type", type }
-                
+
             };
 
             using (UnityWebRequest request = UnityWebRequest.Put(url, JsonConvert.SerializeObject(body)))
@@ -796,7 +913,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    
+
                     Debug.LogError("_IncreasePetHappiness failed: " + request.downloadHandler.text);
                     ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(responseData.message);
@@ -885,6 +1002,7 @@ namespace ARPetPals
             UpdateUser(username, password, (str) => { });
         }
 
+
         public void LeaderBoardTest()
         {
             GetLeaderBoardList((str) => { });
@@ -946,26 +1064,33 @@ namespace ARPetPals
         {
             DeleteUser((str) => { });
         }
-        
-        
+
+
         public void GetLeaderBoardList(Action<string> callback)
         {
-            StartCoroutine( _GetLeaderBoardList(callback));
+            StartCoroutine(_GetLeaderBoardList(callback));
         }
 
         private IEnumerator _GetLeaderBoardList(Action<string> callback)
         {
-            string token = "";
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break;
+            }
             string url = URL + "/leaderboard/list";
-            
-            using (UnityWebRequest request = UnityWebRequest.Get(url)){
+
+            using (UnityWebRequest request = UnityWebRequest.Get(url))
+            {
                 request.SetRequestHeader("Authorization", "Bearer " + token);
 
                 yield return request.SendWebRequest();
 
                 string responseJson = request.downloadHandler.text;
 
-                if (request.result != UnityWebRequest.Result.Success) {
+                if (request.result != UnityWebRequest.Result.Success)
+                {
                     Debug.LogError("_LeaderBoardRequest failed: " + request.downloadHandler.text);
                     ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
                     callback(errorResponse.message);
@@ -981,6 +1106,141 @@ namespace ARPetPals
             }
         }
 
+
+        public void SaveBirthday(string username, string birthday, Action<string> callback)
+        {
+            StartCoroutine(_SendSaveBirthdayRequest(username, birthday, callback));
+        }
+        private IEnumerator _SendSaveBirthdayRequest(string username, string birthday, Action<string> callback)
+        {
+            string token = GetStoredToken();
+            if (token == "")
+            {
+                callback("Invalid token");
+            }
+            else
+            {
+                string url = URL + "/api/savebirthday"; // birthday endpoint
+                                                        // Create the request payload
+                Dictionary<string, string> requestData = new Dictionary<string, string>
+                {
+                    { "username", username },
+                    { "birthday", birthday }
+                };
+                string jsonData = JsonConvert.SerializeObject(requestData);
+                UnityWebRequest request = new UnityWebRequest(url, "POST");
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+                request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+                yield return request.SendWebRequest();
+                // parse response
+                string responseJson = request.downloadHandler.text;
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError("_SendSaveBirthdayRequest failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else
+                {
+                    // Handle the success response if needed
+                    // ...
+                    // Birthday saved successfully, schedule the notification
+                    System.DateTime birthdayDate = System.DateTime.Parse(birthday);
+                    BirthdayNotificationManager.ScheduleBirthdayNotification(username, birthdayDate);
+                    callback("");
+                }
+            }
+        }
+
+        // Son: I'm not sure but there is no api /sendNotification in backend, so I will just comment out this one
+        //send notifications, from mobilenotifications.cs
+        /*public static IEnumerator SendNotificationRequest(string userId, string notificationType, Action<string> callback)
+        {
+            string url = $"{URL}/sendNotification";
+            var requestData = new { userId, notificationType };
+            using (UnityWebRequest www = UnityWebRequest.Post(url, JsonUtility.ToJson(requestData)))
+            {
+                www.SetRequestHeader("Content-Type", CONTENT_TYPE);
+                yield return www.SendWebRequest();
+                if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+                {
+                    Debug.LogError($"Error: {www.error}");
+                }
+                else
+                {
+                    // Deserialize the response using your response class
+                    APIServiceResponse response = JsonUtility.FromJson<APIServiceResponse>(www.downloadHandler.text);
+                    // Invoke the callback with the response
+                    callback?.Invoke(response.Message);
+                }
+            }
+        }*/
+
+        // Son: We've already had this api leaderboard, and this function here is causing compilation error
+        /*public void GetLeaderboard(Action<GetLeaderboardResponse> callback)
+        {
+            StartCoroutine(_GetLeaderboard(callback));
+        }
+        private IEnumerator _GetLeaderboard(Action<GetLeaderboardResponse> callback)
+        {
+            string apiUrl = $"{URL}/api/leaderboard/list"; // leaderboard endpoint
+            using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+            {
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+                yield return request.SendWebRequest();
+                if (request.isNetworkError || request.isHttpError)
+                {
+                    Debug.LogError($"Error fetching leaderboard: {request.error}");
+                    callback?.Invoke(null);
+                }
+                else
+                {
+                    GetLeaderboardResponse response = JsonUtility.FromJson<GetLeaderboardResponse>(request.downloadHandler.text);
+                    callback?.Invoke(response);
+                }
+            }
+        }*/
+
+        public void CheckAccountActivityAndSendNotifications()
+        {
+            StartCoroutine(_CheckAccountActivityAndSendNotifications());
+        }
+        private IEnumerator _CheckAccountActivityAndSendNotifications()
+        {
+            string apiUrl = $"{URL}/api/checkAccountActivity";
+            using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+            {
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+                yield return request.SendWebRequest();
+                if (request.isNetworkError || request.isHttpError)
+                {
+                    Debug.LogError($"Error checking account activity: {request.error}");
+                }
+                else
+                {
+                    // Parse the response as needed
+                    CheckAccountActivityResponse response = JsonUtility.FromJson<CheckAccountActivityResponse>(request.downloadHandler.text);
+                    // Handle the response based on its structure
+                    if (response != null)
+                    {
+                        Debug.Log($"Server Response: {response.message}");
+                        // You might want to check other fields in the response
+                        // For example: if (response.success) { /* handle success */ }
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to parse server response.");
+                    }
+                }
+            }
+
+        }
     }
 }
 

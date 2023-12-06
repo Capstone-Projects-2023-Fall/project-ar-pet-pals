@@ -6,20 +6,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class SignUpController : MonoBehaviour
 {
     [SerializeField] public TMP_Text editText;
     [SerializeField] public TMP_InputField usernameField;
     [SerializeField] public TMP_InputField passwordField;
     [SerializeField] public TMP_InputField confirmPasswordField;
+    [SerializeField] public TMP_InputField birthdateField;  // Added birthdate field
     [SerializeField] public GameObject userNameError;
     [SerializeField] public GameObject passWordError;
     [SerializeField] public GameObject confirmPasswordError;
-    
-    
+
     public string usernameInput = "";
     public string passwordInput = "";
     public string confirmPasswordInput = "";
+    public string birthdateInput = "";  // Added birthdate input
     public string errormessage = "";
 
     public void Start()
@@ -27,8 +28,8 @@ public class NewBehaviourScript : MonoBehaviour
         userNameError.SetActive(false);
         passWordError.SetActive(false);
         confirmPasswordError.SetActive(false);
-        
     }
+
     public void onSelected()
     {
         userNameError.SetActive(false);
@@ -36,7 +37,6 @@ public class NewBehaviourScript : MonoBehaviour
         confirmPasswordError.SetActive(false);
         editText.text = "";
     }
-    
 
     public void BackButtonClicked()
     {
@@ -48,7 +48,8 @@ public class NewBehaviourScript : MonoBehaviour
         usernameInput = usernameField.text;
         passwordInput = passwordField.text;
         confirmPasswordInput = confirmPasswordField.text;
-        
+        birthdateInput = birthdateField.text;  // Get birthdate input
+
         if (usernameInput == "")
         {
             userNameError.SetActive(true);
@@ -59,45 +60,53 @@ public class NewBehaviourScript : MonoBehaviour
         }
         if (confirmPasswordInput == "")
         {
-           confirmPasswordError.SetActive(true);
+            confirmPasswordError.SetActive(true);
         }
 
         if (passwordInput != confirmPasswordInput)
         {
             errormessage += "Confirm Password is not correct";
         }
+        if (birthdateInput == "") //asking birthdate 
+        {
+            if (errormessage != "")
+            {
+                errormessage += " and";
+            }
+            errormessage += " birthdate";
+        }
 
         if (errormessage != "")
         {
             editText.text = $"{errormessage}.";
-            
         }
-        
+
         errormessage = "";
         Debug.Log($"Error message {errormessage}");
-        
+
         Debug.Log("register clicked");
-        Debug.Log($"Sign up Clicked username: {usernameInput} password: {passwordInput} confirm password: {confirmPasswordInput}");
-        if (usernameInput != "" && passwordInput != "" && confirmPasswordInput != "" &&
+        Debug.Log($"Sign up Clicked username: {usernameInput} password: {passwordInput} confirm password: {confirmPasswordInput} birthdate: {birthdateInput}");
+        //added birthdate part to function
+
+        if (usernameInput != "" && passwordInput != "" && confirmPasswordInput != "" && birthdateInput != "" &&
             passwordInput.Equals(confirmPasswordInput))
         {
-            gameObject.GetComponent<APIService>().SignUp(usernameInput, passwordInput, (errMessage) =>
+            gameObject.GetComponent<APIService>().SignUp(usernameInput, passwordInput, birthdateInput, (errMessage) =>
             {
                 if (errMessage != "")
                 {
                     Debug.Log("Signup Fail: " + errMessage);
                     editText.text = errMessage;
-                    editText.color =  Color.red;
+                    editText.color = Color.red;
                 }
                 else
                 {
                     Debug.Log("Signup Success: " + errMessage);
+                    // Schedule birthday notification after successful registration
+                    BirthdayNotificationManager.ScheduleBirthdayNotification(usernameInput, System.DateTime.Parse(birthdateInput));
                     SceneManager.LoadScene("PetChoiceScene");
                 }
             });
-
-
         }
     }
-
 }

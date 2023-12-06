@@ -1,3 +1,5 @@
+import db from "../database/database.connection.ts";
+
 // Route Functions --
 
 // Given a string containing a base64 encoding of an image,
@@ -12,16 +14,26 @@ export const recognizeFood = async ({
   const { image64String } = await request.body().value;
 
   if (!image64String) {
-    response.body = {
+    response.status = 400;
+		response.body = {
       message: "Image not provided",
     };
-    response.status = 400;
     return;
   }
 
   let results = await processImage(image64String);
-  results = JSON.parse(results);
+	results = JSON.parse(results);
+	
+	if (results.status == 400) {
+		response.status = results.status;
+		response.body = {
+			message: `Image Recognition Error: ${results.message}`,
+			image64String: image64String
+		};
+		return;
+	}
 
+  
   // Return top 3 food matches
   const matches = results.outputs[0].data.concepts;
   let topMatches = matches.sort((a, b) => b.value - a.value);
@@ -33,15 +45,123 @@ export const recognizeFood = async ({
   topMatches = JSON.stringify(topMatches, null, 2);
   topMatches = JSON.parse(topMatches);
 
-  response.body = {
+  response.status = 200;
+	response.body = {
     topMatches,
   };
 
-  // TODO: Add route to return the nutrition info of a given food item
 
-  //export the function
-  //export { getHealthRating }
 };
+
+export const getHealthRating = async ({ request, response }: { request: any; response: any }) => {
+    try {
+				const { food } = await request.body().value;
+
+        if (!food) {
+            response.status = 400;
+            response.body = { message: 'No food provided.' };
+            return;
+        }
+				
+				// query food's health rating from database
+				const collection = await db.collection("healthScore");
+				const query = { Food: food };
+				const result = await collection.find(query).toArray();
+				const healthRating = result[0]["Health Rating"];
+
+        response.status = 200;
+        response.body = {
+            "food": food,
+            "healthRating": healthRating
+        };
+				
+				
+    } catch (error) {
+        response.status = 400;
+        response.body = {
+					message: 'Could not process health rating.',
+					error: error.message,
+					food: food, 
+				};
+    }
+};
+
+export const getNutritionInfo = async ({ request, response }: { request: any; response: any }) => {
+    try {
+				const { food } = await request.body().value;
+
+        if (!food) {
+            response.status = 400;
+            response.body = { message: 'No food provided.' };
+            return;
+        }
+				
+				// query food's nutrition info from database
+ /* notification branches version
+				const collection = await db.collection("healthScore");
+				const query = { Food: food };
+				const result = await collection.find(query).toArray();
+				const nutritionInfo = result[0]["Nutrition Info"];
+
+        response.status = 200;
+        response.body = {
+            "food": food,
+            "nutritionInfo": nutritionInfo
+        };
+				*/
+				
+//karls version from staging
+				const collection = await db.collection("nutrition_info");
+				const query = { name: food };
+				const result = await collection.find(query).toArray();
+				const { _id, name, ...info }  = result[0];
+				
+				
+				response.status = 200;
+        response.body = {
+            "food": name,
+						"nutritionInfo": info
+        };
+				
+
+    } catch (error) {
+        response.status = 400;
+        response.body = {
+					message: 'Could not process nutrition info.',
+					error: error.message,
+					food: food, 
+				};
+    }
+};
+
+export const listFoodOptions = async ({ response }: { response: any }) => {
+    try {				
+				// query all available foods in the database
+				const collection = await db.collection("healthScore");
+				const projection = { Food: 1, _id: 0 };
+				const result = await collection.find({}, { projection }).toArray();
+				
+				const foodOptions: string[] = result.map(option => option.Food);
+
+        response.status = 200;
+        response.body = {
+            "foodOptions": foodOptions
+        };
+				
+				
+    } catch (error) {
+        response.status = 400;
+        response.body = {
+					message: 'Could not process nutrition info.',
+					error: error.message,
+					food: food, 
+				};
+    }
+};
+
+
+
+
 
 // ---
 
@@ -88,7 +208,15 @@ async function processImage(image64String) {
       "/outputs",
     requestOptions
   );
-  if (!response.ok) throw new Error(`Error, status: ${response.status}, message: ${response.statusText}`);
+	
+	if (!response.ok) {
+		const error = {
+			status: response.status,
+			message: response.statusText
+		};
+		
+		return JSON.stringify(error);
+	}
 
   return response.text();
 }
