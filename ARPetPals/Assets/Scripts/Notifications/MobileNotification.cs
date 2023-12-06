@@ -1,80 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_ANDROID
-using Unity.Notifications.Android;
-using UnityEngine.Andriod;
-#endif
-
 public class MobileNotification : MonoBehaviour
 {
-    #if UNITY_ANDROID
-    public void RequestAuthorization()
+    [SerializeField]
+    private AndroidNotificationsController androidNotificationsController;
+    [SerializeField]
+    private IosNotificationController iosNotificationController;
+    private void Start()
     {
-        if(!Permission.HasUserAuthorizedPermission("android.permission.POST_NOTIFICATIONS"))
-        {
-            Permission.RequestUserPermission("android.permission.POST_NOTIFICATIONS");
-        }
-    }
-    public void RegisterNotificationChannel()
-    {
-         var channel = new AndroidNotificationChannel()
-        {
-            Id = "generic_reminder_notification",
-            Name = "Generic Reminder Notification",
-            Importance = Importance.Default,
-            Description = "Reminder notification"
-    };
-    AndroidNotificationCenter.RegisterNotificationChannel(channel);
-    }
-    public void SendNotification(string title, string text, int FireTimeInSeconds)
-    {
-        var notification = new AndroidNotification();
-        notification.Title = title;
-        notification.Text = text;
-        notification.FireTime = System.DateTime.Now.AddSeconds(FireTimeInSeconds);
+        #if UNITY_ANDROID
+        androidNotificationsController.RequestAuthorization();
+        androidNotificationsController.RegisterNotificationChannel();
+        androidNotificationsController.SendNotification("ARPetPals: Come Check on your pet!","Your pet misses you! Open the app and play with them!", 15 );
 
-        AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification")
+        #elif UNITY_IOS
+        StartCoroutine(iosNotificationController.RequestAuthorization());
+        iosNotificationController.SendNotification("ARPetPals: Come Check on your pet!","Your pet misses you! Open the app and play with them!", 15);
+        #endif
+// above function exists only in unity ios, if doesnt work check preprocesser docs
     }
-    #endif 
 }
-    /* Start is called before the first frame update
-    void Start()
-    {
-        // Remove notification that have already been displayed
-        AndroidNotificationCenter.CancelAllDisplayedNotifications();
-
-
-        // Setting up Andriod notification channel
-        var channel = new AndroidNotificationChannel()
-        {
-            Id = "channel_id",
-            Name = "Notification Channel",
-            Importance = Importance.Default,
-            Description = "Reminder notifications",
-        };
-        AndroidNotificationCenter.RegisterNotificationChannel(channel);
-
-        //register a new notification channel for birthday notifications
-        var birthdayChannel = new AndroidNotificationChannel()
-        {
-            Id = "birthday_channel_id",
-            Name = "Birthday Notification Channel",
-            Importance = Importance.Default,
-            Description = "Birthday notifications",
-        };
-        AndroidNotificationCenter.RegisterNotificationChannel(birthdayChannel);
-        
-    }
     
 
-/
-
-    }
-
-    // Update is called once per frame
-    void Update()
-{
-
-}
-
+//if this doesnt work, make sure object is created in unity called "NativeNotificationsController" , and the scripts mobilenotification and the ios one should b created from that in unity
