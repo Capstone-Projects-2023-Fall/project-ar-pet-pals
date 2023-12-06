@@ -225,7 +225,10 @@ public class SettingMenuController : MonoBehaviour
         {
             APIServiceResponse.GetLeaderBoardResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetLeaderBoardResponse>(response);
             List<APIServiceResponse.LeaderBoardInfo> boardList = responseData.leaderboardList;
-                
+
+            // Son note
+            // api leaderboard list returns all of users and can't limit it using param n
+            // workaround
             int index = 0;
             foreach (var VARIABLE in boardList)
             {
@@ -233,6 +236,8 @@ public class SettingMenuController : MonoBehaviour
                 GameObject.Find("Name"+indexString).GetComponent<TMP_Text>().text = boardList[index].username;
                 GameObject.Find("Score"+indexString).GetComponent<TMP_Text>().text = boardList[index].score.ToString();
                 index++;
+                // stop at 5
+                if (index == 5) break;
             }
             
            
