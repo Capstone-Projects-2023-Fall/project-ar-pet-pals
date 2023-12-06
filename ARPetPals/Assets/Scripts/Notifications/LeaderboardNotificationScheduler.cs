@@ -25,14 +25,14 @@ public class LeaderboardNotificationScheduler
     {
         try
         {
-          // Get the current top 5 users
+            // Get the current top 5 users
             List<UserScore> top5Users = await GetTop5Users();
 
             // Send notifications to the top 5 users
             SendTop5Notifications(top5Users);
 
             // Send weekly leaderboard notification to all users on Sundays
-            ScheduleWeeklyLeaderboardNotificationForAll();
+            ScheduleWeeklyLeaderboardNotification();
         }
         catch (Exception ex)
         {
@@ -40,12 +40,13 @@ public class LeaderboardNotificationScheduler
         }
     }
 
- private List<UserScore> GetTop5Users()
+ private async List<UserScore> GetTop5Users()
     {
         List<UserScore> top5Users = new List<UserScore>();
 
-        // Call the GetTop5Users function from APIService
-        apiService.GetLeaderBoardList(response =>
+        // Call the getleaderboardlist function from APIService and get top 5 users on list
+        // Note: This is an asynchronous operation, so we use async/await
+        await apiService.GetLeaderBoardList(response =>
         {
             APIServiceResponse.GetLeaderBoardResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetLeaderBoardResponse>(response);
             List<APIServiceResponse.LeaderBoardInfo> boardList = responseData.leaderboardList;
@@ -74,34 +75,29 @@ public class LeaderboardNotificationScheduler
         return top5Users;
     }
 
-    private void SendTop5Notifications(List<UserScore> top5Users)
+   private void SendTop5Notifications(List<UserScore> top5Users)
     {
         foreach (var user in top5Users)
         {
-            // Implement logic to send notifications to each user
-            // Example:
-            // SendNotification(user.Username, $"Congrats, {user.Username}! You are in the top 5 this week. Open the app to celebrate with your pet!");
             ScheduleWeeklyLeaderboardNotification(user.Username);
         }
     }
-   private void ScheduleWeeklyLeaderboardNotification(string username)
+
+    private void ScheduleWeeklyLeaderboardNotification(string username)
     {
-        var notification = new AndroidNotification();
-        notification.Title = "Weekly Leaderboard!";
-        notification.Text = $"Congrats, {username}! You are in the top 5 this week. Open the app to celebrate with your pet!";
-
-        // Calculate the next Sunday at midnight
-        notification.FireTime = CalculateNextSundayMidnight();
-
-        // Send the notification
-        AndroidNotificationCenter.SendNotification(notification, "channel_id");
+        ScheduleNotification($"Congrats, {username}! You are in the top 5 this week. Open the app to celebrate with your pet!");
     }
 
     private void ScheduleWeeklyLeaderboardNotificationForAll()
     {
+        ScheduleNotification("The weekly leaderboard is out! Check it out.");
+    }
+
+    private void ScheduleNotification(string message)
+    {
         var notification = new AndroidNotification();
         notification.Title = "Weekly Leaderboard!";
-        notification.Text = "The weekly leaderboard is out! Check it out.";
+        notification.Text = message;
 
         // Calculate the next Sunday at midnight
         notification.FireTime = CalculateNextSundayMidnight();

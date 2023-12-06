@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Notifications.Android;
 using UnityEngine;
@@ -35,27 +35,27 @@ public class MobileNotification : MonoBehaviour
         //if (!PlayerPrefs.HasKey("InitialNotificationSent"))
         //{}
         // Schedule the weekly leaderboard notification
-        LeaderboardNotification.ScheduleWeeklyLeaderboardNotification();
+       // LeaderboardNotification.ScheduleWeeklyLeaderboardNotification();
 
-        // Set up the notification message and parameters
+        /* Set up the notification message and parameters
         var notification = new AndroidNotification();
         notification.Title = "Attention!";
         notification.Text = "Come to check on your pet!!!";
-        notification.FireTime = System.DateTime.Now.AddSeconds(15);
+        notification.FireTime = System.DateTime.Now.AddSeconds(15); */
 
         // Send the notification
-        var id = AndroidNotificationCenter.SendNotification(notification, "channel_id");
+       // var id = AndroidNotificationCenter.SendNotification(notification, "channel_id");
 
         //set flag to indicate that initial notification has been sent
         //PlayerPrefs.SetInt("InitialNotificationSent", 1);
         //PlayerPrefs.Save();
 
-        // If the script is run and a message is already schedule, cancel it and re-schedule another message
+        /* If the script is run and a message is already schedule, cancel it and re-schedule another message
         if (AndroidNotificationCenter.CheckScheduledNotificationStatus(id) == NotificationStatus.Scheduled)
         {
             AndroidNotificationCenter.CancelAllNotifications();
             AndroidNotificationCenter.SendNotification(notification, "channel_id");
-        }
+        }*/
     }
     string recognizedFood = GetRecognizedFood();
 
@@ -80,4 +80,3 @@ public class MobileNotification : MonoBehaviour
 
 }
 
-*/
