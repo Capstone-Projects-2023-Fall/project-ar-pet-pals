@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,26 +12,35 @@ using static ARPetPals.APIServiceResponse;
 
 public class FoodRecognition : MonoBehaviour
 {
-    public GameObject gameObject;
-    [SerializeField] public TMP_Text foodGuesses;
+    private GameObject gameObject;
+
+    public FoodRecognition(GameObject gameObject)
+    {
+        this.gameObject = gameObject;
+    }
     
-    public void RecognizeFood()
+    public async Task<Dictionary<int, string>> RecognizeFood()
     {
         string imageString = CaptureImage();
+        var tcs = new TaskCompletionSource<Dictionary<int, string>>();
 
-        // Send image string to backend server for recognition
         gameObject.GetComponent<APIService>().RecognizeFood(imageString, (response) =>
         {
             ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
             if (error != null && !string.IsNullOrEmpty(error.message))
-            {
+            {   
                 Debug.Log("Food Recognition Error: " + error.message);
-                return;
+                tcs.SetResult(null);
             }
-
-            RecognizeFoodResponse parsedResponse = JsonUtility.FromJson<RecognizeFoodResponse>(response);
-            DisplayFoodGuesses(parsedResponse);
+            else
+            {
+                RecognizeFoodResponse parsedResponse = JsonUtility.FromJson<RecognizeFoodResponse>(response);
+                Dictionary<int, string> topMatches = parsedResponse.topMatches.ToDictionary(g => g.rank, g => g.name);
+                tcs.SetResult(topMatches);
+            }
         });
+
+        return await tcs.Task;
     }
 
     private string CaptureImage()
@@ -62,18 +73,55 @@ public class FoodRecognition : MonoBehaviour
 
         return imageString;
     }
-    
-    private void DisplayFoodGuesses(RecognizeFoodResponse response)
-    {
-        foodGuesses.text = "Is it one of these?\n";
-        
-        List<Guess> guesses = response.topMatches;
-        foreach (Guess guess in guesses)
-        {
-            // Debug.Log(guess.rank + ". " + guess.name);
-            foodGuesses.text = foodGuesses.text + guess.rank + ". " + guess.name + "\n";
-        }
-    }
 
-    // TODO: Add function to select food from list of guesses
+    public async Task<List<string>> ListFoodOptions()
+    {
+        var tcs = new TaskCompletionSource<List<string>>();
+
+        gameObject.GetComponent<APIService>().ListFoodOptions((response) =>
+        {
+            ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
+            if (error != null && !string.IsNullOrEmpty(error.message))
+            {   
+                Debug.Log("List Food Options Error: " + error.message);
+                tcs.SetResult(null);
+            }
+            else
+            {
+                ListFoodOptionsResponse parsedResponse = JsonUtility.FromJson<ListFoodOptionsResponse>(response);
+                tcs.SetResult(parsedResponse.foodOptions);
+            }                    
+        });
+
+        return await tcs.Task;
+    }
+    
+    public async Task<Dictionary<string, string>> GetNutritionInfo(string food)
+    {
+        var tcs = new TaskCompletionSource<Dictionary<string, string>>();
+
+        gameObject.GetComponent<APIService>().GetNutritionInfo(food, (response) =>
+        {
+            ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
+            if (error != null && !string.IsNullOrEmpty(error.message))
+            {   
+                Debug.Log("Get Nutrition Info Error: " + error.message);
+                tcs.SetResult(null);
+            }
+            else
+            {
+                GetNutritionInfoResponse parsedResponse = JsonUtility.FromJson<GetNutritionInfoResponse>(response);
+                
+                var nutritionInfo = new Dictionary<string, string>();
+                foreach (var field in parsedResponse.nutritionInfo.GetType().GetFields())
+                {
+                    nutritionInfo.Add(field.Name, field.GetValue(parsedResponse.nutritionInfo)?.ToString());
+                }
+
+                tcs.SetResult(nutritionInfo);
+            }                         
+        });
+
+        return await tcs.Task;
+    }
 }
