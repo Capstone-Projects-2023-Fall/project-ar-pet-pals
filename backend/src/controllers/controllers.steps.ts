@@ -1,83 +1,142 @@
-//import { Users } from "../database/database.connection.ts";
-import Users from "../database/database.connection.ts";
-import { ObjectId } from "https://deno.land/x/mongo/mod.ts"; 
+import { ObjectId } from "https://deno.land/x/mongo@v0.32.0/mod.ts";
+import {UserSchema} from "../schema/schema.user.ts";
+import db from "../database/database.connection.ts";
+import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
 
-// Define StepType interface or use 'any'
-interface StepType {
-  timestamp: Date;
-  steps: number;
-  healthScore: number;
-  total: number;
-  // Add other properties as needed
-}
-export const updateStepCount = async ({ request, response,}: { request: any; response: any;}) => {
-  try {
-      const { userId, stepCount } = await request.body().value;
+const Users = db.collection<UserSchema>("users");
 
-      // Fetch the user from the database based on userId
-      const user = await Users.findOne({ _id: userId });
+export const updateStepCount = async ({
+  request,
+  response,
+}: {
+  request: any;
+  response: any;
+}) => {
+  const { steps } = await request.body().value;
+  const userId = getUserIdFromHeaders(request.headers);
 
-      if (!user) {
-          response.status = 404;
-          response.body = {
-              success: false,
-              message: "User not found",
-          };
-          return;
-      }
+  const user = await Users.findOne({ _id: new ObjectId(userId) });
 
-      // Update user's step count
-      user.dailyStepCount += stepCount;
-      user.totalStepCount += stepCount;
-
-      // Update weekly step count (assuming steps have timestamps)
-      const today = new Date();
-      const sevenDaysAgo = new Date(today);
-      sevenDaysAgo.setDate(today.getDate() - 7);
-
-      // Filter steps within the past seven days
-      const stepsWithinWeek = user.steps.filter(
-          (step) => step.timestamp >= sevenDaysAgo
-      );
-
-      // Calculate the total steps within the past seven days
-      user.weeklyStepCount = stepsWithinWeek.reduce(
-          (total, step) => total + step.steps,
-          0
-      );
-
-      // Save the updated user data
-      const result = await Users.updateOne({ _id: userId }, { $set: user });
-
-      response.status = 200;
-      response.body = {
-          success: true,
-          message: "Step count updated successfully",
-          data: result, // Include any additional data you want to send back
-      };
-  } catch (error) {
-      response.status = 500;
-      response.body = {
-          success: false,
-          message: "Internal server error",
-      };
+  if (!user) {
+    response.body = {
+      message: "could not find user",
+    };
+    response.status = 400;
+    return;
   }
+  // Update daily step count
+  user.dailyStepCount += steps;
+
+  // Update total step count
+  user.totalStepCount += steps;
+
+  // Update weekly step count
+  const today = new Date();
+  const sevenDaysAgo = new Date(today);
+  sevenDaysAgo.setDate(today.getDate() - 7);
+
+  // Filter steps within the past seven days
+  let stepsWithinWeek: any[] = [];
+
+  if (user.steps) {
+    stepsWithinWeek = user.steps.filter(
+      (step) => step.timestamp >= sevenDaysAgo
+    );
+  }
+
+  // Calculate the total steps within the past seven days
+  user.weeklyStepCount = stepsWithinWeek.reduce(
+    (total, step) => total + step.steps,
+    0
+  );
+
+  // Save the updated user data
+  const result = await Users.updateOne({ _id: userId }, { $set: user });
+
+  if (!result) {
+    response.body = {
+      message: "could not update step count",
+    };
+    response.status = 400;
+    return;
+  }
+
+  response.body = {
+    message: "updated step count successfully",
+  };
+  response.status = 200;
 };
 
-export const checkStepGoal = async (userId: ObjectId) => {
-  const user = await Users.findOne({ _id: userId });
+export const getStepCount = async ({
+  request,
+  response,
+}: {
+  request: any;
+  response: any;
+}) => {
+  const headers: Headers = request.headers;
+  const userId = getUserIdFromHeaders(request.headers);
+
+  const user = await Users.findOne({ _id: new ObjectId(userId) });
+
+  if (!user) {
+    response.body = {
+      message: "could not find user",
+    };
+    response.status = 400;
+    return;
+  }
+
+  response.body = {
+    dailyStepCount: user.dailyStepCount,
+    weeklyStepCount: user.weeklyStepCount,
+  };
+  response.status = 200;
+};
+
+export const checkStepGoal = async ({
+  request,
+  response,
+}: {
+  request: any;
+  response: any;
+}) => {
+  const userId = getUserIdFromHeaders(request.headers);
+
+  const user = await Users.findOne({ _id: new ObjectId(userId) });
+
+  if (!user) {
+    response.body = {
+      message: "could not find user",
+    };
+    response.status = 400;
+    return;
+  }
 
   if (user.dailyStepCount >= user.dailyStepGoal) {
     // User met the daily step goal
-    return true;
-  } else {
-    // User did not meet the daily step goal
-    return false;
+    response.body = {
+      metDailyGoal: true,
+    };
+    response.status = 200;
+    return;
   }
+
+  response.body = {
+    metDailyGoal: false,
+  };
 };
 
-export const calculateAverageHealthScore = async (userId: ObjectId) => {
-  const user = await Users.findOne({ _id: userId });
+export const calculateAverageHealthScore = async ({
+  request,
+  response,
+}: {
+  request: any;
+  response: any;
+}) => {
+  const { userId, steps } = await request.body().value;
+
+  const user = await Users.findOne({ _id: new ObjectId(userId) });
 
   // Calculate the weekly step count
   const today = new Date();
@@ -90,18 +149,34 @@ export const calculateAverageHealthScore = async (userId: ObjectId) => {
   );
 
   // Calculate the total steps and health score within the past seven days
-  const totalSteps: number = stepsWithinWeek.reduce((total: number, step: StepType) => total + step.steps, 0);
-  const totalHealthScore: number = stepsWithinWeek.reduce((total: number, step: StepType) => total + step.healthScore, 0);
+  const totalSteps: number = stepsWithinWeek.reduce(
+    (total: number, step: StepType) => total + step.steps,
+    0
+  );
+  const totalHealthScore: number = stepsWithinWeek.reduce(
+    (total: number, step: StepType) => total + step.healthScore,
+    0
+  );
 
   // Calculate the average health score
-  const averageHealthScore: number = totalHealthScore / (totalSteps / 1000); // Specify the type as number
+  const averageHealthScore: number =
+    totalHealthScore / (totalSteps / 1000); // Specify the type as number
 
   return averageHealthScore;
-  };
+};
+
 // New function to update step goal
+<<<<<<< HEAD
 export const updateStepGoal = async (userId: ObjectId, newStepGoal: number) => {
   try {
     const user = await Users.findOne({ _id: userId });
+=======
+export const updateStepGoal = async (
+  userId: ObjectId,
+  newStepGoal: number
+) => {
+  const user = await Users.findOne({ _id: userId });
+>>>>>>> f01c105bb4e6c6f37b947d4d4ca8f58a262daa9b
 
     if (!user) {
       return {
