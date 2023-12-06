@@ -20,6 +20,7 @@ public class AndroidNotificationsController : MonoBehaviour
     {
          var channel = new AndroidNotificationChannel()
         {
+            //creating channel for notiifcation
             Id = "generic_reminder_notification",
             Name = "Generic Reminder Notification",
             Importance = Importance.Default,
@@ -29,11 +30,14 @@ public class AndroidNotificationsController : MonoBehaviour
     }
     public void SendNotification(string title, string text, int FireTimeInSeconds)
     {
+        //creating new notification
         var notification = new AndroidNotification();
         notification.Title = title;
         notification.Text = text;
         notification.FireTime = System.DateTime.Now.AddSeconds(FireTimeInSeconds);
 
+//send notification
+//if script is run and a notification is already scheduled, cancel it and resend another message
        var Identifier = AndroidNotificationCenter.SendNotification(notification, "generic_reminder_notification");
        if(AndroidNotificationCenter.CheckScheduledNotificationStatus(identifier) == NotificationStatus.Scheduled)
        {
