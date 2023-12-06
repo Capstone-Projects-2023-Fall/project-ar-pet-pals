@@ -109,7 +109,16 @@ public class SettingMenuController : MonoBehaviour
         //Setup saved volume when started.
         masterVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume",100f);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat("SfxVolume",100f);
-        
+
+        int musicToggle = PlayerPrefs.GetInt("MusicVolumeToggle", 1);
+        int sfxToggle = PlayerPrefs.GetInt("SfxVolumeToggle", 1);
+
+        AudioManager.Instance.musicSource.mute = (musicToggle == 1 ? true : false);
+        AudioManager.Instance.sfxSource.mute = (sfxToggle == 1 ? true : false);
+        ToggleMusic();
+        ToggleSfx();
+
+
         //Get Pet Status Api .        
         gameObject.GetComponent<APIService>().GetPetStatus((errMessage) =>
         {
@@ -122,8 +131,8 @@ public class SettingMenuController : MonoBehaviour
                 APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
                 currentHappniness  = (int)float.Parse(responseData.mood);
                 health = float.Parse(responseData.health)/10;
-                Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
-                Debug.Log($"Hy/Current Health from Api: {health}");
+                // Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
+                // Debug.Log($"Hy/Current Health from Api: {health}");
                 SetMaxHappiness(maxHappiness);
                 SetHappiness(currentHappniness);
 
@@ -133,9 +142,9 @@ public class SettingMenuController : MonoBehaviour
             }
         });
 
-        Debug.Log($"Hy/start Happiness {currentHappniness}");
-        Debug.Log($"Hy/start Happiness {health}");
-        Debug.Log($"Hy/Max Happiness {maxHappiness}");
+        // Debug.Log($"Hy/start Happiness {currentHappniness}");
+        // Debug.Log($"Hy/start Happiness {health}");
+        // Debug.Log($"Hy/Max Happiness {maxHappiness}");
         
     }
 
@@ -162,8 +171,8 @@ public class SettingMenuController : MonoBehaviour
                 APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
                 currentHappniness  = (int)float.Parse(responseData.mood);
                 health = float.Parse(responseData.health)/10;
-                Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
-                Debug.Log($"Hy/Current Health from Api: {health}");
+                // Debug.Log($"Hy/Current Happiness from Api: {currentHappniness}");
+                // Debug.Log($"Hy/Current Health from Api: {health}");
                 SetMaxHappiness(maxHappiness);
                 SetHappiness(currentHappniness);
 
@@ -172,7 +181,7 @@ public class SettingMenuController : MonoBehaviour
                 PlayerPrefs.SetInt("happiness", currentHappniness);
             }
         });
-        Debug.Log("Update status run.");
+        //Debug.Log("Update status run.");
     }
 
     // public void  SetAudioLevel(float sliderValue)
@@ -280,9 +289,12 @@ public class SettingMenuController : MonoBehaviour
         changePassword = changePasswordField.text;
         PlayerPrefs.SetFloat("MusicVolume",masterVolumeSlider.value);
         PlayerPrefs.SetFloat("SfxVolume",sfxVolumeSlider.value);
-        
+        PlayerPrefs.SetInt("MusicVolumeToggle", AudioManager.Instance.musicSource.mute ? 0 : 1);
+        PlayerPrefs.SetInt("SfxVolumeToggle", AudioManager.Instance.sfxSource.mute ? 0 : 1);
+
+
         //Do something
-        
+
         if (changeUserName != "n" || changePassword !="")
         {
             gameObject.GetComponent<APIService>().UpdateUser(changeUserName,changePassword, s => { });
@@ -341,18 +353,17 @@ public class SettingMenuController : MonoBehaviour
 
         // Create Input Listener
         OptionInput.onValueChanged.AddListener((string text) => {
-
             // Clear out old options
             foreach (Transform optButton in contentPanel)
             {
                 Destroy(optButton.gameObject);
             }
-            
+
             if (!string.IsNullOrEmpty(text))
             {
                 // Create sublist of options that include given text
                 List<string> matchingOptions = foodOptions.Where(opt => opt.Contains(text)).ToList();
-                
+
                 // Generate a button for each matching option
                 foreach (var option in matchingOptions)
                 {
@@ -518,7 +529,7 @@ public class SettingMenuController : MonoBehaviour
     //implement audio manager to ui
     public void ToggleMusic()
     {
-        if (VolumeButton.sprite == unmuteMusic)
+        if (!AudioManager.Instance.musicSource.mute)
         {
             VolumeButton.sprite = muteMusic;
         }
@@ -532,7 +543,7 @@ public class SettingMenuController : MonoBehaviour
 
     public void ToggleSfx()
     {
-        if (SfxButton.sprite == unmuteSfx)
+        if (!AudioManager.Instance.sfxSource.mute)
         {
             SfxButton.sprite = muteSfx;
         }
