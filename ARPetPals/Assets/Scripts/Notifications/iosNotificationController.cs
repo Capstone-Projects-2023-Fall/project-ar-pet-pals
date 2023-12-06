@@ -10,14 +10,25 @@ using Unity.Notifications.iOS;
 public class IosNotificationController : MonoBehaviour
 {
     #if UNITY_IOS
-    public IEnumerator RequestAuthorization()
+    IEnumerator RequestAuthorization()
+{
+    var authorizationOption = AuthorizationOption.Alert | AuthorizationOption.Badge;
+    using (var req = new AuthorizationRequest(authorizationOption, true))
     {
-        using var req = new AuthorizationRequest(AuthorizationOption.Alert | AuthorizationOption.Badge, true);
-        while(!req.IsFinished)
+        while (!req.IsFinished)
         {
             yield return null;
-        }
+        };
+
+        string res = "\n RequestAuthorization:";
+        res += "\n finished: " + req.IsFinished;
+        res += "\n granted :  " + req.Granted;
+        res += "\n error:  " + req.Error;
+        res += "\n deviceToken:  " + req.DeviceToken;
+        Debug.Log(res);
     }
+}
+    
 
     public void SendNotification(string title, string body, string subtitle, int FireTimeInSeconds)
     {
