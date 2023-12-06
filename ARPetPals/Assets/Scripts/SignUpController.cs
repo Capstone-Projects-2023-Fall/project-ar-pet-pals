@@ -103,7 +103,7 @@ public class SignUpController : MonoBehaviour
                 {
                     Debug.Log("Signup Success: " + errMessage);
                     // Schedule birthday notification after successful registration
-                    BirthdayNotificationManager.ScheduleBirthdayNotification(usernameInput, System.DateTime.Parse(birthdateInput));
+                    // BirthdayNotificationManager.ScheduleBirthdayNotification(usernameInput, System.DateTime.Parse(birthdateInput));
                     SceneManager.LoadScene("PetChoiceScene");
                 }
             });

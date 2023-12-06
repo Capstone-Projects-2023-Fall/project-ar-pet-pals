@@ -1,4 +1,4 @@
-using Unity.Notifications.Android;
+/*using Unity.Notifications.Android;
 
 public static class BirthdayNotificationManager
 {
@@ -22,3 +22,4 @@ public static class BirthdayNotificationManager
         var id = AndroidNotificationCenter.SendNotification(birthdayNotification, "birthday_channel_id");
     }
 }
+*/
