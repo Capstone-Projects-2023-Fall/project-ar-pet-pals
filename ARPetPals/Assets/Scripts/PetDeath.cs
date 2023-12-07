@@ -67,6 +67,6 @@ public class PetDeath : MonoBehaviour
     public void returnToRegister() {
         gameObject.GetComponent<APIService>().DeletePet(str => {});
         Debug.Log("Deleted Pet");
-        SceneManager.LoadScene("SignUpScene");
+        SceneManager.LoadScene("PetChoiceScene");
     }
 }
