@@ -188,6 +188,11 @@ namespace ARPetPals
         {
             public string message;
         }
+        [System.Serializable]
+        public class DeletePetResponse
+        {
+            public string message;
+        }
     }
 }
 

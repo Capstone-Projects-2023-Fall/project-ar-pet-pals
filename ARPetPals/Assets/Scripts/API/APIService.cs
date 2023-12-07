@@ -1241,6 +1241,63 @@ namespace ARPetPals
             }
 
         }
+
+        public void DeletePet(Action<string> callback)
+        {
+            StartCoroutine(_DeletePet(callback));
+        }
+
+        private IEnumerator _DeletePet(Action<string> callback)
+        {
+
+            string token = GetStoredToken();
+
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break; // Exit the coroutine
+            }
+
+            string url = URL + "/pet";
+
+            using (UnityWebRequest request = UnityWebRequest.Delete(url))
+            {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+                // Add downloadHandler - there is no downloadHandler for DELETE method
+                request.downloadHandler = new DownloadHandlerBuffer();
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+
+                    Debug.LogError("_DeletePet failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else
+                {
+
+                    // Deserialize the JSON response
+                    DeletePetResponse responseData = JsonUtility.FromJson<DeletePetResponse>(responseJson);
+                    Debug.Log("_DeletePet response: " + JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+
+                }
+            }
+        }
+
+        public void DeletePetTest()
+        {
+            DeletePet((str) => { });
+        }
     }
 }
 
