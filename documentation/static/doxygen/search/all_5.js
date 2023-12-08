@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mainscenecontroller_0',['MainSceneController',['../classMainSceneController.html',1,'']]],
-  ['mytestscripts_1',['MyTestScripts',['../classMyTestScripts.html',1,'']]]
+  ['featheringwidth_0',['featheringWidth',['../classARFeatheredPlaneMeshVisualizer.html#a5bf383093b66816c02196b787a234cec',1,'ARFeatheredPlaneMeshVisualizer']]],
+  ['foodrecognition_1',['FoodRecognition',['../classFoodRecognition.html',1,'']]]
 ];

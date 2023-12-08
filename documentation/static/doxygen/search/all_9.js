@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['setpetchoiceresponse_0',['SetPetChoiceResponse',['../classARPetPals_1_1APIServiceResponse_1_1SetPetChoiceResponse.html',1,'ARPetPals::APIServiceResponse']]],
-  ['setpetnameresponse_1',['SetPetNameResponse',['../classARPetPals_1_1APIServiceResponse_1_1SetPetNameResponse.html',1,'ARPetPals::APIServiceResponse']]],
-  ['signinresponse_2',['SignInResponse',['../classARPetPals_1_1APIServiceResponse_1_1SignInResponse.html',1,'ARPetPals::APIServiceResponse']]],
-  ['signupresponse_3',['SignUpResponse',['../classARPetPals_1_1APIServiceResponse_1_1SignUpResponse.html',1,'ARPetPals::APIServiceResponse']]],
-  ['switchscene_4',['SwitchScene',['../classSwitchScene.html',1,'']]]
+  ['leaderboardinfo_0',['LeaderBoardInfo',['../classARPetPals_1_1APIServiceResponse_1_1LeaderBoardInfo.html',1,'ARPetPals::APIServiceResponse']]],
+  ['leaderboardnotificationscheduler_1',['LeaderboardNotificationScheduler',['../classLeaderboardNotificationScheduler.html',1,'']]],
+  ['listfoodoptionsresponse_2',['ListFoodOptionsResponse',['../classARPetPals_1_1APIServiceResponse_1_1ListFoodOptionsResponse.html',1,'ARPetPals::APIServiceResponse']]],
+  ['loadingscenecontroller_3',['LoadingSceneController',['../classLoadingSceneController.html',1,'']]],
+  ['logincontroller_4',['LogInController',['../classLogInController.html',1,'']]]
 ];
