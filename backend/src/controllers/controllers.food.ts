@@ -160,7 +160,7 @@ export const listFoodOptions = async ({ response }: { response: any }) => {
   };
 
     // get food category
-    export const createCategoryInfo = async ({ request, response }: { request: any; response: any }) => {
+    export const getCategoryInfo = async ({ request, response }: { request: any; response: any }) => {
       try {
           const requestBody = await request.body().value;
   
