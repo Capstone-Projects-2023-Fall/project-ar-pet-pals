@@ -2311,6 +2311,7 @@ GameObject:
   - component: {fileID: 301861484}
   - component: {fileID: 301861488}
   - component: {fileID: 301861491}
+  - component: {fileID: 301861492}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -2443,6 +2444,21 @@ MonoBehaviour:
   isWalkingUI: {fileID: 757347639}
   pauseButton: {fileID: 1051766443}
   resumeButton: {fileID: 2066568652}
+--- !u!114 &301861492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301861483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e9dc7cd4a9fad46ab1b96a10d42c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameInput: {fileID: 0}
+  passwordInput: {fileID: 0}
+  responseInput: {fileID: 0}
 --- !u!1 &306123417
 GameObject:
   m_ObjectHideFlags: 0
@@ -17375,7 +17391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Steps remaining until reward: 1000'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ac09f95855ed7145b70a4546b91057f, type: 2}
   m_sharedMaterial: {fileID: -8965224884501965737, guid: 0ac09f95855ed7145b70a4546b91057f,
