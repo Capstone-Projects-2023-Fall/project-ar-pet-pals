@@ -8,6 +8,8 @@ import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } 
 const Pets = db.collection<PetSchema>("pets");
 const MAX_HEALTH = 100;
 const MAX_MOOD = 100;
+const DEFAULT_HEALTH = 50;
+const DEFAULT_MOOD = 50;
 enum RESET_TYPE {
     ALL = 0,
     HEALTH,
@@ -150,8 +152,8 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
             lastCalculatedMood: Date.now(),
-            health: MAX_HEALTH,
-            mood: MAX_MOOD,
+            health: DEFAULT_HEALTH,
+            mood: DEFAULT_MOOD,
         },
         // this activity can be used for leaderboard ranking
         activities: getActivites()
@@ -376,22 +378,22 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
             lastCalculatedMood: Date.now(),
-            health: MAX_HEALTH,
-            mood: MAX_MOOD
+            health: DEFAULT_HEALTH,
+            mood: DEFAULT_MOOD
         }
     }
     else if (reset_type == RESET_TYPE.HEALTH) {
         resetStatus = {
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
-            health: MAX_HEALTH,
+            health: DEFAULT_HEALTH,
         }
     }
     else {
         resetStatus = {
             lastActivity: Date.now(),
             lastCalculatedMood: Date.now(),
-            mood: MAX_MOOD
+            mood: DEFAULT_MOOD
         }
     }
     // update pet status
