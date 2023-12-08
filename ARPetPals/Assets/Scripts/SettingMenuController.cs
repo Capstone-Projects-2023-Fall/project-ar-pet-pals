@@ -90,13 +90,16 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public TMP_Text score3;
     [SerializeField] public TMP_Text score4;
     [SerializeField] public TMP_Text score5;
-    
-    
-    
+      
     
     public string changePetName;
     public string changeUserName;
     public string changePassword;
+
+    [Header("Reference to main pet object")]
+    //reference to the MainPetObject
+    [SerializeField] private GameObject mainPetObject;
+    private MainCharacterController mainCharacterController;
 
     private void Awake()
     {
@@ -152,6 +155,9 @@ public class SettingMenuController : MonoBehaviour
     {
         //Call the update pet status function every 1 second to get the newest value.
         InvokeRepeating("UpdatePetStatus", 2f,1f);
+
+        //reference to main object's controller script
+        mainCharacterController = mainPetObject.GetComponent<MainCharacterController>();
         
     }
     
@@ -512,6 +518,14 @@ public class SettingMenuController : MonoBehaviour
         PlayerPrefs.SetFloat("health", health);
 
         Debug.Log(health);
+    }
+
+    public void StartEating() {
+        mainCharacterController.startEatFoodAnimation();
+    }
+
+    public void EndEating() {
+        mainCharacterController.endEatFoodAnimation();
     }
 
 
