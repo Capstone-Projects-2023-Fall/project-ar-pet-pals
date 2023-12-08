@@ -159,38 +159,44 @@ export const listFoodOptions = async ({ response }: { response: any }) => {
     }
   };
 
-    //get food category
-    export const getCategoryInfo = async ({ request, response }: { request: any; response: any }) => {
-      try {
-          const { category } = await request.body().value;
-  
-          if (!category) {
-              response.status = 400;
-              response.body = { message: 'No category provided.' };
-              return;
-          }
-  
-          // query category info from the database
-          const collection = await db.collection("healthScore");
-          const query = { Category: category }; // Use "Category" field in the query
-          const result = await collection.find(query).toArray();
-          const categoryInfo = result[0]["Category"]; // Adjust the field name accordingly
-  
-          response.status = 200;
-          response.body = {
-              "category": category,
-              "categoryInfo": categoryInfo
-          };
-  
-      } catch (error) {
+    // get food category
+export const getCategoryInfo = async ({ params, response }: { params: any; response: any }) => {
+  try {
+      const { category } = params;
+
+      if (!category) {
           response.status = 400;
-          response.body = {
-              message: 'Could not process category information.',
-              error: error.message,
-              category: category,
-          };
+          response.body = { message: 'No category provided.' };
+          return;
       }
-  };
+
+      // query category info from the database
+      const collection = await db.collection("healthScore");
+      const query = { Category: category }; // Use "Category" field in the query
+      const result = await collection.find(query).toArray();
+      const categoryInfo = result[0]?.Category; // Adjust the field name accordingly
+
+      if (!categoryInfo) {
+          response.status = 404;
+          response.body = { message: 'Category not found.' };
+          return;
+      }
+
+      response.status = 200;
+      response.body = {
+          "category": category,
+          "categoryInfo": categoryInfo
+      };
+
+  } catch (error) {
+      response.status = 400;
+      response.body = {
+          message: 'Could not process category information.',
+          error: error.message,
+          category: params.category,
+      };
+  }
+};
 
 
 

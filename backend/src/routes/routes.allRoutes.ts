@@ -1,7 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser, saveBirthday } from "../controllers/controllers.users.ts";
 import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, increasePetMood, resetPetActivities } from "../controllers/controllers.pets.ts";
-import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions } from "../controllers/controllers.food.ts";
+import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions, getCategoryInfo } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import { updateStepCount, checkStepGoal,getStepCount, updateStepGoal, resetDailyStepCountForAllUsers, resetWeeklyStepCountForAllUsers } from "../controllers/controllers.steps.ts";
@@ -94,7 +94,7 @@ router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
 // Recognize
 router.post("/api/food/recognize", authourized, recognizeFood);
 //Food category
-router.post("/api/category/info", authourized, getCategoryInfo);
+router.get("/api/category/info/:category", authourized, getCategoryInfo);
 
 
 export default router;
