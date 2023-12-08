@@ -259,4 +259,3 @@ async function processImage(image64String) {
 
   return response.text();
 }
-};
