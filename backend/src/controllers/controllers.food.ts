@@ -160,29 +160,30 @@ export const listFoodOptions = async ({ response }: { response: any }) => {
   };
 
     // get food category
-    export const getCategoryInfo = async ({ request, response }: { request: any; response: any }) => {
-      try {
-        const { food } = await request.body().value;
+    export const getCategoryInfo = async (context) => {
 
+      try {
+        const { food } = context.params;
         if (!food) {
-            response.status = 400;
-            response.body = { message: 'No food provided.' };
-            return;
+          context.response.status = 400;
+          context.response.body = { message: 'No food provided.' };
+          return;
         }
+
           // query category info from the database
 				const collection = await db.collection("healthScore");
 				const query = { Food: food };
 				const result = await collection.find(query).toArray();
 				const categoryInfo = result[0]["Category"];
 
-        response.status = 200;
-        response.body = {
-            "food": food,
-            "categoryInfo": categoryInfo
+        context.response.status = 200;
+        context.response.body = {
+          food: food,
+          categoryInfo: categoryInfo
         };
       } catch (error) {
-        response.status = 400;
-        response.body = {
+        context.response.status = 400;
+        context.response.body = {
 					message: 'Could not process category information.',
 					error: error.message,
 					food: food, 
