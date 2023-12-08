@@ -76,6 +76,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classARPetPals_1_1APIService-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ARPetPals.APIService Class Reference</div></div>
 </div><!--header-->
@@ -95,9 +96,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SignIn</b> (string us
 <tr class="memitem:a53eab336f8abb60a5297e9c6bdc8b0fb" id="r_a53eab336f8abb60a5297e9c6bdc8b0fb"><td class="memItemLeft" align="right" valign="top"><a id="a53eab336f8abb60a5297e9c6bdc8b0fb" name="a53eab336f8abb60a5297e9c6bdc8b0fb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SignIn</b> (Action&lt; string &gt; callback)</td></tr>
 <tr class="separator:a53eab336f8abb60a5297e9c6bdc8b0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ba1d6522f622273b005383cc401de4e" id="r_a4ba1d6522f622273b005383cc401de4e"><td class="memItemLeft" align="right" valign="top"><a id="a4ba1d6522f622273b005383cc401de4e" name="a4ba1d6522f622273b005383cc401de4e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SignUp</b> (string username, string password, Action&lt; string &gt; callback)</td></tr>
-<tr class="separator:a4ba1d6522f622273b005383cc401de4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c5ad0c54cd72f8f7e4fdc9194fb19b1" id="r_a4c5ad0c54cd72f8f7e4fdc9194fb19b1"><td class="memItemLeft" align="right" valign="top"><a id="a4c5ad0c54cd72f8f7e4fdc9194fb19b1" name="a4c5ad0c54cd72f8f7e4fdc9194fb19b1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SignUp</b> (string username, string password, string birthdate, Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a4c5ad0c54cd72f8f7e4fdc9194fb19b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a871b23132d7e3cac734968cdc02efc08" id="r_a871b23132d7e3cac734968cdc02efc08"><td class="memItemLeft" align="right" valign="top"><a id="a871b23132d7e3cac734968cdc02efc08" name="a871b23132d7e3cac734968cdc02efc08"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SignUp</b> (Action&lt; string &gt; callback)</td></tr>
 <tr class="separator:a871b23132d7e3cac734968cdc02efc08"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,6 +120,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>GetPetName</b> (Actio
 <tr class="memitem:a3433f801f5540bfd93b3a22fc60ad510" id="r_a3433f801f5540bfd93b3a22fc60ad510"><td class="memItemLeft" align="right" valign="top"><a id="a3433f801f5540bfd93b3a22fc60ad510" name="a3433f801f5540bfd93b3a22fc60ad510"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GetPetChoice</b> (Action&lt; string &gt; callback)</td></tr>
 <tr class="separator:a3433f801f5540bfd93b3a22fc60ad510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83fd0a496492b48c8ab7904b82fd5b7b" id="r_a83fd0a496492b48c8ab7904b82fd5b7b"><td class="memItemLeft" align="right" valign="top"><a id="a83fd0a496492b48c8ab7904b82fd5b7b" name="a83fd0a496492b48c8ab7904b82fd5b7b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetPetStatus</b> (float health, float mood, Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a83fd0a496492b48c8ab7904b82fd5b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c90d262da7b398218b343d03be8510" id="r_a91c90d262da7b398218b343d03be8510"><td class="memItemLeft" align="right" valign="top"><a id="a91c90d262da7b398218b343d03be8510" name="a91c90d262da7b398218b343d03be8510"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GetPetStatus</b> (Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a91c90d262da7b398218b343d03be8510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a056490eca57aedc1d487f7b38a2ad626" id="r_a056490eca57aedc1d487f7b38a2ad626"><td class="memItemLeft" align="right" valign="top"><a id="a056490eca57aedc1d487f7b38a2ad626" name="a056490eca57aedc1d487f7b38a2ad626"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetPetStatus</b> (int type, Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a056490eca57aedc1d487f7b38a2ad626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0612b6a78ca525da70d5243bd0fcc21" id="r_ae0612b6a78ca525da70d5243bd0fcc21"><td class="memItemLeft" align="right" valign="top"><a id="ae0612b6a78ca525da70d5243bd0fcc21" name="ae0612b6a78ca525da70d5243bd0fcc21"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SignInTest</b> ()</td></tr>
 <tr class="separator:ae0612b6a78ca525da70d5243bd0fcc21"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,12 +138,66 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SignUpTest</b> ()</td
 <tr class="memitem:aeddeede0d02383e3651a0b27371d31ed" id="r_aeddeede0d02383e3651a0b27371d31ed"><td class="memItemLeft" align="right" valign="top"><a id="aeddeede0d02383e3651a0b27371d31ed" name="aeddeede0d02383e3651a0b27371d31ed"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>UserTest</b> ()</td></tr>
 <tr class="separator:aeddeede0d02383e3651a0b27371d31ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bedea3fd14f6a674688d73fe2d1bf36" id="r_a8bedea3fd14f6a674688d73fe2d1bf36"><td class="memItemLeft" align="right" valign="top"><a id="a8bedea3fd14f6a674688d73fe2d1bf36" name="a8bedea3fd14f6a674688d73fe2d1bf36"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>CreatePetTest</b> ()</td></tr>
+<tr class="separator:a8bedea3fd14f6a674688d73fe2d1bf36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcebdb8153901988673b335585f857f0" id="r_afcebdb8153901988673b335585f857f0"><td class="memItemLeft" align="right" valign="top"><a id="afcebdb8153901988673b335585f857f0" name="afcebdb8153901988673b335585f857f0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetPetStatusTest</b> ()</td></tr>
+<tr class="separator:afcebdb8153901988673b335585f857f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d4bf3ba8eee0f77a1eb41722617787a" id="r_a9d4bf3ba8eee0f77a1eb41722617787a"><td class="memItemLeft" align="right" valign="top"><a id="a9d4bf3ba8eee0f77a1eb41722617787a" name="a9d4bf3ba8eee0f77a1eb41722617787a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GetPetStatusTest</b> ()</td></tr>
+<tr class="separator:a9d4bf3ba8eee0f77a1eb41722617787a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae20445cc82b89836277cc54c08045305" id="r_ae20445cc82b89836277cc54c08045305"><td class="memItemLeft" align="right" valign="top"><a id="ae20445cc82b89836277cc54c08045305" name="ae20445cc82b89836277cc54c08045305"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ResetPetStatusTest</b> ()</td></tr>
+<tr class="separator:ae20445cc82b89836277cc54c08045305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4c4b48cfcb0c2e22ff6d9c8d57c196c" id="r_af4c4b48cfcb0c2e22ff6d9c8d57c196c"><td class="memItemLeft" align="right" valign="top"><a id="af4c4b48cfcb0c2e22ff6d9c8d57c196c" name="af4c4b48cfcb0c2e22ff6d9c8d57c196c"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>GetStoredToken</b> ()</td></tr>
 <tr class="separator:af4c4b48cfcb0c2e22ff6d9c8d57c196c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1555cd401169344abd07d451396097a0" id="r_a1555cd401169344abd07d451396097a0"><td class="memItemLeft" align="right" valign="top"><a id="a1555cd401169344abd07d451396097a0" name="a1555cd401169344abd07d451396097a0"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>GetStoredUserName</b> ()</td></tr>
 <tr class="separator:a1555cd401169344abd07d451396097a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78c17cdc2637760a2047b119f627b4ac" id="r_a78c17cdc2637760a2047b119f627b4ac"><td class="memItemLeft" align="right" valign="top"><a id="a78c17cdc2637760a2047b119f627b4ac" name="a78c17cdc2637760a2047b119f627b4ac"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>GetStoredPetStatus</b> ()</td></tr>
+<tr class="separator:a78c17cdc2637760a2047b119f627b4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aa0ec5a00d65db1e9242312553824ea" id="r_a3aa0ec5a00d65db1e9242312553824ea"><td class="memItemLeft" align="right" valign="top"><a id="a3aa0ec5a00d65db1e9242312553824ea" name="a3aa0ec5a00d65db1e9242312553824ea"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>RecognizeFood</b> (string image64String, Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a3aa0ec5a00d65db1e9242312553824ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e318695b1a958c6c477d814f03451d6" id="r_a0e318695b1a958c6c477d814f03451d6"><td class="memItemLeft" align="right" valign="top"><a id="a0e318695b1a958c6c477d814f03451d6" name="a0e318695b1a958c6c477d814f03451d6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ListFoodOptions</b> (Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a0e318695b1a958c6c477d814f03451d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c491e48bcd49471821affbabe58206c" id="r_a8c491e48bcd49471821affbabe58206c"><td class="memItemLeft" align="right" valign="top"><a id="a8c491e48bcd49471821affbabe58206c" name="a8c491e48bcd49471821affbabe58206c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GetNutritionInfo</b> (string food, Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a8c491e48bcd49471821affbabe58206c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d40d827e70257c4303d7d0dba42f51a" id="r_a9d40d827e70257c4303d7d0dba42f51a"><td class="memItemLeft" align="right" valign="top"><a id="a9d40d827e70257c4303d7d0dba42f51a" name="a9d40d827e70257c4303d7d0dba42f51a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>IncreasePetHappiness</b> (string type, Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a9d40d827e70257c4303d7d0dba42f51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac254a632ea76f45916b464014c5e85a0" id="r_ac254a632ea76f45916b464014c5e85a0"><td class="memItemLeft" align="right" valign="top"><a id="ac254a632ea76f45916b464014c5e85a0" name="ac254a632ea76f45916b464014c5e85a0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>IncreasePetHappinessTest</b> ()</td></tr>
+<tr class="separator:ac254a632ea76f45916b464014c5e85a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a1e9b45c946404a1a9ed94f99df638f" id="r_a6a1e9b45c946404a1a9ed94f99df638f"><td class="memItemLeft" align="right" valign="top"><a id="a6a1e9b45c946404a1a9ed94f99df638f" name="a6a1e9b45c946404a1a9ed94f99df638f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateUser</b> (string username, string password, Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a6a1e9b45c946404a1a9ed94f99df638f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d0a93c8d3b8499c9efc1d905d20b5d6" id="r_a7d0a93c8d3b8499c9efc1d905d20b5d6"><td class="memItemLeft" align="right" valign="top"><a id="a7d0a93c8d3b8499c9efc1d905d20b5d6" name="a7d0a93c8d3b8499c9efc1d905d20b5d6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateUserTest</b> ()</td></tr>
+<tr class="separator:a7d0a93c8d3b8499c9efc1d905d20b5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ce4db5c866b0c4c1f2efca6ed189f1a" id="r_a1ce4db5c866b0c4c1f2efca6ed189f1a"><td class="memItemLeft" align="right" valign="top"><a id="a1ce4db5c866b0c4c1f2efca6ed189f1a" name="a1ce4db5c866b0c4c1f2efca6ed189f1a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>LeaderBoardTest</b> ()</td></tr>
+<tr class="separator:a1ce4db5c866b0c4c1f2efca6ed189f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebc3cdb1cc1cc5610aa8e3d96bb4a074" id="r_aebc3cdb1cc1cc5610aa8e3d96bb4a074"><td class="memItemLeft" align="right" valign="top"><a id="aebc3cdb1cc1cc5610aa8e3d96bb4a074" name="aebc3cdb1cc1cc5610aa8e3d96bb4a074"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteUser</b> (Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:aebc3cdb1cc1cc5610aa8e3d96bb4a074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a004f82a3f41735d1d59e79e4e518632c" id="r_a004f82a3f41735d1d59e79e4e518632c"><td class="memItemLeft" align="right" valign="top"><a id="a004f82a3f41735d1d59e79e4e518632c" name="a004f82a3f41735d1d59e79e4e518632c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteUserTest</b> ()</td></tr>
+<tr class="separator:a004f82a3f41735d1d59e79e4e518632c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96ede2fd6e1ff777e4352712e88fb186" id="r_a96ede2fd6e1ff777e4352712e88fb186"><td class="memItemLeft" align="right" valign="top"><a id="a96ede2fd6e1ff777e4352712e88fb186" name="a96ede2fd6e1ff777e4352712e88fb186"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GetLeaderBoardList</b> (Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a96ede2fd6e1ff777e4352712e88fb186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38f87390048c59c7849e9ec297d69f00" id="r_a38f87390048c59c7849e9ec297d69f00"><td class="memItemLeft" align="right" valign="top"><a id="a38f87390048c59c7849e9ec297d69f00" name="a38f87390048c59c7849e9ec297d69f00"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveBirthday</b> (string username, string birthday, Action&lt; string &gt; callback)</td></tr>
+<tr class="separator:a38f87390048c59c7849e9ec297d69f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d2b693a388be5636a769653a2fb2055" id="r_a2d2b693a388be5636a769653a2fb2055"><td class="memItemLeft" align="right" valign="top"><a id="a2d2b693a388be5636a769653a2fb2055" name="a2d2b693a388be5636a769653a2fb2055"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>CheckAccountActivityAndSendNotifications</b> ()</td></tr>
+<tr class="separator:a2d2b693a388be5636a769653a2fb2055"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -146,6 +210,33 @@ TMP_InputField&#160;</td><td class="memItemRight" valign="bottom"><b>passwordInp
 <tr class="memitem:ac3e1523229a85dfa62deecaf89414f1a" id="r_ac3e1523229a85dfa62deecaf89414f1a"><td class="memItemLeft" align="right" valign="top"><a id="ac3e1523229a85dfa62deecaf89414f1a" name="ac3e1523229a85dfa62deecaf89414f1a"></a>
 TMP_InputField&#160;</td><td class="memItemRight" valign="bottom"><b>responseInput</b></td></tr>
 <tr class="separator:ac3e1523229a85dfa62deecaf89414f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:aa23dec7ba41f0b0ba513190d63367224" id="r_aa23dec7ba41f0b0ba513190d63367224"><td class="memItemLeft" align="right" valign="top"><a id="aa23dec7ba41f0b0ba513190d63367224" name="aa23dec7ba41f0b0ba513190d63367224"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>URL</b> = &quot;https://arpetpals.store/api&quot;</td></tr>
+<tr class="separator:aa23dec7ba41f0b0ba513190d63367224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affc745696d76868b1bc52c4dd7396f2e" id="r_affc745696d76868b1bc52c4dd7396f2e"><td class="memItemLeft" align="right" valign="top"><a id="affc745696d76868b1bc52c4dd7396f2e" name="affc745696d76868b1bc52c4dd7396f2e"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>CONTENT_TYPE</b> = &quot;application/json&quot;</td></tr>
+<tr class="separator:affc745696d76868b1bc52c4dd7396f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f28f2b047bef623076b5c7b678b8b9" id="r_ae3f28f2b047bef623076b5c7b678b8b9"><td class="memItemLeft" align="right" valign="top"><a id="ae3f28f2b047bef623076b5c7b678b8b9" name="ae3f28f2b047bef623076b5c7b678b8b9"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>KEY_TOKEN</b> = &quot;key_token&quot;</td></tr>
+<tr class="separator:ae3f28f2b047bef623076b5c7b678b8b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9176a05bba7eb7cf0441c102c47a677a" id="r_a9176a05bba7eb7cf0441c102c47a677a"><td class="memItemLeft" align="right" valign="top"><a id="a9176a05bba7eb7cf0441c102c47a677a" name="a9176a05bba7eb7cf0441c102c47a677a"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>KEY_USER_NAME</b> = &quot;key_username&quot;</td></tr>
+<tr class="separator:a9176a05bba7eb7cf0441c102c47a677a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57fa2598ca16ce37165e630b1e88168d" id="r_a57fa2598ca16ce37165e630b1e88168d"><td class="memItemLeft" align="right" valign="top"><a id="a57fa2598ca16ce37165e630b1e88168d" name="a57fa2598ca16ce37165e630b1e88168d"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>KEY_PET_STATUS</b> = &quot;key_pet_status&quot;</td></tr>
+<tr class="separator:a57fa2598ca16ce37165e630b1e88168d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a804a4b3a72b3fd29a1a9b9313e70a5f6" id="r_a804a4b3a72b3fd29a1a9b9313e70a5f6"><td class="memItemLeft" align="right" valign="top"><a id="a804a4b3a72b3fd29a1a9b9313e70a5f6" name="a804a4b3a72b3fd29a1a9b9313e70a5f6"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>ACTIVITY_TYPE_LOGIN</b> = &quot;login&quot;</td></tr>
+<tr class="separator:a804a4b3a72b3fd29a1a9b9313e70a5f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d268fe13a4954b9fb55cc6de31bdcb2" id="r_a3d268fe13a4954b9fb55cc6de31bdcb2"><td class="memItemLeft" align="right" valign="top"><a id="a3d268fe13a4954b9fb55cc6de31bdcb2" name="a3d268fe13a4954b9fb55cc6de31bdcb2"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>ACTIVITY_TYPE_DOUBLETAP</b> = &quot;double_tap&quot;</td></tr>
+<tr class="separator:a3d268fe13a4954b9fb55cc6de31bdcb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3f1066f35f27650cc8dbb90133d90d" id="r_abd3f1066f35f27650cc8dbb90133d90d"><td class="memItemLeft" align="right" valign="top"><a id="abd3f1066f35f27650cc8dbb90133d90d" name="abd3f1066f35f27650cc8dbb90133d90d"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><b>ACTIVITY_TYPE_STEPTRACKING</b> = &quot;step_tracking&quot;</td></tr>
+<tr class="separator:abd3f1066f35f27650cc8dbb90133d90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>ARPetPals/Assets/Scripts/API/<b>APIService.cs</b></li>
