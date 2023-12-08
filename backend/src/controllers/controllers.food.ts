@@ -177,7 +177,6 @@ export const getCategoryInfo =  async ({ response }: { response: any }) => {
 
       response.status = 200;
       response.body = {
-          "category": category,
           "categoryInfo": categoryInfo
       };
 
@@ -186,7 +185,7 @@ export const getCategoryInfo =  async ({ response }: { response: any }) => {
       response.body = {
           message: 'Could not process category information.',
           error: error.message,
-          category: params.category,
+          category: category,
       };
   }
 };
