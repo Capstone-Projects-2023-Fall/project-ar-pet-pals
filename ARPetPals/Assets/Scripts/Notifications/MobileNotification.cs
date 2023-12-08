@@ -10,11 +10,11 @@ public class MobileNotification : MonoBehaviour
         #if UNITY_ANDROID
         androidNotificationsController.RequestAuthorization();
         androidNotificationsController.RegisterNotificationChannel();
-        androidNotificationsController.SendNotification("ARPetPals: Come Check on your pet!","Your pet misses you! Open the app and play with them!", 15 );
+        androidNotificationsController.SendNotification("ARPetPals: Have you met your step goal today? Open the app and give your pet a walk!", 15 );
 
         #elif UNITY_IOS
         StartCoroutine(iosNotificationController.RequestAuthorization());
-        iosNotificationController.SendNotification("ARPetPals: Come Check on your pet!","Your pet misses you! Open the app and play with them!", 15);
+        iosNotificationController.SendNotification("ARPetPals: Have you met your step goal today? Open the app and give your pet a walk!", 15);
         #endif
 // above function exists only in unity ios, if doesnt work check preprocesser docs
     }
