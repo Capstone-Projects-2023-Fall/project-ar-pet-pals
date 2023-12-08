@@ -94,7 +94,7 @@ router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
 // Recognize
 router.post("/api/food/recognize", authourized, recognizeFood);
 //Food category
-router.get("/api/category/info/category", authourized, getCategoryInfo);
+router.get("/api/food/category", authourized, getCategoryInfo);
 
 
 export default router;
