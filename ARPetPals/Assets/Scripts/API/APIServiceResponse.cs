@@ -148,6 +148,11 @@ namespace ARPetPals
         }
 
         [System.Serializable]
+        public class GetFoodCategoryResponse {
+            public string category;
+        }
+
+        [System.Serializable]
         public class UpdateUserResponse
         {
             public string message;
