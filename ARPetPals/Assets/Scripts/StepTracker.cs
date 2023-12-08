@@ -25,7 +25,7 @@ public class StepCounter : MonoBehaviour {
     void Start () {
         stepUI.SetActive(false);
         isWalkingUI.SetActive(false);
-
+        stepText.text = $"Steps remaining until reward: {maxSteps}";
         stepSlider.maxValue = maxSteps;
     }
 
@@ -35,19 +35,21 @@ public class StepCounter : MonoBehaviour {
         Vector3 acceleration = Input.acceleration;
 
         if (isTracking) {
-
+            
             if (acceleration.magnitude > 1.25f) {
                 // Increment step count
                 stepCount++;
+                stepText.text = "Steps remaining until reward: " + (maxSteps - stepCount);
                 // Update UI
                 //stepText.text = "Steps: " + stepCount;
-                stepText.text = "Steps remaining until reward: " + (maxSteps - stepCount);
+                
 
             }
 
             // Check if the user reached 1000 steps
             if (stepCount >= maxSteps) {
                 isTracking = false; // Stop tracking when 1000 steps are reached
+                stepText.text = $"Congratulations! You reached {maxSteps} steps.";
                 Debug.Log("Congratulations! You reached 1000 steps.");
                 //add happiness to pet
                 //Calling API to update happiness on server.
@@ -74,6 +76,7 @@ public class StepCounter : MonoBehaviour {
 
     //open steps ui
     public void openStepsUI() {
+        isTracking = true;
         stepUI.SetActive(true);
     }
 

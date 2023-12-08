@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1781716-5da8-4ba9-a8bc-654060b64c5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ARPetPals/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/Molot SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/Molot SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SignUpScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SignUpScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainGameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StepTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StepTracker.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Accent.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Accent.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Carpet.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Carpet.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Floor.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Floor.mat" afterDir="false" />
@@ -16,7 +15,8 @@
       <change beforePath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Object_Evaluate.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Object_Evaluate.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Wall.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnityXRContent/ARFoundation/SimulationEnvironments/Common/Materials/SimEnvironment_Wall.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/XR/Settings/Open XR Package Settings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XR/Settings/Open XR Package Settings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/XR/UserSimulationSettings/Resources/XRSimulationPreferences.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/XR/UserSimulationSettings/Resources/XRSimulationPreferences.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
