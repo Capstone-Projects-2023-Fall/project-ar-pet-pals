@@ -1,7 +1,7 @@
 // controllers.steps.ts
 
 import {ObjectId} from "https://deno.land/x/mongo@v0.32.0/mod.ts"
-import UserSchema from "../schema/schema.user.ts";
+import {UserSchema} from "../schema/schema.user.ts";
 import db from "../database/database.connection.ts";
 import { getUserIdFromHeaders } from "../utils/utils.utils.ts";
 

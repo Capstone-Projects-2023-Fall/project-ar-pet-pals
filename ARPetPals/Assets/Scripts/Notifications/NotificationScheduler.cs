@@ -1,5 +1,6 @@
 /*using Unity.Notifications.Android;
 using System;
+using System.Collections.Generic; // Added this import for List
 
 public static class NotificationScheduler
 {
@@ -34,6 +35,7 @@ public static class NotificationScheduler
             var thirtyDaysInMinutes = 30 * 24 * 60;
             if (minutesSinceLastActivity > thirtyDaysInMinutes)
             {
+                // Schedule a notification instead of sending it directly
                 ScheduleNotification(pet.status.health);
             }
         }
