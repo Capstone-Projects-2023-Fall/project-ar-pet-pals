@@ -162,45 +162,35 @@ export const listFoodOptions = async ({ response }: { response: any }) => {
     // get food category
     export const getCategoryInfo = async ({ request, response }: { request: any; response: any }) => {
       try {
-          const requestBody = await request.body().value;
-  
-          // Check if request body is empty or does not contain the necessary fields
-          if (!requestBody || !requestBody.category) {
-              response.status = 400;
-              response.body = { message: 'Invalid request body.' };
-              return;
-          }
-  
+        const { food } = await request.body().value;
+
+        if (!food) {
+            response.status = 400;
+            response.body = { message: 'No food provided.' };
+            return;
+        }
           // query category info from the database
-          const collection = await db.collection("healthScore");
-          const query = { Category: requestBody.category }; // Use "Category" field in the query
-          const result = await collection.find(query).toArray();
-          const categoryInfo = result[0]?.Category; // Adjust the field name accordingly
-  
-          if (!categoryInfo) {
-              response.status = 404;
-              response.body = { message: 'Category not found.' };
-              return;
-          }
-  
-          response.status = 200;
-          response.body = {
-              "categoryInfo": categoryInfo
-          };
-  
+				const collection = await db.collection("healthScore");
+				const query = { Food: food };
+				const result = await collection.find(query).toArray();
+				const categoryInfo = result[0]["Category"];
+
+        response.status = 200;
+        response.body = {
+            "food": food,
+            "categoryInfo": categoryInfo
+        };
       } catch (error) {
-          response.status = 400;
-          response.body = {
-              message: 'Could not process category information.',
-              error: error.message,
-          };
+        response.status = 400;
+        response.body = {
+					message: 'Could not process category information.',
+					error: error.message,
+					food: food, 
+				}; 
+  
       }
   };
   
-
-
-
-
 
 // ---
 
