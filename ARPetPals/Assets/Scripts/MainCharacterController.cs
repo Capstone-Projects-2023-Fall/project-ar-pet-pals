@@ -24,12 +24,6 @@ public class MainCharacterController : MonoBehaviour
 
     float health;
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        
-    }
-
     void Start()
     {
         changeMat();

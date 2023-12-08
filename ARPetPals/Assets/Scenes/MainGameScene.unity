@@ -2992,9 +2992,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2121201470}
-        m_TargetAssemblyTypeName: MainCharacterController, Scripts
-        m_MethodName: endEatFoodAnimation
+      - m_Target: {fileID: 810220378}
+        m_TargetAssemblyTypeName: SettingMenuController, Scripts
+        m_MethodName: EndEating
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6224,6 +6224,7 @@ MonoBehaviour:
   changePetName: 
   changeUserName: 
   changePassword: 
+  mainPetObject: {fileID: 2121201468}
 --- !u!114 &810220379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7328,9 +7329,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2121201470}
-        m_TargetAssemblyTypeName: MainCharacterController, Scripts
-        m_MethodName: startEatFoodAnimation
+      - m_Target: {fileID: 810220378}
+        m_TargetAssemblyTypeName: SettingMenuController, Scripts
+        m_MethodName: StartEating
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
