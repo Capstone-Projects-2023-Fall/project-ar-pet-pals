@@ -160,16 +160,9 @@ export const listFoodOptions = async ({ response }: { response: any }) => {
   };
 
     // get food category
-export const getCategoryInfo = async ({ params, response }: { params: any; response: any }) => {
+export const getCategoryInfo =  async ({ response }: { response: any }) => {
   try {
-      const { category } = params;
-
-      if (!category) {
-          response.status = 400;
-          response.body = { message: 'No category provided.' };
-          return;
-      }
-
+     
       // query category info from the database
       const collection = await db.collection("healthScore");
       const query = { Category: category }; // Use "Category" field in the query
