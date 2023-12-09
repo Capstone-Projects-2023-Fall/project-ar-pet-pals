@@ -9,12 +9,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
+using UnityEngine.XR.ARFoundation;
 using Button = UnityEngine.UI.Button;
 using Image = UnityEngine.UI.Image;
 using Slider = UnityEngine.UI.Slider;
 
 public class SettingMenuController : MonoBehaviour
 {
+    [Header("Arsession")]
+    [SerializeField] private ARSession _arSession;
     [Header("Pages")]
     [SerializeField] public GameObject menuPage;
     [SerializeField] public GameObject settingPage;
@@ -73,7 +76,7 @@ public class SettingMenuController : MonoBehaviour
     public Image happinessFill;
     public int maxHappiness = 100;
     public int currentHappniness = 100;
-    // [SerializeField] public
+    
     // [SerializeField] public 
     
     //
@@ -120,6 +123,7 @@ public class SettingMenuController : MonoBehaviour
         AudioManager.Instance.sfxSource.mute = (sfxToggle == 1 ? true : false);
         ToggleMusic();
         ToggleSfx();
+        
 
 
         //Get Pet Status Api .        
@@ -159,7 +163,10 @@ public class SettingMenuController : MonoBehaviour
 
         //reference to main object's controller script
         mainCharacterController = mainPetObject.GetComponent<MainCharacterController>();
-        
+        if (Camera.main == null)
+        {
+            Debug.Log("Main camera is null");
+        }
     }
     
     //Update pet function: calling api to get the newest happiness and mood. 
@@ -221,7 +228,9 @@ public class SettingMenuController : MonoBehaviour
     public void LogoutButtonClicked()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("SignInScene");
+        LoaderUtility.Deinitialize();
+        SceneManager.LoadScene("SignInScene",LoadSceneMode.Single);
+        
     }
 
     public void LeaderBoardButtonClicked()

@@ -4738,9 +4738,10 @@ GameObject:
   - component: {fileID: 656880748}
   - component: {fileID: 656880747}
   - component: {fileID: 656880746}
+  - component: {fileID: 656880749}
   m_Layer: 0
   m_Name: AR Session
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4787,6 +4788,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &656880749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656880745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d862c64823806304096c3c2c3770a715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &670851690
 GameObject:
   m_ObjectHideFlags: 0
@@ -6021,6 +6034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef20810f78b1b940a736824bb54b827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _arSession: {fileID: 656880747}
   menuPage: {fileID: 1566060022}
   settingPage: {fileID: 1354743295}
   ListPage: {fileID: 1445992566}
@@ -18640,7 +18654,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   petNameDisplay: {fileID: 375863008}
   basePetObject: {fileID: 2121201469}
-  foodBowl: {fileID: 274498394}
+  food: {fileID: 0}
+  drink: {fileID: 0}
+  meat: {fileID: 0}
+  vegetable: {fileID: 0}
+  fruit: {fileID: 0}
+  dessert: {fileID: 0}
+  fish: {fileID: 0}
+  pizza: {fileID: 0}
+  hotdog: {fileID: 0}
   orangeMat: {fileID: 2100000, guid: 03aeceaf0f6488a47830ed103dcb14dc, type: 2}
   redMat: {fileID: 2100000, guid: 3f3e8429bde980a42a58358d0cf90671, type: 2}
   greenMat: {fileID: 2100000, guid: 8c3628a3b06e2ff4fa8c773daab75a83, type: 2}

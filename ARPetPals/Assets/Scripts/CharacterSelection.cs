@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngineInternal;
 using ARPetPals;
+using UnityEngine.XR.ARFoundation;
 
 public class CharacterSelection : MonoBehaviour
 {
@@ -199,8 +200,8 @@ public class CharacterSelection : MonoBehaviour
 
                 //Save name to PlayerPrefs
                 PlayerPrefs.SetString("CustomName", customName);
-
-                SceneManager.LoadScene("MainGameScene"); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+                LoaderUtility.Initialize();
+                SceneManager.LoadScene("MainGameScene",LoadSceneMode.Single); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
             }
         });
     }

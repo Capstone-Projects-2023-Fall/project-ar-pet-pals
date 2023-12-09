@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using ARPetPals;
+using UnityEngine.XR.ARFoundation;
 
 
 //This script use for control sign in scene.
@@ -148,7 +149,10 @@ public class LogInController : MonoBehaviour
 
         // Now that data has been retrieved, you can proceed to retrievePetChoice and load the scene
         retrievePetChoice();
-        SceneManager.LoadScene("MainGameScene"); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+        LoaderUtility.Initialize();
+        SceneManager.LoadScene("MainGameScene",LoadSceneMode.Single); //Scene 3 is MainGameScene (see Build Settings --> Scenes in Build)
+        
+        
     }
 
     private IEnumerator WaitForOneSecond() {
