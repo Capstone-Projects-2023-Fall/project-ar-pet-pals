@@ -1,6 +1,6 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser, saveBirthday } from "../controllers/controllers.users.ts";
-import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, increasePetMood, resetPetActivities, deletePet } from "../controllers/controllers.pets.ts";
+import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, increasePetMood, resetPetActivities, deletePet, feedPet } from "../controllers/controllers.pets.ts";
 import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
@@ -54,6 +54,9 @@ router.post("/api/pet/create", authourized, createPet  )
 
 // Delete 
 router.delete("/api/pet", authourized, deletePet  )
+
+// Feed pet
+router.put("/api/pet/feed", authourized, feedPet  )
 
 
 //check account activity

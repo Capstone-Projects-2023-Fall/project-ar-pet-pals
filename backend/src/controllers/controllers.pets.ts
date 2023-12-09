@@ -15,7 +15,7 @@ enum RESET_TYPE {
     HEALTH,
     MOOD
 }
-
+const HEALTH_RATING_MUL = 4;
 
 
 // Activity type
@@ -487,6 +487,56 @@ export const deletePet = async ({
     response.body = {
         message: message,
         deleteCount: deleteCount
+    }
+}
+
+
+export const feedPet = async ({
+    request,
+    response,
+}: {
+    request: any;
+    response: any;
+}) => {
+
+    const { food } = await request.body().value;
+
+    if(!food){
+        response.body = {
+            "message": "No food provided"
+        }
+        response.status = 400
+        return
+    }
+
+    const headers: Headers = request.headers;
+    let userId = getUserIdFromHeaders(headers);
+    const pet = await Pets.findOne({ user_id: userId });
+
+    if(!pet){
+        response.body = {
+            "message": "Could not find a pet for your user's id"
+        }
+        response.status = 400
+        return
+    }
+
+    const collection = await db.collection("healthScore");
+    const foodInfo = await collection.findOne({ Food: food });
+    const healthUp = HEALTH_RATING_MUL * foodInfo["Health Rating"];
+    let oldHealthLog = pet.status.health;
+    pet.status.health = Math.min(pet.status.health + healthUp, MAX_HEALTH);
+
+    await Pets.updateOne({ _id: pet._id}, { 
+        $set: { 
+            status: pet.status 
+        }
+    });
+    
+    response.body = {
+        "message": "pet status updated successfuly",
+        oldHealth: displayNumber(oldHealthLog),
+        health: displayNumber(pet.status.health),
     }
 }
 
