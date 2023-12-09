@@ -465,4 +465,23 @@ export const resetPetActivities = async ({request, response}:{request:any;respon
     }
 }
 
+export const deletePet = async ({
+    request,
+    response,
+}: {
+    request: any;
+    response: any;
+}) => {
+
+    const headers: Headers = request.headers;
+    let userId = getUserIdFromHeaders(headers);
+   
+    const deleteCount = await Pets.deleteOne({ user_id: userId });
+
+    let message = deleteCount ? "Deleted pet successfuly." : "Couldn't delete pet or pet didn't exist!!!";
+    response.body = {
+        message: message,
+        deleteCount: deleteCount
+    }
+}
 

@@ -1,4 +1,4 @@
-namespace ARPetPals.Notifications
+/*namespace ARPetPals.Notifications
 {
     public static class NotificationScheduler
     {
@@ -18,3 +18,4 @@ namespace ARPetPals.Notifications
         }
     }
 }
+*/

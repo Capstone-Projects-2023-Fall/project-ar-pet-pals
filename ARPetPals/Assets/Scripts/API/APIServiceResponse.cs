@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace ARPetPals
 {
+
     public class APIServiceResponse
     {
         [System.Serializable]
@@ -39,40 +40,34 @@ namespace ARPetPals
         }
 
         [System.Serializable]
-        public class SetPetNameResponse
-        {
+        public class SetPetNameResponse {
             public string message;
         }
 
         [System.Serializable]
-        public class GetPetNameResponse
-        {
+        public class GetPetNameResponse {
             public string name;
         }
 
         [System.Serializable]
-        public class SetPetChoiceResponse
-        {
+        public class SetPetChoiceResponse {
             public string message;
         }
 
         [System.Serializable]
-        public class GetPetChoiceResponse
-        {
+        public class GetPetChoiceResponse {
             public string choice;
         }
 
         [System.Serializable]
-        public class PetInfo
-        {
+        public class PetInfo {
             public string id;
             public string name;
             public GetPetStatusResponse status;
         }
 
         [System.Serializable]
-        public class CreatePetResponse
-        {
+        public class CreatePetResponse {
             public string message;
             public PetInfo petInfo = new PetInfo();
         }
@@ -153,6 +148,11 @@ namespace ARPetPals
         }
 
         [System.Serializable]
+        public class GetFoodCategoryResponse {
+            public string category;
+        }
+
+        [System.Serializable]
         public class UpdateUserResponse
         {
             public string message;
@@ -163,7 +163,7 @@ namespace ARPetPals
         {
             public string message;
         }
-
+        
         [System.Serializable]
         public class LeaderBoardInfo
         {
@@ -177,22 +177,27 @@ namespace ARPetPals
             public List<LeaderBoardInfo> leaderboardList;
         }
 
+
         [System.Serializable]
         public class SendNotificationResponse
         {
             public string message;
         }
-
         [System.Serializable]
         public class SaveBirthdayResponse
         {
             public string message;
         }
-
         [System.Serializable]
         public class CheckAccountActivityResponse
         {
             public string message;
         }
+        [System.Serializable]
+        public class DeletePetResponse
+        {
+            public string message;
+        }
     }
 }
+

@@ -13,9 +13,11 @@ public class SignUpController : MonoBehaviour
     [SerializeField] public TMP_InputField passwordField;
     [SerializeField] public TMP_InputField confirmPasswordField;
     [SerializeField] public TMP_InputField birthdateField;  // Added birthdate field
+    
     [SerializeField] public GameObject userNameError;
     [SerializeField] public GameObject passWordError;
     [SerializeField] public GameObject confirmPasswordError;
+    [SerializeField] public GameObject BirthdayError;
 
     public string usernameInput = "";
     public string passwordInput = "";
@@ -28,6 +30,7 @@ public class SignUpController : MonoBehaviour
         userNameError.SetActive(false);
         passWordError.SetActive(false);
         confirmPasswordError.SetActive(false);
+        BirthdayError.SetActive(false);
     }
 
     public void onSelected()
@@ -69,11 +72,7 @@ public class SignUpController : MonoBehaviour
         }
         if (birthdateInput == "") //asking birthdate 
         {
-            if (errormessage != "")
-            {
-                errormessage += " and";
-            }
-            errormessage += " birthdate";
+            BirthdayError.SetActive(true);
         }
 
         if (errormessage != "")
@@ -103,7 +102,7 @@ public class SignUpController : MonoBehaviour
                 {
                     Debug.Log("Signup Success: " + errMessage);
                     // Schedule birthday notification after successful registration
-                    BirthdayNotificationManager.ScheduleBirthdayNotification(usernameInput, System.DateTime.Parse(birthdateInput));
+                    // BirthdayNotificationManager.ScheduleBirthdayNotification(usernameInput, System.DateTime.Parse(birthdateInput));
                     SceneManager.LoadScene("PetChoiceScene");
                 }
             });

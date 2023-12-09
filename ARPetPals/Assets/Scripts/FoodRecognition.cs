@@ -124,4 +124,26 @@ public class FoodRecognition : MonoBehaviour
 
         return await tcs.Task;
     }
+
+    //Dario
+    public async Task<string> GetFoodCategory(string food) {
+        var tcs = new TaskCompletionSource<string>();
+
+        gameObject.GetComponent<APIService>().GetFoodCategory(food, (response) => {
+            ErrorMessageResponse error = JsonUtility.FromJson<ErrorMessageResponse>(response);
+            if (error != null && !string.IsNullOrEmpty(error.message)) {
+                Debug.Log("Get Food Category Error: " + error.message);
+                tcs.SetResult("sad");
+            }
+            else {
+                GetFoodCategoryResponse parsedResponse = JsonUtility.FromJson<GetFoodCategoryResponse>(response);
+
+                string foodCategory = parsedResponse.category;
+
+                tcs.SetResult(foodCategory);
+            }
+        });
+
+        return await tcs.Task;
+    }
 }

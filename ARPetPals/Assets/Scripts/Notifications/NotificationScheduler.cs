@@ -1,5 +1,6 @@
-using Unity.Notifications.Android;
+/*using Unity.Notifications.Android;
 using System;
+using System.Collections.Generic; // Added this import for List
 
 public static class NotificationScheduler
 {
@@ -34,6 +35,7 @@ public static class NotificationScheduler
             var thirtyDaysInMinutes = 30 * 24 * 60;
             if (minutesSinceLastActivity > thirtyDaysInMinutes)
             {
+                // Schedule a notification instead of sending it directly
                 ScheduleNotification(pet.status.health);
             }
         }
@@ -60,14 +62,14 @@ public static class NotificationScheduler
 
         return TimeSpan.FromHours(calculatedInterval);
     }
-}
+}*/
 
 
 /*In this modified code, the CheckAccountActivityAndSendNotifications method now accepts
  a list of users (List<User> users). This list of users should be passed from C# application
   when calling this method. The method then iterates over the users, retrieves the associated pets, 
   checks for low account activity, and schedules notifications accordingly.*/
-    public static void CheckAccountActivityAndSendNotifications(List<User> users)
+    /*public static void CheckAccountActivityAndSendNotifications(List<User> users)
     {
         foreach (var user in users)
         {
@@ -90,7 +92,7 @@ public static class NotificationScheduler
             }
         }
     }
-}
+}*/
 /*async function checkAccountActivityAndSendNotifications() {
   const users = await Users.find({}).toArray(); // Retrieve all users
 
