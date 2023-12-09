@@ -1,7 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser, saveBirthday } from "../controllers/controllers.users.ts";
 import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, increasePetMood, resetPetActivities, deletePet, feedPet } from "../controllers/controllers.pets.ts";
-import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions } from "../controllers/controllers.food.ts";
+import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions, getCategoryInfo } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import { updateStepCount, checkStepGoal,getStepCount, updateStepGoal, resetDailyStepCountForAllUsers, resetWeeklyStepCountForAllUsers } from "../controllers/controllers.steps.ts";
@@ -77,11 +77,6 @@ router.put("/api/pet/activities/reset", authourized, resetPetActivities  )
 router.post("/api/pet/choice", authourized, setPetChoice  )
 router.get("/api/pet/choice", authourized, getPetChoice )
 
-// -- Food --
-
-// Recognize
-router.post("/api/food/recognize", authourized, recognizeFood)
-
 
 //user birthday
 router.post("/api/savebirthday", authourized,saveBirthday) 
@@ -89,13 +84,6 @@ router.post("/api/savebirthday", authourized,saveBirthday)
 // Update Step Goal
 router.put("/api/user/step-goal", authourized, updateStepGoal);
 
-// Nutrition Info
-router.post("/api/food/healthRating", authourized, getHealthRating);
-router.post("/api/food/nutritionInfo", authourized, getNutritionInfo);
-
-
-// List Possible Foods
-router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
 
 // -- Leaderboard --
 
@@ -103,7 +91,17 @@ router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
 router.get("/api/leaderboard/list", authourized, leaderboardList)
 
 
-// food-related routes --
+// -- Food --
+// Nutrition Info
+router.post("/api/food/healthRating", authourized, getHealthRating);
+router.post("/api/food/nutritionInfo", authourized, getNutritionInfo);
+// List Possible Foods
+router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
+// Recognize
+router.post("/api/food/recognize", authourized, recognizeFood);
+//Food category
+router.get("/api/food/categoryInfo/:food", authourized, getCategoryInfo);
+
 
 
 export default router;
