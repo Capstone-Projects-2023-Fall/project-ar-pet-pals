@@ -1339,6 +1339,67 @@ namespace ARPetPals
         {
             DeletePet((str) => { });
         }
+
+        public void FeedPet(string food, Action<string> callback)
+        {
+            StartCoroutine(_FeedPet(food, callback));
+        }
+
+        private IEnumerator _FeedPet(string food, Action<string> callback)
+        {
+
+            string token = GetStoredToken();
+
+            if (string.IsNullOrEmpty(token))
+            {
+                callback("Invalid token");
+                yield break; // Exit the coroutine
+            }
+
+            string url = URL + "/pet/feed";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "food", food}
+
+            };
+
+            using (UnityWebRequest request = UnityWebRequest.Put(url, JsonConvert.SerializeObject(body)))
+            {
+                request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+
+                yield return request.SendWebRequest();
+
+                // parse response
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+
+                    Debug.LogError("_FeedPet failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(responseData.message);
+                    _ShowReponse(responseData.message);
+                }
+                else
+                {
+
+                    // Deserialize the JSON response
+                    FeedPetResponse responseData = JsonUtility.FromJson<FeedPetResponse>(responseJson);
+                    Debug.Log("_FeedPet response: " + JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback("");
+
+                }
+            }
+        }
+
+        public void FeedPetTest()
+        {
+            string food = "baklava"; // health rating = 2
+            FeedPet(food, (str) => { });
+        }
     }
 }
 

@@ -534,7 +534,7 @@ export const feedPet = async ({
     });
     
     response.body = {
-        "message": "pet status updated successfuly",
+        "message": "Feed pet successfuly",
         oldHealth: displayNumber(oldHealthLog),
         health: displayNumber(pet.status.health),
     }

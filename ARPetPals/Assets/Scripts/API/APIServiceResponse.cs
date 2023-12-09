@@ -198,6 +198,14 @@ namespace ARPetPals
         {
             public string message;
         }
+
+        [System.Serializable]
+        public class FeedPetResponse
+        {
+            public string message;
+            public string oldHealth;
+            public string health;
+        }
     }
 }
 
