@@ -876,6 +876,47 @@ namespace ARPetPals
             }
         }
 
+        public void GetFoodCategory(string food, Action<string> callback) {
+            StartCoroutine(_SendGetFoodCategoryRequest(food, callback));
+        }
+
+        private IEnumerator _SendGetFoodCategoryRequest(string food, Action<string> callback) {
+            string token = GetStoredToken();
+            if (string.IsNullOrEmpty(token)) {
+                callback("Invalid token");
+                yield break;
+            }
+
+            string url = URL + "/food/getFoodCategory";
+            Dictionary<string, string> body = new Dictionary<string, string>
+            {
+                { "food", food }
+            };
+
+            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+                request.SetRequestHeader("Authorization", "Bearer " + token);
+
+                yield return request.SendWebRequest();
+
+                string responseJson = request.downloadHandler.text;
+
+                if (request.result != UnityWebRequest.Result.Success) {
+                    Debug.LogError("_GetFoodCategory failed: " + request.downloadHandler.text);
+                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
+                    callback(errorResponse.message);
+                    _ShowReponse(errorResponse.message);
+                    yield break;
+                }
+
+                // Deserialize the JSON response
+                GetFoodCategoryResponse responseData = JsonUtility.FromJson<GetFoodCategoryResponse>(responseJson);
+                Debug.Log("_GetFoodCategoryRequest response: " + JsonUtility.ToJson(responseData, true));
+
+                _ShowReponse(JsonUtility.ToJson(responseData, true));
+                callback(JsonUtility.ToJson(responseData, true));
+            }
+        }
+
         // -- END FOOD --
 
         public void IncreasePetHappiness(string type, Action<string> callback)

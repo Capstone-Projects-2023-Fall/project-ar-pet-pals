@@ -131,6 +131,7 @@ public class SettingMenuController : MonoBehaviour
                 Debug.Log($"Hy/errorMessage {errMessage}");
             }
             else {
+                APIServiceResponse.GetFoodCategoryResponse responseData1 = JsonUtility.FromJson<APIServiceResponse.GetFoodCategoryResponse>(errMessage);
                 APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
                 currentHappniness  = (int)float.Parse(responseData.mood);
                 health = float.Parse(responseData.health)/10;
@@ -442,7 +443,13 @@ public class SettingMenuController : MonoBehaviour
         NutritionInfoHideButton.onClick.AddListener(
             () => { NutritionInfoPanel.gameObject.SetActive(false); }
         );
-        
+
+        //Dario
+        string foodCategory = await foodRecognition.GetFoodCategory(food);
+        Debug.Log("The food category is: " +  foodCategory);
+
+        mainCharacterController.startEatFoodAnimation(foodCategory);
+
     }
 
     public string CapitalizeEachWord(string str)
@@ -458,6 +465,8 @@ public class SettingMenuController : MonoBehaviour
 
         return string.Join(" ", words);
     }
+
+    
 
     // Log out to sign in scene
     public void ExitButtonClicked()
