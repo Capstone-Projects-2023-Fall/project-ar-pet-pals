@@ -530,7 +530,7 @@ public class SettingMenuController : MonoBehaviour
     }
 
     public void StartEating() {
-        mainCharacterController.startEatFoodAnimation();
+        //mainCharacterController.startEatFoodAnimation();
     }
 
     public void EndEating() {

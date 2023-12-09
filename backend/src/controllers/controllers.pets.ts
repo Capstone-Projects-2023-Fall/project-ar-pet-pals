@@ -8,30 +8,35 @@ import { getUserIdFromHeaders, displayNumber, calculateTimeDifferentInMinutes } 
 const Pets = db.collection<PetSchema>("pets");
 const MAX_HEALTH = 100;
 const MAX_MOOD = 100;
+const DEFAULT_HEALTH = 50;
+const DEFAULT_MOOD = 50;
 enum RESET_TYPE {
     ALL = 0,
     HEALTH,
     MOOD
 }
-
+const HEALTH_RATING_MUL = 4;
 
 
 // Activity type
 const ACTIVITY_TYPE_LOGIN = "login";
 const ACTIVITY_TYPE_DOUBLE_TAP = "double_tap";
 const ACTIVITY_TYPE_STEP_TRACKING = "step_tracking";
+const ACTIVITY_TYPE_FEEDING = "feeding";
 
 // Activity point
 const ACTIVITY_POINT = {};
 ACTIVITY_POINT[ACTIVITY_TYPE_LOGIN] = 10;
 ACTIVITY_POINT[ACTIVITY_TYPE_DOUBLE_TAP] = 30;
 ACTIVITY_POINT[ACTIVITY_TYPE_STEP_TRACKING] = 100;
+ACTIVITY_POINT[ACTIVITY_TYPE_FEEDING] = 25;
 
 // Activity locking 
 const ACTIVITY_LOCK = {};
 ACTIVITY_LOCK[ACTIVITY_TYPE_LOGIN] = 8 * 60 * 60 * 1000; // 8 hours
 ACTIVITY_LOCK[ACTIVITY_TYPE_DOUBLE_TAP] = 1 * 60 * 60 * 1000; // 1 hour
 ACTIVITY_LOCK[ACTIVITY_TYPE_STEP_TRACKING] = 0 * 60 * 60 * 1000; // no lock
+ACTIVITY_LOCK[ACTIVITY_TYPE_FEEDING] = 0 * 60 * 60 * 1000; // no lock
 
 
 // health decrease per hour = -1
@@ -40,7 +45,7 @@ const MOOD_DECREASE_PER_MIN = 0.0167;
 
 
 function getArrayActivitesType() {
-    return [ACTIVITY_TYPE_LOGIN, ACTIVITY_TYPE_DOUBLE_TAP, ACTIVITY_TYPE_STEP_TRACKING];
+    return [ACTIVITY_TYPE_LOGIN, ACTIVITY_TYPE_DOUBLE_TAP, ACTIVITY_TYPE_STEP_TRACKING, ACTIVITY_TYPE_FEEDING];
 }
 
 function getActivites() {
@@ -150,8 +155,8 @@ export const createPet =async ({request, response}:{request:any;response:any}) =
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
             lastCalculatedMood: Date.now(),
-            health: MAX_HEALTH,
-            mood: MAX_MOOD,
+            health: DEFAULT_HEALTH,
+            mood: DEFAULT_MOOD,
         },
         // this activity can be used for leaderboard ranking
         activities: getActivites()
@@ -376,22 +381,22 @@ export const resetPetStatus =async ({request, response}:{request:any;response:an
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
             lastCalculatedMood: Date.now(),
-            health: MAX_HEALTH,
-            mood: MAX_MOOD
+            health: DEFAULT_HEALTH,
+            mood: DEFAULT_MOOD
         }
     }
     else if (reset_type == RESET_TYPE.HEALTH) {
         resetStatus = {
             lastFeeding: Date.now(),
             lastCalculatedHealth: Date.now(),
-            health: MAX_HEALTH,
+            health: DEFAULT_HEALTH,
         }
     }
     else {
         resetStatus = {
             lastActivity: Date.now(),
             lastCalculatedMood: Date.now(),
-            mood: MAX_MOOD
+            mood: DEFAULT_MOOD
         }
     }
     // update pet status
@@ -482,6 +487,56 @@ export const deletePet = async ({
     response.body = {
         message: message,
         deleteCount: deleteCount
+    }
+}
+
+
+export const feedPet = async ({
+    request,
+    response,
+}: {
+    request: any;
+    response: any;
+}) => {
+
+    const { food } = await request.body().value;
+
+    if(!food){
+        response.body = {
+            "message": "No food provided"
+        }
+        response.status = 400
+        return
+    }
+
+    const headers: Headers = request.headers;
+    let userId = getUserIdFromHeaders(headers);
+    const pet = await Pets.findOne({ user_id: userId });
+
+    if(!pet){
+        response.body = {
+            "message": "Could not find a pet for your user's id"
+        }
+        response.status = 400
+        return
+    }
+
+    const collection = await db.collection("healthScore");
+    const foodInfo = await collection.findOne({ Food: food });
+    const healthUp = HEALTH_RATING_MUL * foodInfo["Health Rating"];
+    let oldHealthLog = pet.status.health;
+    pet.status.health = Math.min(pet.status.health + healthUp, MAX_HEALTH);
+
+    await Pets.updateOne({ _id: pet._id}, { 
+        $set: { 
+            status: pet.status 
+        }
+    });
+    
+    response.body = {
+        "message": "pet status updated successfuly",
+        oldHealth: displayNumber(oldHealthLog),
+        health: displayNumber(pet.status.health),
     }
 }
 
