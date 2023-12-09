@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
  * The URL or reference to your projects logo!
  * @type {string}
  */
-const logo = 'https://imgur.com/Uq8mCbD';
+const logo = 'img/logo.png';
 
 const main_template_jira_scripts = () => {
   if (process.env.ORG_NAME === 'ApplebaumIan'){
