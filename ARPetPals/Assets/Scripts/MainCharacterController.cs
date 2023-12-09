@@ -45,8 +45,14 @@ public class MainCharacterController : MonoBehaviour
     }
 
     private void DeactivateAllGameObjects() {
+
+    /*UnassignedReferenceException: The variable food of MainCharacterController has not been assigned.
+You probably need to assign the food variable of the MainCharacterController script in the inspector.
+MainCharacterController.DeactivateAllGameObjects()(at Assets / Scripts / MainCharacterController.cs:49)
+MainCharacterController.Start()(at Assets / Scripts / MainCharacterController.cs:32)*/
+
         // Deactivate all game objects
-        food.SetActive(false);
+        /*food.SetActive(false);
         drink.SetActive(false);
         meat.SetActive(false);
         vegetable.SetActive(false);
@@ -54,7 +60,7 @@ public class MainCharacterController : MonoBehaviour
         dessert.SetActive(false);
         fish.SetActive(false);
         pizza.SetActive(false);
-        hotdog.SetActive(false);
+        hotdog.SetActive(false);*/
     }
 
     private void changeMat() {
