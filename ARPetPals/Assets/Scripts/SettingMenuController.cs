@@ -247,38 +247,6 @@ public class SettingMenuController : MonoBehaviour
                 if (index == 5) break;
             }
             
-           
-            // if (index ++ <= totalSize)
-            // {
-            //     
-            //     // name1.text = boardList[index].username;
-            //     // score1.text = boardList[index].score.ToString();
-            // }
-            // if (boardList[1] != null)
-            // {
-            //     name2.text = boardList[1].username;
-            //     score2.text = boardList[1].score.ToString(); 
-            // }
-            // if (boardList[2] != null)
-            // {
-            //     name3.text = boardList[2].username;
-            //     score3.text = boardList[2].score.ToString();
-            // }
-            // if (boardList[3] != null)
-            // {
-            //     name4.text = boardList[3].username;
-            //     score4.text = boardList[3].score.ToString();
-            // }
-            // if (boardList[4] != null)
-            // {
-            //     name5.text = boardList[4].username;
-            //     score5.text = boardList[4].score.ToString(); 
-            // }
-            //
-            // if (boardList[4] == null)
-            // {
-            //     Debug.Log("4 is null");
-            // }
         });
     }
     
@@ -490,43 +458,29 @@ public class SettingMenuController : MonoBehaviour
     }
 
     public void AddHappinessButtonClicked() {
-        currentHappniness += 10;
-        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
-        SetHappiness(currentHappniness);
 
-        PlayerPrefs.SetInt("happiness", currentHappniness);
+        gameObject.GetComponent<APIService>().SetPetStatus(health * 10, currentHappniness + 10, (errMessage) =>
+        { });
 
     }
 
     public void LoseHappinessButtonClicked() {
-        currentHappniness -= 10;
-        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
-        SetHappiness(currentHappniness);
-
-        PlayerPrefs.SetInt("happiness", currentHappniness);
+        gameObject.GetComponent<APIService>().SetPetStatus(health * 10, currentHappniness - 10, (errMessage) =>
+        { });
 
     }
 
-    public void ChangeHealthButtonClicked()
-    {
-        health += 1f;
-        //Dario
-        PlayerPrefs.SetFloat("health", health);
-        Debug.Log(health);
-    }
 
     //Dario
     public void AddHealthButtonClicked() {
-        health += 1f;
-        
-        PlayerPrefs.SetFloat("health", health);
+
+        gameObject.GetComponent<APIService>().SetPetStatus(health * 10 + 15, currentHappniness, (errMessage) =>
+        { });
     }
     public void LoseHealthButtonClicked() {
-        health -= 1f;
-       
-        PlayerPrefs.SetFloat("health", health);
 
-        Debug.Log(health);
+        gameObject.GetComponent<APIService>().SetPetStatus(health * 10 - 15, currentHappniness, (errMessage) =>
+        { });
     }
 
     public void StartEating() {

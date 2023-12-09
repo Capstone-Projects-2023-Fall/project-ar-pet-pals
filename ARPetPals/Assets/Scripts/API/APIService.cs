@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using static ARPetPals.APIServiceResponse;
 using Newtonsoft.Json;
 using System;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace ARPetPals
 {
@@ -118,10 +118,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendGetUserRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendGetUserRequest", responseJson, callback);
                 }
                 else
                 {
@@ -158,10 +155,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendSignInRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendSignInRequest", responseJson, callback);
                 }
                 // Signin successful
                 else
@@ -201,10 +195,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendSignUpRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendSignUpRequest", responseJson, callback);
                 }
                 // Signup successful
                 else
@@ -262,10 +253,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendCreatePetRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendCreatePetRequest", responseJson, callback);
                 }
                 // Create pet successful
                 else
@@ -281,12 +269,6 @@ namespace ARPetPals
                 }
             }
         }
-
-
-
-
-
-
 
         //Set pet name
         public void SetPetName(string petName, Action<string> callback)
@@ -322,10 +304,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendSetPetNameRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendSetPetNameRequest", responseJson, callback);
                 }
                 // Set pet name successful
                 else
@@ -376,10 +355,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendSetPetChoiceRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendSetPetChoiceRequest", responseJson, callback);
                 }
                 // Set pet name successful
                 else
@@ -424,10 +400,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendGetPetNameRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendGetPetNameRequest", responseJson, callback);
                 }
                 else
                 {
@@ -474,10 +447,7 @@ namespace ARPetPals
 
             if (request.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError("_SendGetPetChoiceRequest failed: " + request.downloadHandler.text);
-                ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                callback(responseData.message);
-                _ShowReponse(responseData.message);
+                handleErrorMessageResponse("_SendGetPetChoiceRequest", responseJson, callback);
             }
             else
             {
@@ -553,10 +523,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendSetPetStatusRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendSetPetStatusRequest", responseJson, callback);
                 }
                 // Set pet status successful
                 else
@@ -601,10 +568,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendGetPetStatusRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendGetPetStatusRequest", responseJson, callback);
                 }
                 else
                 {
@@ -655,10 +619,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendResetPetStatusRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_SendResetPetStatusRequest", responseJson, callback);
                 }
                 // Reset pet status successful
                 else
@@ -772,10 +733,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_RecognizeFoodRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(errorResponse.message);
-                    _ShowReponse(errorResponse.message);
+                    handleErrorMessageResponse("_RecognizeFoodRequest", responseJson, callback);
                     yield break;
                 }
 
@@ -814,10 +772,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_SendListFoodOptionsRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(errorResponse.message);
-                    _ShowReponse(errorResponse.message);
+                    handleErrorMessageResponse("_SendListFoodOptionsRequest", responseJson, callback);
                     yield break;
                 }
 
@@ -860,10 +815,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_GetNutritionInfoRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(errorResponse.message);
-                    _ShowReponse(errorResponse.message);
+                    handleErrorMessageResponse("_GetNutritionInfoRequest", responseJson, callback);
                     yield break;
                 }
 
@@ -901,10 +853,8 @@ namespace ARPetPals
                 string responseJson = request.downloadHandler.text;
 
                 if (request.result != UnityWebRequest.Result.Success) {
-                    Debug.LogError("_GetFoodCategory failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(errorResponse.message);
-                    _ShowReponse(errorResponse.message);
+                    handleErrorMessageResponse("_GetFoodCategory", responseJson, callback);
+                    
                     yield break;
                 }
 
@@ -954,11 +904,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-
-                    Debug.LogError("_IncreasePetHappiness failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_IncreasePetHappiness", responseJson, callback);
                 }
                 else
                 {
@@ -1016,11 +962,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-
-                    Debug.LogError("_UpdateUser failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_UpdateUser", responseJson, callback);
                 }
                 else
                 {
@@ -1081,11 +1023,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-
-                    Debug.LogError("_DeleteUser failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_DeleteUser", responseJson, callback);
                 }
                 else
                 {
@@ -1132,18 +1070,19 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("_LeaderBoardRequest failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse errorResponse = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(errorResponse.message);
-                    _ShowReponse(errorResponse.message);
-                    yield break;
+                    handleErrorMessageResponse("_GetLeaderBoardList", responseJson, callback);
                 }
+                else
+                {
 
-                // Deserialize the JSON response
-                GetLeaderBoardResponse responseData = JsonUtility.FromJson<GetLeaderBoardResponse>(responseJson);
-                Debug.Log("_LeaderBoardRequest response: " + JsonUtility.ToJson(responseData, true));
-                _ShowReponse(JsonUtility.ToJson(responseData, true));
-                callback(JsonUtility.ToJson(responseData, true));
+                    // Deserialize the JSON response
+                    GetLeaderBoardResponse responseData = JsonUtility.FromJson<GetLeaderBoardResponse>(responseJson);
+                    Debug.Log("_GetLeaderBoardList response: " + JsonUtility.ToJson(responseData, true));
+
+                    _ShowReponse(JsonUtility.ToJson(responseData, true));
+                    callback(JsonUtility.ToJson(responseData, true));
+
+                }
             }
         }
 
@@ -1315,11 +1254,7 @@ namespace ARPetPals
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-
-                    Debug.LogError("_DeletePet failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_DeletePet", responseJson, callback);
                 }
                 else
                 {
@@ -1376,10 +1311,7 @@ namespace ARPetPals
                 if (request.result != UnityWebRequest.Result.Success)
                 {
 
-                    Debug.LogError("_FeedPet failed: " + request.downloadHandler.text);
-                    ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(responseJson);
-                    callback(responseData.message);
-                    _ShowReponse(responseData.message);
+                    handleErrorMessageResponse("_FeedPet", responseJson, callback);
                 }
                 else
                 {
@@ -1399,6 +1331,24 @@ namespace ARPetPals
         {
             string food = "baklava"; // health rating = 2
             FeedPet(food, (str) => { });
+        }
+
+        public void handleErrorMessageResponse(string funcName, string jsonData, Action<string> callback)
+        {
+
+            Debug.LogError($"{funcName} failed: " + jsonData);
+            ErrorMessageResponse responseData = JsonUtility.FromJson<ErrorMessageResponse>(jsonData);
+            callback(responseData.message);
+            _ShowReponse(responseData.message);
+            
+
+            // Workaround for token invalid
+            if (responseData.message == "Error: The jwt's signature does not match the verification signature.")
+            {
+                SceneManager.LoadScene("SignInScene");
+            }
+
+            
         }
     }
 }

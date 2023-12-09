@@ -244,7 +244,7 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
 
     const { health, mood } = await request.body().value;
 
-    if(!health && !mood){
+    if(health === undefined && mood === undefined){
         response.body = {
             "message": "No status provided"
         }
@@ -265,7 +265,8 @@ export const setPetStatus =async ({request, response}:{request:any;response:any}
         return
     }
 
-    pet.status.health = Math.max(Math.min(health || pet.status.health, MAX_HEALTH), 0);
+    // allow health = -1 to set pet death
+    pet.status.health = Math.max(Math.min(health || pet.status.health, MAX_HEALTH), -1);
     pet.status.mood = Math.max(Math.min(mood || pet.status.mood, MAX_MOOD), 0);
 
 
