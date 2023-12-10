@@ -415,7 +415,7 @@ public class SettingMenuController : MonoBehaviour
         //Dario
         string foodCategory = await foodRecognition.GetFoodCategory(food);
         Debug.Log("The food category is: " +  foodCategory);
-
+        gameObject.GetComponent<APIService>().FeedPet(food,s =>{});
         mainCharacterController.startEatFoodAnimation(foodCategory);
 
     }
