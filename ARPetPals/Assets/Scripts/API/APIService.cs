@@ -842,13 +842,13 @@ namespace ARPetPals
                 yield break;
             }
 
-            string url = URL + "/food/getFoodCategory";
-            Dictionary<string, string> body = new Dictionary<string, string>
+            string url = URL + "/food/categoryInfo/" + food;
+            /*Dictionary<string, string> body = new Dictionary<string, string>
             {
                 { "food", food }
-            };
+            };*/
 
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+            using (UnityWebRequest request = UnityWebRequest.Get(url)) {
                 request.SetRequestHeader("Authorization", "Bearer " + token);
 
                 yield return request.SendWebRequest();

@@ -46,13 +46,8 @@ public class MainCharacterController : MonoBehaviour
 
     private void DeactivateAllGameObjects() {
 
-    /*UnassignedReferenceException: The variable food of MainCharacterController has not been assigned.
-You probably need to assign the food variable of the MainCharacterController script in the inspector.
-MainCharacterController.DeactivateAllGameObjects()(at Assets / Scripts / MainCharacterController.cs:49)
-MainCharacterController.Start()(at Assets / Scripts / MainCharacterController.cs:32)*/
-
         // Deactivate all game objects
-        /*food.SetActive(false);
+        food.SetActive(false);
         drink.SetActive(false);
         meat.SetActive(false);
         vegetable.SetActive(false);
@@ -60,7 +55,7 @@ MainCharacterController.Start()(at Assets / Scripts / MainCharacterController.cs
         dessert.SetActive(false);
         fish.SetActive(false);
         pizza.SetActive(false);
-        hotdog.SetActive(false);*/
+        hotdog.SetActive(false);
     }
 
     private void changeMat() {
@@ -93,13 +88,31 @@ MainCharacterController.Start()(at Assets / Scripts / MainCharacterController.cs
     }
 
     public void startEatFoodAnimation(string foodCategory) {
+        animator.SetInteger("eatCount", 3);
         animator.SetBool("isEating", true);
         AudioManager.Instance.PlaySfx("EatingLong");
         ActivateGameObject(foodCategory);        
     }
     public void endEatFoodAnimation() {
+        /*
         animator.SetBool("isEating", false);
         DeactivateAllGameObjects();
+        Debug.Log("Done eating food should be gone");
+        */
+        // Decrement the eatCount
+        int eatCount = animator.GetInteger("eatCount");
+        eatCount--;
+
+        // Check if there are more eating cycles left
+        if (eatCount == 0) {
+            // Trigger the animation to end
+            animator.SetBool("isEating", false);
+            DeactivateAllGameObjects();
+            Debug.Log("Done eating food should be gone");
+        }
+
+        // Update the eatCount in the animator
+        animator.SetInteger("eatCount", eatCount);
     }
 
     public void startSadAnimation() {
