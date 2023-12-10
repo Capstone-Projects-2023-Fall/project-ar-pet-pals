@@ -138,7 +138,7 @@ public class FoodRecognition : MonoBehaviour
             else {
                 GetFoodCategoryResponse parsedResponse = JsonUtility.FromJson<GetFoodCategoryResponse>(response);
 
-                string foodCategory = parsedResponse.category;
+                string foodCategory = parsedResponse.categoryInfo;
 
                 tcs.SetResult(foodCategory);
             }
