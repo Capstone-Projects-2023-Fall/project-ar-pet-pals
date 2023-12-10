@@ -287,14 +287,50 @@ paths:
             application/json:
               schema:
                 type: object
-                description: Result
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
         
         '400':
           description: "Failure"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Fail"    
+                $ref: "#/components/schemas/Fail"
+  
+    get:
+      security:
+        - token: []
+
+      tags:
+        - User
+
+      summary: "Check Step Count"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dailyStepCount:
+                    type: number
+                  weeklyStepCount:
+                    type: number
+        
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
 
   /api/user/step-goal:
     put:
@@ -392,6 +428,58 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/Fail"
+
+  /api/user/reset-daily-step-count:
+    get:
+      tags:
+        - User
+
+      summary: "Reset Daily Step Counter for All Users"
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+  /api/user/reset-weekly-step-count:
+    get:
+      tags:
+        - User
+
+      summary: "Reset Weekly Step Counter for All Users"
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
 
   # Pet Routes
   /api/pet/name:
