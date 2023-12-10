@@ -779,7 +779,7 @@ paths:
                 $ref: "#/components/schemas/Fail"
 
   /api/pet/activities/reset:
-    put:
+    post:
       tags:
         - Pet
 
@@ -814,37 +814,37 @@ paths:
   
   /api/pet/choice:
     get:
-        tags: 
-          - Pet
+      tags: 
+        - Pet
 
-        security: 
-          - token: []
+      security: 
+        - token: []
 
-        summary: "Get Pet Choice"
+      summary: "Get Pet Choice"
 
-        requestBody:
-          description: "User ID is provided in the request headers."
-          required: true
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
 
-        responses:
-          '200':
-            description: "Success"
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    choice:
-                      type: string
-                      description: Pet Choice
-                  
-          '400':
-            description: "Failure"
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Fail"
-    
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  choice:
+                    type: string
+                    description: Pet Choice
+                
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+  
     put:
       tags:
         - Pet
@@ -954,6 +954,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+
+  /api/checkAccountActivity:
+    get:
+      tags: 
+        - Pet
+
+      security: 
+        - token: []
+
+      summary: "Check Account Activity -- Pet"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+
+      responses:
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
 
   # Food Routes
   /api/food/recognize:
