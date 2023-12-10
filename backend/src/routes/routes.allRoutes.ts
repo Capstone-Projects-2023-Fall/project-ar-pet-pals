@@ -63,18 +63,18 @@ router.put("/api/pet/feed", authourized, feedPet  )
 router.get("/api/checkAccountActivity", authourized, checkAccountActivity);
 
 //name
-router.post("/api/pet/name", authourized, setPetName  )
+router.put("/api/pet/name", authourized, setPetName  )
 router.get("/api/pet/name", authourized, getPetName  )
 
 // Status
-router.post("/api/pet/status", authourized, setPetStatus  )
+router.put("/api/pet/status", authourized, setPetStatus  )
 router.get("/api/pet/status", authourized, getPetStatus  )
 router.post("/api/pet/status/reset", authourized, resetPetStatus  )
 router.put("/api/pet/status/increaseMood", authourized, increasePetMood  )
 router.put("/api/pet/activities/reset", authourized, resetPetActivities  )
 
 // Choice
-router.post("/api/pet/choice", authourized, setPetChoice  )
+router.put("/api/pet/choice", authourized, setPetChoice  )
 router.get("/api/pet/choice", authourized, getPetChoice )
 
 

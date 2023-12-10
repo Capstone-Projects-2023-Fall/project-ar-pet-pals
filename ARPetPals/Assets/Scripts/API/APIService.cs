@@ -293,9 +293,10 @@ namespace ARPetPals
                 { "name", petName }
             };
 
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
+            using (UnityWebRequest request = UnityWebRequest.Put(url, JsonConvert.SerializeObject(body)))
             {
                 request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
 
                 yield return request.SendWebRequest();
 
@@ -344,9 +345,10 @@ namespace ARPetPals
                 { "choice", petChoice }
             };
 
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
+            using (UnityWebRequest request = UnityWebRequest.Put(url, JsonConvert.SerializeObject(body)))
             {
                 request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
 
                 yield return request.SendWebRequest();
 
@@ -506,15 +508,16 @@ namespace ARPetPals
             }
 
             string url = URL + "/pet/status";
-            Dictionary<string, float> body = new Dictionary<string, float>
+            Dictionary<string, string> body = new Dictionary<string, string>
             {
-                { "health", health },
-                { "mood", mood },
+                { "health", health.ToString() },
+                { "mood", mood.ToString() },
             };
 
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE))
+            using (UnityWebRequest request = UnityWebRequest.Put(url, JsonConvert.SerializeObject(body)))
             {
                 request.SetRequestHeader("Authorization", "Bearer " + token); // Add the authorization header
+                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
 
                 yield return request.SendWebRequest();
 
@@ -1186,41 +1189,42 @@ namespace ARPetPals
             }
         }*/
 
-        public void CheckAccountActivityAndSendNotifications()
-        {
-            StartCoroutine(_CheckAccountActivityAndSendNotifications());
-        }
-        private IEnumerator _CheckAccountActivityAndSendNotifications()
-        {
-            string apiUrl = $"{URL}/api/checkAccountActivity";
-            using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
-            {
-                request.downloadHandler = new DownloadHandlerBuffer();
-                request.SetRequestHeader("Content-Type", CONTENT_TYPE);
-                yield return request.SendWebRequest();
-                if (request.isNetworkError || request.isHttpError)
-                {
-                    Debug.LogError($"Error checking account activity: {request.error}");
-                }
-                else
-                {
-                    // Parse the response as needed
-                    CheckAccountActivityResponse response = JsonUtility.FromJson<CheckAccountActivityResponse>(request.downloadHandler.text);
-                    // Handle the response based on its structure
-                    if (response != null)
-                    {
-                        Debug.Log($"Server Response: {response.message}");
-                        // You might want to check other fields in the response
-                        // For example: if (response.success) { /* handle success */ }
-                    }
-                    else
-                    {
-                        Debug.LogError("Failed to parse server response.");
-                    }
-                }
-            }
+        // Son: fix warning + unused function
+        // public void CheckAccountActivityAndSendNotifications()
+        // {
+        //     StartCoroutine(_CheckAccountActivityAndSendNotifications());
+        // }
+        // private IEnumerator _CheckAccountActivityAndSendNotifications()
+        // {
+        //     string apiUrl = $"{URL}/api/checkAccountActivity";
+        //     using (UnityWebRequest request = new UnityWebRequest(apiUrl, "GET"))
+        //     {
+        //         request.downloadHandler = new DownloadHandlerBuffer();
+        //         request.SetRequestHeader("Content-Type", CONTENT_TYPE);
+        //         yield return request.SendWebRequest();
+        //         if (request.isNetworkError || request.isHttpError)
+        //         {
+        //             Debug.LogError($"Error checking account activity: {request.error}");
+        //         }
+        //         else
+        //         {
+        //             // Parse the response as needed
+        //             CheckAccountActivityResponse response = JsonUtility.FromJson<CheckAccountActivityResponse>(request.downloadHandler.text);
+        //             // Handle the response based on its structure
+        //             if (response != null)
+        //             {
+        //                 Debug.Log($"Server Response: {response.message}");
+        //                 // You might want to check other fields in the response
+        //                 // For example: if (response.success) { /* handle success */ }
+        //             }
+        //             else
+        //             {
+        //                 Debug.LogError("Failed to parse server response.");
+        //             }
+        //         }
+        //     }
 
-        }
+        // }
 
         public void DeletePet(Action<string> callback)
         {
