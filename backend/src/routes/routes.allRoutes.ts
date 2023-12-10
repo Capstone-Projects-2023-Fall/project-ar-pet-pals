@@ -1,7 +1,7 @@
 import { Router } from "https://deno.land/x/oak/mod.ts";
 import {signin, signup, getUserName, getUserInfo, updateUser, deleteUser, saveBirthday } from "../controllers/controllers.users.ts";
-import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, increasePetMood, resetPetActivities } from "../controllers/controllers.pets.ts";
-import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions } from "../controllers/controllers.food.ts";
+import {setPetName, getPetName, setPetStatus, getPetStatus, resetPetStatus, createPet, setPetChoice, getPetChoice, increasePetMood, resetPetActivities, deletePet, feedPet } from "../controllers/controllers.pets.ts";
+import { recognizeFood, getHealthRating, getNutritionInfo, listFoodOptions, getCategoryInfo } from "../controllers/controllers.food.ts";
 import {authourized} from "../middlewares/middlewares.isAuthorized.ts"
 import { verifyToken } from "../controllers/controllers.token.ts";
 import { updateStepCount, checkStepGoal,getStepCount, updateStepGoal, resetDailyStepCountForAllUsers, resetWeeklyStepCountForAllUsers } from "../controllers/controllers.steps.ts";
@@ -52,29 +52,30 @@ router.get("/api/user/reset-weekly-step-count", authourized, resetWeeklyStepCoun
 // Create
 router.post("/api/pet/create", authourized, createPet  )
 
+// Delete 
+router.delete("/api/pet", authourized, deletePet  )
+
+// Feed pet
+router.put("/api/pet/feed", authourized, feedPet  )
+
 
 //check account activity
 router.get("/api/checkAccountActivity", authourized, checkAccountActivity);
 
 //name
-router.post("/api/pet/name", authourized, setPetName  )
+router.put("/api/pet/name", authourized, setPetName  )
 router.get("/api/pet/name", authourized, getPetName  )
 
 // Status
-router.post("/api/pet/status", authourized, setPetStatus  )
+router.put("/api/pet/status", authourized, setPetStatus  )
 router.get("/api/pet/status", authourized, getPetStatus  )
 router.post("/api/pet/status/reset", authourized, resetPetStatus  )
 router.put("/api/pet/status/increaseMood", authourized, increasePetMood  )
 router.put("/api/pet/activities/reset", authourized, resetPetActivities  )
 
 // Choice
-router.post("/api/pet/choice", authourized, setPetChoice  )
+router.put("/api/pet/choice", authourized, setPetChoice  )
 router.get("/api/pet/choice", authourized, getPetChoice )
-
-// -- Food --
-
-// Recognize
-router.post("/api/food/recognize", authourized, recognizeFood)
 
 
 //user birthday
@@ -83,13 +84,6 @@ router.post("/api/savebirthday", authourized,saveBirthday)
 // Update Step Goal
 router.put("/api/user/step-goal", authourized, updateStepGoal);
 
-// Nutrition Info
-router.post("/api/food/healthRating", authourized, getHealthRating);
-router.post("/api/food/nutritionInfo", authourized, getNutritionInfo);
-
-
-// List Possible Foods
-router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
 
 // -- Leaderboard --
 
@@ -97,7 +91,17 @@ router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
 router.get("/api/leaderboard/list", authourized, leaderboardList)
 
 
-// food-related routes --
+// -- Food --
+// Nutrition Info
+router.post("/api/food/healthRating", authourized, getHealthRating);
+router.post("/api/food/nutritionInfo", authourized, getNutritionInfo);
+// List Possible Foods
+router.get("/api/food/listFoodOptions", authourized, listFoodOptions);
+// Recognize
+router.post("/api/food/recognize", authourized, recognizeFood);
+//Food category
+router.get("/api/food/categoryInfo/:food", authourized, getCategoryInfo);
+
 
 
 export default router;

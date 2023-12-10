@@ -157,11 +157,41 @@ export const listFoodOptions = async ({ response }: { response: any }) => {
 					food: food, 
 				};
     }
-};
+  };
 
+    // get food category
+    export const getCategoryInfo = async (context) => {
 
+      try {
+        const { food } = context.params;
+        if (!food) {
+          context.response.status = 400;
+          context.response.body = { message: 'No food provided.' };
+          return;
+        }
 
+          // query category info from the database
+				const collection = await db.collection("healthScore");
+				const query = { Food: food };
+				const result = await collection.find(query).toArray();
+				const categoryInfo = result[0]["Category"];
 
+        context.response.status = 200;
+        context.response.body = {
+          food: food,
+          categoryInfo: categoryInfo
+        };
+      } catch (error) {
+        context.response.status = 400;
+        context.response.body = {
+					message: 'Could not process category information.',
+					error: error.message,
+					food: food, 
+				}; 
+  
+      }
+  };
+  
 
 // ---
 

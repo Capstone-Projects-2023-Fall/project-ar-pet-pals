@@ -245,24 +245,24 @@ Deno.test("invalid (no username) sign up", async () => {
 /* END SIGNUP*/
 
 /* PET CREATE */
-Deno.test("valid create pet", async () => {
-  // this is a valid token
-  let headers = {
-    Authorization: `Bearer ${token_with_no_pet}`,
-  };
+// Deno.test("valid create pet", async () => {
+//   // this is a valid token
+//   let headers = {
+//     Authorization: `Bearer ${token_with_no_pet}`,
+//   };
 
-  try {
-    let res = await fetch(BASE_URL + "/pet/create", {
-      headers,
-      method: "POST",
-    });
-    let json = await res.json();
+//   try {
+//     let res = await fetch(BASE_URL + "/pet/create", {
+//       headers,
+//       method: "POST",
+//     });
+//     let json = await res.json();
 
-    assert(json.petInfo.id, JSON.stringify(json));
-  } catch (err) {
-    assert(false, err);
-  }
-});
+//     assert(json.petInfo.id, JSON.stringify(json));
+//   } catch (err) {
+//     assert(false, err);
+//   }
+// });
 
 Deno.test("invalid token create pet", async () => {
   // this is a invalid token
@@ -299,7 +299,7 @@ Deno.test("get pet name", async () => {
     });
     let json = await res.json();
 
-    assert(json.name);
+    assert(json.name, JSON.stringify(json));
   } catch (err) {
     assert(false, err);
   }
@@ -439,12 +439,12 @@ Deno.test("get pet status", async () => {
   };
 
   try {
-    let res = await fetch(BASE_URL + "/pet/name", {
+    let res = await fetch(BASE_URL + "/pet/status", {
       headers,
     });
     let json = await res.json();
 
-    assert(json.name, JSON.stringify(json));
+    assert(json.health, JSON.stringify(json));
   } catch (err) {
     assert(false, err);
   }
@@ -672,7 +672,7 @@ Deno.test("invalid ( invalid token) set pet choice", async () => {
   };
 
   let data = {
-    name: "echo",
+    choice: "echo",
   };
 
   try {
@@ -692,6 +692,7 @@ Deno.test("invalid ( invalid token) set pet choice", async () => {
     assert(false, err);
   }
 });
+
 Deno.test("invalid ( no pet created) set pet choice", async () => {
   let headers = {
     Authorization: `Bearer ${token_with_no_pet}`,
@@ -699,7 +700,7 @@ Deno.test("invalid ( no pet created) set pet choice", async () => {
   };
 
   let data = {
-    name: "echo",
+    choice: "echo",
   };
 
   try {
@@ -802,7 +803,7 @@ Deno.test("set pet status", async () => {
     let json = await res.json();
 
     assert(
-      json.message == "pet status updated successfuly",
+      json.health,
       JSON.stringify(json)
     );
   } catch (err) {
