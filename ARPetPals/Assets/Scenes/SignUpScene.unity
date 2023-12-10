@@ -3839,7 +3839,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Birthday(optional)
+  m_text: 'Birthday
+
 
 '
   m_isRightToLeft: 0
