@@ -15,9 +15,6 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] private GameObject petNameUI;
     
     public GameObject basePetObject;
-    public Material orangeMat, redMat, greenMat, blueMat, yellowMat;
-    Renderer m_Renderer;
-
     private int index = 0;
 
     private string customName;
@@ -57,7 +54,6 @@ public class CharacterSelection : MonoBehaviour
         if (characterList[0]) {
             characterList[0].SetActive(true);
         }
-        m_Renderer = basePetObject.GetComponent<Renderer>();
     }
 
     // public void OrangeClicked()
