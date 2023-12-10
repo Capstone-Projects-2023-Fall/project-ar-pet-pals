@@ -390,44 +390,44 @@ paths:
 
   /api/user/check-step-goal:
     get:
-        security: 
-          - token: []
+      security: 
+        - token: []
 
-        tags:
-          - User
+      tags:
+        - User
 
-        summary: "Check User's Step Goal"
+      summary: "Check User's Step Goal"
 
-        requestBody:
-          description: "User ID is provided in the request headers."
-          required: true
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                  description: User ID
+                steps:
+                  type: number
+                  description: User's Steps
+
+      responses:
+        '200':
+          description: "Success"
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  userId:
-                    type: number
-                    description: User ID
-                  steps:
-                    type: number
-                    description: User's Steps
-
-        responses:
-          '200':
-            description: "Success"
-            content:
-              application/json:
-                schema:
-                  type: boolean
-                  description: Whether the user met the step goal.
-          
-          '400':
-            description: "Failure"
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Fail"
+                type: boolean
+                description: Whether the user met the step goal.
+        
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
 
   /api/user/reset-daily-step-count:
     get:
@@ -480,6 +480,56 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Fail"
+
+  /api/user/savebirthday:
+    post:
+      security: 
+        - token: []
+
+      tags:
+        - User
+
+      summary: "Set User's Birthday"
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                birthday:
+                  type: string
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  userInfo:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      birthday:
+                        type: string
+        
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+
 
   # Pet Routes
   /api/pet/name:
