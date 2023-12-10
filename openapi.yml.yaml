@@ -427,7 +427,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Fail"                    
 
-    post:
+    put:
       security: 
         - token: []
 
@@ -559,7 +559,7 @@ paths:
                 schema:
                   $ref: "#/components/schemas/Fail"
 
-    post:
+    put:
       tags:
         - Pet
 
@@ -605,7 +605,7 @@ paths:
                 $ref: "#/components/schemas/Fail"
 
   /api/pet/status/reset:
-    post:
+    put:
       tags:
         - Pet
 
@@ -757,7 +757,7 @@ paths:
                 schema:
                   $ref: "#/components/schemas/Fail"
     
-    post:
+    put:
       tags:
         - Pet
 
@@ -774,9 +774,79 @@ paths:
             schema:
                 type: object
                 properties:
-                  type:
+                  choice:
                     type: string
                     description: Choice
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+  /api/pet/feed:
+    put:
+      tags:
+        - Pet
+
+      security: 
+        - token: []
+
+      summary: "Feed Pet"
+
+      requestBody:
+        description: "User ID is provided in the request headers."
+        required: true
+        content:
+          application/json:
+            schema:
+                type: object
+                properties:
+                  food:
+                    type: string
+                    description: Food
+
+      responses:
+        '200':
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+
+        '400':
+          description: "Failure"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fail"
+
+  /api/pet:
+    delete:
+      tags:
+        - Pet
+
+      security: 
+        - token: []
+
+      summary: "Delete Pet"
 
       responses:
         '200':
@@ -842,10 +912,44 @@ paths:
 
 
   # Leaderboard Routes
-  # /api/leaderboard/list:
-  #   get:
-  #     tags:
-  #     - Leaderboard
+
+  /api/leaderboard/list:
+    get:
+        tags: 
+          - Leaderboard
+        
+        security: 
+          - token: []
+        
+        summary: "Get Leaderboard list - top 5 users' activities"
+
+        requestBody:
+          description: "User ID is provided in the request headers."
+          required: true
+
+        responses:
+          '200':
+            description: "Success"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    leaderboardList:
+                      type: array
+                      items:
+                        properties:
+                          username:
+                            type: number
+                          score:
+                            type: number
+
+          '400':
+            description: "Failure"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Fail"
   
 
 components:
@@ -856,3 +960,5 @@ components:
         message:
           type: string
           description: Reason for Failure
+
+
