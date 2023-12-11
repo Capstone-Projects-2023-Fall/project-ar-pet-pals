@@ -243,7 +243,37 @@ paths:
             application/json:
               schema:
                 type: object
-                description: Result
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+    get:
+      security:
+        - token: []
+      tags:
+        - User
+      summary: Check Step Count
+      requestBody:
+        description: User ID is provided in the request headers.
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dailyStepCount:
+                    type: number
+                  weeklyStepCount:
+                    type: number
         '400':
           description: Failure
           content:
@@ -328,6 +358,92 @@ paths:
               schema:
                 type: boolean
                 description: Whether the user met the step goal.
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /api/user/reset-daily-step-count:
+    get:
+      tags:
+        - User
+      summary: Reset Daily Step Counter for All Users
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /api/user/reset-weekly-step-count:
+    get:
+      tags:
+        - User
+      summary: Reset Weekly Step Counter for All Users
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /api/user/savebirthday:
+    post:
+      security:
+        - token: []
+      tags:
+        - User
+      summary: Set User's Birthday
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                birthday:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Success Message
+                  userInfo:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      birthday:
+                        type: string
         '400':
           description: Failure
           content:
@@ -589,7 +705,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fail'
   /api/pet/activities/reset:
-    put:
+    post:
       tags:
         - Pet
       security:
@@ -737,6 +853,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fail'
+  /api/checkAccountActivity:
+    get:
+      tags:
+        - Pet
+      security:
+        - token: []
+      summary: Check Account Activity -- Pet
+      requestBody:
+        description: User ID is provided in the request headers.
+        required: true
+      responses:
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
   /api/food/recognize:
     post:
       tags:
@@ -764,16 +897,128 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fail'
+  /api/food/healthRating:
+    post:
+      tags:
+        - Food
+      security:
+        - token: []
+      summary: Get Food's Health Rating
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                food:
+                  type: string
+                  description: Food Name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  food:
+                    type: string
+                  healthRating:
+                    type: number
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /api/food/nutritionInfo:
+    post:
+      tags:
+        - Food
+      security:
+        - token: []
+      summary: Get Food's Nutrition Info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                food:
+                  type: string
+                  description: Food Name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  food:
+                    type: string
+                  nutritionInfo:
+                    type: string
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /api/food/listFoodOptions:
+    get:
+      tags:
+        - Food
+      security:
+        - token: []
+      summary: List All Possible Food Options
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  foodOptions:
+                    type: array
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
+  /api/food/categoryInfo:
+    get:
+      tags:
+        - Food
+      security:
+        - token: []
+      summary: Get Food's Category
+      requestBody:
+        description: Food name is provided in URL parameters.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  food:
+                    type: string
+                  categoryInfo:
+                    type: string
+        '400':
+          description: Failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fail'
   /api/leaderboard/list:
     get:
       tags:
         - Leaderboard
       security:
         - token: []
-      summary: Get Leaderboard list - top 5 users' activities
-      requestBody:
-        description: User ID is provided in the request headers.
-        required: true
+      summary: List User Leaderboard
       responses:
         '200':
           description: Success
@@ -784,12 +1029,8 @@ paths:
                 properties:
                   leaderboardList:
                     type: array
-                    items:
-                      properties:
-                        username:
-                          type: number
-                        score:
-                          type: number
+                  top5Users:
+                    type: array
         '400':
           description: Failure
           content:
