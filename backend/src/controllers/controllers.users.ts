@@ -237,7 +237,6 @@ export const updateUser = async ({
     }
 };
 
-
 export const deleteUser = async ({
     request,
     response,
@@ -257,35 +256,36 @@ export const deleteUser = async ({
         message: message,
     }
 }
-    export const saveBirthday = async ({ request,response,}: {request: any; response: any;}) => {
-        const { username, birthday } = await request.body().value;
-    
-        if (!username) {
-            response.body = { message: "No username provided" };
-            response.status = 400;
-            return;
-        }
-    
-        if (!birthday) {
-            response.body = { message: "No birthday provided" };
-            response.status = 400;
-            return;
-        }
-    
-        // logic to save the birthday in the database
-         const user = await Users.findOne({ username });
-            user.birthday = birthday;
-             await Users.updateOne({ username }, { $set: { birthday } });
-    
-        response.status = 200;
-        response.body = {
-            message: "Birthday saved successfully",
-            userInfo: {
-                name: username,
-                birthday,
-            },
-        };
+
+export const saveBirthday = async ({ request,response,}: {request: any; response: any;}) => {
+    const { username, birthday } = await request.body().value;
+
+    if (!username) {
+        response.body = { message: "No username provided" };
+        response.status = 400;
+        return;
+    }
+
+    if (!birthday) {
+        response.body = { message: "No birthday provided" };
+        response.status = 400;
+        return;
+    }
+
+    // logic to save the birthday in the database
+        const user = await Users.findOne({ username });
+        user.birthday = birthday;
+            await Users.updateOne({ username }, { $set: { birthday } });
+
+    response.status = 200;
+    response.body = {
+        message: "Birthday saved successfully",
+        userInfo: {
+            name: username,
+            birthday,
+        },
     };
+};
 
 
 
