@@ -36,7 +36,7 @@ public class MainCharacterController : MonoBehaviour
         happiness = PlayerPrefs.GetInt("happiness");
         health = PlayerPrefs.GetFloat("health");
 
-        if (happiness < 50 || health < 4) {
+        if (happiness < 30 || health < 3) {
             startSadAnimation();
         }
         else {
