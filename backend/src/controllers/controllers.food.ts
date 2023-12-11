@@ -2,8 +2,6 @@ import db from "../database/database.connection.ts";
 
 // Route Functions --
 
-// Given a string containing a base64 encoding of an image,
-// return the AI models top 3 guesses of the food in the image.
 export const recognizeFood = async ({
   request,
   response,
@@ -80,8 +78,7 @@ export const getHealthRating = async ({ request, response }: { request: any; res
         response.status = 400;
         response.body = {
 					message: 'Could not process health rating.',
-					error: error.message,
-					food: food, 
+					error: error.message
 				};
     }
 };
@@ -96,40 +93,22 @@ export const getNutritionInfo = async ({ request, response }: { request: any; re
             return;
         }
 				
-				// query food's nutrition info from database
- /* notification branches version
-				const collection = await db.collection("healthScore");
-				const query = { Food: food };
-				const result = await collection.find(query).toArray();
-				const nutritionInfo = result[0]["Nutrition Info"];
-
-        response.status = 200;
-        response.body = {
-            "food": food,
-            "nutritionInfo": nutritionInfo
-        };
-				*/
-				
-//karls version from staging
 				const collection = await db.collection("nutrition_info");
 				const query = { name: food };
 				const result = await collection.find(query).toArray();
 				const { _id, name, ...info }  = result[0];
-				
 				
 				response.status = 200;
         response.body = {
             "food": name,
 						"nutritionInfo": info
         };
-				
 
     } catch (error) {
         response.status = 400;
         response.body = {
 					message: 'Could not process nutrition info.',
-					error: error.message,
-					food: food, 
+					error: error.message
 				};
     }
 };
@@ -154,46 +133,40 @@ export const listFoodOptions = async ({ response }: { response: any }) => {
         response.body = {
 					message: 'Could not process nutrition info.',
 					error: error.message,
-					food: food, 
 				};
     }
-  };
+};
 
-    // get food category
-    export const getCategoryInfo = async (context) => {
+export const getCategoryInfo = async (context) => {
 
-      try {
-        const { food } = context.params;
-        if (!food) {
-          context.response.status = 400;
-          context.response.body = { message: 'No food provided.' };
-          return;
-        }
-
-          // query category info from the database
-				const collection = await db.collection("healthScore");
-				const query = { Food: food };
-				const result = await collection.find(query).toArray();
-				const categoryInfo = result[0]["Category"];
-
-        context.response.status = 200;
-        context.response.body = {
-          food: food,
-          categoryInfo: categoryInfo
-        };
-      } catch (error) {
+    try {
+      const { food } = context.params;
+      if (!food) {
         context.response.status = 400;
-        context.response.body = {
-					message: 'Could not process category information.',
-					error: error.message,
-					food: food, 
-				}; 
-  
+        context.response.body = { message: 'No food provided.' };
+        return;
       }
-  };
-  
 
-// ---
+        // query category info from the database
+      const collection = await db.collection("healthScore");
+      const query = { Food: food };
+      const result = await collection.find(query).toArray();
+      const categoryInfo = result[0]["Category"];
+
+      context.response.status = 200;
+      context.response.body = {
+        food: food,
+        categoryInfo: categoryInfo
+      };
+    } catch (error) {
+      context.response.status = 400;
+      context.response.body = {
+        message: 'Could not process category information.',
+        error: error.message,
+      }; 
+
+    }
+};
 
 // Helper functions --
 

@@ -68,6 +68,7 @@ export const updateStepCount = async ({
   };
   response.status = 200;
 };
+
 export const getStepCount = async ({
   request,
   response,
