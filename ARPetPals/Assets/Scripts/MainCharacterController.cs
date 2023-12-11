@@ -90,7 +90,7 @@ public class MainCharacterController : MonoBehaviour
     public void startEatFoodAnimation(string foodCategory) {
         animator.SetInteger("eatCount", 3);
         animator.SetBool("isEating", true);
-        AudioManager.Instance.PlaySfx("EatingLong");
+        //AudioManager.Instance.PlaySfx("EatingLong");
         ActivateGameObject(foodCategory);        
     }
     public void endEatFoodAnimation() {
