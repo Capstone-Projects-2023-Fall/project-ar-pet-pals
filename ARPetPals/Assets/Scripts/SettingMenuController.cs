@@ -90,13 +90,16 @@ public class SettingMenuController : MonoBehaviour
     [SerializeField] public TMP_Text score3;
     [SerializeField] public TMP_Text score4;
     [SerializeField] public TMP_Text score5;
-    
-    
-    
+      
     
     public string changePetName;
     public string changeUserName;
     public string changePassword;
+
+    [Header("Reference to main pet object")]
+    //reference to the MainPetObject
+    [SerializeField] private GameObject mainPetObject;
+    private MainCharacterController mainCharacterController;
 
     private void Awake()
     {
@@ -128,6 +131,7 @@ public class SettingMenuController : MonoBehaviour
                 Debug.Log($"Hy/errorMessage {errMessage}");
             }
             else {
+                APIServiceResponse.GetFoodCategoryResponse responseData1 = JsonUtility.FromJson<APIServiceResponse.GetFoodCategoryResponse>(errMessage);
                 APIServiceResponse.GetPetStatusResponse responseData = JsonUtility.FromJson<APIServiceResponse.GetPetStatusResponse>(gameObject.GetComponent<APIService>().GetStoredPetStatus());
                 currentHappniness  = (int)float.Parse(responseData.mood);
                 health = float.Parse(responseData.health)/10;
@@ -152,6 +156,9 @@ public class SettingMenuController : MonoBehaviour
     {
         //Call the update pet status function every 1 second to get the newest value.
         InvokeRepeating("UpdatePetStatus", 2f,1f);
+
+        //reference to main object's controller script
+        mainCharacterController = mainPetObject.GetComponent<MainCharacterController>();
         
     }
     
@@ -240,38 +247,6 @@ public class SettingMenuController : MonoBehaviour
                 if (index == 5) break;
             }
             
-           
-            // if (index ++ <= totalSize)
-            // {
-            //     
-            //     // name1.text = boardList[index].username;
-            //     // score1.text = boardList[index].score.ToString();
-            // }
-            // if (boardList[1] != null)
-            // {
-            //     name2.text = boardList[1].username;
-            //     score2.text = boardList[1].score.ToString(); 
-            // }
-            // if (boardList[2] != null)
-            // {
-            //     name3.text = boardList[2].username;
-            //     score3.text = boardList[2].score.ToString();
-            // }
-            // if (boardList[3] != null)
-            // {
-            //     name4.text = boardList[3].username;
-            //     score4.text = boardList[3].score.ToString();
-            // }
-            // if (boardList[4] != null)
-            // {
-            //     name5.text = boardList[4].username;
-            //     score5.text = boardList[4].score.ToString(); 
-            // }
-            //
-            // if (boardList[4] == null)
-            // {
-            //     Debug.Log("4 is null");
-            // }
         });
     }
     
@@ -436,7 +411,13 @@ public class SettingMenuController : MonoBehaviour
         NutritionInfoHideButton.onClick.AddListener(
             () => { NutritionInfoPanel.gameObject.SetActive(false); }
         );
-        
+
+        //Dario
+        string foodCategory = await foodRecognition.GetFoodCategory(food);
+        Debug.Log("The food category is: " +  foodCategory);
+
+        mainCharacterController.startEatFoodAnimation(foodCategory);
+
     }
 
     public string CapitalizeEachWord(string str)
@@ -452,6 +433,8 @@ public class SettingMenuController : MonoBehaviour
 
         return string.Join(" ", words);
     }
+
+    
 
     // Log out to sign in scene
     public void ExitButtonClicked()
@@ -475,43 +458,37 @@ public class SettingMenuController : MonoBehaviour
     }
 
     public void AddHappinessButtonClicked() {
-        currentHappniness += 10;
-        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
-        SetHappiness(currentHappniness);
 
-        PlayerPrefs.SetInt("happiness", currentHappniness);
+        gameObject.GetComponent<APIService>().SetPetStatus(health * 10, currentHappniness + 10, (errMessage) =>
+        { });
 
     }
 
     public void LoseHappinessButtonClicked() {
-        currentHappniness -= 10;
-        Debug.Log($"Hy/CurrentHappy {currentHappniness}");
-        SetHappiness(currentHappniness);
-
-        PlayerPrefs.SetInt("happiness", currentHappniness);
+        gameObject.GetComponent<APIService>().SetPetStatus(health * 10, currentHappniness - 10, (errMessage) =>
+        { });
 
     }
 
-    public void ChangeHealthButtonClicked()
-    {
-        health += 1f;
-        //Dario
-        PlayerPrefs.SetFloat("health", health);
-        Debug.Log(health);
-    }
 
     //Dario
     public void AddHealthButtonClicked() {
-        health += 1f;
-        
-        PlayerPrefs.SetFloat("health", health);
+
+        gameObject.GetComponent<APIService>().SetPetStatus(health * 10 + 15, currentHappniness, (errMessage) =>
+        { });
     }
     public void LoseHealthButtonClicked() {
-        health -= 1f;
-       
-        PlayerPrefs.SetFloat("health", health);
 
-        Debug.Log(health);
+        gameObject.GetComponent<APIService>().SetPetStatus(health * 10 - 15, currentHappniness, (errMessage) =>
+        { });
+    }
+
+    public void StartEating() {
+        //mainCharacterController.startEatFoodAnimation();
+    }
+
+    public void EndEating() {
+        mainCharacterController.endEatFoodAnimation();
     }
 
 

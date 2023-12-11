@@ -148,6 +148,11 @@ namespace ARPetPals
         }
 
         [System.Serializable]
+        public class GetFoodCategoryResponse {
+            public string category;
+        }
+
+        [System.Serializable]
         public class UpdateUserResponse
         {
             public string message;
@@ -187,6 +192,19 @@ namespace ARPetPals
         public class CheckAccountActivityResponse
         {
             public string message;
+        }
+        [System.Serializable]
+        public class DeletePetResponse
+        {
+            public string message;
+        }
+
+        [System.Serializable]
+        public class FeedPetResponse
+        {
+            public string message;
+            public string oldHealth;
+            public string health;
         }
     }
 }

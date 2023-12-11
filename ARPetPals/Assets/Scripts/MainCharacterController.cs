@@ -12,7 +12,7 @@ public class MainCharacterController : MonoBehaviour
 
     public GameObject basePetObject;
 
-    public GameObject foodBowl;
+    public GameObject food, drink, meat, vegetable, fruit, dessert, fish, pizza, hotdog;
 
     public Material orangeMat, redMat, greenMat, blueMat, yellowMat;
 
@@ -24,18 +24,12 @@ public class MainCharacterController : MonoBehaviour
 
     float health;
 
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        
-    }
-
     void Start()
     {
         changeMat();
         petNameDisplay.text = PlayerPrefs.GetString("CustomName");  
         animator = GetComponent<Animator>();
-        foodBowl.SetActive(false);
+        DeactivateAllGameObjects();
     }
 
     private void Update() {
@@ -48,6 +42,25 @@ public class MainCharacterController : MonoBehaviour
         else {
             endSadAnimation();
         }
+    }
+
+    private void DeactivateAllGameObjects() {
+
+    /*UnassignedReferenceException: The variable food of MainCharacterController has not been assigned.
+You probably need to assign the food variable of the MainCharacterController script in the inspector.
+MainCharacterController.DeactivateAllGameObjects()(at Assets / Scripts / MainCharacterController.cs:49)
+MainCharacterController.Start()(at Assets / Scripts / MainCharacterController.cs:32)*/
+
+        // Deactivate all game objects
+        /*food.SetActive(false);
+        drink.SetActive(false);
+        meat.SetActive(false);
+        vegetable.SetActive(false);
+        fruit.SetActive(false);
+        dessert.SetActive(false);
+        fish.SetActive(false);
+        pizza.SetActive(false);
+        hotdog.SetActive(false);*/
     }
 
     private void changeMat() {
@@ -79,15 +92,14 @@ public class MainCharacterController : MonoBehaviour
         }
     }
 
-    public void startEatFoodAnimation() {
+    public void startEatFoodAnimation(string foodCategory) {
         animator.SetBool("isEating", true);
         AudioManager.Instance.PlaySfx("EatingLong");
-        foodBowl.SetActive(true);
-        
+        ActivateGameObject(foodCategory);        
     }
     public void endEatFoodAnimation() {
         animator.SetBool("isEating", false);
-        foodBowl.SetActive(false);
+        DeactivateAllGameObjects();
     }
 
     public void startSadAnimation() {
@@ -103,4 +115,43 @@ public class MainCharacterController : MonoBehaviour
         AudioManager.Instance.PlaySfx("Fly");
     }
 
+    public void ActivateGameObject(string foodCategory) {
+        switch (foodCategory.ToLower()) // Convert to lowercase to handle case-insensitivity
+        {
+            case "food":
+                ActivateGameObjectByName(food);
+                break;
+            case "drink":
+                ActivateGameObjectByName(drink);
+                break;
+            case "meat":
+                ActivateGameObjectByName(meat);
+                break;
+            case "vegetable":
+                ActivateGameObjectByName(vegetable);
+                break;
+            case "fruit":
+                ActivateGameObjectByName(fruit);
+                break;
+            case "dessert":
+                ActivateGameObjectByName(dessert);
+                break;
+            case "fish":
+                ActivateGameObjectByName(fish);
+                break;
+            case "pizza":
+                ActivateGameObjectByName(pizza);
+                break;
+            case "hotdog":
+                ActivateGameObjectByName(hotdog);
+                break;
+            default:
+                ActivateGameObjectByName(food);
+                break;
+        }
+    }
+
+    private void ActivateGameObjectByName(GameObject obj) {
+        obj.SetActive(true);        
+    }
 }

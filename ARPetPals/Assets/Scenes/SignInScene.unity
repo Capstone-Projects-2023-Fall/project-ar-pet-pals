@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -175,7 +175,6 @@ GameObject:
   - component: {fileID: 61903524}
   - component: {fileID: 61903523}
   - component: {fileID: 61903522}
-  - component: {fileID: 61903528}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -305,25 +304,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &61903528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61903521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af58cb3feaec0bf4cb3beb34db562367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userNameField: {fileID: 0}
-  passwordField: {fileID: 0}
-  editText: {fileID: 0}
-  userError: {fileID: 16216363}
-  passwordError: {fileID: 1363997301}
-  usernameInput: 
-  passwordInput: 
 --- !u!1 &106840186
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11.605011, y: 299.00006}
+  m_AnchoredPosition: {x: 11.60498, y: 299}
   m_SizeDelta: {x: 1100, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &106840188
@@ -560,7 +540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.803293, y: -0.5}
+  m_AnchoredPosition: {x: 15.803345, y: -0.5}
   m_SizeDelta: {x: -51.6066, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &130830240
@@ -1710,7 +1690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.803284, y: -0.000015258789}
+  m_AnchoredPosition: {x: 15.803223, y: -0.000015258789}
   m_SizeDelta: {x: -51.6066, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &853457201
@@ -1894,7 +1874,6 @@ GameObject:
   - component: {fileID: 1022816044}
   - component: {fileID: 1022816046}
   - component: {fileID: 1022816045}
-  - component: {fileID: 1022816047}
   m_Layer: 5
   m_Name: LoginText
   m_TagString: Untagged
@@ -2022,25 +2001,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022816043}
   m_CullTransparentMesh: 1
---- !u!114 &1022816047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022816043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af58cb3feaec0bf4cb3beb34db562367, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userNameField: {fileID: 0}
-  passwordField: {fileID: 0}
-  editText: {fileID: 0}
-  userError: {fileID: 0}
-  passwordError: {fileID: 0}
-  usernameInput: 
-  passwordInput: 
 --- !u!1 &1140474180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2274,7 +2234,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11.605011, y: 67.000046}
+  m_AnchoredPosition: {x: 11.60498, y: 67}
   m_SizeDelta: {x: 1100, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1283373977
