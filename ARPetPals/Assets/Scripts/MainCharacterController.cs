@@ -36,7 +36,7 @@ public class MainCharacterController : MonoBehaviour
         happiness = PlayerPrefs.GetInt("happiness");
         health = PlayerPrefs.GetFloat("health");
 
-        if (happiness < 50 || health < 4) {
+        if (happiness < 30 || health < 3) {
             startSadAnimation();
         }
         else {
@@ -90,7 +90,7 @@ public class MainCharacterController : MonoBehaviour
     public void startEatFoodAnimation(string foodCategory) {
         animator.SetInteger("eatCount", 3);
         animator.SetBool("isEating", true);
-        AudioManager.Instance.PlaySfx("EatingLong");
+        //AudioManager.Instance.PlaySfx("EatingLong");
         ActivateGameObject(foodCategory);        
     }
     public void endEatFoodAnimation() {
