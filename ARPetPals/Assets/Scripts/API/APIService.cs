@@ -27,6 +27,7 @@ namespace ARPetPals
         public const string ACTIVITY_TYPE_LOGIN = "login";
         public const string ACTIVITY_TYPE_DOUBLETAP = "double_tap";
         public const string ACTIVITY_TYPE_STEPTRACKING = "step_tracking";
+        public const string ACTIVITY_TYPE_EATING = "feeding";
 
         enum RESET_STATUS_TYPE
         {
@@ -842,13 +843,13 @@ namespace ARPetPals
                 yield break;
             }
 
-            string url = URL + "/food/getFoodCategory";
-            Dictionary<string, string> body = new Dictionary<string, string>
+            string url = URL + "/food/categoryInfo/" + food;
+            /*Dictionary<string, string> body = new Dictionary<string, string>
             {
                 { "food", food }
-            };
+            };*/
 
-            using (UnityWebRequest request = UnityWebRequest.Post(url, JsonConvert.SerializeObject(body), CONTENT_TYPE)) {
+            using (UnityWebRequest request = UnityWebRequest.Get(url)) {
                 request.SetRequestHeader("Authorization", "Bearer " + token);
 
                 yield return request.SendWebRequest();
